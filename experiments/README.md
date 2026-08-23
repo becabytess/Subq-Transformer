@@ -14,6 +14,8 @@ This directory contains all 43 dedicated research, benchmark, and mechanistic st
 - `modal_mech5_fixed_graph_message_passing.py`: Ambient 128D space trajectory straightness (91.3%) and minimal-pair agreement resolution on frozen graphs.
 - `modal_mech6_message_passing_depth_vs_width.py`: Iso-FLOP frontier proving balanced iterative passing ($K=16, T=2$) beats flat wide lookup ($K=32, T=1$).
 - `modal_mech7_k_vs_t_scaling_law.py`: 2D $(K, T)$ compensation grid sweep evaluating multi-hop over-squashing bottlenecks.
+- `modal_attractor_steering_and_multistability.py`: Monte Carlo basin multiplicity sweep & quantitative directional steering.
+- `modal_attractor_text_steering.py`: Zero-weight-update runtime text generation steering via vector bias inoculation.
 
 ### 2. Interpretability & Representation Probing
 - `modal_interp1_language_jump_profile.py`: Analyzes relative jump distance utilization and syntactic attention distributions.

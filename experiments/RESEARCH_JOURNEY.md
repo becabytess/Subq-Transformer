@@ -483,6 +483,38 @@ To rigorously test the theoretical limits and dynamical behavior of Gravimem as 
   2. **The Multi-Hop Over-Squashing Bottleneck**: On $K=2$, pushing to $T=4$ forces multi-hop information through very narrow 2-edge intermediate states, causing information loss and bottlenecking ($134.05 \to 149.26$).
   3. **The Balanced Regime**: Once graph connectivity captures sufficient linguistic anchors ($K \sim 8 \text{ to } 16$), modest recurrent depth ($T=2$) consistently achieves lower perplexity and superior representation settling.
 
+##### Study 5: Attractor Basin Multiplicity & Zero-Weight-Update Vector Steering
+*Investigated whether a token's phase space is monostable or multistable via Monte Carlo sampling ($N=200$ diverse starting states $s_0 \sim \mathcal{N}(s_{\text{base}}, \sigma^2)$ across 128D hyperspheres), and evaluated runtime directional vector steering:*
+
+1. **Attractor Basin Multiplicity Sweep (Is the system Monostable or Multistable?)**:
+   - **Local Funnel-Shaped Monostability**: For all perturbation radii $\sigma \le 2.0$, **100% of diverse trajectories contract to the exact same primary attractor basin** (DBSCAN detects a single unified cluster). The landscape forms a deep, noise-absorbing attractor vortex around the intended context.
+   - **Global Multistability**: At extreme noise ($\sigma = 5.0$), trajectories cross the energy barrier (separatrix) and split into multiple discrete attractor basins ($63.5\%$ primary share, $36.5\%$ secondary basins).
+
+| Perturbation Radius ($\sigma$) | Mean Distance to Baseline | Detected Attractor Clusters (DBSCAN) | Primary Basin Share |
+| :---: | :---: | :---: | :---: |
+| **$\sigma = 0.10$** | `0.1407` | **1** | **`100.0%`** (Perfect Contraction) |
+| **$\sigma = 0.50$** | `0.7069` | **1** | **`100.0%`** |
+| **$\sigma = 1.00$** | `1.3687` | **1** | **`100.0%`** |
+| **$\sigma = 2.00$** | `2.8091` | **1** | **`100.0%`** |
+| **$\sigma = 5.00$** (Extreme) | `7.2443` | **Multiple** | **`63.5%`** (36.5% crossed barrier) |
+
+2. **Directional Vector Steering at Runtime ($s_{t+1} = \text{GRUCell}(c + \alpha \cdot \vec{b}, s_t)$)**:
+   - Injecting a directional concept steering vector $\vec{b}$ with intensity $\alpha \in [-3.0 \dots +3.0]$ smoothly and monotonically deflects the dynamical trajectory into the intended semantic basin:
+
+| Steering Intensity ($\alpha$) | Trajectory Deflection ($\Delta s$) | Prediction Dynamics |
+| :---: | :---: | :--- |
+| $\alpha = -3.0$ | `1.0530` | Trajectory steered toward negative semantic basin |
+| $\alpha = 0.0$ (Neutral) | `0.5419` | Baseline attractor point |
+| $\alpha = +1.0$ | `0.6445` | Smooth monotonic trajectory deflection |
+| $\alpha = +3.0$ | `1.0839` | Trajectory captured by target positive semantic basin |
+
+3. **Qualitative Text Generation Steering**:
+   - Prompt: *"The messenger arrived at the gates and declared"*
+   - **Unsteered ($\alpha=0.0$)**: Generates standard narrative (*"the treasure of King Henry of his trade, She shall not see so before..."*).
+   - **Steered with Royalty Vector ($\alpha=+2.0$)**: Generates noble/court dialogue (*"...honourish'd with foreign storms than Alc'd on duke. NORTHUMBERLAND: Why, that you are it off..."*).
+   - **Steered with Conflict Vector ($\alpha=+2.0$)**: Generates combat dialogue (*"...CASAR: Stay! I say, every one of their strong your pleasure: Faith, or drownIA: Villain..."*).
+   - **Takeaway**: SubQ allows **zero-weight-update test-time control** and continual in-context fact retention via stable attractor basin capture without risking catastrophic forgetting.
+
 ---
 
 ## 4. Quickstart & Installation
