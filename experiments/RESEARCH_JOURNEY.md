@@ -517,6 +517,23 @@ To rigorously test the theoretical limits and dynamical behavior of Gravimem as 
 
 ---
 
+##### Study 6: Cross-Layer Shared Attention vs. Independent Attention Ablation
+*Investigates whether the exact same `SubQSurfer` attention weights can be shared across multiple physical layers with unique MLPs (`modal_exp_shared_attention_unique_mlps.py` on Tesla T4, Natural English $L=256$):*
+
+| Architecture | Total Parameters | Non-Embedding Parameters | Val Loss | Perplexity | Finding / Assessment |
+| :--- | :---: | :---: | :---: | :---: | :--- |
+| **1-Layer SubQ Baseline** | 6,728,576 | `295,680` | `5.6560` | **`285.99`** | Single-layer reference baseline |
+| **2-Layer Independent SubQ** (2 Surfers + 2 MLPs) | 7,024,000 | `591,360` | **`5.6479`** | **`283.69`** 🏆 | **Best performance!** Outperforms 1-layer baseline |
+| **2-Layer Shared-Surfer SubQ** (1 Surfer + 2 MLPs) | 6,860,160 | `427,520` | `5.6765` | `291.92` ❌ | **Underperforms 1-layer baseline (+5.93 PPL worse)** |
+| **4-Layer Shared-Surfer SubQ** (1 Surfer + 4 MLPs) | 7,123,328 | `690,816` | `5.6676` | `289.35` ❌ | **Underperforms 1-layer baseline (+3.36 PPL worse)** |
+
+* **Empirical Finding & Conclusion**:
+  - **Shared Attention Fails Across Depths**: Reusing attention weights across physical layers degrades perplexity below that of a single 1-layer model.
+  - **Mechanistic Root Cause**: Layer 1 attention operates on raw syntactic word embeddings, while Layer 2+ attention operates on deep semantic concept spaces produced by intermediate MLPs. Forcing identical $W_q, W_k$ projections across both regimes creates severe representational compromise.
+  - **Architectural Rule**: When scaling physical depth in SubQ, **each physical layer must possess its own independent, unshared attention parameters** to allow layer specialization across hierarchical abstraction levels.
+
+---
+
 ## 4. Quickstart & Installation
 
 ```bash

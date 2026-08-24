@@ -31,3 +31,8 @@ This directory contains all 43 dedicated research, benchmark, and mechanistic st
 - `modal_nightmare2_dyck_grammar.py`: Deep nested Dyck-4 bracket matching up to depth 30+.
 - `modal_exp3_length_extrapolation.py`: Zero-shot context length generalization ($L=256 \to 1024$).
 - `modal_exp4_extreme_context.py`: Extreme context scaling ($L=256 \dots 4096$) and OOM memory frontier.
+- `modal_exp_extreme_natural_language.py`: Natural language modeling at $L=4096$ with 1.1M tokens/sec.
+- `modal_exp_extreme_long_context_learning.py`: Extreme context scaling at $L=8,192 \dots 16,384$ tokens on Tesla T4.
+- `modal_exp_dynamic_vs_static_needle.py`: Dynamic recomputed routing vs static frozen graph needle recall.
+- `modal_exp_shared_attention_unique_mlps.py`: Cross-layer shared attention vs independent attention ablation.
+
