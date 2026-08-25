@@ -33,16 +33,16 @@ class SubQConfig:
     d_model: int = 256
     n_heads: int = 8
     n_layers: int = 2
-    default_T: int = 3
+    default_T: int = 3 
     max_seq_len: int = 2048
     d_mlp: Optional[int] = None
     jump_offsets: Optional[List[int]] = None
     dropout: float = 0.0
     adaptive_halting: bool = False
     halt_threshold: float = 0.08
-    halt_criterion: str = "velocity"
+    halt_criterion: str = "velocity" 
     weight_tying: bool = True
-    layer_norm_eps: float = 1e-5
+    layer_norm_eps: float = 1e-5 
     bias: bool = False
 
     def __post_init__(self):
@@ -50,7 +50,7 @@ class SubQConfig:
             self.d_mlp = 4 * self.d_model
         if self.jump_offsets is None:
             # Default multi-scale relative offset strides
-            offsets = [0, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597, 2047]
+            offsets = [0, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597, 2047] 
             self.jump_offsets = sorted(list(set([o for o in offsets if o < self.max_seq_len])))
             if len(self.jump_offsets) == 0:
                 self.jump_offsets = [0]

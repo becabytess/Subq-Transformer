@@ -197,7 +197,7 @@ class SubQBlock(nn.Module):
         self.ln2 = nn.LayerNorm(config.d_model, eps=config.layer_norm_eps)
         
         self.mlp = nn.Sequential(
-            nn.Linear(config.d_model, config.d_mlp, bias=config.bias),
+            nn.Linear(config.d_model, config.d_mlp, bias=config.bias) ,
             nn.GELU(),
             nn.Dropout(config.dropout),
             nn.Linear(config.d_mlp, config.d_model, bias=config.bias),

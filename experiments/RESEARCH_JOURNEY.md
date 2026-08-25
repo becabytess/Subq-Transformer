@@ -534,6 +534,44 @@ To rigorously test the theoretical limits and dynamical behavior of Gravimem as 
 
 ---
 
+##### Study 7: 2D Multi-Scale Vision Benchmark & Strict Iso-Parameter Analysis (CIFAR-10)
+*Evaluates SubQ on 2D image tasks ($32\times 32$ CIFAR-10, $2\times 2$ patch size = 256 tokens) comparing Modern ResNet CNN, Multi-Layer ViT, and 1-Layer architectures under strict iso-parameter controls:*
+
+###### 1. Global Architectural Head-to-Head
+
+| Model Architecture | Parameters | Layer Depth | Test Accuracy (%) | Throughput (img/s) | Peak VRAM |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| **Modern ResNet CNN** | 558,538 | 6 Conv Blocks | **84.39%** | **9,040** | 221.3 MB |
+| **Standard ViT-4L (Dense $O(N^2)$)** | 828,938 | 4 Layers | **71.59%** | 2,197 | 717.7 MB |
+| **1-Layer 2D SubQ-ViT ($K=36, T=3$)** | **331,274** *(60% fewer)* | **1 Layer** | **69.31%** | 1,196 | 1,883.7 MB |
+
+###### 2. Strict Iso-Parameter 1-Layer Controls
+
+| Parameter Budget | Architecture | Physical Layers | Parameter Count | Epoch 4 Acc | Epoch 8 Acc | Final Train Acc | **Test Accuracy** |
+| :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+| **~234k Budget** | **Standard ViT-1L (Dense $O(N^2)$)** | 1 | 234,122 | 59.82% | 67.04% | 70.92% | **67.36%** |
+| | **SubQ-ViT-1L ($K=36, T=3$)** | 1 | **232,970** | **62.41%** | **68.90%** | **72.65%** | **68.86%** *(+1.50%)* |
+| | | | | | | | |
+| **~331k Budget** | **Standard ViT-1L (Dense $O(N^2)$)** | 1 | 332,810 | 59.95% | 67.59% | 71.63% | **67.62%** |
+| | **SubQ-ViT-1L ($K=36, T=3$)** | 1 | **331,274** | **62.68%** | **69.54%** | **73.13%** | **69.31%** *(+1.69%)* |
+
+###### 3. PyTorch Compilation & Kernel Fusion Profiling (Tesla T4)
+
+| Optimization Variant | Throughput (img/s) | Latency (ms/batch) | Speedup vs Pure PyTorch |
+| :--- | :---: | :---: | :---: |
+| **Pure PyTorch SubQ-ViT (Uncompiled)** | 2,895.4 | 44.21 ms | 1.00x |
+| **SubQ-ViT + `torch.compile` (Inductor Fused)** | **9,171.3** | **13.96 ms** | **3.17x FASTER** 🚀 |
+| **SubQ-ViT + `torch.compile` (CUDA Graphs)** | **9,192.2** | **13.92 ms** | **3.17x FASTER** 🚀 |
+| *Standard ViT-1L (Native cuDNN SDPA)* | *15,848.2* | *8.08 ms* | *—* |
+
+* **Empirical Takeaways & Receptive Field Dynamics**:
+  1. **CNN Inductive Bias Advantage on Small Datasets**: The ResNet CNN achieves 84.39% with superior throughput due to hardwired 2D translation invariance and weight-shared spatial convolutions.
+  2. **SubQ Outperforms Dense Attention Under Strict Parameter Equivalence**: SubQ consistently outperforms standard dense ViT attention by **+1.50% to +1.69%** when parameter budgets are strictly matched.
+  3. **Receptive Field Expansion via Deliberation**: In 1-Layer Standard ViT, dense attention performs a single unweighted global blend. In 2D SubQ-ViT, a $3\times3$ local fovea combined with radial Fibonacci strides ($\delta \in \{2, 3, 5, 8, 13\}$) and $T=3$ recurrent GRU deliberation functions like expanding receptive fields in CNNs—allowing local spatial details to progressively integrate into global context within a single physical layer.
+  4. **Compilation Closes the Execution Latency Gap**: Pure PyTorch unrolls recurrent hops in Python, incurring CPU kernel launch latency across ~20 small GPU dispatches per step. `torch.compile` fuses the GRU elementwise operations and loop state transitions into a single optimized C++/Triton kernel, delivering a **3.17x throughput speedup** with zero model modifications.
+
+---
+
 ## 4. Quickstart & Installation
 
 ```bash

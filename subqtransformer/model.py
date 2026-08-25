@@ -262,3 +262,4 @@ class SubQTransformerClassifier(nn.Module):
             loss = F.cross_entropy(logits, targets)
             return logits, loss
         return logits
+
