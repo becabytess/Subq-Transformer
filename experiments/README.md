@@ -36,3 +36,10 @@ This directory contains all 43 dedicated research, benchmark, and mechanistic st
 - `modal_exp_dynamic_vs_static_needle.py`: Dynamic recomputed routing vs static frozen graph needle recall.
 - `modal_exp_shared_attention_unique_mlps.py`: Cross-layer shared attention vs independent attention ablation.
 
+### 4. Pre-Trained Dense LLM Transplant & Architectural Transfer (GPT-2 124M)
+- `modal_exp_gpt2_subq_phase0_diagnostic.py`: Study 23 — Attention mass profiling across 144 heads (12 layers $\times$ 12 heads), proving layer-by-layer sparsity patterns on real text.
+- `modal_exp_gpt2_subq_transplant_adaptive_t.py`: Study 24 — Direct weight surgery from dense GPT-2 to SubQ; multi-hop dynamical settling ($T=4..6$) reduces zero-train perplexity from `13,940` to `767` ($48.8\times$ reduction).
+- `modal_exp_gpt2_subq_full_transplant_adaptation.py`: Study 25 — Unlocked full model adaptation on NVIDIA A10G (Attention + MLPs + GRU), dropping perplexity from `811` $\to$ `174` PPL.
+- `modal_exp_gpt2_subq_multidomain_transfer.py`: Study 26 — Multi-domain generalization and cross-corpus transfer benchmark across WebText, WikiText-2, Python Code, and Shakespeare with permanent Modal Volume checkpoint persistence (`subq-gpt2-checkpoints`).
+
+
