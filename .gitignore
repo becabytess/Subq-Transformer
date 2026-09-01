@@ -48,3 +48,6 @@ wheels/
 *.swo
 .DS_Store
 Thumbs.db
+
+# Scratch test files
+subqtransformer/test*.py
