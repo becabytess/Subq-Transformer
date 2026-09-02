@@ -1880,7 +1880,24 @@ To rigorously test the theoretical limits and dynamical behavior of Gravimem as 
      * Standard 4-Layer Dense ViT requires **1.85 Million parameters** and full all-to-all attention ($\sim 66\text{k}$ dot-products per head), reaching `77.80%` Top-5.
      * 1-Layer Harmonic SubQ with $T=12$ has only **520k parameters** (72% smaller) and computes **only 8 sparse wave peaks per query**, yet decisively beats the 4-Layer Dense ViT on Top-5 (`79.00%` vs `77.80%`, +1.20%).
   3. **Runtime Adaptability**: In a multi-layer Transformer, compute is hardcoded into the weight depth. In 1-Layer SubQ, depth is a dynamic inference parameter: simple queries can run at $T=2$, complex multi-step reasoning at $T=16$.
-* **Scripts**: [`experiments/study73_1_2layer_sequential.py`](file:///c:/Users/beca/Desktop/gravimem-revived/experiments/study73_1_2layer_sequential.py), [`experiments/study73_2_2layer_interleaved.py`](file:///c:/Users/beca/Desktop/gravimem-revived/experiments/study73_2_2layer_interleaved.py).
+##### Study 74: Base-K (Radix-8) Mathematical Optimal Offsets Benchmark — Pure Exponential Combinatorics
+*Testing the pure mathematical base-8 expansion hypothesis ($\mathcal{D}_t = \{0, 1\cdot 8^{t-1}, \dots, 7\cdot 8^{t-1}\}$) on High-Res CIFAR-100 ($L=257$ patches, $T=3$ hops, zero learned waves) to evaluate raw combinatorial reach ($8^3 = 512 \ge 257$):*
+
+* **Controlled Setup**: High-Res CIFAR-100 ($L=257$ tokens), batch size 128, 20 epochs, AdamW ($lr=5\text{e-}4$, cosine annealing), AMP fp16 on NVIDIA A10G.
+
+| Model Architecture | Offsets Method | Hops ($T$) | Attention Dot-Products | Physical Params | Top-1 Test Acc | Top-5 Test Acc | Test Cross-Entropy | Time / Epoch |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| **1. Standard 1L Dense ViT** | All-to-All | 1 | 257 (Dense) | `516,580` | `39.73%` | `69.99%` | `2.3780` | 21.6s |
+| **2. Radix-8 Optimal SubQ ($T=3$)** | **Hardcoded Math (Base-8)** | **$T=3$** | **8 (Sparse)** | **`516,580`** | **`44.30%`** 🚀 | **`75.23%`** 🚀 | **`2.1713`** | **21.6s** |
+| **3. Radix-8 Optimal SubQ ($T=4$)** | **Hardcoded Math (Base-8)** | **$T=4$** | **8 (Sparse)** | **`516,580`** | **`43.97%`** | **`74.76%`** | **`2.1765`** | 28.2s |
+| **4. Learned Harmonic SubQ ($T=4$)** | **Learned Continuous Waves** | **$T=4$** | **8 (Sparse)** | `520,020` | **`45.67%`** 🏆 | **`76.19%`** 🏆 | **`2.0953`** | 28.5s |
+| **5. Learned Harmonic SubQ ($T=12$)** | **Learned Continuous Waves** | **$T=12$** | **8 (Sparse)** | `520,020` | **`49.86%`** 🏆 | **`79.00%`** 🏆 | **`1.9374`** | 92.6s |
+
+* **Scientific Discoveries & Theoretical Insights**:
+  1. **Pure Base-8 Math Outperforms 1-Layer Dense Transformer (`44.30%` vs `39.73%`)**: With **zero learned wave parameters** (pure fixed geometric strides), SubQ beats the 1-Layer Dense Transformer by **`+4.57%` Top-1** and **`+5.24%` Top-5** at identical epoch runtime (21.6s/epoch).
+  2. **The Power of Gap-Free Combinatorial Reach**: In Base-8 arithmetic, $T=3$ hops guarantees that every integer from $0 \dots 511$ is uniquely addressable via $c_1 \cdot 1 + c_2 \cdot 8 + c_3 \cdot 64$, providing 100% gap-free indirect coverage of all 257 image patches.
+  3. **Pattern Exploitation vs Graph Search**: While Base-8 assumes uniform random independence, real images exhibit spatial and frequency structure. Learned continuous harmonic waves beat hardcoded Base-8 (`45.67%` vs `44.30%`) because the wave generator aligns with visual spatial priors, freeing up 100% of the transformer's non-linearities for reasoning rather than graph search.
+* **Scripts**: [`experiments/study74_radix_optimal_offsets.py`](file:///c:/Users/beca/Desktop/gravimem-revived/experiments/study74_radix_optimal_offsets.py), [`experiments/study74_radix_optimal_offsets_t4.py`](file:///c:/Users/beca/Desktop/gravimem-revived/experiments/study74_radix_optimal_offsets_t4.py).
 
 ---
 
