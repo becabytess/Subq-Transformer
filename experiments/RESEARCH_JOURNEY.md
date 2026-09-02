@@ -1749,8 +1749,39 @@ To rigorously test the theoretical limits and dynamical behavior of Gravimem as 
      Unrolling deeper thinking iterations from $T=4$ to $T=12$ steadily gains **`+4.19%` Top-1 accuracy** without adding a single physical parameter!
   2. **Harmonic SubQ Crushes Dense 1L-ViT (`49.86%` vs `39.73%`)**: For the same parameter budget (~520k params), Harmonic SubQ at $T=12$ outperforms Dense 1L-ViT by **`+10.13%` Top-1** and **`+9.01%` Top-5 accuracy**.
   3. **1-Layer SubQ Beats 4-Layer Dense ViT on Top-5 with 72% Fewer Parameters**: 1 single physical layer of Harmonic SubQ ($T=12$) matches 4-Layer Dense ViT on Top-1 (`49.86%` vs `50.37%`) and **beats it on Top-5 accuracy (`79.00%` vs `77.80%`)**, while slashing **$72\%$ of model weights** (520k vs 1.85M parameters).
-  4. **Time vs Parameter Scaling Characteristics**: Wall-clock training time scales linearly with recurrent thought depth $T$ (because $T=12$ computes 12 unrolled forward/backward passes of MLP + Attention per batch), demonstrating the tradeoff between physical parameter count ($72\%$ smaller footprint) and recurrent compute depth.
 * **Script**: [`experiments/modal_exp_cifar100_high_res_subq_vit.py`](file:///c:/Users/beca/Desktop/gravimem-revived/experiments/modal_exp_cifar100_high_res_subq_vit.py).
+
+---
+
+##### Study 69: Zero-Shot Test-Time Thinking Compute Extrapolation ($T_{\text{train}} = 4 \to T_{\text{eval}} \in [1 \dots 32]$)
+*Investigating whether a model trained strictly at $T_{\text{train}} = 4$ hops can zero-shot extrapolate to deeper thinking iterations at test time without architectural retraining:*
+
+* **Controlled Setup**: Model trained at $T_{\text{train}}=4$ on CIFAR-100 ($L=257$ tokens), checkpoint saved to persistent volume `/models/harmonic_subq_vit_T4.pt`, and evaluated across 13 thought depths from $T=1$ to $T=32$:
+
+| $T_{\text{eval}}$ Hops | Extrapolation Regime | Fixed Step Top-1 ($0.5$) | Fixed Step Top-5 | Fixed Loss | Adaptive Top-1 ($1/\sqrt{T_{\text{eval}}}$) | Adaptive Top-5 | Eval Time |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| **$T = 1$** | Under-thinking | `1.05%` | `5.51%` | `5.1357` | `1.07%` | `5.49%` | `2.0s` |
+| **$T = 2$** | Under-thinking | `4.86%` | `17.54%` | `4.5968` | `4.49%` | `16.70%` | `1.9s` |
+| **$T = 3$** | Under-thinking | `23.40%` | `50.79%` | `3.2211` | `23.37%` | `50.79%` | `1.9s` |
+| **$T = 4$** | **TRAINED TARGET ($T=4$)** | **`45.69%`** 🎯 | **`76.18%`** 🎯 | **`2.1099`** | **`45.69%`** 🎯 | **`76.18%`** 🎯 | `2.4s` |
+| **$T = 5$** | Near Extrapolation | `38.12%` | `70.38%` | `2.4060` | `38.28%` | `70.19%` | `3.0s` |
+| **$T = 6$** | Near Extrapolation | `29.32%` | `60.11%` | `2.8733` | `30.53%` | `61.45%` | `3.5s` |
+| **$T = 8$** | Near Extrapolation | `16.28%` | `42.65%` | `3.8362` | `18.77%` | `46.03%` | `4.5s` |
+| **$T = 10$** | Deep Extrapolation | `10.77%` | `31.28%` | `4.4337` | `14.18%` | `37.55%` | `5.5s` |
+| **$T = 12$** | Deep Extrapolation | `7.53%` | `24.54%` | `4.8026` | `11.15%` | `31.69%` | `6.5s` |
+| **$T = 16$** | Deep Extrapolation | `4.58%` | `16.68%` | `5.2183` | `7.96%` | `24.87%` | `8.5s` |
+| **$T = 20$** | Deep Extrapolation | `3.50%` | `13.18%` | `5.4395` | `6.58%` | `21.12%` | `10.6s` |
+| **$T = 24$** | Deep Extrapolation | `2.80%` | `11.14%` | `5.5855` | `5.54%` | `18.25%` | `12.6s` |
+| **$T = 32$** | Deep Extrapolation | `2.30%` | `9.34%` | `5.7658` | `4.43%` | `14.94%` | `16.7s` |
+
+* **Scientific Discoveries & Architectural Analysis**:
+  1. **Sharp Performance Peak at Trained Depth ($T = 4$)**: Performance peaks cleanly at the exact training horizon ($T_{\text{eval}} = 4 \implies 45.69\%$), dropping sharply when under-thinking ($T=1 \implies 1.05\%$) or when over-unrolling ($T=8 \implies 18.77\%$).
+  2. **The Root Cause — Classification Head & Wave Drift**:
+     * The linear classification head $W_{\text{head}}$ and LayerNorm $\text{LN}_f$ are calibrated via backpropagation to receive representations $s^{(T)}$ specifically after exactly 4 residual relaxation steps.
+     * Further unrolling causes the latent representations $s^{(t)}$ and dynamic carrier wave parameters $\text{wave}^{(t)}$ to drift beyond the manifold calibrated for $W_{\text{head}}$.
+  3. **Path to True Test-Time Compute Scaling**:
+     To enable genuine zero-shot test-time compute scaling (where increasing $T$ during inference monotonically increases accuracy), the network must be trained with **Stochastic Thought Depth ($T_{\text{train}} \sim \text{Uniform}(1, 12)$)** and **Multi-Hop Deep Supervision ($\sum_{t=1}^T \mathcal{L}(W_{\text{head}}(s^{(t)}))$)** so the classification head is calibrated for all intermediate states.
+* **Script**: [`experiments/modal_exp_subq_vit_test_time_scaling.py`](file:///c:/Users/beca/Desktop/gravimem-revived/experiments/modal_exp_subq_vit_test_time_scaling.py).
 
 ---
 
