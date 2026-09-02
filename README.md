@@ -19,6 +19,8 @@
 4. Spatial Fixed-Point Attractor:  ||W^(t+1) - W^(t)|| -> 0,  cos(W^(t+1), W^(t)) -> 0.9917
 ```
 
+> 🧠 **Current Canonical Blueprint & Consensus**: For our unified, up-to-date architectural specification, established truths, and active frontiers, see **[`STATE_OF_SUBQ.md`](file:///c:/Users/beca/Desktop/gravimem-revived/STATE_OF_SUBQ.md)**.
+>
 > 📖 **Comprehensive Research Journey & Full Technical Report**: For the complete, unabridged 175KB experimental log covering all 73 Modal GPU studies (including wave attractor proofs, the Dyck-4 rematch, Triton kernels, high-res vision transformers, and depth equivalence proofs), see **[`experiments/RESEARCH_JOURNEY.md`](file:///c:/Users/beca/Desktop/gravimem-revived/experiments/RESEARCH_JOURNEY.md)**.
 
 ---

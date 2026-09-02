@@ -1,6 +1,8 @@
 # Gravimem: Recurrent Markov & Positional Jump Transformer 🪐
 
 > **A sub-quadratic neural architecture where multi-scale positional jumps and gated trajectory accumulation replace stacked physical layers and quadratic all-to-all attention.**
+>
+> 🧠 **Single Source of Truth**: For the living canonical blueprint, verified consensus truths, and deprecated hypotheses across all studies, see **[`STATE_OF_SUBQ.md`](file:///c:/Users/beca/Desktop/gravimem-revived/STATE_OF_SUBQ.md)**.
 
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.0+-ee4c2c.svg)](https://pytorch.org/)
@@ -1974,6 +1976,19 @@ That foundational research provided the theoretical bedrock (Markov transition d
 
 ---
 
-## 7. License
+## 7. Current Ground-Truth Consensus & Architectural Stance
+
+For the formal synthesis of all 73 studies into a single, clean architectural blueprint, see:
+👉 **[`STATE_OF_SUBQ.md`](file:///c:/Users/beca/Desktop/gravimem-revived/STATE_OF_SUBQ.md)**
+
+It outlines:
+- **The Canonical 1-Layer Recurrent SubQ Architecture** (Evolving $Q,K,V$, continuous carrier waves, $K=8$ discrete peaks, $1/\sqrt{T}$ contraction).
+- **Established Truths** (Depth-equivalence of temporal recurrence over physical layers, necessity of evolving Keys/Values, discrete peak superiority).
+- **Discarded / Deprecated Hypotheses** (Static grids, static KV projections, neighborhood state filterbanks, multi-layer stacking).
+- **Active Research Frontiers** (Monotonic test-time compute scaling, adaptive halting, extreme context kernels).
+
+---
+
+## 8. License
 
 MIT License. See [LICENSE](LICENSE) for details.
