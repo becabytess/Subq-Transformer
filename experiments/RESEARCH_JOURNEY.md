@@ -1707,7 +1707,7 @@ To rigorously test the theoretical limits and dynamical behavior of Gravimem as 
 
 ---
 
-##### Study 67: CIFAR-100 Image Classification Shootout — Harmonic SubQ ViT vs Dense ViT
+##### Study 67: CIFAR-100 Image Classification Shootout — Harmonic SubQ ViT vs Dense ViT ($L=65$ Tokens)
 *Testing Harmonic SubQ on 2D Computer Vision (CIFAR-100, 50k train, 10k test, 100 fine-grained classes) with patch size $4 \times 4$ ($L=65$ tokens) from scratch on an NVIDIA A10G:*
 
 * **Controlled Setup**: 20 epochs, batch size 128, AdamW ($lr=5\text{e-}4$, cosine annealing, weight decay 0.05), label smoothing 0.1.
@@ -1725,6 +1725,32 @@ To rigorously test the theoretical limits and dynamical behavior of Gravimem as 
   2. **1-Layer SubQ Matches 4-Layer Deep Dense ViT with 73% Fewer Parameters**: 1 single physical layer with $T=8$ recurrent relaxation achieves **`50.29%` Top-1 and `79.92%` Top-5** (almost identical to the 4-layer Dense ViT's `51.87%` / `80.11%`), while using **$73\%$ fewer parameters** (490k vs 1.82M) and strictly sparse $K=8$ offsets per token!
   3. **Multi-Hop 2D Spatial Diffusion**: At $T=1$ hop, the `[CLS]` token can only observe $K=8$ patch crests ($20.92\%$). By $T=4$ and $T=8$, dynamic wave propagation and evolving $Q,K,V$ diffuse semantic context across all 64 2D spatial patches into the classification token.
 * **Script**: [`experiments/modal_exp_cifar100_harmonic_subq_vit.py`](file:///c:/Users/beca/Desktop/gravimem-revived/experiments/modal_exp_cifar100_harmonic_subq_vit.py).
+
+---
+
+##### Study 68: High-Resolution CIFAR-100 Shootout ($L = 257$ Tokens) — Deep Thought Scaling ($T = 4, 8, 12$) vs Dense ViT
+*Testing Harmonic SubQ in high token resolution on CIFAR-100 with patch size $2 \times 2 \implies 256$ spatial patches ($L=257$ tokens) comparing 1L Dense, 4L Dense, and Harmonic SubQ across deep thought iterations $T \in [4, 8, 12]$ on an NVIDIA A10G (24GB VRAM):*
+
+* **Controlled Setup**: 20 epochs, batch size 128, AdamW ($lr=5\text{e-}4$, cosine annealing, weight decay 0.05), label smoothing 0.1, AMP fp16 mixed precision.
+
+| Model Architecture | Physical Layers | Complexity | Physical Params | Top-1 Test Acc | Top-5 Test Acc | Test Cross-Entropy | Training Time |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| **1. Standard Dense 1L-ViT** | 1 | $\mathcal{O}(L^2)$ All-to-All | `516,580` | `39.73%` | `69.99%` | `2.4052` | `262.3s` |
+| **2. Standard Dense 4L-ViT** | 4 | $\mathcal{O}(L^2)$ All-to-All | `1,851,172` | **`50.37%`** | `77.80%` | `1.9807` | `478.4s` |
+| **3. Harmonic SubQ ViT ($T=4$ Hops)** | 1 | $\mathcal{O}(L \cdot K)$ Sparse | `520,020` | `45.67%` | `76.19%` | `2.0953` | `637.0s` |
+| **4. Harmonic SubQ ViT ($T=8$ Hops)** | 1 | $\mathcal{O}(L \cdot K)$ Sparse | `520,020` | `48.36%` | **`78.92%`** | `1.9838` | `1244.2s` |
+| **5. Harmonic SubQ ViT ($T=12$ Hops)**| **1** | **$\mathcal{O}(L \cdot K)$ Sparse** | **`520,020`** | **`49.86%`** 🏆 | **`79.00%`** 🏆 | **`1.9374`** | `1852.1s` |
+
+* **Scientific Discoveries**:
+  1. **Strict Monotonic Deep Thought Scaling ($T = 4 \to 8 \to 12$) at $L=257$**:
+     * $T=4$: `45.67%` Top-1 / `76.19%` Top-5
+     * $T=8$: `48.36%` Top-1 / `78.92%` Top-5
+     * $T=12$: **`49.86%`** Top-1 / **`79.00%`** Top-5
+     Unrolling deeper thinking iterations from $T=4$ to $T=12$ steadily gains **`+4.19%` Top-1 accuracy** without adding a single physical parameter!
+  2. **Harmonic SubQ Crushes Dense 1L-ViT (`49.86%` vs `39.73%`)**: For the same parameter budget (~520k params), Harmonic SubQ at $T=12$ outperforms Dense 1L-ViT by **`+10.13%` Top-1** and **`+9.01%` Top-5 accuracy**.
+  3. **1-Layer SubQ Beats 4-Layer Dense ViT on Top-5 with 72% Fewer Parameters**: 1 single physical layer of Harmonic SubQ ($T=12$) matches 4-Layer Dense ViT on Top-1 (`49.86%` vs `50.37%`) and **beats it on Top-5 accuracy (`79.00%` vs `77.80%`)**, while slashing **$72\%$ of model weights** (520k vs 1.85M parameters).
+  4. **Time vs Parameter Scaling Characteristics**: Wall-clock training time scales linearly with recurrent thought depth $T$ (because $T=12$ computes 12 unrolled forward/backward passes of MLP + Attention per batch), demonstrating the tradeoff between physical parameter count ($72\%$ smaller footprint) and recurrent compute depth.
+* **Script**: [`experiments/modal_exp_cifar100_high_res_subq_vit.py`](file:///c:/Users/beca/Desktop/gravimem-revived/experiments/modal_exp_cifar100_high_res_subq_vit.py).
 
 ---
 
