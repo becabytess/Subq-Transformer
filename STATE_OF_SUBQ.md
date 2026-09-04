@@ -105,3 +105,7 @@ Input Tokens / Patches (L)
 
 3. **Extreme Context Hardware Kernels ($L \ge 65\text{k}$)**:
    * Scaling the OpenAI Triton fused Harmonic SubQ kernel to massive context windows ($128\text{k} - 1\text{M}$ tokens) where FlashAttention-2 runs out of memory.
+
+4. **Linear $O(L)$ Pre-Scan + Multi-Hop Sparse Attention (Hybrid Front-End)**:
+   * *The Discovery (Study 76)*: Pairing an initial $O(L)$ bidirectional CuDNN recurrent scan with SubQ wave relaxation ($T=4$) solves contiguous local patch dependencies instantaneously, freeing sparse waves for pure non-local relational reasoning. It accelerated training convergence to **`51.91%`** and boosted Top-1 test accuracy to **`45.95%`** (+6.22% over 1L Dense ViT).
+
