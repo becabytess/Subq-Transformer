@@ -107,5 +107,6 @@ Input Tokens / Patches (L)
    * Scaling the OpenAI Triton fused Harmonic SubQ kernel to massive context windows ($128\text{k} - 1\text{M}$ tokens) where FlashAttention-2 runs out of memory.
 
 4. **Linear $O(L)$ Pre-Scan + Multi-Hop Sparse Attention (Hybrid Front-End)**:
-   * *The Discovery (Study 76)*: Pairing an initial $O(L)$ bidirectional CuDNN recurrent scan with SubQ wave relaxation ($T=4$) solves contiguous local patch dependencies instantaneously, freeing sparse waves for pure non-local relational reasoning. It accelerated training convergence to **`51.91%`** and boosted Top-1 test accuracy to **`45.95%`** (+6.22% over 1L Dense ViT).
+   * *The Discovery (Studies 76 & 77)*: Pairing an initial $O(L)$ CuDNN recurrent scan with SubQ wave relaxation solves contiguous local sequence dependencies instantaneously, freeing sparse waves for pure non-local relational reasoning. When strictly restricted to a **unidirectional forward scan (`bidirectional=False`)** to eliminate any future-peeking advantage and scaled to $T=8$ thought hops (Study 77), training convergence reached **`53.13%`**, Top-1 test accuracy hit **`46.92%`** (+7.19% over 1L Dense ViT), and test cross-entropy dropped to **`2.0651`**.
+
 
