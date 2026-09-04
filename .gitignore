@@ -47,7 +47,8 @@ wheels/
 *.swp
 *.swo
 .DS_Store
-Thumbs.db
+# Local repos
+Feature-Escrow-Networks/
 
 # Scratch test files
 subqtransformer/test*.py
