@@ -1,0 +1,24 @@
+{
+  "experiment": "S2-025",
+  "description": "Matched per-hop MLP versus final-MLP-only placement across language and vision",
+  "offsets": [0, 1, 2, 4, 8, 16, 32, 64],
+  "thought_hops": 8,
+  "training": {
+    "language_steps": 2000,
+    "vision_epochs": 10,
+    "language_seeds": [42, 1337, 2026],
+    "vision_seeds": [42, 1337]
+  },
+  "results": [
+    {"domain": "language", "mode": "per_hop_mlp", "seed": 42, "parameters": 247424, "steps": 2000, "val_loss": 1.782139, "ppl": 5.9426, "elapsed_s": 57.9},
+    {"domain": "language", "mode": "per_hop_mlp", "seed": 1337, "parameters": 247424, "steps": 2000, "val_loss": 1.769114, "ppl": 5.8657, "elapsed_s": 57.974},
+    {"domain": "language", "mode": "per_hop_mlp", "seed": 2026, "parameters": 247424, "steps": 2000, "val_loss": 1.780613, "ppl": 5.9335, "elapsed_s": 58.008},
+    {"domain": "vision", "mode": "per_hop_mlp", "seed": 42, "parameters": 225536, "epochs": 10, "top1": 27.05, "elapsed_s": 118.915},
+    {"domain": "vision", "mode": "per_hop_mlp", "seed": 1337, "parameters": 225536, "epochs": 10, "top1": 27.38, "elapsed_s": 117.563},
+    {"domain": "language", "mode": "final_mlp_only", "seed": 42, "parameters": 247424, "steps": 2000, "val_loss": 1.786454, "ppl": 5.9682, "elapsed_s": 46.592},
+    {"domain": "language", "mode": "final_mlp_only", "seed": 1337, "parameters": 247424, "steps": 2000, "val_loss": 1.771082, "ppl": 5.8772, "elapsed_s": 45.774},
+    {"domain": "language", "mode": "final_mlp_only", "seed": 2026, "parameters": 247424, "steps": 2000, "val_loss": 1.785489, "ppl": 5.9625, "elapsed_s": 45.702},
+    {"domain": "vision", "mode": "final_mlp_only", "seed": 42, "parameters": 225536, "epochs": 10, "top1": 24.94, "elapsed_s": 103.234},
+    {"domain": "vision", "mode": "final_mlp_only", "seed": 1337, "parameters": 225536, "epochs": 10, "top1": 25.69, "elapsed_s": 128.01}
+  ]
+}

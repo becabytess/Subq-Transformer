@@ -1,0 +1,151 @@
+{
+  "experiment": "S2-030",
+  "description": "CIFAR-100 High-Res Vision Shootout: Dense 4-layer vs SubQ 2-macro recurrent vs SubQ 1-layer final MLP (L=257 tokens)",
+  "task": "CIFAR-100 classification with patch size 2x2 stride 2 (257 tokens)",
+  "seeds": [
+    42,
+    1337,
+    2026
+  ],
+  "epochs": 10,
+  "conditions": [
+    [
+      "dense_4layer_s42",
+      "dense_4layer",
+      42
+    ],
+    [
+      "dense_4layer_s1337",
+      "dense_4layer",
+      1337
+    ],
+    [
+      "dense_4layer_s2026",
+      "dense_4layer",
+      2026
+    ],
+    [
+      "subq_2macro_recurrent_s42",
+      "subq_2macro_recurrent",
+      42
+    ],
+    [
+      "subq_2macro_recurrent_s1337",
+      "subq_2macro_recurrent",
+      1337
+    ],
+    [
+      "subq_2macro_recurrent_s2026",
+      "subq_2macro_recurrent",
+      2026
+    ],
+    [
+      "subq_1layer_final_mlp_s42",
+      "subq_1layer_final_mlp",
+      42
+    ],
+    [
+      "subq_1layer_final_mlp_s1337",
+      "subq_1layer_final_mlp",
+      1337
+    ],
+    [
+      "subq_1layer_final_mlp_s2026",
+      "subq_1layer_final_mlp",
+      2026
+    ]
+  ],
+  "completed_at": "2026-09-08T07:11:42Z",
+  "results": [
+    {
+      "model": "dense_4layer_s42",
+      "architecture": "dense_4layer",
+      "seed": 42,
+      "parameters": 838784,
+      "epochs": 10,
+      "top1_accuracy": 42.13,
+      "total_test_images": 10000,
+      "elapsed_s": 157.407
+    },
+    {
+      "model": "dense_4layer_s1337",
+      "architecture": "dense_4layer",
+      "seed": 1337,
+      "parameters": 838784,
+      "epochs": 10,
+      "top1_accuracy": 42.46,
+      "total_test_images": 10000,
+      "elapsed_s": 157.208
+    },
+    {
+      "model": "dense_4layer_s2026",
+      "architecture": "dense_4layer",
+      "seed": 2026,
+      "parameters": 838784,
+      "epochs": 10,
+      "top1_accuracy": 43.02,
+      "total_test_images": 10000,
+      "elapsed_s": 156.107
+    },
+    {
+      "model": "subq_2macro_recurrent_s42",
+      "architecture": "subq_2macro_recurrent",
+      "seed": 42,
+      "parameters": 229120,
+      "epochs": 10,
+      "top1_accuracy": 31.76,
+      "total_test_images": 10000,
+      "elapsed_s": 335.43
+    },
+    {
+      "model": "subq_2macro_recurrent_s1337",
+      "architecture": "subq_2macro_recurrent",
+      "seed": 1337,
+      "parameters": 229120,
+      "epochs": 10,
+      "top1_accuracy": 31.68,
+      "total_test_images": 10000,
+      "elapsed_s": 336.689
+    },
+    {
+      "model": "subq_2macro_recurrent_s2026",
+      "architecture": "subq_2macro_recurrent",
+      "seed": 2026,
+      "parameters": 229120,
+      "epochs": 10,
+      "top1_accuracy": 32.71,
+      "total_test_images": 10000,
+      "elapsed_s": 340.423
+    },
+    {
+      "model": "subq_1layer_final_mlp_s42",
+      "architecture": "subq_1layer_final_mlp",
+      "seed": 42,
+      "parameters": 229120,
+      "epochs": 10,
+      "top1_accuracy": 31.27,
+      "total_test_images": 10000,
+      "elapsed_s": 328.064
+    },
+    {
+      "model": "subq_1layer_final_mlp_s1337",
+      "architecture": "subq_1layer_final_mlp",
+      "seed": 1337,
+      "parameters": 229120,
+      "epochs": 10,
+      "top1_accuracy": 31.26,
+      "total_test_images": 10000,
+      "elapsed_s": 325.626
+    },
+    {
+      "model": "subq_1layer_final_mlp_s2026",
+      "architecture": "subq_1layer_final_mlp",
+      "seed": 2026,
+      "parameters": 229120,
+      "epochs": 10,
+      "top1_accuracy": 32.99,
+      "total_test_images": 10000,
+      "elapsed_s": 329.128
+    }
+  ]
+}

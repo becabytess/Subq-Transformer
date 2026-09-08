@@ -1,0 +1,472 @@
+{
+  "experiment": "S2-015",
+  "description": "Corrected gated MQAR with oracle value-position routing",
+  "source_commit": "working-tree",
+  "dataset": "Synthetic MQAR with 16 key-value pairs and 8 late queries",
+  "causal": true,
+  "seq_len": 512,
+  "vocab_size": 256,
+  "num_kv_pairs": 16,
+  "num_queries": 8,
+  "key_value_assignment": "independent random permutation per example",
+  "thought_hops": 4,
+  "route_mode": "oracle_value_position",
+  "random_exact_baseline_percent": 2.5,
+  "training_steps": 6000,
+  "validation_batches": 50,
+  "seeds": [
+    42,
+    1337,
+    2026
+  ],
+  "k": 8,
+  "offsets": [
+    0,
+    1,
+    2,
+    4,
+    8,
+    16,
+    32,
+    64
+  ],
+  "update_mode": "learned_gate_full",
+  "results": [
+    {
+      "experiment": "S2-015",
+      "model": "oracle_t4_s42",
+      "update_mode": "learned_gate_full",
+      "route_mode": "oracle_value_position",
+      "thought_hops": 4,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "offset_horizon": 64,
+      "k": 8,
+      "seed": 42,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "n_heads": 4,
+      "d_mlp": 512,
+      "num_kv_pairs": 16,
+      "num_queries": 8,
+      "parameters": 329345,
+      "target_parameters": 329088,
+      "parameter_delta_vs_target": 257,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 100.0,
+          "val_loss": 0.000357,
+          "queries": 12800,
+          "mean_query_distance": 333.847,
+          "distance_accuracy": {
+            "128-255": {
+              "correct": 3561,
+              "total": 3561,
+              "accuracy": 100.0
+            },
+            "256-383": {
+              "correct": 4656,
+              "total": 4656,
+              "accuracy": 100.0
+            },
+            "384-511": {
+              "correct": 4583,
+              "total": 4583,
+              "accuracy": 100.0
+            }
+          },
+          "gate_mean_all_positions_by_hop": [
+            0.523939,
+            0.575083,
+            0.625211,
+            0.626129
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.700728,
+            0.750073,
+            0.672655,
+            0.621845
+          ]
+        },
+        {
+          "step": 3000,
+          "accuracy": 100.0,
+          "val_loss": 6.3e-05,
+          "queries": 12800,
+          "mean_query_distance": 333.286,
+          "distance_accuracy": {
+            "128-255": {
+              "correct": 3597,
+              "total": 3597,
+              "accuracy": 100.0
+            },
+            "256-383": {
+              "correct": 4599,
+              "total": 4599,
+              "accuracy": 100.0
+            },
+            "384-511": {
+              "correct": 4604,
+              "total": 4604,
+              "accuracy": 100.0
+            }
+          },
+          "gate_mean_all_positions_by_hop": [
+            0.531549,
+            0.593255,
+            0.654241,
+            0.647945
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.71472,
+            0.772996,
+            0.693224,
+            0.637319
+          ]
+        },
+        {
+          "step": 6000,
+          "accuracy": 100.0,
+          "val_loss": 2.5e-05,
+          "queries": 12800,
+          "mean_query_distance": 332.523,
+          "distance_accuracy": {
+            "128-255": {
+              "correct": 3603,
+              "total": 3603,
+              "accuracy": 100.0
+            },
+            "256-383": {
+              "correct": 4653,
+              "total": 4653,
+              "accuracy": 100.0
+            },
+            "384-511": {
+              "correct": 4544,
+              "total": 4544,
+              "accuracy": 100.0
+            }
+          },
+          "gate_mean_all_positions_by_hop": [
+            0.536098,
+            0.603141,
+            0.668934,
+            0.656383
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.720552,
+            0.782964,
+            0.701913,
+            0.643572
+          ]
+        }
+      ],
+      "elapsed_s": 355.866,
+      "train_tokens_per_s": 276238.78,
+      "peak_memory_mb": 435.0,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-015",
+      "model": "oracle_t4_s1337",
+      "update_mode": "learned_gate_full",
+      "route_mode": "oracle_value_position",
+      "thought_hops": 4,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "offset_horizon": 64,
+      "k": 8,
+      "seed": 1337,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "n_heads": 4,
+      "d_mlp": 512,
+      "num_kv_pairs": 16,
+      "num_queries": 8,
+      "parameters": 329345,
+      "target_parameters": 329088,
+      "parameter_delta_vs_target": 257,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 100.0,
+          "val_loss": 0.000351,
+          "queries": 12800,
+          "mean_query_distance": 332.949,
+          "distance_accuracy": {
+            "128-255": {
+              "correct": 3525,
+              "total": 3525,
+              "accuracy": 100.0
+            },
+            "256-383": {
+              "correct": 4748,
+              "total": 4748,
+              "accuracy": 100.0
+            },
+            "384-511": {
+              "correct": 4527,
+              "total": 4527,
+              "accuracy": 100.0
+            }
+          },
+          "gate_mean_all_positions_by_hop": [
+            0.53084,
+            0.597404,
+            0.654244,
+            0.632267
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.701098,
+            0.753981,
+            0.68304,
+            0.638547
+          ]
+        },
+        {
+          "step": 3000,
+          "accuracy": 100.0,
+          "val_loss": 6.1e-05,
+          "queries": 12800,
+          "mean_query_distance": 333.487,
+          "distance_accuracy": {
+            "128-255": {
+              "correct": 3498,
+              "total": 3498,
+              "accuracy": 100.0
+            },
+            "256-383": {
+              "correct": 4719,
+              "total": 4719,
+              "accuracy": 100.0
+            },
+            "384-511": {
+              "correct": 4583,
+              "total": 4583,
+              "accuracy": 100.0
+            }
+          },
+          "gate_mean_all_positions_by_hop": [
+            0.539458,
+            0.619413,
+            0.685295,
+            0.640434
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.713615,
+            0.775662,
+            0.703477,
+            0.652596
+          ]
+        },
+        {
+          "step": 6000,
+          "accuracy": 100.0,
+          "val_loss": 2.4e-05,
+          "queries": 12800,
+          "mean_query_distance": 333.198,
+          "distance_accuracy": {
+            "128-255": {
+              "correct": 3564,
+              "total": 3564,
+              "accuracy": 100.0
+            },
+            "256-383": {
+              "correct": 4646,
+              "total": 4646,
+              "accuracy": 100.0
+            },
+            "384-511": {
+              "correct": 4590,
+              "total": 4590,
+              "accuracy": 100.0
+            }
+          },
+          "gate_mean_all_positions_by_hop": [
+            0.544375,
+            0.630687,
+            0.699721,
+            0.640223
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.720264,
+            0.786858,
+            0.713047,
+            0.658328
+          ]
+        }
+      ],
+      "elapsed_s": 377.315,
+      "train_tokens_per_s": 260535.37,
+      "peak_memory_mb": 435.0,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-015",
+      "model": "oracle_t4_s2026",
+      "update_mode": "learned_gate_full",
+      "route_mode": "oracle_value_position",
+      "thought_hops": 4,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "offset_horizon": 64,
+      "k": 8,
+      "seed": 2026,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "n_heads": 4,
+      "d_mlp": 512,
+      "num_kv_pairs": 16,
+      "num_queries": 8,
+      "parameters": 329345,
+      "target_parameters": 329088,
+      "parameter_delta_vs_target": 257,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 100.0,
+          "val_loss": 0.000359,
+          "queries": 12800,
+          "mean_query_distance": 331.846,
+          "distance_accuracy": {
+            "128-255": {
+              "correct": 3611,
+              "total": 3611,
+              "accuracy": 100.0
+            },
+            "256-383": {
+              "correct": 4700,
+              "total": 4700,
+              "accuracy": 100.0
+            },
+            "384-511": {
+              "correct": 4489,
+              "total": 4489,
+              "accuracy": 100.0
+            }
+          },
+          "gate_mean_all_positions_by_hop": [
+            0.529792,
+            0.587108,
+            0.637647,
+            0.636134
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.694921,
+            0.755022,
+            0.682449,
+            0.635419
+          ]
+        },
+        {
+          "step": 3000,
+          "accuracy": 100.0,
+          "val_loss": 6.3e-05,
+          "queries": 12800,
+          "mean_query_distance": 332.151,
+          "distance_accuracy": {
+            "128-255": {
+              "correct": 3592,
+              "total": 3592,
+              "accuracy": 100.0
+            },
+            "256-383": {
+              "correct": 4680,
+              "total": 4680,
+              "accuracy": 100.0
+            },
+            "384-511": {
+              "correct": 4528,
+              "total": 4528,
+              "accuracy": 100.0
+            }
+          },
+          "gate_mean_all_positions_by_hop": [
+            0.539623,
+            0.606618,
+            0.664344,
+            0.651149
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.707315,
+            0.77632,
+            0.700943,
+            0.649293
+          ]
+        },
+        {
+          "step": 6000,
+          "accuracy": 100.0,
+          "val_loss": 2.5e-05,
+          "queries": 12800,
+          "mean_query_distance": 332.991,
+          "distance_accuracy": {
+            "128-255": {
+              "correct": 3544,
+              "total": 3544,
+              "accuracy": 100.0
+            },
+            "256-383": {
+              "correct": 4712,
+              "total": 4712,
+              "accuracy": 100.0
+            },
+            "384-511": {
+              "correct": 4544,
+              "total": 4544,
+              "accuracy": 100.0
+            }
+          },
+          "gate_mean_all_positions_by_hop": [
+            0.545157,
+            0.616975,
+            0.677641,
+            0.656059
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.714321,
+            0.786457,
+            0.708886,
+            0.654794
+          ]
+        }
+      ],
+      "elapsed_s": 346.52,
+      "train_tokens_per_s": 283689.4,
+      "peak_memory_mb": 435.0,
+      "device": "NVIDIA A10"
+    }
+  ],
+  "completed_at": "2026-09-05T14:21:20Z"
+}

@@ -23,6 +23,8 @@
 >
 > 📖 **Comprehensive Research Journey & Full Technical Report**: For the complete, unabridged 175KB experimental log covering all 73 Modal GPU studies (including wave attractor proofs, the Dyck-4 rematch, Triton kernels, high-res vision transformers, and depth equivalence proofs), see **[`experiments/RESEARCH_JOURNEY.md`](file:///c:/Users/beca/Desktop/gravimem-revived/experiments/RESEARCH_JOURNEY.md)**.
 
+> **Research tracks**: The original record is preserved and indexed in **[`season1_atlas/`](season1_atlas/README.md)**. New clean experiments belong in **[`season2/`](season2/README.md)**.
+
 ---
 
 ## 🚀 Key Highlights & Breakthroughs

@@ -1,0 +1,92 @@
+{
+  "experiment": "S2-024",
+  "description": "Attention-only T=8 with one final MLP after all attention iterations",
+  "source_commit": "working-tree",
+  "task": "16 independently randomized key/value pairs, 8 late queries",
+  "offsets": [
+    0,
+    1,
+    2,
+    4,
+    8,
+    16,
+    32,
+    64
+  ],
+  "conditions": [
+    [
+      "attention_only_final_mlp_t8_d128",
+      "attention_only_final_mlp",
+      128,
+      512,
+      8
+    ]
+  ],
+  "seeds": [
+    42,
+    1337,
+    2026
+  ],
+  "training_steps": 6000,
+  "random_exact_baseline_percent": 2.5,
+  "results": [
+    {
+      "experiment": "S2-024",
+      "model": "attention_only_final_mlp_t8_d128_s42",
+      "mode": "attention_only_final_mlp",
+      "seed": 42,
+      "d_model": 128,
+      "d_mlp": 512,
+      "thought_hops": 8,
+      "parameters": 312704,
+      "steps": 6000,
+      "accuracy": 5.4062,
+      "distance_accuracy": {
+        "128-255": 8.3616,
+        "256-383": 6.3098,
+        "384-511": 2.1744
+      },
+      "queries": 12800,
+      "elapsed_s": 502.108
+    },
+    {
+      "experiment": "S2-024",
+      "model": "attention_only_final_mlp_t8_d128_s1337",
+      "mode": "attention_only_final_mlp",
+      "seed": 1337,
+      "d_model": 128,
+      "d_mlp": 512,
+      "thought_hops": 8,
+      "parameters": 312704,
+      "steps": 6000,
+      "accuracy": 4.3047,
+      "distance_accuracy": {
+        "128-255": 5.5138,
+        "256-383": 4.988,
+        "384-511": 2.6851
+      },
+      "queries": 12800,
+      "elapsed_s": 484.591
+    },
+    {
+      "experiment": "S2-024",
+      "model": "attention_only_final_mlp_t8_d128_s2026",
+      "mode": "attention_only_final_mlp",
+      "seed": 2026,
+      "d_model": 128,
+      "d_mlp": 512,
+      "thought_hops": 8,
+      "parameters": 312704,
+      "steps": 6000,
+      "accuracy": 5.2812,
+      "distance_accuracy": {
+        "128-255": 7.8896,
+        "256-383": 6.1628,
+        "384-511": 2.3266
+      },
+      "queries": 12800,
+      "elapsed_s": 486.111
+    }
+  ],
+  "completed_at": "2026-09-06T14:29:02Z"
+}

@@ -1,0 +1,869 @@
+{
+  "experiment": "S2-009",
+  "description": "Four-hop distance-256 update-path preservation ablation",
+  "source_commit": "working-tree",
+  "dataset": "Synthetic one-pair randomized-position propagation task",
+  "causal": true,
+  "seq_len": 512,
+  "query_target_position_range": [
+    257,
+    511
+  ],
+  "value_distance": 256,
+  "num_kv_pairs": 1,
+  "num_queries": 1,
+  "random_exact_baseline_percent": 2.5,
+  "offsets": [
+    0,
+    1,
+    2,
+    4,
+    8,
+    16,
+    32,
+    64
+  ],
+  "offset_horizon": 64,
+  "thought_hops": 4,
+  "route_mode": "forced_64",
+  "training_steps": 6000,
+  "validation_batches": 100,
+  "seeds": [
+    42,
+    1337,
+    2026
+  ],
+  "parameter_target": 329088,
+  "update_modes": [
+    "full",
+    "no_mlp",
+    "v_residual",
+    "raw_copy",
+    "gru"
+  ],
+  "mode_definitions": {
+    "full": "Forced offset-64 route, output projection, residual update, and nonlinear MLP",
+    "no_mlp": "Forced offset-64 route, output projection, and residual update; no MLP",
+    "v_residual": "Forced offset-64 route, value projection, and residual update; no output projection or MLP",
+    "raw_copy": "Forced offset-64 route with direct source-state replacement",
+    "gru": "Established accumulator GRU update followed by the MLP"
+  },
+  "parameter_matching": {
+    "full_width": 512,
+    "gru_width": 512,
+    "note": "The GRU adds parameters; this is an update-mechanism diagnostic, not a matched-capacity comparison."
+  },
+  "results": [
+    {
+      "experiment": "S2-009",
+      "model": "full_d256_t4_s42",
+      "update_mode": "full",
+      "route_mode": "forced_64",
+      "thought_hops": 4,
+      "value_distance": 256,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "offset_horizon": 64,
+      "residual_scale": 0.5,
+      "seed": 42,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "n_heads": 4,
+      "d_mlp": 512,
+      "parameters": 329088,
+      "target_parameters": 329088,
+      "parameter_delta_vs_target": 0,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 2.3125,
+          "loss": 3.717639,
+          "queries": 3200
+        },
+        {
+          "step": 3000,
+          "accuracy": 2.8125,
+          "loss": 3.695322,
+          "queries": 3200
+        },
+        {
+          "step": 6000,
+          "accuracy": 2.75,
+          "loss": 3.690119,
+          "queries": 3200
+        }
+      ],
+      "elapsed_s": 57.638,
+      "tokens_per_s_train": 1705537.03,
+      "peak_memory_mb": 321.62,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-009",
+      "model": "no_mlp_d256_t4_s42",
+      "update_mode": "no_mlp",
+      "route_mode": "forced_64",
+      "thought_hops": 4,
+      "value_distance": 256,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "offset_horizon": 64,
+      "residual_scale": 0.5,
+      "seed": 42,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "n_heads": 4,
+      "d_mlp": 512,
+      "parameters": 329088,
+      "target_parameters": 329088,
+      "parameter_delta_vs_target": 0,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 2.4375,
+          "loss": 3.717133,
+          "queries": 3200
+        },
+        {
+          "step": 3000,
+          "accuracy": 2.6875,
+          "loss": 3.696102,
+          "queries": 3200
+        },
+        {
+          "step": 6000,
+          "accuracy": 2.5625,
+          "loss": 3.69056,
+          "queries": 3200
+        }
+      ],
+      "elapsed_s": 32.395,
+      "tokens_per_s_train": 3034525.42,
+      "peak_memory_mb": 143.86,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-009",
+      "model": "v_residual_d256_t4_s42",
+      "update_mode": "v_residual",
+      "route_mode": "forced_64",
+      "thought_hops": 4,
+      "value_distance": 256,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "offset_horizon": 64,
+      "residual_scale": 0.5,
+      "seed": 42,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "n_heads": 4,
+      "d_mlp": 512,
+      "parameters": 329088,
+      "target_parameters": 329088,
+      "parameter_delta_vs_target": 0,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 2.3125,
+          "loss": 3.720301,
+          "queries": 3200
+        },
+        {
+          "step": 3000,
+          "accuracy": 3.0,
+          "loss": 3.694645,
+          "queries": 3200
+        },
+        {
+          "step": 6000,
+          "accuracy": 14.4688,
+          "loss": 2.615619,
+          "queries": 3200
+        }
+      ],
+      "elapsed_s": 29.225,
+      "tokens_per_s_train": 3363664.14,
+      "peak_memory_mb": 127.71,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-009",
+      "model": "raw_copy_d256_t4_s42",
+      "update_mode": "raw_copy",
+      "route_mode": "forced_64",
+      "thought_hops": 4,
+      "value_distance": 256,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "offset_horizon": 64,
+      "residual_scale": 0.5,
+      "seed": 42,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "n_heads": 4,
+      "d_mlp": 512,
+      "parameters": 329088,
+      "target_parameters": 329088,
+      "parameter_delta_vs_target": 0,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 100.0,
+          "loss": 0.003175,
+          "queries": 3200
+        },
+        {
+          "step": 3000,
+          "accuracy": 100.0,
+          "loss": 0.000482,
+          "queries": 3200
+        },
+        {
+          "step": 6000,
+          "accuracy": 100.0,
+          "loss": 0.000187,
+          "queries": 3200
+        }
+      ],
+      "elapsed_s": 29.725,
+      "tokens_per_s_train": 3307101.71,
+      "peak_memory_mb": 87.14,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-009",
+      "model": "gru_d256_t4_s42",
+      "update_mode": "gru",
+      "route_mode": "forced_64",
+      "thought_hops": 4,
+      "value_distance": 256,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "offset_horizon": 64,
+      "residual_scale": 0.5,
+      "seed": 42,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "n_heads": 4,
+      "d_mlp": 512,
+      "parameters": 428160,
+      "target_parameters": 329088,
+      "parameter_delta_vs_target": 99072,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 2.3125,
+          "loss": 3.711112,
+          "queries": 3200
+        },
+        {
+          "step": 3000,
+          "accuracy": 2.5625,
+          "loss": 3.694976,
+          "queries": 3200
+        },
+        {
+          "step": 6000,
+          "accuracy": 2.8125,
+          "loss": 3.689824,
+          "queries": 3200
+        }
+      ],
+      "elapsed_s": 80.421,
+      "tokens_per_s_train": 1222366.87,
+      "peak_memory_mb": 530.94,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-009",
+      "model": "full_d256_t4_s1337",
+      "update_mode": "full",
+      "route_mode": "forced_64",
+      "thought_hops": 4,
+      "value_distance": 256,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "offset_horizon": 64,
+      "residual_scale": 0.5,
+      "seed": 1337,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "n_heads": 4,
+      "d_mlp": 512,
+      "parameters": 329088,
+      "target_parameters": 329088,
+      "parameter_delta_vs_target": 0,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 2.2188,
+          "loss": 3.716964,
+          "queries": 3200
+        },
+        {
+          "step": 3000,
+          "accuracy": 2.6875,
+          "loss": 3.698683,
+          "queries": 3200
+        },
+        {
+          "step": 6000,
+          "accuracy": 2.2188,
+          "loss": 3.693103,
+          "queries": 3200
+        }
+      ],
+      "elapsed_s": 57.37,
+      "tokens_per_s_train": 1713509.04,
+      "peak_memory_mb": 321.62,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-009",
+      "model": "no_mlp_d256_t4_s1337",
+      "update_mode": "no_mlp",
+      "route_mode": "forced_64",
+      "thought_hops": 4,
+      "value_distance": 256,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "offset_horizon": 64,
+      "residual_scale": 0.5,
+      "seed": 1337,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "n_heads": 4,
+      "d_mlp": 512,
+      "parameters": 329088,
+      "target_parameters": 329088,
+      "parameter_delta_vs_target": 0,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 2.4062,
+          "loss": 3.716779,
+          "queries": 3200
+        },
+        {
+          "step": 3000,
+          "accuracy": 2.6875,
+          "loss": 3.698329,
+          "queries": 3200
+        },
+        {
+          "step": 6000,
+          "accuracy": 2.25,
+          "loss": 3.692926,
+          "queries": 3200
+        }
+      ],
+      "elapsed_s": 33.878,
+      "tokens_per_s_train": 2901674.53,
+      "peak_memory_mb": 143.86,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-009",
+      "model": "v_residual_d256_t4_s1337",
+      "update_mode": "v_residual",
+      "route_mode": "forced_64",
+      "thought_hops": 4,
+      "value_distance": 256,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "offset_horizon": 64,
+      "residual_scale": 0.5,
+      "seed": 1337,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "n_heads": 4,
+      "d_mlp": 512,
+      "parameters": 329088,
+      "target_parameters": 329088,
+      "parameter_delta_vs_target": 0,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 2.375,
+          "loss": 3.721702,
+          "queries": 3200
+        },
+        {
+          "step": 3000,
+          "accuracy": 2.7188,
+          "loss": 3.70187,
+          "queries": 3200
+        },
+        {
+          "step": 6000,
+          "accuracy": 2.6875,
+          "loss": 3.691382,
+          "queries": 3200
+        }
+      ],
+      "elapsed_s": 29.117,
+      "tokens_per_s_train": 3376141.8,
+      "peak_memory_mb": 127.71,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-009",
+      "model": "raw_copy_d256_t4_s1337",
+      "update_mode": "raw_copy",
+      "route_mode": "forced_64",
+      "thought_hops": 4,
+      "value_distance": 256,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "offset_horizon": 64,
+      "residual_scale": 0.5,
+      "seed": 1337,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "n_heads": 4,
+      "d_mlp": 512,
+      "parameters": 329088,
+      "target_parameters": 329088,
+      "parameter_delta_vs_target": 0,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 100.0,
+          "loss": 0.003127,
+          "queries": 3200
+        },
+        {
+          "step": 3000,
+          "accuracy": 100.0,
+          "loss": 0.000489,
+          "queries": 3200
+        },
+        {
+          "step": 6000,
+          "accuracy": 100.0,
+          "loss": 0.000191,
+          "queries": 3200
+        }
+      ],
+      "elapsed_s": 20.664,
+      "tokens_per_s_train": 4757242.58,
+      "peak_memory_mb": 87.14,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-009",
+      "model": "gru_d256_t4_s1337",
+      "update_mode": "gru",
+      "route_mode": "forced_64",
+      "thought_hops": 4,
+      "value_distance": 256,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "offset_horizon": 64,
+      "residual_scale": 0.5,
+      "seed": 1337,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "n_heads": 4,
+      "d_mlp": 512,
+      "parameters": 428160,
+      "target_parameters": 329088,
+      "parameter_delta_vs_target": 99072,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 2.25,
+          "loss": 3.710649,
+          "queries": 3200
+        },
+        {
+          "step": 3000,
+          "accuracy": 2.6875,
+          "loss": 3.696241,
+          "queries": 3200
+        },
+        {
+          "step": 6000,
+          "accuracy": 2.2188,
+          "loss": 3.692217,
+          "queries": 3200
+        }
+      ],
+      "elapsed_s": 80.773,
+      "tokens_per_s_train": 1217046.77,
+      "peak_memory_mb": 530.94,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-009",
+      "model": "full_d256_t4_s2026",
+      "update_mode": "full",
+      "route_mode": "forced_64",
+      "thought_hops": 4,
+      "value_distance": 256,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "offset_horizon": 64,
+      "residual_scale": 0.5,
+      "seed": 2026,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "n_heads": 4,
+      "d_mlp": 512,
+      "parameters": 329088,
+      "target_parameters": 329088,
+      "parameter_delta_vs_target": 0,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 2.0938,
+          "loss": 3.716232,
+          "queries": 3200
+        },
+        {
+          "step": 3000,
+          "accuracy": 2.7188,
+          "loss": 3.697661,
+          "queries": 3200
+        },
+        {
+          "step": 6000,
+          "accuracy": 2.5625,
+          "loss": 3.692283,
+          "queries": 3200
+        }
+      ],
+      "elapsed_s": 57.46,
+      "tokens_per_s_train": 1710837.34,
+      "peak_memory_mb": 321.62,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-009",
+      "model": "no_mlp_d256_t4_s2026",
+      "update_mode": "no_mlp",
+      "route_mode": "forced_64",
+      "thought_hops": 4,
+      "value_distance": 256,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "offset_horizon": 64,
+      "residual_scale": 0.5,
+      "seed": 2026,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "n_heads": 4,
+      "d_mlp": 512,
+      "parameters": 329088,
+      "target_parameters": 329088,
+      "parameter_delta_vs_target": 0,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 2.1562,
+          "loss": 3.713658,
+          "queries": 3200
+        },
+        {
+          "step": 3000,
+          "accuracy": 2.5312,
+          "loss": 3.696897,
+          "queries": 3200
+        },
+        {
+          "step": 6000,
+          "accuracy": 2.25,
+          "loss": 3.692236,
+          "queries": 3200
+        }
+      ],
+      "elapsed_s": 31.098,
+      "tokens_per_s_train": 3161079.3,
+      "peak_memory_mb": 143.86,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-009",
+      "model": "v_residual_d256_t4_s2026",
+      "update_mode": "v_residual",
+      "route_mode": "forced_64",
+      "thought_hops": 4,
+      "value_distance": 256,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "offset_horizon": 64,
+      "residual_scale": 0.5,
+      "seed": 2026,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "n_heads": 4,
+      "d_mlp": 512,
+      "parameters": 329088,
+      "target_parameters": 329088,
+      "parameter_delta_vs_target": 0,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 2.2188,
+          "loss": 3.716376,
+          "queries": 3200
+        },
+        {
+          "step": 3000,
+          "accuracy": 6.4375,
+          "loss": 3.143742,
+          "queries": 3200
+        },
+        {
+          "step": 6000,
+          "accuracy": 37.0625,
+          "loss": 1.796242,
+          "queries": 3200
+        }
+      ],
+      "elapsed_s": 35.576,
+      "tokens_per_s_train": 2763224.45,
+      "peak_memory_mb": 127.71,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-009",
+      "model": "raw_copy_d256_t4_s2026",
+      "update_mode": "raw_copy",
+      "route_mode": "forced_64",
+      "thought_hops": 4,
+      "value_distance": 256,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "offset_horizon": 64,
+      "residual_scale": 0.5,
+      "seed": 2026,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "n_heads": 4,
+      "d_mlp": 512,
+      "parameters": 329088,
+      "target_parameters": 329088,
+      "parameter_delta_vs_target": 0,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 100.0,
+          "loss": 0.003082,
+          "queries": 3200
+        },
+        {
+          "step": 3000,
+          "accuracy": 100.0,
+          "loss": 0.000484,
+          "queries": 3200
+        },
+        {
+          "step": 6000,
+          "accuracy": 100.0,
+          "loss": 0.000189,
+          "queries": 3200
+        }
+      ],
+      "elapsed_s": 19.754,
+      "tokens_per_s_train": 4976442.59,
+      "peak_memory_mb": 87.14,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-009",
+      "model": "gru_d256_t4_s2026",
+      "update_mode": "gru",
+      "route_mode": "forced_64",
+      "thought_hops": 4,
+      "value_distance": 256,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "offset_horizon": 64,
+      "residual_scale": 0.5,
+      "seed": 2026,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "n_heads": 4,
+      "d_mlp": 512,
+      "parameters": 428160,
+      "target_parameters": 329088,
+      "parameter_delta_vs_target": 99072,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 2.0938,
+          "loss": 3.706346,
+          "queries": 3200
+        },
+        {
+          "step": 3000,
+          "accuracy": 2.7188,
+          "loss": 3.695189,
+          "queries": 3200
+        },
+        {
+          "step": 6000,
+          "accuracy": 2.1562,
+          "loss": 3.691281,
+          "queries": 3200
+        }
+      ],
+      "elapsed_s": 81.286,
+      "tokens_per_s_train": 1209353.06,
+      "peak_memory_mb": 530.94,
+      "device": "NVIDIA A10"
+    }
+  ],
+  "completed_at": "2026-09-05T12:39:02Z"
+}

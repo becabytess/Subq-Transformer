@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SubQ: Combinatorial Receptive Field Explorer</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="style.css">
+  <!-- Three.js & OrbitControls from reliable CDNs -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+</head>
+<body>
+  <!-- 3D Canvas Viewport -->
+  <div id="canvas-container"></div>
+
+  <!-- Interactive Hover Tooltip -->
+  <div id="token-tooltip"></div>
+
+  <!-- Header -->
+  <header class="glass-panel">
+    <div class="title-group">
+      <div class="app-title">
+        <span>SubQ Combinatorial Receptive Field</span>
+        <span class="badge">3D Explorer</span>
+      </div>
+      <div class="app-subtitle">
+        A single token only observes <em>K</em> tokens at a time, but in a few recurrent iterations its receptive field covers the entire sequence!
+      </div>
+    </div>
+
+    <div class="header-actions">
+      <!-- Mouse Mode Switcher (Rotate vs Pan) -->
+      <div class="view-mode-toggle" title="Select Mouse Drag Action">
+        <button id="btn-mode-rotate" class="view-btn active" title="Left-drag rotates the 3D scene">
+          <span>🔄</span> Rotate
+        </button>
+        <button id="btn-mode-pan" class="view-btn" title="Left-drag pans/moves left, right, up, down">
+          <span>✋</span> Move / Pan
+        </button>
+      </div>
+
+      <!-- 3D Perspective Mode Switcher -->
+      <div class="view-mode-toggle">
+        <button id="btn-view-cone" class="view-btn active" title="View temporal unrolled cone / pyramid across iterations">
+          <span>🗼</span> 3D Cone
+        </button>
+        <button id="btn-view-arcs" class="view-btn" title="View 3D overhead arcs jumping between tokens">
+          <span>🌈</span> 3D Arcs
+        </button>
+      </div>
+
+      <!-- Sidebar Toggle Button -->
+      <button id="btn-toggle-sidebar" class="view-btn active" title="Toggle Settings Sidebar (HotKey: H)">
+        <span id="sidebar-toggle-icon">◀</span>
+        <span id="sidebar-toggle-text">Controls</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Left Sidebar Controls -->
+  <aside id="controls-sidebar" class="controls-sidebar glass-panel">
+    <!-- Sidebar Header with Close Button -->
+    <div class="sidebar-header-row">
+      <div class="control-section-title" style="margin-bottom: 0;">Controls & Settings</div>
+      <button id="btn-close-sidebar" class="sidebar-close-btn" title="Hide Sidebar (H)">✕</button>
+    </div>
+    <!-- Presets -->
+    <div>
+      <div class="control-section-title">Quick Presets</div>
+      <div class="presets-grid">
+        <button id="preset-subq" class="preset-btn">
+          <strong>⚡ SubQ Multi-Scale (K=5)</strong>
+          <span>Exponential stride hops — full sequence in 3 hops!</span>
+        </button>
+        <button id="preset-local" class="preset-btn">
+          <strong>🐌 Local Window (K=5)</strong>
+          <span>Standard linear expansion — slow and narrow.</span>
+        </button>
+        <button id="preset-wide" class="preset-btn">
+          <strong>🚀 Wide Horizon (K=8)</strong>
+          <span>Canonical SubQ K=8 routing.</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Parameter Sliders -->
+    <div class="control-group">
+      <div class="control-section-title">Parameters</div>
+
+      <div class="control-group">
+        <div class="control-label-row">
+          <span>Routing Architecture</span>
+        </div>
+        <select id="select-mode">
+          <option value="multiscale">SubQ Multi-Scale Strides (Exponential)</option>
+          <option value="local">Standard Local Sliding Window</option>
+        </select>
+      </div>
+
+      <div class="control-group" style="margin-top: 6px;">
+        <div class="control-label-row">
+          <span>Branching Factor (K tokens seen):</span>
+          <span id="val-k" class="val">5</span>
+        </div>
+        <input type="range" id="slider-k" min="2" max="12" step="1" value="5">
+      </div>
+
+      <div class="control-group" style="margin-top: 6px;">
+        <div class="control-label-row">
+          <span>Sequence Length (N tokens):</span>
+          <span id="val-seq" class="val">96</span>
+        </div>
+        <input type="range" id="slider-seq" min="32" max="160" step="16" value="96">
+      </div>
+
+      <div class="control-group" style="margin-top: 6px;">
+        <div class="control-label-row">
+          <span>Max Recurrent Hops (T):</span>
+          <span id="val-hops" class="val">4</span>
+        </div>
+        <input type="range" id="slider-hops" min="2" max="6" step="1" value="4">
+      </div>
+
+      <div class="control-group" style="margin-top: 6px;">
+        <div class="control-label-row">
+          <span>Signal Animation Speed:</span>
+        </div>
+        <input type="range" id="slider-speed" min="0.2" max="2.5" step="0.1" value="1.0">
+      </div>
+
+      <label class="checkbox-row" style="margin-top: 8px;">
+        <input type="checkbox" id="check-causal">
+        <span>Causal Masking (Past tokens only)</span>
+      </label>
+    </div>
+
+    <!-- Interactive Navigation Hint -->
+    <div class="hint-box">
+      <strong>💡 Navigation & Controls:</strong><br>
+      • <strong>Click ANY 3D token</strong> along the sequence to set as observer.<br>
+      • <strong>Left Click + Drag:</strong> Rotate 3D camera.<br>
+      • <strong>Right Click + Drag:</strong> Pan camera.<br>
+      • <strong>Mouse Wheel:</strong> Zoom in / out.<br>
+      • Watch the glowing <strong>signal particles</strong> travel along the paths!
+    </div>
+  </aside>
+
+  <!-- Bottom HUD (Timeline & Telemetry) -->
+  <div class="bottom-hud">
+    <!-- Camera Pan & Navigation Toolbar -->
+    <div class="nav-toolbar glass-panel">
+      <div class="nav-group-left">
+        <span class="nav-label">Sequence View:</span>
+        <button id="btn-pan-left" class="nav-btn" title="Move View Left (Arrow Left / A)">◀ Move Left</button>
+        <button id="btn-focus-token" class="nav-btn accent-btn" title="Center view on selected token (Key: F)">🎯 Center on Token</button>
+        <button id="btn-pan-right" class="nav-btn" title="Move View Right (Arrow Right / D)">Move Right ▶</button>
+        <button id="btn-reset-cam" class="nav-btn" title="Reset Camera View Angle">↺ Reset View</button>
+      </div>
+      <div class="nav-hint-right">
+        <span>Tip: Toggle <strong>Move / Pan</strong> mode above, or hold <strong>Shift + Drag</strong> / use <strong>Arrow Keys</strong></span>
+      </div>
+    </div>
+
+    <!-- Timeline Stepper -->
+    <div class="timeline-panel glass-panel">
+      <div class="playback-controls">
+        <button id="btn-reset" class="playback-btn" title="Reset to Hop 0">↺ Hop 0</button>
+        <button id="btn-prev" class="playback-btn" title="Previous Hop">◀</button>
+        <button id="btn-play" class="playback-btn" title="Auto Play/Pause">▶ Play</button>
+        <button id="btn-next" class="playback-btn" title="Next Hop">▶</button>
+      </div>
+
+      <!-- Hop Stepper Dots -->
+      <div id="timeline-steps" class="timeline-steps">
+        <!-- Injected dynamically by JS -->
+      </div>
+    </div>
+
+    <!-- Telemetry Bar -->
+    <div class="telemetry-bar glass-panel">
+      <div class="stats-grid">
+        <div class="stat-item">
+          <span class="stat-label">Observer Token</span>
+          <span id="stat-token-id" class="stat-val" style="color: #fbbf24;">#48</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-label">Recurrent Hop (T)</span>
+          <span id="stat-current-hop" class="stat-val">1 / 4</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-label">Hop Branching (K)</span>
+          <span id="stat-branching-k" class="stat-val">5 tokens</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-label">Receptive Field</span>
+          <span id="stat-rf-count" class="stat-val">5 / 96</span>
+        </div>
+      </div>
+
+      <!-- Visual Coverage Progress Widget -->
+      <div class="coverage-widget">
+        <div class="control-label-row">
+          <span class="stat-label">Context Coverage</span>
+          <span id="stat-coverage-pct" class="stat-val" style="font-size: 13px;">5.2%</span>
+        </div>
+        <div class="progress-bar-track">
+          <div id="progress-bar-fill" class="progress-bar-fill"></div>
+        </div>
+      </div>
+
+      <!-- Theoretical Scaling Badge -->
+      <div id="scaling-badge" class="scaling-badge">
+        SubQ Multi-Scale: K^T = 5^1 = 5 paths
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="graph_engine.js"></script>
+  <script src="particles.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

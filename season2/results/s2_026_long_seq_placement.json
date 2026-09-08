@@ -1,0 +1,176 @@
+{
+  "experiment": "S2-026",
+  "description": "Long-sequence per-hop MLP versus final-MLP-only: language L=512, vision L=257",
+  "conditions": [
+    [
+      "language",
+      "per_hop_mlp",
+      42
+    ],
+    [
+      "language",
+      "per_hop_mlp",
+      1337
+    ],
+    [
+      "language",
+      "per_hop_mlp",
+      2026
+    ],
+    [
+      "vision",
+      "per_hop_mlp",
+      42
+    ],
+    [
+      "vision",
+      "per_hop_mlp",
+      1337
+    ],
+    [
+      "language",
+      "final_mlp_only",
+      42
+    ],
+    [
+      "language",
+      "final_mlp_only",
+      1337
+    ],
+    [
+      "language",
+      "final_mlp_only",
+      2026
+    ],
+    [
+      "vision",
+      "final_mlp_only",
+      42
+    ],
+    [
+      "vision",
+      "final_mlp_only",
+      1337
+    ]
+  ],
+  "offsets": [
+    0,
+    1,
+    2,
+    4,
+    8,
+    16,
+    32,
+    64
+  ],
+  "thought_hops": 8,
+  "completed_at": "2026-09-07T09:11:44Z",
+  "results": [
+    {
+      "domain": "language",
+      "mode": "per_hop_mlp",
+      "seed": 42,
+      "parameters": 280192,
+      "steps": 2000,
+      "seq_len": 512,
+      "val_loss": 1.736471,
+      "ppl": 5.6773,
+      "elapsed_s": 113.21
+    },
+    {
+      "domain": "language",
+      "mode": "per_hop_mlp",
+      "seed": 1337,
+      "parameters": 280192,
+      "steps": 2000,
+      "seq_len": 512,
+      "val_loss": 1.757159,
+      "ppl": 5.7959,
+      "elapsed_s": 112.034
+    },
+    {
+      "domain": "language",
+      "mode": "per_hop_mlp",
+      "seed": 2026,
+      "parameters": 280192,
+      "steps": 2000,
+      "seq_len": 512,
+      "val_loss": 1.761854,
+      "ppl": 5.8232,
+      "elapsed_s": 113.668
+    },
+    {
+      "domain": "vision",
+      "mode": "per_hop_mlp",
+      "seed": 42,
+      "parameters": 245504,
+      "epochs": 10,
+      "seq_len": 257,
+      "top1": 24.27,
+      "elapsed_s": 419.136
+    },
+    {
+      "domain": "vision",
+      "mode": "per_hop_mlp",
+      "seed": 1337,
+      "parameters": 245504,
+      "epochs": 10,
+      "seq_len": 257,
+      "top1": 24.92,
+      "elapsed_s": 421.61
+    },
+    {
+      "domain": "language",
+      "mode": "final_mlp_only",
+      "seed": 42,
+      "parameters": 280192,
+      "steps": 2000,
+      "seq_len": 512,
+      "val_loss": 1.758904,
+      "ppl": 5.8061,
+      "elapsed_s": 88.205
+    },
+    {
+      "domain": "language",
+      "mode": "final_mlp_only",
+      "seed": 1337,
+      "parameters": 280192,
+      "steps": 2000,
+      "seq_len": 512,
+      "val_loss": 1.770462,
+      "ppl": 5.8736,
+      "elapsed_s": 88.127
+    },
+    {
+      "domain": "language",
+      "mode": "final_mlp_only",
+      "seed": 2026,
+      "parameters": 280192,
+      "steps": 2000,
+      "seq_len": 512,
+      "val_loss": 1.767444,
+      "ppl": 5.8559,
+      "elapsed_s": 88.821
+    },
+    {
+      "domain": "vision",
+      "mode": "final_mlp_only",
+      "seed": 42,
+      "parameters": 245504,
+      "epochs": 10,
+      "seq_len": 257,
+      "top1": 20.17,
+      "elapsed_s": 336.732
+    },
+    {
+      "domain": "vision",
+      "mode": "final_mlp_only",
+      "seed": 1337,
+      "parameters": 245504,
+      "epochs": 10,
+      "seq_len": 257,
+      "top1": 20.0,
+      "elapsed_s": 336.481
+    }
+  ]
+}

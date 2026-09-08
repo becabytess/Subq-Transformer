@@ -1,0 +1,2190 @@
+{
+  "experiment": "S2-011",
+  "description": "Residual mixing coefficient and learned-gate sweep",
+  "source_commit": "working-tree",
+  "dataset": "Synthetic one-pair randomized-position propagation task",
+  "causal": true,
+  "seq_len": 512,
+  "query_target_position_range": [
+    257,
+    511
+  ],
+  "value_distance": 256,
+  "num_kv_pairs": 1,
+  "num_queries": 1,
+  "random_exact_baseline_percent": 2.5,
+  "offsets": [
+    0,
+    1,
+    2,
+    4,
+    8,
+    16,
+    32,
+    64
+  ],
+  "offset_horizon": 64,
+  "thought_hops": 4,
+  "route_mode": "forced_64",
+  "message_transform": "LayerNorm -> tied value projection -> tied output projection",
+  "training_steps": 6000,
+  "validation_batches": 100,
+  "probe_batches": 40,
+  "probe_steps": 200,
+  "seeds": [
+    42,
+    1337,
+    2026
+  ],
+  "conditions": [
+    {
+      "update_mode": "replacement",
+      "alpha": 1.0
+    },
+    {
+      "update_mode": "additive",
+      "alpha": 0.125
+    },
+    {
+      "update_mode": "additive",
+      "alpha": 0.25
+    },
+    {
+      "update_mode": "additive",
+      "alpha": 0.5
+    },
+    {
+      "update_mode": "additive",
+      "alpha": 0.75
+    },
+    {
+      "update_mode": "additive",
+      "alpha": 1.0
+    },
+    {
+      "update_mode": "convex",
+      "alpha": 0.25
+    },
+    {
+      "update_mode": "convex",
+      "alpha": 0.5
+    },
+    {
+      "update_mode": "convex",
+      "alpha": 0.75
+    },
+    {
+      "update_mode": "learned_gate",
+      "alpha": 0.0
+    }
+  ],
+  "mode_definitions": {
+    "replacement": "state = message",
+    "additive": "state = state + alpha * message",
+    "convex": "state = (1-alpha) * state + alpha * message",
+    "learned_gate": "state = (1-gate) * state + gate * message, with a learned scalar gate per token"
+  },
+  "results": [
+    {
+      "experiment": "S2-011",
+      "model": "replacement_a1p0_d256_t4_s42",
+      "update_mode": "replacement",
+      "alpha": 1.0,
+      "route_mode": "forced_64",
+      "thought_hops": 4,
+      "value_distance": 256,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "offset_horizon": 64,
+      "seed": 42,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "parameters": 164352,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 100.0,
+          "loss": 0.00055,
+          "queries": 3200
+        },
+        {
+          "step": 3000,
+          "accuracy": 100.0,
+          "loss": 9.1e-05,
+          "queries": 3200
+        },
+        {
+          "step": 6000,
+          "accuracy": 100.0,
+          "loss": 3.6e-05,
+          "queries": 3200
+        }
+      ],
+      "intermediate_linear_probe": [
+        {
+          "hop": 1,
+          "accuracy": 2.2656
+        },
+        {
+          "hop": 2,
+          "accuracy": 2.3438
+        },
+        {
+          "hop": 3,
+          "accuracy": 2.6563
+        },
+        {
+          "hop": 4,
+          "accuracy": 100.0
+        }
+      ],
+      "probe_batches": 40,
+      "probe_steps": 200,
+      "elapsed_s": 24.178,
+      "tokens_per_s_train": 4065843.02,
+      "peak_memory_mb": 143.17,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-011",
+      "model": "additive_a0p125_d256_t4_s42",
+      "update_mode": "additive",
+      "alpha": 0.125,
+      "route_mode": "forced_64",
+      "thought_hops": 4,
+      "value_distance": 256,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "offset_horizon": 64,
+      "seed": 42,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "parameters": 164352,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 2.3125,
+          "loss": 3.717908,
+          "queries": 3200
+        },
+        {
+          "step": 3000,
+          "accuracy": 2.7812,
+          "loss": 3.697721,
+          "queries": 3200
+        },
+        {
+          "step": 6000,
+          "accuracy": 2.6875,
+          "loss": 3.691205,
+          "queries": 3200
+        }
+      ],
+      "intermediate_linear_probe": [
+        {
+          "hop": 1,
+          "accuracy": 2.4219
+        },
+        {
+          "hop": 2,
+          "accuracy": 2.1875
+        },
+        {
+          "hop": 3,
+          "accuracy": 2.5781
+        },
+        {
+          "hop": 4,
+          "accuracy": 3.0469
+        }
+      ],
+      "probe_batches": 40,
+      "probe_steps": 200,
+      "elapsed_s": 27.601,
+      "tokens_per_s_train": 3561670.81,
+      "peak_memory_mb": 143.17,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-011",
+      "model": "additive_a0p25_d256_t4_s42",
+      "update_mode": "additive",
+      "alpha": 0.25,
+      "route_mode": "forced_64",
+      "thought_hops": 4,
+      "value_distance": 256,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "offset_horizon": 64,
+      "seed": 42,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "parameters": 164352,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 2.3125,
+          "loss": 3.716865,
+          "queries": 3200
+        },
+        {
+          "step": 3000,
+          "accuracy": 2.9062,
+          "loss": 3.697206,
+          "queries": 3200
+        },
+        {
+          "step": 6000,
+          "accuracy": 2.9062,
+          "loss": 3.690743,
+          "queries": 3200
+        }
+      ],
+      "intermediate_linear_probe": [
+        {
+          "hop": 1,
+          "accuracy": 2.1094
+        },
+        {
+          "hop": 2,
+          "accuracy": 2.3438
+        },
+        {
+          "hop": 3,
+          "accuracy": 2.6563
+        },
+        {
+          "hop": 4,
+          "accuracy": 2.6563
+        }
+      ],
+      "probe_batches": 40,
+      "probe_steps": 200,
+      "elapsed_s": 54.622,
+      "tokens_per_s_train": 1799704.47,
+      "peak_memory_mb": 143.17,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-011",
+      "model": "additive_a0p5_d256_t4_s42",
+      "update_mode": "additive",
+      "alpha": 0.5,
+      "route_mode": "forced_64",
+      "thought_hops": 4,
+      "value_distance": 256,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "offset_horizon": 64,
+      "seed": 42,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "parameters": 164352,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 2.2812,
+          "loss": 3.715707,
+          "queries": 3200
+        },
+        {
+          "step": 3000,
+          "accuracy": 2.875,
+          "loss": 3.696575,
+          "queries": 3200
+        },
+        {
+          "step": 6000,
+          "accuracy": 2.8438,
+          "loss": 3.690282,
+          "queries": 3200
+        }
+      ],
+      "intermediate_linear_probe": [
+        {
+          "hop": 1,
+          "accuracy": 2.5
+        },
+        {
+          "hop": 2,
+          "accuracy": 2.2656
+        },
+        {
+          "hop": 3,
+          "accuracy": 2.8906
+        },
+        {
+          "hop": 4,
+          "accuracy": 2.3438
+        }
+      ],
+      "probe_batches": 40,
+      "probe_steps": 200,
+      "elapsed_s": 27.606,
+      "tokens_per_s_train": 3560908.43,
+      "peak_memory_mb": 143.17,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-011",
+      "model": "additive_a0p75_d256_t4_s42",
+      "update_mode": "additive",
+      "alpha": 0.75,
+      "route_mode": "forced_64",
+      "thought_hops": 4,
+      "value_distance": 256,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "offset_horizon": 64,
+      "seed": 42,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "parameters": 164352,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 2.2812,
+          "loss": 3.715028,
+          "queries": 3200
+        },
+        {
+          "step": 3000,
+          "accuracy": 2.7188,
+          "loss": 3.696104,
+          "queries": 3200
+        },
+        {
+          "step": 6000,
+          "accuracy": 2.8438,
+          "loss": 3.690047,
+          "queries": 3200
+        }
+      ],
+      "intermediate_linear_probe": [
+        {
+          "hop": 1,
+          "accuracy": 1.9531
+        },
+        {
+          "hop": 2,
+          "accuracy": 2.1094
+        },
+        {
+          "hop": 3,
+          "accuracy": 2.4219
+        },
+        {
+          "hop": 4,
+          "accuracy": 2.6563
+        }
+      ],
+      "probe_batches": 40,
+      "probe_steps": 200,
+      "elapsed_s": 28.031,
+      "tokens_per_s_train": 3506914.45,
+      "peak_memory_mb": 143.17,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-011",
+      "model": "additive_a1p0_d256_t4_s42",
+      "update_mode": "additive",
+      "alpha": 1.0,
+      "route_mode": "forced_64",
+      "thought_hops": 4,
+      "value_distance": 256,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "offset_horizon": 64,
+      "seed": 42,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "parameters": 164352,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 2.3125,
+          "loss": 3.714522,
+          "queries": 3200
+        },
+        {
+          "step": 3000,
+          "accuracy": 2.5938,
+          "loss": 3.695756,
+          "queries": 3200
+        },
+        {
+          "step": 6000,
+          "accuracy": 7.375,
+          "loss": 3.090217,
+          "queries": 3200
+        }
+      ],
+      "intermediate_linear_probe": [
+        {
+          "hop": 1,
+          "accuracy": 2.4219
+        },
+        {
+          "hop": 2,
+          "accuracy": 2.3438
+        },
+        {
+          "hop": 3,
+          "accuracy": 2.8125
+        },
+        {
+          "hop": 4,
+          "accuracy": 6.3281
+        }
+      ],
+      "probe_batches": 40,
+      "probe_steps": 200,
+      "elapsed_s": 27.93,
+      "tokens_per_s_train": 3519683.44,
+      "peak_memory_mb": 143.17,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-011",
+      "model": "convex_a0p25_d256_t4_s42",
+      "update_mode": "convex",
+      "alpha": 0.25,
+      "route_mode": "forced_64",
+      "thought_hops": 4,
+      "value_distance": 256,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "offset_horizon": 64,
+      "seed": 42,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "parameters": 164352,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 2.25,
+          "loss": 3.715485,
+          "queries": 3200
+        },
+        {
+          "step": 3000,
+          "accuracy": 2.7812,
+          "loss": 3.696431,
+          "queries": 3200
+        },
+        {
+          "step": 6000,
+          "accuracy": 2.8438,
+          "loss": 3.690265,
+          "queries": 3200
+        }
+      ],
+      "intermediate_linear_probe": [
+        {
+          "hop": 1,
+          "accuracy": 2.1875
+        },
+        {
+          "hop": 2,
+          "accuracy": 2.1875
+        },
+        {
+          "hop": 3,
+          "accuracy": 2.6563
+        },
+        {
+          "hop": 4,
+          "accuracy": 2.3438
+        }
+      ],
+      "probe_batches": 40,
+      "probe_steps": 200,
+      "elapsed_s": 30.214,
+      "tokens_per_s_train": 3253569.95,
+      "peak_memory_mb": 143.17,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-011",
+      "model": "convex_a0p5_d256_t4_s42",
+      "update_mode": "convex",
+      "alpha": 0.5,
+      "route_mode": "forced_64",
+      "thought_hops": 4,
+      "value_distance": 256,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "offset_horizon": 64,
+      "seed": 42,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "parameters": 164352,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 60.4375,
+          "loss": 1.22386,
+          "queries": 3200
+        },
+        {
+          "step": 3000,
+          "accuracy": 100.0,
+          "loss": 0.018413,
+          "queries": 3200
+        },
+        {
+          "step": 6000,
+          "accuracy": 100.0,
+          "loss": 0.00472,
+          "queries": 3200
+        }
+      ],
+      "intermediate_linear_probe": [
+        {
+          "hop": 1,
+          "accuracy": 2.4219
+        },
+        {
+          "hop": 2,
+          "accuracy": 2.5781
+        },
+        {
+          "hop": 3,
+          "accuracy": 2.5
+        },
+        {
+          "hop": 4,
+          "accuracy": 100.0
+        }
+      ],
+      "probe_batches": 40,
+      "probe_steps": 200,
+      "elapsed_s": 41.441,
+      "tokens_per_s_train": 2372152.44,
+      "peak_memory_mb": 143.17,
+      "device": "NVIDIA A10G"
+    },
+    {
+      "experiment": "S2-011",
+      "model": "convex_a0p75_d256_t4_s42",
+      "update_mode": "convex",
+      "alpha": 0.75,
+      "route_mode": "forced_64",
+      "thought_hops": 4,
+      "value_distance": 256,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "offset_horizon": 64,
+      "seed": 42,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "parameters": 164352,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 100.0,
+          "loss": 0.002415,
+          "queries": 3200
+        },
+        {
+          "step": 3000,
+          "accuracy": 100.0,
+          "loss": 0.000306,
+          "queries": 3200
+        },
+        {
+          "step": 6000,
+          "accuracy": 100.0,
+          "loss": 0.000112,
+          "queries": 3200
+        }
+      ],
+      "intermediate_linear_probe": [
+        {
+          "hop": 1,
+          "accuracy": 1.7188
+        },
+        {
+          "hop": 2,
+          "accuracy": 2.0313
+        },
+        {
+          "hop": 3,
+          "accuracy": 1.7969
+        },
+        {
+          "hop": 4,
+          "accuracy": 100.0
+        }
+      ],
+      "probe_batches": 40,
+      "probe_steps": 200,
+      "elapsed_s": 30.004,
+      "tokens_per_s_train": 3276368.75,
+      "peak_memory_mb": 143.17,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-011",
+      "model": "learned_gate_a0p0_d256_t4_s42",
+      "update_mode": "learned_gate",
+      "alpha": 0.0,
+      "route_mode": "forced_64",
+      "thought_hops": 4,
+      "value_distance": 256,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "offset_horizon": 64,
+      "seed": 42,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "parameters": 164609,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 100.0,
+          "loss": 0.001074,
+          "queries": 3200
+        },
+        {
+          "step": 3000,
+          "accuracy": 100.0,
+          "loss": 0.000155,
+          "queries": 3200
+        },
+        {
+          "step": 6000,
+          "accuracy": 100.0,
+          "loss": 6.8e-05,
+          "queries": 3200
+        }
+      ],
+      "intermediate_linear_probe": [
+        {
+          "hop": 1,
+          "accuracy": 1.4844
+        },
+        {
+          "hop": 2,
+          "accuracy": 2.1094
+        },
+        {
+          "hop": 3,
+          "accuracy": 1.9531
+        },
+        {
+          "hop": 4,
+          "accuracy": 100.0
+        }
+      ],
+      "probe_batches": 40,
+      "probe_steps": 200,
+      "elapsed_s": 57.047,
+      "tokens_per_s_train": 1723205.31,
+      "peak_memory_mb": 256.42,
+      "device": "NVIDIA A10G"
+    },
+    {
+      "experiment": "S2-011",
+      "model": "replacement_a1p0_d256_t4_s1337",
+      "update_mode": "replacement",
+      "alpha": 1.0,
+      "route_mode": "forced_64",
+      "thought_hops": 4,
+      "value_distance": 256,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "offset_horizon": 64,
+      "seed": 1337,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "parameters": 164352,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 100.0,
+          "loss": 0.000567,
+          "queries": 3200
+        },
+        {
+          "step": 3000,
+          "accuracy": 100.0,
+          "loss": 9.4e-05,
+          "queries": 3200
+        },
+        {
+          "step": 6000,
+          "accuracy": 100.0,
+          "loss": 3.7e-05,
+          "queries": 3200
+        }
+      ],
+      "intermediate_linear_probe": [
+        {
+          "hop": 1,
+          "accuracy": 2.3438
+        },
+        {
+          "hop": 2,
+          "accuracy": 2.2656
+        },
+        {
+          "hop": 3,
+          "accuracy": 2.5781
+        },
+        {
+          "hop": 4,
+          "accuracy": 100.0
+        }
+      ],
+      "probe_batches": 40,
+      "probe_steps": 200,
+      "elapsed_s": 23.209,
+      "tokens_per_s_train": 4235549.33,
+      "peak_memory_mb": 143.17,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-011",
+      "model": "additive_a0p125_d256_t4_s1337",
+      "update_mode": "additive",
+      "alpha": 0.125,
+      "route_mode": "forced_64",
+      "thought_hops": 4,
+      "value_distance": 256,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "offset_horizon": 64,
+      "seed": 1337,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "parameters": 164352,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 2.4688,
+          "loss": 3.714616,
+          "queries": 3200
+        },
+        {
+          "step": 3000,
+          "accuracy": 2.6875,
+          "loss": 3.698932,
+          "queries": 3200
+        },
+        {
+          "step": 6000,
+          "accuracy": 2.3125,
+          "loss": 3.693876,
+          "queries": 3200
+        }
+      ],
+      "intermediate_linear_probe": [
+        {
+          "hop": 1,
+          "accuracy": 2.6563
+        },
+        {
+          "hop": 2,
+          "accuracy": 2.8906
+        },
+        {
+          "hop": 3,
+          "accuracy": 2.6563
+        },
+        {
+          "hop": 4,
+          "accuracy": 2.4219
+        }
+      ],
+      "probe_batches": 40,
+      "probe_steps": 200,
+      "elapsed_s": 26.736,
+      "tokens_per_s_train": 3676856.54,
+      "peak_memory_mb": 143.17,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-011",
+      "model": "additive_a0p25_d256_t4_s1337",
+      "update_mode": "additive",
+      "alpha": 0.25,
+      "route_mode": "forced_64",
+      "thought_hops": 4,
+      "value_distance": 256,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "offset_horizon": 64,
+      "seed": 1337,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "parameters": 164352,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 2.2812,
+          "loss": 3.713989,
+          "queries": 3200
+        },
+        {
+          "step": 3000,
+          "accuracy": 2.6875,
+          "loss": 3.698367,
+          "queries": 3200
+        },
+        {
+          "step": 6000,
+          "accuracy": 2.2188,
+          "loss": 3.693737,
+          "queries": 3200
+        }
+      ],
+      "intermediate_linear_probe": [
+        {
+          "hop": 1,
+          "accuracy": 2.8125
+        },
+        {
+          "hop": 2,
+          "accuracy": 2.5
+        },
+        {
+          "hop": 3,
+          "accuracy": 2.8125
+        },
+        {
+          "hop": 4,
+          "accuracy": 2.8125
+        }
+      ],
+      "probe_batches": 40,
+      "probe_steps": 200,
+      "elapsed_s": 26.74,
+      "tokens_per_s_train": 3676343.43,
+      "peak_memory_mb": 143.17,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-011",
+      "model": "additive_a0p5_d256_t4_s1337",
+      "update_mode": "additive",
+      "alpha": 0.5,
+      "route_mode": "forced_64",
+      "thought_hops": 4,
+      "value_distance": 256,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "offset_horizon": 64,
+      "seed": 1337,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "parameters": 164352,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 2.1875,
+          "loss": 3.714845,
+          "queries": 3200
+        },
+        {
+          "step": 3000,
+          "accuracy": 2.6875,
+          "loss": 3.697867,
+          "queries": 3200
+        },
+        {
+          "step": 6000,
+          "accuracy": 2.2188,
+          "loss": 3.693549,
+          "queries": 3200
+        }
+      ],
+      "intermediate_linear_probe": [
+        {
+          "hop": 1,
+          "accuracy": 2.7344
+        },
+        {
+          "hop": 2,
+          "accuracy": 2.4219
+        },
+        {
+          "hop": 3,
+          "accuracy": 2.8125
+        },
+        {
+          "hop": 4,
+          "accuracy": 2.5
+        }
+      ],
+      "probe_batches": 40,
+      "probe_steps": 200,
+      "elapsed_s": 26.785,
+      "tokens_per_s_train": 3670117.65,
+      "peak_memory_mb": 143.17,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-011",
+      "model": "additive_a0p75_d256_t4_s1337",
+      "update_mode": "additive",
+      "alpha": 0.75,
+      "route_mode": "forced_64",
+      "thought_hops": 4,
+      "value_distance": 256,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "offset_horizon": 64,
+      "seed": 1337,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "parameters": 164352,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 2.3125,
+          "loss": 3.715979,
+          "queries": 3200
+        },
+        {
+          "step": 3000,
+          "accuracy": 2.6875,
+          "loss": 3.697466,
+          "queries": 3200
+        },
+        {
+          "step": 6000,
+          "accuracy": 2.2812,
+          "loss": 3.693342,
+          "queries": 3200
+        }
+      ],
+      "intermediate_linear_probe": [
+        {
+          "hop": 1,
+          "accuracy": 2.5
+        },
+        {
+          "hop": 2,
+          "accuracy": 2.1875
+        },
+        {
+          "hop": 3,
+          "accuracy": 2.3438
+        },
+        {
+          "hop": 4,
+          "accuracy": 2.3438
+        }
+      ],
+      "probe_batches": 40,
+      "probe_steps": 200,
+      "elapsed_s": 27.069,
+      "tokens_per_s_train": 3631600.15,
+      "peak_memory_mb": 143.17,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-011",
+      "model": "additive_a1p0_d256_t4_s1337",
+      "update_mode": "additive",
+      "alpha": 1.0,
+      "route_mode": "forced_64",
+      "thought_hops": 4,
+      "value_distance": 256,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "offset_horizon": 64,
+      "seed": 1337,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "parameters": 164352,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 2.1875,
+          "loss": 3.713247,
+          "queries": 3200
+        },
+        {
+          "step": 3000,
+          "accuracy": 2.6875,
+          "loss": 3.697068,
+          "queries": 3200
+        },
+        {
+          "step": 6000,
+          "accuracy": 2.1875,
+          "loss": 3.693148,
+          "queries": 3200
+        }
+      ],
+      "intermediate_linear_probe": [
+        {
+          "hop": 1,
+          "accuracy": 2.0313
+        },
+        {
+          "hop": 2,
+          "accuracy": 2.4219
+        },
+        {
+          "hop": 3,
+          "accuracy": 2.5
+        },
+        {
+          "hop": 4,
+          "accuracy": 2.6563
+        }
+      ],
+      "probe_batches": 40,
+      "probe_steps": 200,
+      "elapsed_s": 26.875,
+      "tokens_per_s_train": 3657843.6,
+      "peak_memory_mb": 143.17,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-011",
+      "model": "convex_a0p25_d256_t4_s1337",
+      "update_mode": "convex",
+      "alpha": 0.25,
+      "route_mode": "forced_64",
+      "thought_hops": 4,
+      "value_distance": 256,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "offset_horizon": 64,
+      "seed": 1337,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "parameters": 164352,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 2.2188,
+          "loss": 3.713425,
+          "queries": 3200
+        },
+        {
+          "step": 3000,
+          "accuracy": 2.6875,
+          "loss": 3.697736,
+          "queries": 3200
+        },
+        {
+          "step": 6000,
+          "accuracy": 2.25,
+          "loss": 3.693467,
+          "queries": 3200
+        }
+      ],
+      "intermediate_linear_probe": [
+        {
+          "hop": 1,
+          "accuracy": 2.6563
+        },
+        {
+          "hop": 2,
+          "accuracy": 2.2656
+        },
+        {
+          "hop": 3,
+          "accuracy": 2.4219
+        },
+        {
+          "hop": 4,
+          "accuracy": 2.4219
+        }
+      ],
+      "probe_batches": 40,
+      "probe_steps": 200,
+      "elapsed_s": 29.05,
+      "tokens_per_s_train": 3383945.84,
+      "peak_memory_mb": 143.17,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-011",
+      "model": "convex_a0p5_d256_t4_s1337",
+      "update_mode": "convex",
+      "alpha": 0.5,
+      "route_mode": "forced_64",
+      "thought_hops": 4,
+      "value_distance": 256,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "offset_horizon": 64,
+      "seed": 1337,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "parameters": 164352,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 55.5625,
+          "loss": 1.394095,
+          "queries": 3200
+        },
+        {
+          "step": 3000,
+          "accuracy": 100.0,
+          "loss": 0.003174,
+          "queries": 3200
+        },
+        {
+          "step": 6000,
+          "accuracy": 100.0,
+          "loss": 0.000952,
+          "queries": 3200
+        }
+      ],
+      "intermediate_linear_probe": [
+        {
+          "hop": 1,
+          "accuracy": 2.5781
+        },
+        {
+          "hop": 2,
+          "accuracy": 2.3438
+        },
+        {
+          "hop": 3,
+          "accuracy": 2.3438
+        },
+        {
+          "hop": 4,
+          "accuracy": 100.0
+        }
+      ],
+      "probe_batches": 40,
+      "probe_steps": 200,
+      "elapsed_s": 33.164,
+      "tokens_per_s_train": 2964189.72,
+      "peak_memory_mb": 143.17,
+      "device": "NVIDIA A10G"
+    },
+    {
+      "experiment": "S2-011",
+      "model": "convex_a0p75_d256_t4_s1337",
+      "update_mode": "convex",
+      "alpha": 0.75,
+      "route_mode": "forced_64",
+      "thought_hops": 4,
+      "value_distance": 256,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "offset_horizon": 64,
+      "seed": 1337,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "parameters": 164352,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 100.0,
+          "loss": 0.002532,
+          "queries": 3200
+        },
+        {
+          "step": 3000,
+          "accuracy": 100.0,
+          "loss": 0.000304,
+          "queries": 3200
+        },
+        {
+          "step": 6000,
+          "accuracy": 100.0,
+          "loss": 0.000115,
+          "queries": 3200
+        }
+      ],
+      "intermediate_linear_probe": [
+        {
+          "hop": 1,
+          "accuracy": 2.1875
+        },
+        {
+          "hop": 2,
+          "accuracy": 2.3438
+        },
+        {
+          "hop": 3,
+          "accuracy": 2.6563
+        },
+        {
+          "hop": 4,
+          "accuracy": 100.0
+        }
+      ],
+      "probe_batches": 40,
+      "probe_steps": 200,
+      "elapsed_s": 28.734,
+      "tokens_per_s_train": 3421115.25,
+      "peak_memory_mb": 143.17,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-011",
+      "model": "learned_gate_a0p0_d256_t4_s1337",
+      "update_mode": "learned_gate",
+      "alpha": 0.0,
+      "route_mode": "forced_64",
+      "thought_hops": 4,
+      "value_distance": 256,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "offset_horizon": 64,
+      "seed": 1337,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "parameters": 164609,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 100.0,
+          "loss": 0.001116,
+          "queries": 3200
+        },
+        {
+          "step": 3000,
+          "accuracy": 100.0,
+          "loss": 0.000165,
+          "queries": 3200
+        },
+        {
+          "step": 6000,
+          "accuracy": 100.0,
+          "loss": 0.000122,
+          "queries": 3200
+        }
+      ],
+      "intermediate_linear_probe": [
+        {
+          "hop": 1,
+          "accuracy": 2.5
+        },
+        {
+          "hop": 2,
+          "accuracy": 3.2813
+        },
+        {
+          "hop": 3,
+          "accuracy": 2.4219
+        },
+        {
+          "hop": 4,
+          "accuracy": 100.0
+        }
+      ],
+      "probe_batches": 40,
+      "probe_steps": 200,
+      "elapsed_s": 54.153,
+      "tokens_per_s_train": 1815284.82,
+      "peak_memory_mb": 256.42,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-011",
+      "model": "replacement_a1p0_d256_t4_s2026",
+      "update_mode": "replacement",
+      "alpha": 1.0,
+      "route_mode": "forced_64",
+      "thought_hops": 4,
+      "value_distance": 256,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "offset_horizon": 64,
+      "seed": 2026,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "parameters": 164352,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 100.0,
+          "loss": 0.000552,
+          "queries": 3200
+        },
+        {
+          "step": 3000,
+          "accuracy": 100.0,
+          "loss": 9.3e-05,
+          "queries": 3200
+        },
+        {
+          "step": 6000,
+          "accuracy": 100.0,
+          "loss": 3.7e-05,
+          "queries": 3200
+        }
+      ],
+      "intermediate_linear_probe": [
+        {
+          "hop": 1,
+          "accuracy": 2.1875
+        },
+        {
+          "hop": 2,
+          "accuracy": 3.125
+        },
+        {
+          "hop": 3,
+          "accuracy": 2.6563
+        },
+        {
+          "hop": 4,
+          "accuracy": 100.0
+        }
+      ],
+      "probe_batches": 40,
+      "probe_steps": 200,
+      "elapsed_s": 23.298,
+      "tokens_per_s_train": 4219461.4,
+      "peak_memory_mb": 143.17,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-011",
+      "model": "additive_a0p125_d256_t4_s2026",
+      "update_mode": "additive",
+      "alpha": 0.125,
+      "route_mode": "forced_64",
+      "thought_hops": 4,
+      "value_distance": 256,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "offset_horizon": 64,
+      "seed": 2026,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "parameters": 164352,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 2.4062,
+          "loss": 3.718268,
+          "queries": 3200
+        },
+        {
+          "step": 3000,
+          "accuracy": 2.625,
+          "loss": 3.698931,
+          "queries": 3200
+        },
+        {
+          "step": 6000,
+          "accuracy": 2.0625,
+          "loss": 3.692661,
+          "queries": 3200
+        }
+      ],
+      "intermediate_linear_probe": [
+        {
+          "hop": 1,
+          "accuracy": 2.1094
+        },
+        {
+          "hop": 2,
+          "accuracy": 1.9531
+        },
+        {
+          "hop": 3,
+          "accuracy": 1.875
+        },
+        {
+          "hop": 4,
+          "accuracy": 2.1875
+        }
+      ],
+      "probe_batches": 40,
+      "probe_steps": 200,
+      "elapsed_s": 53.773,
+      "tokens_per_s_train": 1828114.61,
+      "peak_memory_mb": 143.17,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-011",
+      "model": "additive_a0p25_d256_t4_s2026",
+      "update_mode": "additive",
+      "alpha": 0.25,
+      "route_mode": "forced_64",
+      "thought_hops": 4,
+      "value_distance": 256,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "offset_horizon": 64,
+      "seed": 2026,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "parameters": 164352,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 2.4375,
+          "loss": 3.716977,
+          "queries": 3200
+        },
+        {
+          "step": 3000,
+          "accuracy": 2.6875,
+          "loss": 3.698314,
+          "queries": 3200
+        },
+        {
+          "step": 6000,
+          "accuracy": 2.1875,
+          "loss": 3.69249,
+          "queries": 3200
+        }
+      ],
+      "intermediate_linear_probe": [
+        {
+          "hop": 1,
+          "accuracy": 1.9531
+        },
+        {
+          "hop": 2,
+          "accuracy": 1.875
+        },
+        {
+          "hop": 3,
+          "accuracy": 2.0313
+        },
+        {
+          "hop": 4,
+          "accuracy": 2.8125
+        }
+      ],
+      "probe_batches": 40,
+      "probe_steps": 200,
+      "elapsed_s": 26.992,
+      "tokens_per_s_train": 3641978.59,
+      "peak_memory_mb": 143.17,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-011",
+      "model": "additive_a0p5_d256_t4_s2026",
+      "update_mode": "additive",
+      "alpha": 0.5,
+      "route_mode": "forced_64",
+      "thought_hops": 4,
+      "value_distance": 256,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "offset_horizon": 64,
+      "seed": 2026,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "parameters": 164352,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 2.3438,
+          "loss": 3.715754,
+          "queries": 3200
+        },
+        {
+          "step": 3000,
+          "accuracy": 2.625,
+          "loss": 3.698139,
+          "queries": 3200
+        },
+        {
+          "step": 6000,
+          "accuracy": 2.5,
+          "loss": 3.693633,
+          "queries": 3200
+        }
+      ],
+      "intermediate_linear_probe": [
+        {
+          "hop": 1,
+          "accuracy": 2.1094
+        },
+        {
+          "hop": 2,
+          "accuracy": 2.0313
+        },
+        {
+          "hop": 3,
+          "accuracy": 1.9531
+        },
+        {
+          "hop": 4,
+          "accuracy": 2.8125
+        }
+      ],
+      "probe_batches": 40,
+      "probe_steps": 200,
+      "elapsed_s": 27.135,
+      "tokens_per_s_train": 3622727.59,
+      "peak_memory_mb": 143.17,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-011",
+      "model": "additive_a0p75_d256_t4_s2026",
+      "update_mode": "additive",
+      "alpha": 0.75,
+      "route_mode": "forced_64",
+      "thought_hops": 4,
+      "value_distance": 256,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "offset_horizon": 64,
+      "seed": 2026,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "parameters": 164352,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 2.2812,
+          "loss": 3.714756,
+          "queries": 3200
+        },
+        {
+          "step": 3000,
+          "accuracy": 19.0,
+          "loss": 2.219756,
+          "queries": 3200
+        },
+        {
+          "step": 6000,
+          "accuracy": 49.1562,
+          "loss": 1.512265,
+          "queries": 3200
+        }
+      ],
+      "intermediate_linear_probe": [
+        {
+          "hop": 1,
+          "accuracy": 1.7969
+        },
+        {
+          "hop": 2,
+          "accuracy": 2.0313
+        },
+        {
+          "hop": 3,
+          "accuracy": 1.7188
+        },
+        {
+          "hop": 4,
+          "accuracy": 29.9219
+        }
+      ],
+      "probe_batches": 40,
+      "probe_steps": 200,
+      "elapsed_s": 27.202,
+      "tokens_per_s_train": 3613787.51,
+      "peak_memory_mb": 143.17,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-011",
+      "model": "additive_a1p0_d256_t4_s2026",
+      "update_mode": "additive",
+      "alpha": 1.0,
+      "route_mode": "forced_64",
+      "thought_hops": 4,
+      "value_distance": 256,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "offset_horizon": 64,
+      "seed": 2026,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "parameters": 164352,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 2.875,
+          "loss": 3.705153,
+          "queries": 3200
+        },
+        {
+          "step": 3000,
+          "accuracy": 36.7188,
+          "loss": 1.646745,
+          "queries": 3200
+        },
+        {
+          "step": 6000,
+          "accuracy": 54.9062,
+          "loss": 1.346715,
+          "queries": 3200
+        }
+      ],
+      "intermediate_linear_probe": [
+        {
+          "hop": 1,
+          "accuracy": 1.7969
+        },
+        {
+          "hop": 2,
+          "accuracy": 1.9531
+        },
+        {
+          "hop": 3,
+          "accuracy": 2.3438
+        },
+        {
+          "hop": 4,
+          "accuracy": 30.7031
+        }
+      ],
+      "probe_batches": 40,
+      "probe_steps": 200,
+      "elapsed_s": 26.922,
+      "tokens_per_s_train": 3651502.66,
+      "peak_memory_mb": 143.17,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-011",
+      "model": "convex_a0p25_d256_t4_s2026",
+      "update_mode": "convex",
+      "alpha": 0.25,
+      "route_mode": "forced_64",
+      "thought_hops": 4,
+      "value_distance": 256,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "offset_horizon": 64,
+      "seed": 2026,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "parameters": 164352,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 2.3125,
+          "loss": 3.715594,
+          "queries": 3200
+        },
+        {
+          "step": 3000,
+          "accuracy": 36.0312,
+          "loss": 1.722806,
+          "queries": 3200
+        },
+        {
+          "step": 6000,
+          "accuracy": 60.9375,
+          "loss": 1.351334,
+          "queries": 3200
+        }
+      ],
+      "intermediate_linear_probe": [
+        {
+          "hop": 1,
+          "accuracy": 2.1094
+        },
+        {
+          "hop": 2,
+          "accuracy": 2.0313
+        },
+        {
+          "hop": 3,
+          "accuracy": 2.0313
+        },
+        {
+          "hop": 4,
+          "accuracy": 37.8125
+        }
+      ],
+      "probe_batches": 40,
+      "probe_steps": 200,
+      "elapsed_s": 30.278,
+      "tokens_per_s_train": 3246686.98,
+      "peak_memory_mb": 143.17,
+      "device": "NVIDIA A10G"
+    },
+    {
+      "experiment": "S2-011",
+      "model": "convex_a0p5_d256_t4_s2026",
+      "update_mode": "convex",
+      "alpha": 0.5,
+      "route_mode": "forced_64",
+      "thought_hops": 4,
+      "value_distance": 256,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "offset_horizon": 64,
+      "seed": 2026,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "parameters": 164352,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 27.5938,
+          "loss": 1.867466,
+          "queries": 3200
+        },
+        {
+          "step": 3000,
+          "accuracy": 53.5625,
+          "loss": 1.294924,
+          "queries": 3200
+        },
+        {
+          "step": 6000,
+          "accuracy": 79.1562,
+          "loss": 1.124836,
+          "queries": 3200
+        }
+      ],
+      "intermediate_linear_probe": [
+        {
+          "hop": 1,
+          "accuracy": 2.0313
+        },
+        {
+          "hop": 2,
+          "accuracy": 1.875
+        },
+        {
+          "hop": 3,
+          "accuracy": 2.1094
+        },
+        {
+          "hop": 4,
+          "accuracy": 54.5313
+        }
+      ],
+      "probe_batches": 40,
+      "probe_steps": 200,
+      "elapsed_s": 28.811,
+      "tokens_per_s_train": 3412019.19,
+      "peak_memory_mb": 143.17,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-011",
+      "model": "convex_a0p75_d256_t4_s2026",
+      "update_mode": "convex",
+      "alpha": 0.75,
+      "route_mode": "forced_64",
+      "thought_hops": 4,
+      "value_distance": 256,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "offset_horizon": 64,
+      "seed": 2026,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "parameters": 164352,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 100.0,
+          "loss": 0.002331,
+          "queries": 3200
+        },
+        {
+          "step": 3000,
+          "accuracy": 100.0,
+          "loss": 0.000311,
+          "queries": 3200
+        },
+        {
+          "step": 6000,
+          "accuracy": 100.0,
+          "loss": 0.000113,
+          "queries": 3200
+        }
+      ],
+      "intermediate_linear_probe": [
+        {
+          "hop": 1,
+          "accuracy": 2.3438
+        },
+        {
+          "hop": 2,
+          "accuracy": 3.125
+        },
+        {
+          "hop": 3,
+          "accuracy": 2.4219
+        },
+        {
+          "hop": 4,
+          "accuracy": 100.0
+        }
+      ],
+      "probe_batches": 40,
+      "probe_steps": 200,
+      "elapsed_s": 28.984,
+      "tokens_per_s_train": 3391716.91,
+      "peak_memory_mb": 143.17,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-011",
+      "model": "learned_gate_a0p0_d256_t4_s2026",
+      "update_mode": "learned_gate",
+      "alpha": 0.0,
+      "route_mode": "forced_64",
+      "thought_hops": 4,
+      "value_distance": 256,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "offset_horizon": 64,
+      "seed": 2026,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "parameters": 164609,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 100.0,
+          "loss": 0.001216,
+          "queries": 3200
+        },
+        {
+          "step": 3000,
+          "accuracy": 100.0,
+          "loss": 0.000166,
+          "queries": 3200
+        },
+        {
+          "step": 6000,
+          "accuracy": 100.0,
+          "loss": 6.5e-05,
+          "queries": 3200
+        }
+      ],
+      "intermediate_linear_probe": [
+        {
+          "hop": 1,
+          "accuracy": 2.2656
+        },
+        {
+          "hop": 2,
+          "accuracy": 2.4219
+        },
+        {
+          "hop": 3,
+          "accuracy": 3.125
+        },
+        {
+          "hop": 4,
+          "accuracy": 100.0
+        }
+      ],
+      "probe_batches": 40,
+      "probe_steps": 200,
+      "elapsed_s": 54.487,
+      "tokens_per_s_train": 1804179.17,
+      "peak_memory_mb": 256.42,
+      "device": "NVIDIA A10G"
+    }
+  ],
+  "completed_at": "2026-09-05T13:09:35Z"
+}

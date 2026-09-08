@@ -1,0 +1,357 @@
+{
+  "experiment": "S2-005-dense-audit",
+  "description": "10,000-step dense-control convergence audit for one-pair/one-query MQAR",
+  "source_commit": "working-tree",
+  "dataset": "Synthetic MQAR with one independently randomized key-value pair and one query",
+  "causal": true,
+  "seq_len": 512,
+  "query_target_position_range": [
+    257,
+    511
+  ],
+  "value_distances": {
+    "local_32": 32,
+    "medium_128": 128,
+    "long_256": 256
+  },
+  "seeds": [
+    42,
+    1337,
+    2026
+  ],
+  "training_steps": 10000,
+  "validation_batches": 100,
+  "results": [
+    {
+      "experiment": "S2-005-dense-audit",
+      "seed": 42,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "n_heads": 4,
+      "d_mlp": 127,
+      "num_kv_pairs": 1,
+      "num_queries": 1,
+      "query_target_position_range": [
+        257,
+        511
+      ],
+      "value_distances": {
+        "local_32": 32,
+        "medium_128": 128,
+        "long_256": 256
+      },
+      "parameters": 328958,
+      "target_parameters": 329088,
+      "parameter_delta_vs_target": -130,
+      "steps": 10000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "conditions": {
+            "local_32": {
+              "accuracy": 8.8125,
+              "loss": 3.45805,
+              "queries": 3200
+            },
+            "medium_128": {
+              "accuracy": 7.0938,
+              "loss": 3.496681,
+              "queries": 3200
+            },
+            "long_256": {
+              "accuracy": 7.8438,
+              "loss": 3.482445,
+              "queries": 3200
+            }
+          }
+        },
+        {
+          "step": 3000,
+          "conditions": {
+            "local_32": {
+              "accuracy": 94.6875,
+              "loss": 0.128159,
+              "queries": 3200
+            },
+            "medium_128": {
+              "accuracy": 94.375,
+              "loss": 0.134849,
+              "queries": 3200
+            },
+            "long_256": {
+              "accuracy": 94.5938,
+              "loss": 0.129314,
+              "queries": 3200
+            }
+          }
+        },
+        {
+          "step": 6000,
+          "conditions": {
+            "local_32": {
+              "accuracy": 100.0,
+              "loss": 0.000234,
+              "queries": 3200
+            },
+            "medium_128": {
+              "accuracy": 100.0,
+              "loss": 0.000228,
+              "queries": 3200
+            },
+            "long_256": {
+              "accuracy": 100.0,
+              "loss": 0.000231,
+              "queries": 3200
+            }
+          }
+        },
+        {
+          "step": 10000,
+          "conditions": {
+            "local_32": {
+              "accuracy": 100.0,
+              "loss": 6.3e-05,
+              "queries": 3200
+            },
+            "medium_128": {
+              "accuracy": 100.0,
+              "loss": 6e-05,
+              "queries": 3200
+            },
+            "long_256": {
+              "accuracy": 100.0,
+              "loss": 6.7e-05,
+              "queries": 3200
+            }
+          }
+        }
+      ],
+      "elapsed_s": 170.077,
+      "tokens_per_s_train": 963328.48,
+      "peak_memory_mb": 766.05,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-005-dense-audit",
+      "seed": 1337,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "n_heads": 4,
+      "d_mlp": 127,
+      "num_kv_pairs": 1,
+      "num_queries": 1,
+      "query_target_position_range": [
+        257,
+        511
+      ],
+      "value_distances": {
+        "local_32": 32,
+        "medium_128": 128,
+        "long_256": 256
+      },
+      "parameters": 328958,
+      "target_parameters": 329088,
+      "parameter_delta_vs_target": -130,
+      "steps": 10000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "conditions": {
+            "local_32": {
+              "accuracy": 2.0938,
+              "loss": 3.782959,
+              "queries": 3200
+            },
+            "medium_128": {
+              "accuracy": 2.5625,
+              "loss": 3.744345,
+              "queries": 3200
+            },
+            "long_256": {
+              "accuracy": 2.4062,
+              "loss": 3.794467,
+              "queries": 3200
+            }
+          }
+        },
+        {
+          "step": 3000,
+          "conditions": {
+            "local_32": {
+              "accuracy": 88.375,
+              "loss": 0.270286,
+              "queries": 3200
+            },
+            "medium_128": {
+              "accuracy": 87.0625,
+              "loss": 0.29212,
+              "queries": 3200
+            },
+            "long_256": {
+              "accuracy": 88.0,
+              "loss": 0.279829,
+              "queries": 3200
+            }
+          }
+        },
+        {
+          "step": 6000,
+          "conditions": {
+            "local_32": {
+              "accuracy": 99.9688,
+              "loss": 0.000708,
+              "queries": 3200
+            },
+            "medium_128": {
+              "accuracy": 100.0,
+              "loss": 0.000278,
+              "queries": 3200
+            },
+            "long_256": {
+              "accuracy": 100.0,
+              "loss": 0.000303,
+              "queries": 3200
+            }
+          }
+        },
+        {
+          "step": 10000,
+          "conditions": {
+            "local_32": {
+              "accuracy": 100.0,
+              "loss": 7.8e-05,
+              "queries": 3200
+            },
+            "medium_128": {
+              "accuracy": 100.0,
+              "loss": 7.4e-05,
+              "queries": 3200
+            },
+            "long_256": {
+              "accuracy": 100.0,
+              "loss": 7.8e-05,
+              "queries": 3200
+            }
+          }
+        }
+      ],
+      "elapsed_s": 170.153,
+      "tokens_per_s_train": 962897.69,
+      "peak_memory_mb": 766.05,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-005-dense-audit",
+      "seed": 2026,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "n_heads": 4,
+      "d_mlp": 127,
+      "num_kv_pairs": 1,
+      "num_queries": 1,
+      "query_target_position_range": [
+        257,
+        511
+      ],
+      "value_distances": {
+        "local_32": 32,
+        "medium_128": 128,
+        "long_256": 256
+      },
+      "parameters": 328958,
+      "target_parameters": 329088,
+      "parameter_delta_vs_target": -130,
+      "steps": 10000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "conditions": {
+            "local_32": {
+              "accuracy": 2.4688,
+              "loss": 3.718582,
+              "queries": 3200
+            },
+            "medium_128": {
+              "accuracy": 2.75,
+              "loss": 3.714858,
+              "queries": 3200
+            },
+            "long_256": {
+              "accuracy": 2.375,
+              "loss": 3.717649,
+              "queries": 3200
+            }
+          }
+        },
+        {
+          "step": 3000,
+          "conditions": {
+            "local_32": {
+              "accuracy": 92.25,
+              "loss": 0.146563,
+              "queries": 3200
+            },
+            "medium_128": {
+              "accuracy": 92.7188,
+              "loss": 0.140048,
+              "queries": 3200
+            },
+            "long_256": {
+              "accuracy": 92.0625,
+              "loss": 0.152822,
+              "queries": 3200
+            }
+          }
+        },
+        {
+          "step": 6000,
+          "conditions": {
+            "local_32": {
+              "accuracy": 97.9375,
+              "loss": 0.030767,
+              "queries": 3200
+            },
+            "medium_128": {
+              "accuracy": 97.875,
+              "loss": 0.036433,
+              "queries": 3200
+            },
+            "long_256": {
+              "accuracy": 97.5312,
+              "loss": 0.036232,
+              "queries": 3200
+            }
+          }
+        },
+        {
+          "step": 10000,
+          "conditions": {
+            "local_32": {
+              "accuracy": 97.5625,
+              "loss": 0.036733,
+              "queries": 3200
+            },
+            "medium_128": {
+              "accuracy": 97.5625,
+              "loss": 0.036954,
+              "queries": 3200
+            },
+            "long_256": {
+              "accuracy": 97.2812,
+              "loss": 0.03847,
+              "queries": 3200
+            }
+          }
+        }
+      ],
+      "elapsed_s": 173.094,
+      "tokens_per_s_train": 946538.13,
+      "peak_memory_mb": 766.05,
+      "device": "NVIDIA A10G"
+    }
+  ],
+  "completed_at": "2026-09-05T11:30:27Z"
+}

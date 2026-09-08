@@ -1,0 +1,165 @@
+{
+  "experiment": "S2-021",
+  "description": "Clean dense-vs-SubQ head-to-head on corrected full MQAR",
+  "source_commit": "working-tree",
+  "task": "16 independently randomized key/value pairs, 8 late queries",
+  "modes": [
+    "dense1",
+    "subq_gate",
+    "subq_gru"
+  ],
+  "seeds": [
+    42,
+    1337,
+    2026
+  ],
+  "training_steps": 6000,
+  "random_exact_baseline_percent": 2.5,
+  "results": [
+    {
+      "experiment": "S2-021",
+      "model": "dense1_s42",
+      "mode": "dense1",
+      "seed": 42,
+      "parameters": 329088,
+      "steps": 6000,
+      "accuracy": 5.0,
+      "distance_accuracy": {
+        "128-255": 5.1797,
+        "256-383": 5.0053,
+        "384-511": 4.855
+      },
+      "queries": 12800,
+      "elapsed_s": 329.649
+    },
+    {
+      "experiment": "S2-021",
+      "model": "dense1_s1337",
+      "mode": "dense1",
+      "seed": 1337,
+      "parameters": 329088,
+      "steps": 6000,
+      "accuracy": 5.6172,
+      "distance_accuracy": {
+        "128-255": 5.6205,
+        "256-383": 5.1898,
+        "384-511": 6.0533
+      },
+      "queries": 12800,
+      "elapsed_s": 340.89
+    },
+    {
+      "experiment": "S2-021",
+      "model": "dense1_s2026",
+      "mode": "dense1",
+      "seed": 2026,
+      "parameters": 329088,
+      "steps": 6000,
+      "accuracy": 5.7188,
+      "distance_accuracy": {
+        "128-255": 5.4393,
+        "256-383": 6.424,
+        "384-511": 5.2145
+      },
+      "queries": 12800,
+      "elapsed_s": 334.539
+    },
+    {
+      "experiment": "S2-021",
+      "model": "subq_gate_s42",
+      "mode": "subq_gate",
+      "seed": 42,
+      "parameters": 329345,
+      "steps": 6000,
+      "accuracy": 2.3828,
+      "distance_accuracy": {
+        "128-255": 2.5474,
+        "256-383": 2.4814,
+        "384-511": 2.1529
+      },
+      "queries": 12800,
+      "elapsed_s": 453.765
+    },
+    {
+      "experiment": "S2-021",
+      "model": "subq_gate_s1337",
+      "mode": "subq_gate",
+      "seed": 1337,
+      "parameters": 329345,
+      "steps": 6000,
+      "accuracy": 2.3281,
+      "distance_accuracy": {
+        "128-255": 2.6155,
+        "256-383": 2.0802,
+        "384-511": 2.3553
+      },
+      "queries": 12800,
+      "elapsed_s": 444.398
+    },
+    {
+      "experiment": "S2-021",
+      "model": "subq_gate_s2026",
+      "mode": "subq_gate",
+      "seed": 2026,
+      "parameters": 329345,
+      "steps": 6000,
+      "accuracy": 2.4062,
+      "distance_accuracy": {
+        "128-255": 2.6499,
+        "256-383": 2.1842,
+        "384-511": 2.4422
+      },
+      "queries": 12800,
+      "elapsed_s": 444.077
+    },
+    {
+      "experiment": "S2-021",
+      "model": "subq_gru_s42",
+      "mode": "subq_gru",
+      "seed": 42,
+      "parameters": 328958,
+      "steps": 6000,
+      "accuracy": 2.5234,
+      "distance_accuracy": {
+        "128-255": 2.5474,
+        "256-383": 2.1845,
+        "384-511": 2.8559
+      },
+      "queries": 12800,
+      "elapsed_s": 451.06
+    },
+    {
+      "experiment": "S2-021",
+      "model": "subq_gru_s1337",
+      "mode": "subq_gru",
+      "seed": 1337,
+      "parameters": 328958,
+      "steps": 6000,
+      "accuracy": 2.3125,
+      "distance_accuracy": {
+        "128-255": 2.1703,
+        "256-383": 2.6378,
+        "384-511": 2.0911
+      },
+      "queries": 12800,
+      "elapsed_s": 432.735
+    },
+    {
+      "experiment": "S2-021",
+      "model": "subq_gru_s2026",
+      "mode": "subq_gru",
+      "seed": 2026,
+      "parameters": 328958,
+      "steps": 6000,
+      "accuracy": 2.6719,
+      "distance_accuracy": {
+        "128-255": 2.7894,
+        "256-383": 2.6124,
+        "384-511": 2.6403
+      },
+      "queries": 12800,
+      "elapsed_s": 438.956
+    }
+  ],
+  "completed_at": "2026-09-06T12:38:57Z"
+}

@@ -1,0 +1,1809 @@
+{
+  "experiment": "S2-014",
+  "description": "Corrected gated MQAR across matched-k offset horizons",
+  "source_commit": "working-tree",
+  "dataset": "Synthetic MQAR with 16 key-value pairs and 8 late queries",
+  "causal": true,
+  "seq_len": 512,
+  "vocab_size": 256,
+  "num_kv_pairs": 16,
+  "num_queries": 8,
+  "key_value_assignment": "independent random permutation per example",
+  "thought_hops": 4,
+  "route_mode": "learned",
+  "random_exact_baseline_percent": 2.5,
+  "training_steps": 6000,
+  "validation_batches": 50,
+  "seeds": [
+    42,
+    1337,
+    2026
+  ],
+  "k": 8,
+  "offset_policies": {
+    "h64": [
+      0,
+      1,
+      2,
+      4,
+      8,
+      16,
+      32,
+      64
+    ],
+    "h128": [
+      0,
+      1,
+      2,
+      4,
+      8,
+      16,
+      32,
+      128
+    ],
+    "h256": [
+      0,
+      1,
+      2,
+      4,
+      8,
+      16,
+      32,
+      256
+    ],
+    "h384": [
+      0,
+      1,
+      2,
+      4,
+      8,
+      16,
+      32,
+      384
+    ]
+  },
+  "update_mode": "learned_gate_full",
+  "results": [
+    {
+      "experiment": "S2-014",
+      "model": "h64_t4_s42",
+      "update_mode": "learned_gate_full",
+      "route_mode": "learned",
+      "thought_hops": 4,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "offset_horizon": 64,
+      "k": 8,
+      "seed": 42,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "n_heads": 4,
+      "d_mlp": 512,
+      "num_kv_pairs": 16,
+      "num_queries": 8,
+      "parameters": 329345,
+      "target_parameters": 329088,
+      "parameter_delta_vs_target": 257,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 2.5391,
+          "val_loss": 3.698994,
+          "queries": 12800,
+          "mean_query_distance": 333.847,
+          "distance_accuracy": {
+            "128-255": {
+              "correct": 80,
+              "total": 3561,
+              "accuracy": 2.2466
+            },
+            "256-383": {
+              "correct": 118,
+              "total": 4656,
+              "accuracy": 2.5344
+            },
+            "384-511": {
+              "correct": 127,
+              "total": 4583,
+              "accuracy": 2.7711
+            }
+          },
+          "gate_mean_all_positions_by_hop": [
+            0.669783,
+            0.9325,
+            0.950731,
+            0.951964
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.900767,
+            0.949913,
+            0.952149,
+            0.952148
+          ]
+        },
+        {
+          "step": 3000,
+          "accuracy": 2.4609,
+          "val_loss": 3.696936,
+          "queries": 12800,
+          "mean_query_distance": 333.286,
+          "distance_accuracy": {
+            "128-255": {
+              "correct": 90,
+              "total": 3597,
+              "accuracy": 2.5021
+            },
+            "256-383": {
+              "correct": 101,
+              "total": 4599,
+              "accuracy": 2.1961
+            },
+            "384-511": {
+              "correct": 124,
+              "total": 4604,
+              "accuracy": 2.6933
+            }
+          },
+          "gate_mean_all_positions_by_hop": [
+            0.678162,
+            0.903344,
+            0.921804,
+            0.921833
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.870641,
+            0.918753,
+            0.921922,
+            0.921875
+          ]
+        },
+        {
+          "step": 6000,
+          "accuracy": 2.5312,
+          "val_loss": 3.689253,
+          "queries": 12800,
+          "mean_query_distance": 332.523,
+          "distance_accuracy": {
+            "128-255": {
+              "correct": 116,
+              "total": 3603,
+              "accuracy": 3.2195
+            },
+            "256-383": {
+              "correct": 100,
+              "total": 4653,
+              "accuracy": 2.1492
+            },
+            "384-511": {
+              "correct": 108,
+              "total": 4544,
+              "accuracy": 2.3768
+            }
+          },
+          "gate_mean_all_positions_by_hop": [
+            0.692717,
+            0.919302,
+            0.938347,
+            0.938443
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.879414,
+            0.936159,
+            0.938464,
+            0.938477
+          ]
+        }
+      ],
+      "elapsed_s": 438.427,
+      "train_tokens_per_s": 224219.66,
+      "peak_memory_mb": 740.93,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-014",
+      "model": "h128_t4_s42",
+      "update_mode": "learned_gate_full",
+      "route_mode": "learned",
+      "thought_hops": 4,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        128
+      ],
+      "offset_horizon": 128,
+      "k": 8,
+      "seed": 42,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "n_heads": 4,
+      "d_mlp": 512,
+      "num_kv_pairs": 16,
+      "num_queries": 8,
+      "parameters": 329345,
+      "target_parameters": 329088,
+      "parameter_delta_vs_target": 257,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 2.3672,
+          "val_loss": 3.70336,
+          "queries": 12800,
+          "mean_query_distance": 333.271,
+          "distance_accuracy": {
+            "128-255": {
+              "correct": 91,
+              "total": 3505,
+              "accuracy": 2.5963
+            },
+            "256-383": {
+              "correct": 119,
+              "total": 4745,
+              "accuracy": 2.5079
+            },
+            "384-511": {
+              "correct": 93,
+              "total": 4550,
+              "accuracy": 2.044
+            }
+          },
+          "gate_mean_all_positions_by_hop": [
+            0.491357,
+            0.742996,
+            0.812989,
+            0.818953
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.740234,
+            0.820229,
+            0.819672,
+            0.819714
+          ]
+        },
+        {
+          "step": 3000,
+          "accuracy": 2.4844,
+          "val_loss": 3.692022,
+          "queries": 12800,
+          "mean_query_distance": 332.297,
+          "distance_accuracy": {
+            "128-255": {
+              "correct": 92,
+              "total": 3579,
+              "accuracy": 2.5706
+            },
+            "256-383": {
+              "correct": 108,
+              "total": 4700,
+              "accuracy": 2.2979
+            },
+            "384-511": {
+              "correct": 118,
+              "total": 4521,
+              "accuracy": 2.61
+            }
+          },
+          "gate_mean_all_positions_by_hop": [
+            0.515429,
+            0.84763,
+            0.908828,
+            0.911734
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.817717,
+            0.911548,
+            0.912135,
+            0.912112
+          ]
+        },
+        {
+          "step": 6000,
+          "accuracy": 2.7188,
+          "val_loss": 3.689706,
+          "queries": 12800,
+          "mean_query_distance": 332.165,
+          "distance_accuracy": {
+            "128-255": {
+              "correct": 95,
+              "total": 3597,
+              "accuracy": 2.6411
+            },
+            "256-383": {
+              "correct": 126,
+              "total": 4640,
+              "accuracy": 2.7155
+            },
+            "384-511": {
+              "correct": 127,
+              "total": 4563,
+              "accuracy": 2.7833
+            }
+          },
+          "gate_mean_all_positions_by_hop": [
+            0.569142,
+            0.883841,
+            0.932139,
+            0.933227
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.843488,
+            0.933632,
+            0.933873,
+            0.933597
+          ]
+        }
+      ],
+      "elapsed_s": 426.758,
+      "train_tokens_per_s": 230350.46,
+      "peak_memory_mb": 740.93,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-014",
+      "model": "h256_t4_s42",
+      "update_mode": "learned_gate_full",
+      "route_mode": "learned",
+      "thought_hops": 4,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        256
+      ],
+      "offset_horizon": 256,
+      "k": 8,
+      "seed": 42,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "n_heads": 4,
+      "d_mlp": 512,
+      "num_kv_pairs": 16,
+      "num_queries": 8,
+      "parameters": 329345,
+      "target_parameters": 329088,
+      "parameter_delta_vs_target": 257,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 2.4688,
+          "val_loss": 3.69681,
+          "queries": 12800,
+          "mean_query_distance": 333.685,
+          "distance_accuracy": {
+            "128-255": {
+              "correct": 81,
+              "total": 3489,
+              "accuracy": 2.3216
+            },
+            "256-383": {
+              "correct": 121,
+              "total": 4772,
+              "accuracy": 2.5356
+            },
+            "384-511": {
+              "correct": 114,
+              "total": 4539,
+              "accuracy": 2.5116
+            }
+          },
+          "gate_mean_all_positions_by_hop": [
+            0.553088,
+            0.84955,
+            0.872624,
+            0.873089
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.849783,
+            0.864056,
+            0.8742,
+            0.873542
+          ]
+        },
+        {
+          "step": 3000,
+          "accuracy": 2.375,
+          "val_loss": 3.691239,
+          "queries": 12800,
+          "mean_query_distance": 332.835,
+          "distance_accuracy": {
+            "128-255": {
+              "correct": 91,
+              "total": 3637,
+              "accuracy": 2.5021
+            },
+            "256-383": {
+              "correct": 112,
+              "total": 4584,
+              "accuracy": 2.4433
+            },
+            "384-511": {
+              "correct": 101,
+              "total": 4579,
+              "accuracy": 2.2057
+            }
+          },
+          "gate_mean_all_positions_by_hop": [
+            0.569836,
+            0.893367,
+            0.926218,
+            0.926508
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.875175,
+            0.922961,
+            0.92733,
+            0.92676
+          ]
+        },
+        {
+          "step": 6000,
+          "accuracy": 2.4062,
+          "val_loss": 3.690583,
+          "queries": 12800,
+          "mean_query_distance": 332.664,
+          "distance_accuracy": {
+            "128-255": {
+              "correct": 98,
+              "total": 3573,
+              "accuracy": 2.7428
+            },
+            "256-383": {
+              "correct": 110,
+              "total": 4672,
+              "accuracy": 2.3545
+            },
+            "384-511": {
+              "correct": 100,
+              "total": 4555,
+              "accuracy": 2.1954
+            }
+          },
+          "gate_mean_all_positions_by_hop": [
+            0.595265,
+            0.921345,
+            0.952284,
+            0.952403
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.892914,
+            0.950367,
+            0.953025,
+            0.952637
+          ]
+        }
+      ],
+      "elapsed_s": 427.91,
+      "train_tokens_per_s": 229730.4,
+      "peak_memory_mb": 740.93,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-014",
+      "model": "h384_t4_s42",
+      "update_mode": "learned_gate_full",
+      "route_mode": "learned",
+      "thought_hops": 4,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        384
+      ],
+      "offset_horizon": 384,
+      "k": 8,
+      "seed": 42,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "n_heads": 4,
+      "d_mlp": 512,
+      "num_kv_pairs": 16,
+      "num_queries": 8,
+      "parameters": 329345,
+      "target_parameters": 329088,
+      "parameter_delta_vs_target": 257,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 2.2891,
+          "val_loss": 3.699123,
+          "queries": 12800,
+          "mean_query_distance": 332.931,
+          "distance_accuracy": {
+            "128-255": {
+              "correct": 81,
+              "total": 3582,
+              "accuracy": 2.2613
+            },
+            "256-383": {
+              "correct": 108,
+              "total": 4600,
+              "accuracy": 2.3478
+            },
+            "384-511": {
+              "correct": 104,
+              "total": 4618,
+              "accuracy": 2.2521
+            }
+          },
+          "gate_mean_all_positions_by_hop": [
+            0.535057,
+            0.805121,
+            0.842392,
+            0.844257
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.798073,
+            0.844646,
+            0.844736,
+            0.844727
+          ]
+        },
+        {
+          "step": 3000,
+          "accuracy": 2.5547,
+          "val_loss": 3.693598,
+          "queries": 12800,
+          "mean_query_distance": 332.115,
+          "distance_accuracy": {
+            "128-255": {
+              "correct": 88,
+              "total": 3632,
+              "accuracy": 2.4229
+            },
+            "256-383": {
+              "correct": 122,
+              "total": 4655,
+              "accuracy": 2.6208
+            },
+            "384-511": {
+              "correct": 117,
+              "total": 4513,
+              "accuracy": 2.5925
+            }
+          },
+          "gate_mean_all_positions_by_hop": [
+            0.594119,
+            0.868656,
+            0.873214,
+            0.873857
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.834062,
+            0.813891,
+            0.873847,
+            0.874286
+          ]
+        },
+        {
+          "step": 6000,
+          "accuracy": 2.4922,
+          "val_loss": 3.689682,
+          "queries": 12800,
+          "mean_query_distance": 334.448,
+          "distance_accuracy": {
+            "128-255": {
+              "correct": 83,
+              "total": 3503,
+              "accuracy": 2.3694
+            },
+            "256-383": {
+              "correct": 106,
+              "total": 4601,
+              "accuracy": 2.3038
+            },
+            "384-511": {
+              "correct": 130,
+              "total": 4696,
+              "accuracy": 2.7683
+            }
+          },
+          "gate_mean_all_positions_by_hop": [
+            0.610453,
+            0.895042,
+            0.89489,
+            0.894861
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.849704,
+            0.860052,
+            0.894824,
+            0.895011
+          ]
+        }
+      ],
+      "elapsed_s": 428.551,
+      "train_tokens_per_s": 229387.02,
+      "peak_memory_mb": 740.93,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-014",
+      "model": "h64_t4_s1337",
+      "update_mode": "learned_gate_full",
+      "route_mode": "learned",
+      "thought_hops": 4,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "offset_horizon": 64,
+      "k": 8,
+      "seed": 1337,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "n_heads": 4,
+      "d_mlp": 512,
+      "num_kv_pairs": 16,
+      "num_queries": 8,
+      "parameters": 329345,
+      "target_parameters": 329088,
+      "parameter_delta_vs_target": 257,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 2.5,
+          "val_loss": 3.705809,
+          "queries": 12800,
+          "mean_query_distance": 332.949,
+          "distance_accuracy": {
+            "128-255": {
+              "correct": 96,
+              "total": 3525,
+              "accuracy": 2.7234
+            },
+            "256-383": {
+              "correct": 112,
+              "total": 4748,
+              "accuracy": 2.3589
+            },
+            "384-511": {
+              "correct": 112,
+              "total": 4527,
+              "accuracy": 2.474
+            }
+          },
+          "gate_mean_all_positions_by_hop": [
+            0.547782,
+            0.73361,
+            0.774903,
+            0.775139
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.712939,
+            0.781144,
+            0.776686,
+            0.775372
+          ]
+        },
+        {
+          "step": 3000,
+          "accuracy": 2.6562,
+          "val_loss": 3.694003,
+          "queries": 12800,
+          "mean_query_distance": 333.487,
+          "distance_accuracy": {
+            "128-255": {
+              "correct": 90,
+              "total": 3498,
+              "accuracy": 2.5729
+            },
+            "256-383": {
+              "correct": 125,
+              "total": 4719,
+              "accuracy": 2.6489
+            },
+            "384-511": {
+              "correct": 125,
+              "total": 4583,
+              "accuracy": 2.7275
+            }
+          },
+          "gate_mean_all_positions_by_hop": [
+            0.708916,
+            0.950756,
+            0.959435,
+            0.960638
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.923265,
+            0.961099,
+            0.961425,
+            0.961426
+          ]
+        },
+        {
+          "step": 6000,
+          "accuracy": 2.4062,
+          "val_loss": 3.689969,
+          "queries": 12800,
+          "mean_query_distance": 333.198,
+          "distance_accuracy": {
+            "128-255": {
+              "correct": 77,
+              "total": 3564,
+              "accuracy": 2.1605
+            },
+            "256-383": {
+              "correct": 114,
+              "total": 4646,
+              "accuracy": 2.4537
+            },
+            "384-511": {
+              "correct": 117,
+              "total": 4590,
+              "accuracy": 2.549
+            }
+          },
+          "gate_mean_all_positions_by_hop": [
+            0.708659,
+            0.942635,
+            0.950839,
+            0.951108
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.912627,
+            0.951011,
+            0.951172,
+            0.951172
+          ]
+        }
+      ],
+      "elapsed_s": 426.981,
+      "train_tokens_per_s": 230230.5,
+      "peak_memory_mb": 740.93,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-014",
+      "model": "h128_t4_s1337",
+      "update_mode": "learned_gate_full",
+      "route_mode": "learned",
+      "thought_hops": 4,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        128
+      ],
+      "offset_horizon": 128,
+      "k": 8,
+      "seed": 1337,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "n_heads": 4,
+      "d_mlp": 512,
+      "num_kv_pairs": 16,
+      "num_queries": 8,
+      "parameters": 329345,
+      "target_parameters": 329088,
+      "parameter_delta_vs_target": 257,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 2.3516,
+          "val_loss": 3.700515,
+          "queries": 12800,
+          "mean_query_distance": 332.474,
+          "distance_accuracy": {
+            "128-255": {
+              "correct": 82,
+              "total": 3535,
+              "accuracy": 2.3197
+            },
+            "256-383": {
+              "correct": 115,
+              "total": 4741,
+              "accuracy": 2.4256
+            },
+            "384-511": {
+              "correct": 104,
+              "total": 4524,
+              "accuracy": 2.2989
+            }
+          },
+          "gate_mean_all_positions_by_hop": [
+            0.553758,
+            0.822312,
+            0.87185,
+            0.880573
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.821966,
+            0.94969,
+            0.950592,
+            0.950682
+          ]
+        },
+        {
+          "step": 3000,
+          "accuracy": 2.5312,
+          "val_loss": 3.695499,
+          "queries": 12800,
+          "mean_query_distance": 333.498,
+          "distance_accuracy": {
+            "128-255": {
+              "correct": 93,
+              "total": 3538,
+              "accuracy": 2.6286
+            },
+            "256-383": {
+              "correct": 118,
+              "total": 4707,
+              "accuracy": 2.5069
+            },
+            "384-511": {
+              "correct": 113,
+              "total": 4555,
+              "accuracy": 2.4808
+            }
+          },
+          "gate_mean_all_positions_by_hop": [
+            0.671507,
+            0.920418,
+            0.933564,
+            0.938793
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.952052,
+            0.988695,
+            0.98877,
+            0.98877
+          ]
+        },
+        {
+          "step": 6000,
+          "accuracy": 2.3906,
+          "val_loss": 3.690349,
+          "queries": 12800,
+          "mean_query_distance": 330.867,
+          "distance_accuracy": {
+            "128-255": {
+              "correct": 94,
+              "total": 3630,
+              "accuracy": 2.5895
+            },
+            "256-383": {
+              "correct": 112,
+              "total": 4722,
+              "accuracy": 2.3719
+            },
+            "384-511": {
+              "correct": 100,
+              "total": 4448,
+              "accuracy": 2.2482
+            }
+          },
+          "gate_mean_all_positions_by_hop": [
+            0.571993,
+            0.899016,
+            0.915722,
+            0.921835
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.940303,
+            0.985745,
+            0.98584,
+            0.98584
+          ]
+        }
+      ],
+      "elapsed_s": 426.914,
+      "train_tokens_per_s": 230266.68,
+      "peak_memory_mb": 740.93,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-014",
+      "model": "h256_t4_s1337",
+      "update_mode": "learned_gate_full",
+      "route_mode": "learned",
+      "thought_hops": 4,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        256
+      ],
+      "offset_horizon": 256,
+      "k": 8,
+      "seed": 1337,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "n_heads": 4,
+      "d_mlp": 512,
+      "num_kv_pairs": 16,
+      "num_queries": 8,
+      "parameters": 329345,
+      "target_parameters": 329088,
+      "parameter_delta_vs_target": 257,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 2.2812,
+          "val_loss": 3.705603,
+          "queries": 12800,
+          "mean_query_distance": 331.849,
+          "distance_accuracy": {
+            "128-255": {
+              "correct": 80,
+              "total": 3638,
+              "accuracy": 2.199
+            },
+            "256-383": {
+              "correct": 106,
+              "total": 4653,
+              "accuracy": 2.2781
+            },
+            "384-511": {
+              "correct": 106,
+              "total": 4509,
+              "accuracy": 2.3509
+            }
+          },
+          "gate_mean_all_positions_by_hop": [
+            0.545882,
+            0.90251,
+            0.964672,
+            0.967176
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.826557,
+            0.96512,
+            0.966952,
+            0.967225
+          ]
+        },
+        {
+          "step": 3000,
+          "accuracy": 2.6484,
+          "val_loss": 3.692804,
+          "queries": 12800,
+          "mean_query_distance": 331.736,
+          "distance_accuracy": {
+            "128-255": {
+              "correct": 106,
+              "total": 3575,
+              "accuracy": 2.965
+            },
+            "256-383": {
+              "correct": 123,
+              "total": 4783,
+              "accuracy": 2.5716
+            },
+            "384-511": {
+              "correct": 110,
+              "total": 4442,
+              "accuracy": 2.4764
+            }
+          },
+          "gate_mean_all_positions_by_hop": [
+            0.575736,
+            0.845082,
+            0.890746,
+            0.922517
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.859404,
+            0.980767,
+            0.981865,
+            0.981929
+          ]
+        },
+        {
+          "step": 6000,
+          "accuracy": 2.5938,
+          "val_loss": 3.689464,
+          "queries": 12800,
+          "mean_query_distance": 333.458,
+          "distance_accuracy": {
+            "128-255": {
+              "correct": 101,
+              "total": 3528,
+              "accuracy": 2.8628
+            },
+            "256-383": {
+              "correct": 127,
+              "total": 4691,
+              "accuracy": 2.7073
+            },
+            "384-511": {
+              "correct": 104,
+              "total": 4581,
+              "accuracy": 2.2702
+            }
+          },
+          "gate_mean_all_positions_by_hop": [
+            0.503877,
+            0.719495,
+            0.848605,
+            0.941901
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.701521,
+            0.941158,
+            0.954502,
+            0.95459
+          ]
+        }
+      ],
+      "elapsed_s": 429.889,
+      "train_tokens_per_s": 228673.0,
+      "peak_memory_mb": 740.93,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-014",
+      "model": "h384_t4_s1337",
+      "update_mode": "learned_gate_full",
+      "route_mode": "learned",
+      "thought_hops": 4,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        384
+      ],
+      "offset_horizon": 384,
+      "k": 8,
+      "seed": 1337,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "n_heads": 4,
+      "d_mlp": 512,
+      "num_kv_pairs": 16,
+      "num_queries": 8,
+      "parameters": 329345,
+      "target_parameters": 329088,
+      "parameter_delta_vs_target": 257,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 2.4609,
+          "val_loss": 3.696637,
+          "queries": 12800,
+          "mean_query_distance": 332.422,
+          "distance_accuracy": {
+            "128-255": {
+              "correct": 89,
+              "total": 3557,
+              "accuracy": 2.5021
+            },
+            "256-383": {
+              "correct": 108,
+              "total": 4763,
+              "accuracy": 2.2675
+            },
+            "384-511": {
+              "correct": 118,
+              "total": 4480,
+              "accuracy": 2.6339
+            }
+          },
+          "gate_mean_all_positions_by_hop": [
+            0.548949,
+            0.764242,
+            0.819032,
+            0.820589
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.726702,
+            0.822349,
+            0.822104,
+            0.820814
+          ]
+        },
+        {
+          "step": 3000,
+          "accuracy": 2.375,
+          "val_loss": 3.693029,
+          "queries": 12800,
+          "mean_query_distance": 331.371,
+          "distance_accuracy": {
+            "128-255": {
+              "correct": 84,
+              "total": 3631,
+              "accuracy": 2.3134
+            },
+            "256-383": {
+              "correct": 104,
+              "total": 4659,
+              "accuracy": 2.2322
+            },
+            "384-511": {
+              "correct": 116,
+              "total": 4510,
+              "accuracy": 2.5721
+            }
+          },
+          "gate_mean_all_positions_by_hop": [
+            0.569053,
+            0.851333,
+            0.902812,
+            0.90605
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.799453,
+            0.905324,
+            0.906368,
+            0.90625
+          ]
+        },
+        {
+          "step": 6000,
+          "accuracy": 2.4766,
+          "val_loss": 3.690085,
+          "queries": 12800,
+          "mean_query_distance": 332.979,
+          "distance_accuracy": {
+            "128-255": {
+              "correct": 77,
+              "total": 3562,
+              "accuracy": 2.1617
+            },
+            "256-383": {
+              "correct": 131,
+              "total": 4672,
+              "accuracy": 2.8039
+            },
+            "384-511": {
+              "correct": 109,
+              "total": 4566,
+              "accuracy": 2.3872
+            }
+          },
+          "gate_mean_all_positions_by_hop": [
+            0.575929,
+            0.871282,
+            0.920398,
+            0.923985
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.818301,
+            0.923167,
+            0.924851,
+            0.924317
+          ]
+        }
+      ],
+      "elapsed_s": 417.85,
+      "train_tokens_per_s": 235261.2,
+      "peak_memory_mb": 740.93,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-014",
+      "model": "h64_t4_s2026",
+      "update_mode": "learned_gate_full",
+      "route_mode": "learned",
+      "thought_hops": 4,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "offset_horizon": 64,
+      "k": 8,
+      "seed": 2026,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "n_heads": 4,
+      "d_mlp": 512,
+      "num_kv_pairs": 16,
+      "num_queries": 8,
+      "parameters": 329345,
+      "target_parameters": 329088,
+      "parameter_delta_vs_target": 257,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 2.5156,
+          "val_loss": 3.694272,
+          "queries": 12800,
+          "mean_query_distance": 331.846,
+          "distance_accuracy": {
+            "128-255": {
+              "correct": 80,
+              "total": 3611,
+              "accuracy": 2.2155
+            },
+            "256-383": {
+              "correct": 120,
+              "total": 4700,
+              "accuracy": 2.5532
+            },
+            "384-511": {
+              "correct": 122,
+              "total": 4489,
+              "accuracy": 2.7178
+            }
+          },
+          "gate_mean_all_positions_by_hop": [
+            0.542159,
+            0.699147,
+            0.751425,
+            0.75128
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.678567,
+            0.757605,
+            0.753613,
+            0.75244
+          ]
+        },
+        {
+          "step": 3000,
+          "accuracy": 2.3906,
+          "val_loss": 3.69471,
+          "queries": 12800,
+          "mean_query_distance": 332.151,
+          "distance_accuracy": {
+            "128-255": {
+              "correct": 78,
+              "total": 3592,
+              "accuracy": 2.1715
+            },
+            "256-383": {
+              "correct": 107,
+              "total": 4680,
+              "accuracy": 2.2863
+            },
+            "384-511": {
+              "correct": 121,
+              "total": 4528,
+              "accuracy": 2.6723
+            }
+          },
+          "gate_mean_all_positions_by_hop": [
+            0.827051,
+            0.865983,
+            0.862875,
+            0.862525
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.876595,
+            0.867273,
+            0.8637,
+            0.863281
+          ]
+        },
+        {
+          "step": 6000,
+          "accuracy": 2.3672,
+          "val_loss": 3.690752,
+          "queries": 12800,
+          "mean_query_distance": 332.991,
+          "distance_accuracy": {
+            "128-255": {
+              "correct": 89,
+              "total": 3544,
+              "accuracy": 2.5113
+            },
+            "256-383": {
+              "correct": 106,
+              "total": 4712,
+              "accuracy": 2.2496
+            },
+            "384-511": {
+              "correct": 108,
+              "total": 4544,
+              "accuracy": 2.3768
+            }
+          },
+          "gate_mean_all_positions_by_hop": [
+            0.822995,
+            0.860444,
+            0.857201,
+            0.857165
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.869945,
+            0.861638,
+            0.857913,
+            0.857907
+          ]
+        }
+      ],
+      "elapsed_s": 419.532,
+      "train_tokens_per_s": 234318.05,
+      "peak_memory_mb": 740.93,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-014",
+      "model": "h128_t4_s2026",
+      "update_mode": "learned_gate_full",
+      "route_mode": "learned",
+      "thought_hops": 4,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        128
+      ],
+      "offset_horizon": 128,
+      "k": 8,
+      "seed": 2026,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "n_heads": 4,
+      "d_mlp": 512,
+      "num_kv_pairs": 16,
+      "num_queries": 8,
+      "parameters": 329345,
+      "target_parameters": 329088,
+      "parameter_delta_vs_target": 257,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 2.3828,
+          "val_loss": 3.699809,
+          "queries": 12800,
+          "mean_query_distance": 332.191,
+          "distance_accuracy": {
+            "128-255": {
+              "correct": 96,
+              "total": 3570,
+              "accuracy": 2.6891
+            },
+            "256-383": {
+              "correct": 107,
+              "total": 4722,
+              "accuracy": 2.266
+            },
+            "384-511": {
+              "correct": 102,
+              "total": 4508,
+              "accuracy": 2.2626
+            }
+          },
+          "gate_mean_all_positions_by_hop": [
+            0.54859,
+            0.742189,
+            0.801161,
+            0.802293
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.704448,
+            0.804863,
+            0.80472,
+            0.804275
+          ]
+        },
+        {
+          "step": 3000,
+          "accuracy": 2.7109,
+          "val_loss": 3.6931,
+          "queries": 12800,
+          "mean_query_distance": 333.081,
+          "distance_accuracy": {
+            "128-255": {
+              "correct": 89,
+              "total": 3550,
+              "accuracy": 2.507
+            },
+            "256-383": {
+              "correct": 120,
+              "total": 4706,
+              "accuracy": 2.5499
+            },
+            "384-511": {
+              "correct": 138,
+              "total": 4544,
+              "accuracy": 3.037
+            }
+          },
+          "gate_mean_all_positions_by_hop": [
+            0.571929,
+            0.801421,
+            0.853911,
+            0.855375
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.746701,
+            0.857323,
+            0.857644,
+            0.857422
+          ]
+        },
+        {
+          "step": 6000,
+          "accuracy": 2.6328,
+          "val_loss": 3.690383,
+          "queries": 12800,
+          "mean_query_distance": 333.572,
+          "distance_accuracy": {
+            "128-255": {
+              "correct": 88,
+              "total": 3526,
+              "accuracy": 2.4957
+            },
+            "256-383": {
+              "correct": 119,
+              "total": 4702,
+              "accuracy": 2.5308
+            },
+            "384-511": {
+              "correct": 130,
+              "total": 4572,
+              "accuracy": 2.8434
+            }
+          },
+          "gate_mean_all_positions_by_hop": [
+            0.575385,
+            0.812557,
+            0.86719,
+            0.86901
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.752691,
+            0.870803,
+            0.871334,
+            0.871094
+          ]
+        }
+      ],
+      "elapsed_s": 426.27,
+      "train_tokens_per_s": 230614.57,
+      "peak_memory_mb": 740.93,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-014",
+      "model": "h256_t4_s2026",
+      "update_mode": "learned_gate_full",
+      "route_mode": "learned",
+      "thought_hops": 4,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        256
+      ],
+      "offset_horizon": 256,
+      "k": 8,
+      "seed": 2026,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "n_heads": 4,
+      "d_mlp": 512,
+      "num_kv_pairs": 16,
+      "num_queries": 8,
+      "parameters": 329345,
+      "target_parameters": 329088,
+      "parameter_delta_vs_target": 257,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 2.5703,
+          "val_loss": 3.696578,
+          "queries": 12800,
+          "mean_query_distance": 332.354,
+          "distance_accuracy": {
+            "128-255": {
+              "correct": 88,
+              "total": 3608,
+              "accuracy": 2.439
+            },
+            "256-383": {
+              "correct": 138,
+              "total": 4695,
+              "accuracy": 2.9393
+            },
+            "384-511": {
+              "correct": 103,
+              "total": 4497,
+              "accuracy": 2.2904
+            }
+          },
+          "gate_mean_all_positions_by_hop": [
+            0.589921,
+            0.876973,
+            0.920796,
+            0.922584
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.839401,
+            0.925031,
+            0.925781,
+            0.925781
+          ]
+        },
+        {
+          "step": 3000,
+          "accuracy": 2.2266,
+          "val_loss": 3.692199,
+          "queries": 12800,
+          "mean_query_distance": 332.74,
+          "distance_accuracy": {
+            "128-255": {
+              "correct": 76,
+              "total": 3581,
+              "accuracy": 2.1223
+            },
+            "256-383": {
+              "correct": 109,
+              "total": 4688,
+              "accuracy": 2.3251
+            },
+            "384-511": {
+              "correct": 100,
+              "total": 4531,
+              "accuracy": 2.207
+            }
+          },
+          "gate_mean_all_positions_by_hop": [
+            0.654734,
+            0.8885,
+            0.909891,
+            0.909972
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.859157,
+            0.908412,
+            0.910982,
+            0.911133
+          ]
+        },
+        {
+          "step": 6000,
+          "accuracy": 2.6172,
+          "val_loss": 3.689214,
+          "queries": 12800,
+          "mean_query_distance": 331.94,
+          "distance_accuracy": {
+            "128-255": {
+              "correct": 98,
+              "total": 3601,
+              "accuracy": 2.7215
+            },
+            "256-383": {
+              "correct": 118,
+              "total": 4726,
+              "accuracy": 2.4968
+            },
+            "384-511": {
+              "correct": 119,
+              "total": 4473,
+              "accuracy": 2.6604
+            }
+          },
+          "gate_mean_all_positions_by_hop": [
+            0.643417,
+            0.86996,
+            0.895513,
+            0.895756
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.844443,
+            0.892675,
+            0.897222,
+            0.897461
+          ]
+        }
+      ],
+      "elapsed_s": 428.48,
+      "train_tokens_per_s": 229424.99,
+      "peak_memory_mb": 740.93,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-014",
+      "model": "h384_t4_s2026",
+      "update_mode": "learned_gate_full",
+      "route_mode": "learned",
+      "thought_hops": 4,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        384
+      ],
+      "offset_horizon": 384,
+      "k": 8,
+      "seed": 2026,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "n_heads": 4,
+      "d_mlp": 512,
+      "num_kv_pairs": 16,
+      "num_queries": 8,
+      "parameters": 329345,
+      "target_parameters": 329088,
+      "parameter_delta_vs_target": 257,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 2.5312,
+          "val_loss": 3.703185,
+          "queries": 12800,
+          "mean_query_distance": 333.529,
+          "distance_accuracy": {
+            "128-255": {
+              "correct": 114,
+              "total": 3511,
+              "accuracy": 3.2469
+            },
+            "256-383": {
+              "correct": 102,
+              "total": 4742,
+              "accuracy": 2.151
+            },
+            "384-511": {
+              "correct": 108,
+              "total": 4547,
+              "accuracy": 2.3752
+            }
+          },
+          "gate_mean_all_positions_by_hop": [
+            0.635978,
+            0.849052,
+            0.882124,
+            0.883001
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.788227,
+            0.881587,
+            0.883604,
+            0.883789
+          ]
+        },
+        {
+          "step": 3000,
+          "accuracy": 2.6719,
+          "val_loss": 3.693754,
+          "queries": 12800,
+          "mean_query_distance": 333.597,
+          "distance_accuracy": {
+            "128-255": {
+              "correct": 95,
+              "total": 3492,
+              "accuracy": 2.7205
+            },
+            "256-383": {
+              "correct": 124,
+              "total": 4732,
+              "accuracy": 2.6205
+            },
+            "384-511": {
+              "correct": 123,
+              "total": 4576,
+              "accuracy": 2.6879
+            }
+          },
+          "gate_mean_all_positions_by_hop": [
+            0.744943,
+            0.823399,
+            0.866398,
+            0.870942
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.828306,
+            0.842592,
+            0.87021,
+            0.873571
+          ]
+        },
+        {
+          "step": 6000,
+          "accuracy": 2.2969,
+          "val_loss": 3.690629,
+          "queries": 12800,
+          "mean_query_distance": 331.853,
+          "distance_accuracy": {
+            "128-255": {
+              "correct": 79,
+              "total": 3641,
+              "accuracy": 2.1697
+            },
+            "256-383": {
+              "correct": 114,
+              "total": 4700,
+              "accuracy": 2.4255
+            },
+            "384-511": {
+              "correct": 101,
+              "total": 4459,
+              "accuracy": 2.2651
+            }
+          },
+          "gate_mean_all_positions_by_hop": [
+            0.637361,
+            0.663287,
+            0.769038,
+            0.773353
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.691881,
+            0.681879,
+            0.772016,
+            0.775581
+          ]
+        }
+      ],
+      "elapsed_s": 430.792,
+      "train_tokens_per_s": 228193.76,
+      "peak_memory_mb": 740.93,
+      "device": "NVIDIA A10"
+    }
+  ],
+  "completed_at": "2026-09-05T14:08:37Z"
+}

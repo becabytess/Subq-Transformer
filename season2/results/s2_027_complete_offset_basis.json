@@ -1,0 +1,605 @@
+{
+  "experiment": "S2-027",
+  "description": "Attention-only SubQ with old dyadic versus bounded-hop-complete offsets on corrected MQAR",
+  "task": "16 independently randomized key/value pairs, 8 late queries",
+  "random_exact_baseline_percent": 2.5,
+  "thought_hops": 8,
+  "offset_sets": {
+    "dyadic_k8": [
+      0,
+      1,
+      2,
+      4,
+      8,
+      16,
+      32,
+      64
+    ],
+    "complete_k9": [
+      0,
+      1,
+      2,
+      4,
+      8,
+      16,
+      63,
+      127,
+      128
+    ]
+  },
+  "seeds": [
+    42,
+    1337,
+    2026
+  ],
+  "training_steps": 6000,
+  "conditions": [
+    [
+      "dyadic_k8_attention_only_s42",
+      "attention_only",
+      "dyadic_k8",
+      [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      42
+    ],
+    [
+      "dyadic_k8_attention_only_s1337",
+      "attention_only",
+      "dyadic_k8",
+      [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      1337
+    ],
+    [
+      "dyadic_k8_attention_only_s2026",
+      "attention_only",
+      "dyadic_k8",
+      [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      2026
+    ],
+    [
+      "dyadic_k8_attention_only_final_mlp_s42",
+      "attention_only_final_mlp",
+      "dyadic_k8",
+      [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      42
+    ],
+    [
+      "dyadic_k8_attention_only_final_mlp_s1337",
+      "attention_only_final_mlp",
+      "dyadic_k8",
+      [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      1337
+    ],
+    [
+      "dyadic_k8_attention_only_final_mlp_s2026",
+      "attention_only_final_mlp",
+      "dyadic_k8",
+      [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      2026
+    ],
+    [
+      "complete_k9_attention_only_s42",
+      "attention_only",
+      "complete_k9",
+      [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        63,
+        127,
+        128
+      ],
+      42
+    ],
+    [
+      "complete_k9_attention_only_s1337",
+      "attention_only",
+      "complete_k9",
+      [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        63,
+        127,
+        128
+      ],
+      1337
+    ],
+    [
+      "complete_k9_attention_only_s2026",
+      "attention_only",
+      "complete_k9",
+      [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        63,
+        127,
+        128
+      ],
+      2026
+    ],
+    [
+      "complete_k9_attention_only_final_mlp_s42",
+      "attention_only_final_mlp",
+      "complete_k9",
+      [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        63,
+        127,
+        128
+      ],
+      42
+    ],
+    [
+      "complete_k9_attention_only_final_mlp_s1337",
+      "attention_only_final_mlp",
+      "complete_k9",
+      [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        63,
+        127,
+        128
+      ],
+      1337
+    ],
+    [
+      "complete_k9_attention_only_final_mlp_s2026",
+      "attention_only_final_mlp",
+      "complete_k9",
+      [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        63,
+        127,
+        128
+      ],
+      2026
+    ]
+  ],
+  "completed_at": "2026-09-07T13:21:31Z",
+  "results": [
+    {
+      "experiment": "S2-027",
+      "model": "dyadic_k8_attention_only_s42",
+      "mode": "attention_only",
+      "offset_name": "dyadic_k8",
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "seed": 42,
+      "d_model": 128,
+      "d_mlp": 512,
+      "thought_hops": 8,
+      "parameters": 180736,
+      "steps": 6000,
+      "accuracy": 5.4531,
+      "distance_accuracy": {
+        "128-255": 9.0008,
+        "256-383": 6.1718,
+        "384-511": 1.9552
+      },
+      "queries": 12800,
+      "elapsed_s": 493.424
+    },
+    {
+      "experiment": "S2-027",
+      "model": "dyadic_k8_attention_only_s1337",
+      "mode": "attention_only",
+      "offset_name": "dyadic_k8",
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "seed": 1337,
+      "d_model": 128,
+      "d_mlp": 512,
+      "thought_hops": 8,
+      "parameters": 180736,
+      "steps": 6000,
+      "accuracy": 4.5938,
+      "distance_accuracy": {
+        "128-255": 6.7056,
+        "256-383": 5.3185,
+        "384-511": 2.1792
+      },
+      "queries": 12800,
+      "elapsed_s": 493.537
+    },
+    {
+      "experiment": "S2-027",
+      "model": "dyadic_k8_attention_only_s2026",
+      "mode": "attention_only",
+      "offset_name": "dyadic_k8",
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "seed": 2026,
+      "d_model": 128,
+      "d_mlp": 512,
+      "thought_hops": 8,
+      "parameters": 180736,
+      "steps": 6000,
+      "accuracy": 5.25,
+      "distance_accuracy": {
+        "128-255": 8.6471,
+        "256-383": 5.8672,
+        "384-511": 1.9362
+      },
+      "queries": 12800,
+      "elapsed_s": 497.838
+    },
+    {
+      "experiment": "S2-027",
+      "model": "dyadic_k8_attention_only_final_mlp_s42",
+      "mode": "attention_only_final_mlp",
+      "offset_name": "dyadic_k8",
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "seed": 42,
+      "d_model": 128,
+      "d_mlp": 512,
+      "thought_hops": 8,
+      "parameters": 312704,
+      "steps": 6000,
+      "accuracy": 4.9688,
+      "distance_accuracy": {
+        "128-255": 7.4724,
+        "256-383": 5.6628,
+        "384-511": 2.3067
+      },
+      "queries": 12800,
+      "elapsed_s": 578.118
+    },
+    {
+      "experiment": "S2-027",
+      "model": "dyadic_k8_attention_only_final_mlp_s1337",
+      "mode": "attention_only_final_mlp",
+      "offset_name": "dyadic_k8",
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "seed": 1337,
+      "d_model": 128,
+      "d_mlp": 512,
+      "thought_hops": 8,
+      "parameters": 312704,
+      "steps": 6000,
+      "accuracy": 4.2969,
+      "distance_accuracy": {
+        "128-255": 6.4552,
+        "256-383": 4.6322,
+        "384-511": 2.2452
+      },
+      "queries": 12800,
+      "elapsed_s": 498.796
+    },
+    {
+      "experiment": "S2-027",
+      "model": "dyadic_k8_attention_only_final_mlp_s2026",
+      "mode": "attention_only_final_mlp",
+      "offset_name": "dyadic_k8",
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "seed": 2026,
+      "d_model": 128,
+      "d_mlp": 512,
+      "thought_hops": 8,
+      "parameters": 312704,
+      "steps": 6000,
+      "accuracy": 4.7031,
+      "distance_accuracy": {
+        "128-255": 7.364,
+        "256-383": 5.2463,
+        "384-511": 2.0462
+      },
+      "queries": 12800,
+      "elapsed_s": 495.224
+    },
+    {
+      "experiment": "S2-027",
+      "model": "complete_k9_attention_only_s42",
+      "mode": "attention_only",
+      "offset_name": "complete_k9",
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        63,
+        127,
+        128
+      ],
+      "seed": 42,
+      "d_model": 128,
+      "d_mlp": 512,
+      "thought_hops": 8,
+      "parameters": 180736,
+      "steps": 6000,
+      "accuracy": 6.7109,
+      "distance_accuracy": {
+        "128-255": 6.227,
+        "256-383": 6.8505,
+        "384-511": 6.942
+      },
+      "queries": 12800,
+      "elapsed_s": 602.662
+    },
+    {
+      "experiment": "S2-027",
+      "model": "complete_k9_attention_only_s1337",
+      "mode": "attention_only",
+      "offset_name": "complete_k9",
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        63,
+        127,
+        128
+      ],
+      "seed": 1337,
+      "d_model": 128,
+      "d_mlp": 512,
+      "thought_hops": 8,
+      "parameters": 180736,
+      "steps": 6000,
+      "accuracy": 6.1016,
+      "distance_accuracy": {
+        "128-255": 5.7874,
+        "256-383": 6.1548,
+        "384-511": 6.2954
+      },
+      "queries": 12800,
+      "elapsed_s": 597.549
+    },
+    {
+      "experiment": "S2-027",
+      "model": "complete_k9_attention_only_s2026",
+      "mode": "attention_only",
+      "offset_name": "complete_k9",
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        63,
+        127,
+        128
+      ],
+      "seed": 2026,
+      "d_model": 128,
+      "d_mlp": 512,
+      "thought_hops": 8,
+      "parameters": 180736,
+      "steps": 6000,
+      "accuracy": 6.1484,
+      "distance_accuracy": {
+        "128-255": 5.9693,
+        "256-383": 6.7238,
+        "384-511": 5.6986
+      },
+      "queries": 12800,
+      "elapsed_s": 517.268
+    },
+    {
+      "experiment": "S2-027",
+      "model": "complete_k9_attention_only_final_mlp_s42",
+      "mode": "attention_only_final_mlp",
+      "offset_name": "complete_k9",
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        63,
+        127,
+        128
+      ],
+      "seed": 42,
+      "d_model": 128,
+      "d_mlp": 512,
+      "thought_hops": 8,
+      "parameters": 312704,
+      "steps": 6000,
+      "accuracy": 6.3594,
+      "distance_accuracy": {
+        "128-255": 6.0855,
+        "256-383": 5.8749,
+        "384-511": 7.0738
+      },
+      "queries": 12800,
+      "elapsed_s": 525.578
+    },
+    {
+      "experiment": "S2-027",
+      "model": "complete_k9_attention_only_final_mlp_s1337",
+      "mode": "attention_only_final_mlp",
+      "offset_name": "complete_k9",
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        63,
+        127,
+        128
+      ],
+      "seed": 1337,
+      "d_model": 128,
+      "d_mlp": 512,
+      "thought_hops": 8,
+      "parameters": 312704,
+      "steps": 6000,
+      "accuracy": 4.9766,
+      "distance_accuracy": {
+        "128-255": 4.5632,
+        "256-383": 4.9324,
+        "384-511": 5.3489
+      },
+      "queries": 12800,
+      "elapsed_s": 529.555
+    },
+    {
+      "experiment": "S2-027",
+      "model": "complete_k9_attention_only_final_mlp_s2026",
+      "mode": "attention_only_final_mlp",
+      "offset_name": "complete_k9",
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        63,
+        127,
+        128
+      ],
+      "seed": 2026,
+      "d_model": 128,
+      "d_mlp": 512,
+      "thought_hops": 8,
+      "parameters": 312704,
+      "steps": 6000,
+      "accuracy": 6.0234,
+      "distance_accuracy": {
+        "128-255": 5.7183,
+        "256-383": 5.7602,
+        "384-511": 6.5347
+      },
+      "queries": 12800,
+      "elapsed_s": 534.88
+    }
+  ]
+}

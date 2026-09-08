@@ -1,0 +1,2442 @@
+{
+  "experiment": "S2-012",
+  "description": "Convex and learned-gate audit across distances and routing modes",
+  "source_commit": "working-tree",
+  "dataset": "Synthetic one-pair randomized-position propagation task",
+  "causal": true,
+  "seq_len": 512,
+  "query_target_position_range_by_distance": {
+    "128": [
+      129,
+      511
+    ],
+    "192": [
+      193,
+      511
+    ],
+    "256": [
+      257,
+      511
+    ]
+  },
+  "distances_and_hops": [
+    {
+      "value_distance": 128,
+      "thought_hops": 2
+    },
+    {
+      "value_distance": 192,
+      "thought_hops": 3
+    },
+    {
+      "value_distance": 256,
+      "thought_hops": 4
+    }
+  ],
+  "offsets": [
+    0,
+    1,
+    2,
+    4,
+    8,
+    16,
+    32,
+    64
+  ],
+  "random_exact_baseline_percent": 2.5,
+  "training_steps": 6000,
+  "validation_batches": 100,
+  "seeds": [
+    42,
+    1337,
+    2026
+  ],
+  "update_modes": [
+    "convex_075",
+    "learned_gate"
+  ],
+  "route_modes": [
+    "forced_64",
+    "learned"
+  ],
+  "gate_definition": "Scalar per-token sigmoid gate over LayerNorm(state) and LayerNorm(message), initialized at 0.5.",
+  "results": [
+    {
+      "experiment": "S2-012",
+      "model": "convex_075_forced_64_d128_t2_s42",
+      "update_mode": "convex_075",
+      "route_mode": "forced_64",
+      "value_distance": 128,
+      "thought_hops": 2,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "offset_horizon": 64,
+      "convex_alpha": 0.75,
+      "seed": 42,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "n_heads": 4,
+      "parameters": 197120,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 100.0,
+          "loss": 0.001355,
+          "queries": 3200
+        },
+        {
+          "step": 3000,
+          "accuracy": 100.0,
+          "loss": 0.00022,
+          "queries": 3200
+        },
+        {
+          "step": 6000,
+          "accuracy": 100.0,
+          "loss": 8.3e-05,
+          "queries": 3200
+        }
+      ],
+      "elapsed_s": 21.36,
+      "tokens_per_s_train": 4602161.58,
+      "peak_memory_mb": 119.11,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-012",
+      "model": "learned_gate_forced_64_d128_t2_s42",
+      "update_mode": "learned_gate",
+      "route_mode": "forced_64",
+      "value_distance": 128,
+      "thought_hops": 2,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "offset_horizon": 64,
+      "convex_alpha": null,
+      "seed": 42,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "n_heads": 4,
+      "parameters": 197377,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 100.0,
+          "loss": 0.000968,
+          "queries": 3200,
+          "gate_mean_all_positions_by_hop": [
+            0.948086,
+            0.965505
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.946886,
+            0.961507
+          ]
+        },
+        {
+          "step": 3000,
+          "accuracy": 100.0,
+          "loss": 0.000157,
+          "queries": 3200,
+          "gate_mean_all_positions_by_hop": [
+            0.954753,
+            0.966612
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.955531,
+            0.961069
+          ]
+        },
+        {
+          "step": 6000,
+          "accuracy": 100.0,
+          "loss": 6.2e-05,
+          "queries": 3200,
+          "gate_mean_all_positions_by_hop": [
+            0.957963,
+            0.968863
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.958102,
+            0.962711
+          ]
+        }
+      ],
+      "elapsed_s": 33.874,
+      "tokens_per_s_train": 2902059.81,
+      "peak_memory_mb": 171.74,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-012",
+      "model": "convex_075_learned_d128_t2_s42",
+      "update_mode": "convex_075",
+      "route_mode": "learned",
+      "value_distance": 128,
+      "thought_hops": 2,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "offset_horizon": 64,
+      "convex_alpha": 0.75,
+      "seed": 42,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "n_heads": 4,
+      "parameters": 197120,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 88.1562,
+          "loss": 0.352919,
+          "queries": 3200
+        },
+        {
+          "step": 3000,
+          "accuracy": 100.0,
+          "loss": 0.000763,
+          "queries": 3200
+        },
+        {
+          "step": 6000,
+          "accuracy": 100.0,
+          "loss": 0.000209,
+          "queries": 3200
+        }
+      ],
+      "elapsed_s": 67.783,
+      "tokens_per_s_train": 1450265.34,
+      "peak_memory_mb": 357.34,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-012",
+      "model": "learned_gate_learned_d128_t2_s42",
+      "update_mode": "learned_gate",
+      "route_mode": "learned",
+      "value_distance": 128,
+      "thought_hops": 2,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "offset_horizon": 64,
+      "convex_alpha": null,
+      "seed": 42,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "n_heads": 4,
+      "parameters": 197377,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 100.0,
+          "loss": 0.005238,
+          "queries": 3200,
+          "gate_mean_all_positions_by_hop": [
+            0.995191,
+            0.969634
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.994392,
+            0.984717
+          ]
+        },
+        {
+          "step": 3000,
+          "accuracy": 100.0,
+          "loss": 0.000338,
+          "queries": 3200,
+          "gate_mean_all_positions_by_hop": [
+            0.995755,
+            0.963596
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.994906,
+            0.983
+          ]
+        },
+        {
+          "step": 6000,
+          "accuracy": 100.0,
+          "loss": 0.00012,
+          "queries": 3200,
+          "gate_mean_all_positions_by_hop": [
+            0.995656,
+            0.960736
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.99464,
+            0.98114
+          ]
+        }
+      ],
+      "elapsed_s": 80.657,
+      "tokens_per_s_train": 1218787.91,
+      "peak_memory_mb": 377.66,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-012",
+      "model": "convex_075_forced_64_d192_t3_s42",
+      "update_mode": "convex_075",
+      "route_mode": "forced_64",
+      "value_distance": 192,
+      "thought_hops": 3,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "offset_horizon": 64,
+      "convex_alpha": 0.75,
+      "seed": 42,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "n_heads": 4,
+      "parameters": 197120,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 100.0,
+          "loss": 0.001736,
+          "queries": 3200
+        },
+        {
+          "step": 3000,
+          "accuracy": 100.0,
+          "loss": 0.000254,
+          "queries": 3200
+        },
+        {
+          "step": 6000,
+          "accuracy": 100.0,
+          "loss": 0.0001,
+          "queries": 3200
+        }
+      ],
+      "elapsed_s": 26.628,
+      "tokens_per_s_train": 3691723.62,
+      "peak_memory_mb": 135.23,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-012",
+      "model": "learned_gate_forced_64_d192_t3_s42",
+      "update_mode": "learned_gate",
+      "route_mode": "forced_64",
+      "value_distance": 192,
+      "thought_hops": 3,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "offset_horizon": 64,
+      "convex_alpha": null,
+      "seed": 42,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "n_heads": 4,
+      "parameters": 197377,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 100.0,
+          "loss": 0.001282,
+          "queries": 3200,
+          "gate_mean_all_positions_by_hop": [
+            0.958538,
+            0.984939,
+            0.967522
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.947068,
+            0.980078,
+            0.962638
+          ]
+        },
+        {
+          "step": 3000,
+          "accuracy": 100.0,
+          "loss": 0.000156,
+          "queries": 3200,
+          "gate_mean_all_positions_by_hop": [
+            0.963471,
+            0.990011,
+            0.964734
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.954811,
+            0.988428,
+            0.967845
+          ]
+        },
+        {
+          "step": 6000,
+          "accuracy": 100.0,
+          "loss": 6.1e-05,
+          "queries": 3200,
+          "gate_mean_all_positions_by_hop": [
+            0.96608,
+            0.990787,
+            0.964744
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.959078,
+            0.989206,
+            0.967343
+          ]
+        }
+      ],
+      "elapsed_s": 45.103,
+      "tokens_per_s_train": 2179521.63,
+      "peak_memory_mb": 208.18,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-012",
+      "model": "convex_075_learned_d192_t3_s42",
+      "update_mode": "convex_075",
+      "route_mode": "learned",
+      "value_distance": 192,
+      "thought_hops": 3,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "offset_horizon": 64,
+      "convex_alpha": 0.75,
+      "seed": 42,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "n_heads": 4,
+      "parameters": 197120,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 2.3125,
+          "loss": 3.725032,
+          "queries": 3200
+        },
+        {
+          "step": 3000,
+          "accuracy": 57.625,
+          "loss": 1.356487,
+          "queries": 3200
+        },
+        {
+          "step": 6000,
+          "accuracy": 74.1562,
+          "loss": 0.737471,
+          "queries": 3200
+        }
+      ],
+      "elapsed_s": 95.52,
+      "tokens_per_s_train": 1029144.56,
+      "peak_memory_mb": 451.47,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-012",
+      "model": "learned_gate_learned_d192_t3_s42",
+      "update_mode": "learned_gate",
+      "route_mode": "learned",
+      "value_distance": 192,
+      "thought_hops": 3,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "offset_horizon": 64,
+      "convex_alpha": null,
+      "seed": 42,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "n_heads": 4,
+      "parameters": 197377,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 2.125,
+          "loss": 3.722747,
+          "queries": 3200,
+          "gate_mean_all_positions_by_hop": [
+            0.741223,
+            0.808317,
+            0.816208
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.807887,
+            0.822863,
+            0.820167
+          ]
+        },
+        {
+          "step": 3000,
+          "accuracy": 2.5938,
+          "loss": 3.696037,
+          "queries": 3200,
+          "gate_mean_all_positions_by_hop": [
+            0.706227,
+            0.776816,
+            0.796122
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.768911,
+            0.800544,
+            0.80049
+          ]
+        },
+        {
+          "step": 6000,
+          "accuracy": 2.375,
+          "loss": 3.689299,
+          "queries": 3200,
+          "gate_mean_all_positions_by_hop": [
+            0.744405,
+            0.832032,
+            0.854227
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.804342,
+            0.857009,
+            0.858276
+          ]
+        }
+      ],
+      "elapsed_s": 115.885,
+      "tokens_per_s_train": 848286.52,
+      "peak_memory_mb": 492.1,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-012",
+      "model": "convex_075_forced_64_d256_t4_s42",
+      "update_mode": "convex_075",
+      "route_mode": "forced_64",
+      "value_distance": 256,
+      "thought_hops": 4,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "offset_horizon": 64,
+      "convex_alpha": 0.75,
+      "seed": 42,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "n_heads": 4,
+      "parameters": 197120,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 100.0,
+          "loss": 0.002608,
+          "queries": 3200
+        },
+        {
+          "step": 3000,
+          "accuracy": 100.0,
+          "loss": 0.000329,
+          "queries": 3200
+        },
+        {
+          "step": 6000,
+          "accuracy": 100.0,
+          "loss": 0.000118,
+          "queries": 3200
+        }
+      ],
+      "elapsed_s": 31.738,
+      "tokens_per_s_train": 3097383.47,
+      "peak_memory_mb": 151.36,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-012",
+      "model": "learned_gate_forced_64_d256_t4_s42",
+      "update_mode": "learned_gate",
+      "route_mode": "forced_64",
+      "value_distance": 256,
+      "thought_hops": 4,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "offset_horizon": 64,
+      "convex_alpha": null,
+      "seed": 42,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "n_heads": 4,
+      "parameters": 197377,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 100.0,
+          "loss": 0.001249,
+          "queries": 3200,
+          "gate_mean_all_positions_by_hop": [
+            0.95313,
+            0.993903,
+            0.992704,
+            0.943296
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.940193,
+            0.991787,
+            0.99153,
+            0.969672
+          ]
+        },
+        {
+          "step": 3000,
+          "accuracy": 100.0,
+          "loss": 0.000183,
+          "queries": 3200,
+          "gate_mean_all_positions_by_hop": [
+            0.954969,
+            0.994358,
+            0.993548,
+            0.933928
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.933804,
+            0.990894,
+            0.9925,
+            0.968651
+          ]
+        },
+        {
+          "step": 6000,
+          "accuracy": 100.0,
+          "loss": 7e-05,
+          "queries": 3200,
+          "gate_mean_all_positions_by_hop": [
+            0.956394,
+            0.994691,
+            0.994094,
+            0.935468
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.943304,
+            0.992134,
+            0.992979,
+            0.969155
+          ]
+        }
+      ],
+      "elapsed_s": 53.896,
+      "tokens_per_s_train": 1823948.97,
+      "peak_memory_mb": 244.61,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-012",
+      "model": "convex_075_learned_d256_t4_s42",
+      "update_mode": "convex_075",
+      "route_mode": "learned",
+      "value_distance": 256,
+      "thought_hops": 4,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "offset_horizon": 64,
+      "convex_alpha": 0.75,
+      "seed": 42,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "n_heads": 4,
+      "parameters": 197120,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 2.1562,
+          "loss": 3.72092,
+          "queries": 3200
+        },
+        {
+          "step": 3000,
+          "accuracy": 2.4688,
+          "loss": 3.69684,
+          "queries": 3200
+        },
+        {
+          "step": 6000,
+          "accuracy": 2.5,
+          "loss": 3.692794,
+          "queries": 3200
+        }
+      ],
+      "elapsed_s": 123.823,
+      "tokens_per_s_train": 793909.23,
+      "peak_memory_mb": 545.6,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-012",
+      "model": "learned_gate_learned_d256_t4_s42",
+      "update_mode": "learned_gate",
+      "route_mode": "learned",
+      "value_distance": 256,
+      "thought_hops": 4,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "offset_horizon": 64,
+      "convex_alpha": null,
+      "seed": 42,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "n_heads": 4,
+      "parameters": 197377,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 2.125,
+          "loss": 3.722766,
+          "queries": 3200,
+          "gate_mean_all_positions_by_hop": [
+            0.635394,
+            0.677057,
+            0.639714,
+            0.635686
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.697793,
+            0.678352,
+            0.641452,
+            0.638612
+          ]
+        },
+        {
+          "step": 3000,
+          "accuracy": 2.4688,
+          "loss": 3.696302,
+          "queries": 3200,
+          "gate_mean_all_positions_by_hop": [
+            0.696273,
+            0.772202,
+            0.78215,
+            0.782223
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.773961,
+            0.790076,
+            0.787032,
+            0.786611
+          ]
+        },
+        {
+          "step": 6000,
+          "accuracy": 2.5,
+          "loss": 3.692851,
+          "queries": 3200,
+          "gate_mean_all_positions_by_hop": [
+            0.723543,
+            0.818387,
+            0.840048,
+            0.840029
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.7969,
+            0.841922,
+            0.84506,
+            0.844727
+          ]
+        }
+      ],
+      "elapsed_s": 151.309,
+      "tokens_per_s_train": 649690.84,
+      "peak_memory_mb": 606.54,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-012",
+      "model": "convex_075_forced_64_d128_t2_s1337",
+      "update_mode": "convex_075",
+      "route_mode": "forced_64",
+      "value_distance": 128,
+      "thought_hops": 2,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "offset_horizon": 64,
+      "convex_alpha": 0.75,
+      "seed": 1337,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "n_heads": 4,
+      "parameters": 197120,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 100.0,
+          "loss": 0.001335,
+          "queries": 3200
+        },
+        {
+          "step": 3000,
+          "accuracy": 100.0,
+          "loss": 0.000221,
+          "queries": 3200
+        },
+        {
+          "step": 6000,
+          "accuracy": 100.0,
+          "loss": 8.2e-05,
+          "queries": 3200
+        }
+      ],
+      "elapsed_s": 20.84,
+      "tokens_per_s_train": 4717122.92,
+      "peak_memory_mb": 119.11,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-012",
+      "model": "learned_gate_forced_64_d128_t2_s1337",
+      "update_mode": "learned_gate",
+      "route_mode": "forced_64",
+      "value_distance": 128,
+      "thought_hops": 2,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "offset_horizon": 64,
+      "convex_alpha": null,
+      "seed": 1337,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "n_heads": 4,
+      "parameters": 197377,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 100.0,
+          "loss": 0.000992,
+          "queries": 3200,
+          "gate_mean_all_positions_by_hop": [
+            0.955123,
+            0.971589
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.958477,
+            0.96491
+          ]
+        },
+        {
+          "step": 3000,
+          "accuracy": 100.0,
+          "loss": 0.000164,
+          "queries": 3200,
+          "gate_mean_all_positions_by_hop": [
+            0.960718,
+            0.971346
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.964413,
+            0.964233
+          ]
+        },
+        {
+          "step": 6000,
+          "accuracy": 100.0,
+          "loss": 6.4e-05,
+          "queries": 3200,
+          "gate_mean_all_positions_by_hop": [
+            0.963547,
+            0.972777
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.965953,
+            0.965893
+          ]
+        }
+      ],
+      "elapsed_s": 33.584,
+      "tokens_per_s_train": 2927079.19,
+      "peak_memory_mb": 171.74,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-012",
+      "model": "convex_075_learned_d128_t2_s1337",
+      "update_mode": "convex_075",
+      "route_mode": "learned",
+      "value_distance": 128,
+      "thought_hops": 2,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "offset_horizon": 64,
+      "convex_alpha": 0.75,
+      "seed": 1337,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "n_heads": 4,
+      "parameters": 197120,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 95.125,
+          "loss": 0.131523,
+          "queries": 3200
+        },
+        {
+          "step": 3000,
+          "accuracy": 100.0,
+          "loss": 0.000675,
+          "queries": 3200
+        },
+        {
+          "step": 6000,
+          "accuracy": 100.0,
+          "loss": 0.000229,
+          "queries": 3200
+        }
+      ],
+      "elapsed_s": 67.227,
+      "tokens_per_s_train": 1462259.88,
+      "peak_memory_mb": 357.34,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-012",
+      "model": "learned_gate_learned_d128_t2_s1337",
+      "update_mode": "learned_gate",
+      "route_mode": "learned",
+      "value_distance": 128,
+      "thought_hops": 2,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "offset_horizon": 64,
+      "convex_alpha": null,
+      "seed": 1337,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "n_heads": 4,
+      "parameters": 197377,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 97.6875,
+          "loss": 0.054018,
+          "queries": 3200,
+          "gate_mean_all_positions_by_hop": [
+            0.991793,
+            0.965301
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.994086,
+            0.9893
+          ]
+        },
+        {
+          "step": 3000,
+          "accuracy": 100.0,
+          "loss": 0.000446,
+          "queries": 3200,
+          "gate_mean_all_positions_by_hop": [
+            0.993612,
+            0.970492
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.994762,
+            0.986496
+          ]
+        },
+        {
+          "step": 6000,
+          "accuracy": 100.0,
+          "loss": 0.000151,
+          "queries": 3200,
+          "gate_mean_all_positions_by_hop": [
+            0.993806,
+            0.968448
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.994707,
+            0.985024
+          ]
+        }
+      ],
+      "elapsed_s": 80.144,
+      "tokens_per_s_train": 1226593.5,
+      "peak_memory_mb": 377.66,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-012",
+      "model": "convex_075_forced_64_d192_t3_s1337",
+      "update_mode": "convex_075",
+      "route_mode": "forced_64",
+      "value_distance": 192,
+      "thought_hops": 3,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "offset_horizon": 64,
+      "convex_alpha": 0.75,
+      "seed": 1337,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "n_heads": 4,
+      "parameters": 197120,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 100.0,
+          "loss": 0.00163,
+          "queries": 3200
+        },
+        {
+          "step": 3000,
+          "accuracy": 100.0,
+          "loss": 0.000245,
+          "queries": 3200
+        },
+        {
+          "step": 6000,
+          "accuracy": 100.0,
+          "loss": 9.5e-05,
+          "queries": 3200
+        }
+      ],
+      "elapsed_s": 24.532,
+      "tokens_per_s_train": 4007208.33,
+      "peak_memory_mb": 135.23,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-012",
+      "model": "learned_gate_forced_64_d192_t3_s1337",
+      "update_mode": "learned_gate",
+      "route_mode": "forced_64",
+      "value_distance": 192,
+      "thought_hops": 3,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "offset_horizon": 64,
+      "convex_alpha": null,
+      "seed": 1337,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "n_heads": 4,
+      "parameters": 197377,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 100.0,
+          "loss": 0.001025,
+          "queries": 3200,
+          "gate_mean_all_positions_by_hop": [
+            0.951368,
+            0.983654,
+            0.967719
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.944283,
+            0.985189,
+            0.964007
+          ]
+        },
+        {
+          "step": 3000,
+          "accuracy": 100.0,
+          "loss": 0.000241,
+          "queries": 3200,
+          "gate_mean_all_positions_by_hop": [
+            0.963656,
+            0.984173,
+            0.982453
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.962276,
+            0.983375,
+            0.981123
+          ]
+        },
+        {
+          "step": 6000,
+          "accuracy": 100.0,
+          "loss": 5.4e-05,
+          "queries": 3200,
+          "gate_mean_all_positions_by_hop": [
+            0.965893,
+            0.983595,
+            0.979454
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.964642,
+            0.983951,
+            0.979649
+          ]
+        }
+      ],
+      "elapsed_s": 45.103,
+      "tokens_per_s_train": 2179536.2,
+      "peak_memory_mb": 208.18,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-012",
+      "model": "convex_075_learned_d192_t3_s1337",
+      "update_mode": "convex_075",
+      "route_mode": "learned",
+      "value_distance": 192,
+      "thought_hops": 3,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "offset_horizon": 64,
+      "convex_alpha": 0.75,
+      "seed": 1337,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "n_heads": 4,
+      "parameters": 197120,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 2.8438,
+          "loss": 3.715719,
+          "queries": 3200
+        },
+        {
+          "step": 3000,
+          "accuracy": 2.0625,
+          "loss": 3.704215,
+          "queries": 3200
+        },
+        {
+          "step": 6000,
+          "accuracy": 2.625,
+          "loss": 3.688877,
+          "queries": 3200
+        }
+      ],
+      "elapsed_s": 97.864,
+      "tokens_per_s_train": 1004496.69,
+      "peak_memory_mb": 451.47,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-012",
+      "model": "learned_gate_learned_d192_t3_s1337",
+      "update_mode": "learned_gate",
+      "route_mode": "learned",
+      "value_distance": 192,
+      "thought_hops": 3,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "offset_horizon": 64,
+      "convex_alpha": null,
+      "seed": 1337,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "n_heads": 4,
+      "parameters": 197377,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 2.8438,
+          "loss": 3.711359,
+          "queries": 3200,
+          "gate_mean_all_positions_by_hop": [
+            0.729975,
+            0.813913,
+            0.843256
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.793162,
+            0.839409,
+            0.844727
+          ]
+        },
+        {
+          "step": 3000,
+          "accuracy": 2.0625,
+          "loss": 3.704124,
+          "queries": 3200,
+          "gate_mean_all_positions_by_hop": [
+            0.714136,
+            0.766294,
+            0.779478
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.760741,
+            0.780203,
+            0.780751
+          ]
+        },
+        {
+          "step": 6000,
+          "accuracy": 2.625,
+          "loss": 3.688737,
+          "queries": 3200,
+          "gate_mean_all_positions_by_hop": [
+            0.706288,
+            0.75787,
+            0.769904
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.75774,
+            0.771593,
+            0.771469
+          ]
+        }
+      ],
+      "elapsed_s": 109.724,
+      "tokens_per_s_train": 895923.39,
+      "peak_memory_mb": 492.1,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-012",
+      "model": "convex_075_forced_64_d256_t4_s1337",
+      "update_mode": "convex_075",
+      "route_mode": "forced_64",
+      "value_distance": 256,
+      "thought_hops": 4,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "offset_horizon": 64,
+      "convex_alpha": 0.75,
+      "seed": 1337,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "n_heads": 4,
+      "parameters": 197120,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 100.0,
+          "loss": 0.002143,
+          "queries": 3200
+        },
+        {
+          "step": 3000,
+          "accuracy": 100.0,
+          "loss": 0.000292,
+          "queries": 3200
+        },
+        {
+          "step": 6000,
+          "accuracy": 100.0,
+          "loss": 0.00011,
+          "queries": 3200
+        }
+      ],
+      "elapsed_s": 31.167,
+      "tokens_per_s_train": 3154097.84,
+      "peak_memory_mb": 151.36,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-012",
+      "model": "learned_gate_forced_64_d256_t4_s1337",
+      "update_mode": "learned_gate",
+      "route_mode": "forced_64",
+      "value_distance": 256,
+      "thought_hops": 4,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "offset_horizon": 64,
+      "convex_alpha": null,
+      "seed": 1337,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "n_heads": 4,
+      "parameters": 197377,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 100.0,
+          "loss": 0.001107,
+          "queries": 3200,
+          "gate_mean_all_positions_by_hop": [
+            0.939104,
+            0.986861,
+            0.989699,
+            0.972457
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.916461,
+            0.986642,
+            0.991042,
+            0.969444
+          ]
+        },
+        {
+          "step": 3000,
+          "accuracy": 100.0,
+          "loss": 0.000167,
+          "queries": 3200,
+          "gate_mean_all_positions_by_hop": [
+            0.944153,
+            0.988828,
+            0.99136,
+            0.974989
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.925526,
+            0.988194,
+            0.99188,
+            0.969837
+          ]
+        },
+        {
+          "step": 6000,
+          "accuracy": 100.0,
+          "loss": 6.4e-05,
+          "queries": 3200,
+          "gate_mean_all_positions_by_hop": [
+            0.946762,
+            0.990105,
+            0.991775,
+            0.973037
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.93063,
+            0.990139,
+            0.99237,
+            0.970176
+          ]
+        }
+      ],
+      "elapsed_s": 56.277,
+      "tokens_per_s_train": 1746785.29,
+      "peak_memory_mb": 244.61,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-012",
+      "model": "convex_075_learned_d256_t4_s1337",
+      "update_mode": "convex_075",
+      "route_mode": "learned",
+      "value_distance": 256,
+      "thought_hops": 4,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "offset_horizon": 64,
+      "convex_alpha": 0.75,
+      "seed": 1337,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "n_heads": 4,
+      "parameters": 197120,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 2.875,
+          "loss": 3.710246,
+          "queries": 3200
+        },
+        {
+          "step": 3000,
+          "accuracy": 2.5,
+          "loss": 3.698219,
+          "queries": 3200
+        },
+        {
+          "step": 6000,
+          "accuracy": 2.5625,
+          "loss": 3.691524,
+          "queries": 3200
+        }
+      ],
+      "elapsed_s": 126.771,
+      "tokens_per_s_train": 775447.59,
+      "peak_memory_mb": 545.6,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-012",
+      "model": "learned_gate_learned_d256_t4_s1337",
+      "update_mode": "learned_gate",
+      "route_mode": "learned",
+      "value_distance": 256,
+      "thought_hops": 4,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "offset_horizon": 64,
+      "convex_alpha": null,
+      "seed": 1337,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "n_heads": 4,
+      "parameters": 197377,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 2.9062,
+          "loss": 3.709149,
+          "queries": 3200,
+          "gate_mean_all_positions_by_hop": [
+            0.648701,
+            0.717113,
+            0.737361,
+            0.738288
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.703479,
+            0.730791,
+            0.739414,
+            0.738867
+          ]
+        },
+        {
+          "step": 3000,
+          "accuracy": 2.5,
+          "loss": 3.696849,
+          "queries": 3200,
+          "gate_mean_all_positions_by_hop": [
+            0.621652,
+            0.659489,
+            0.66375,
+            0.663796
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.665386,
+            0.669732,
+            0.665442,
+            0.664717
+          ]
+        },
+        {
+          "step": 6000,
+          "accuracy": 2.5938,
+          "loss": 3.691204,
+          "queries": 3200,
+          "gate_mean_all_positions_by_hop": [
+            0.668955,
+            0.758421,
+            0.794758,
+            0.796034
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.729671,
+            0.785621,
+            0.797642,
+            0.796926
+          ]
+        }
+      ],
+      "elapsed_s": 152.43,
+      "tokens_per_s_train": 644914.19,
+      "peak_memory_mb": 606.54,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-012",
+      "model": "convex_075_forced_64_d128_t2_s2026",
+      "update_mode": "convex_075",
+      "route_mode": "forced_64",
+      "value_distance": 128,
+      "thought_hops": 2,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "offset_horizon": 64,
+      "convex_alpha": 0.75,
+      "seed": 2026,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "n_heads": 4,
+      "parameters": 197120,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 100.0,
+          "loss": 0.001335,
+          "queries": 3200
+        },
+        {
+          "step": 3000,
+          "accuracy": 100.0,
+          "loss": 0.000217,
+          "queries": 3200
+        },
+        {
+          "step": 6000,
+          "accuracy": 100.0,
+          "loss": 8.3e-05,
+          "queries": 3200
+        }
+      ],
+      "elapsed_s": 20.307,
+      "tokens_per_s_train": 4840882.15,
+      "peak_memory_mb": 119.11,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-012",
+      "model": "learned_gate_forced_64_d128_t2_s2026",
+      "update_mode": "learned_gate",
+      "route_mode": "forced_64",
+      "value_distance": 128,
+      "thought_hops": 2,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "offset_horizon": 64,
+      "convex_alpha": null,
+      "seed": 2026,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "n_heads": 4,
+      "parameters": 197377,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 100.0,
+          "loss": 0.000991,
+          "queries": 3200,
+          "gate_mean_all_positions_by_hop": [
+            0.962117,
+            0.97165
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.964655,
+            0.963458
+          ]
+        },
+        {
+          "step": 3000,
+          "accuracy": 100.0,
+          "loss": 0.000164,
+          "queries": 3200,
+          "gate_mean_all_positions_by_hop": [
+            0.967425,
+            0.973399
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.970225,
+            0.966051
+          ]
+        },
+        {
+          "step": 6000,
+          "accuracy": 100.0,
+          "loss": 6.4e-05,
+          "queries": 3200,
+          "gate_mean_all_positions_by_hop": [
+            0.969509,
+            0.974625
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.972234,
+            0.967143
+          ]
+        }
+      ],
+      "elapsed_s": 33.843,
+      "tokens_per_s_train": 2904710.31,
+      "peak_memory_mb": 171.74,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-012",
+      "model": "convex_075_learned_d128_t2_s2026",
+      "update_mode": "convex_075",
+      "route_mode": "learned",
+      "value_distance": 128,
+      "thought_hops": 2,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "offset_horizon": 64,
+      "convex_alpha": 0.75,
+      "seed": 2026,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "n_heads": 4,
+      "parameters": 197120,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 100.0,
+          "loss": 0.019136,
+          "queries": 3200
+        },
+        {
+          "step": 3000,
+          "accuracy": 100.0,
+          "loss": 0.000557,
+          "queries": 3200
+        },
+        {
+          "step": 6000,
+          "accuracy": 100.0,
+          "loss": 0.000194,
+          "queries": 3200
+        }
+      ],
+      "elapsed_s": 67.921,
+      "tokens_per_s_train": 1447331.28,
+      "peak_memory_mb": 357.34,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-012",
+      "model": "learned_gate_learned_d128_t2_s2026",
+      "update_mode": "learned_gate",
+      "route_mode": "learned",
+      "value_distance": 128,
+      "thought_hops": 2,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "offset_horizon": 64,
+      "convex_alpha": null,
+      "seed": 2026,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "n_heads": 4,
+      "parameters": 197377,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 99.9375,
+          "loss": 0.011035,
+          "queries": 3200,
+          "gate_mean_all_positions_by_hop": [
+            0.981884,
+            0.981415
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.974925,
+            0.984379
+          ]
+        },
+        {
+          "step": 3000,
+          "accuracy": 100.0,
+          "loss": 0.000376,
+          "queries": 3200,
+          "gate_mean_all_positions_by_hop": [
+            0.9782,
+            0.980102
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.966441,
+            0.982521
+          ]
+        },
+        {
+          "step": 6000,
+          "accuracy": 100.0,
+          "loss": 0.000146,
+          "queries": 3200,
+          "gate_mean_all_positions_by_hop": [
+            0.979917,
+            0.984262
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.968702,
+            0.985087
+          ]
+        }
+      ],
+      "elapsed_s": 80.776,
+      "tokens_per_s_train": 1216999.07,
+      "peak_memory_mb": 377.66,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-012",
+      "model": "convex_075_forced_64_d192_t3_s2026",
+      "update_mode": "convex_075",
+      "route_mode": "forced_64",
+      "value_distance": 192,
+      "thought_hops": 3,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "offset_horizon": 64,
+      "convex_alpha": 0.75,
+      "seed": 2026,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "n_heads": 4,
+      "parameters": 197120,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 100.0,
+          "loss": 0.001705,
+          "queries": 3200
+        },
+        {
+          "step": 3000,
+          "accuracy": 100.0,
+          "loss": 0.000261,
+          "queries": 3200
+        },
+        {
+          "step": 6000,
+          "accuracy": 100.0,
+          "loss": 9.6e-05,
+          "queries": 3200
+        }
+      ],
+      "elapsed_s": 25.877,
+      "tokens_per_s_train": 3798824.93,
+      "peak_memory_mb": 135.23,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-012",
+      "model": "learned_gate_forced_64_d192_t3_s2026",
+      "update_mode": "learned_gate",
+      "route_mode": "forced_64",
+      "value_distance": 192,
+      "thought_hops": 3,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "offset_horizon": 64,
+      "convex_alpha": null,
+      "seed": 2026,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "n_heads": 4,
+      "parameters": 197377,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 100.0,
+          "loss": 0.000996,
+          "queries": 3200,
+          "gate_mean_all_positions_by_hop": [
+            0.955186,
+            0.981083,
+            0.963717
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.965975,
+            0.992297,
+            0.967955
+          ]
+        },
+        {
+          "step": 3000,
+          "accuracy": 100.0,
+          "loss": 0.000158,
+          "queries": 3200,
+          "gate_mean_all_positions_by_hop": [
+            0.958966,
+            0.981983,
+            0.961472
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.964952,
+            0.992694,
+            0.967916
+          ]
+        },
+        {
+          "step": 6000,
+          "accuracy": 100.0,
+          "loss": 6.2e-05,
+          "queries": 3200,
+          "gate_mean_all_positions_by_hop": [
+            0.961121,
+            0.983697,
+            0.963562
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.96992,
+            0.993784,
+            0.969797
+          ]
+        }
+      ],
+      "elapsed_s": 45.752,
+      "tokens_per_s_train": 2148637.18,
+      "peak_memory_mb": 208.18,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-012",
+      "model": "convex_075_learned_d192_t3_s2026",
+      "update_mode": "convex_075",
+      "route_mode": "learned",
+      "value_distance": 192,
+      "thought_hops": 3,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "offset_horizon": 64,
+      "convex_alpha": 0.75,
+      "seed": 2026,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "n_heads": 4,
+      "parameters": 197120,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 2.8125,
+          "loss": 3.711707,
+          "queries": 3200
+        },
+        {
+          "step": 3000,
+          "accuracy": 2.75,
+          "loss": 3.699077,
+          "queries": 3200
+        },
+        {
+          "step": 6000,
+          "accuracy": 2.0938,
+          "loss": 3.692701,
+          "queries": 3200
+        }
+      ],
+      "elapsed_s": 96.19,
+      "tokens_per_s_train": 1021982.27,
+      "peak_memory_mb": 451.47,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-012",
+      "model": "learned_gate_learned_d192_t3_s2026",
+      "update_mode": "learned_gate",
+      "route_mode": "learned",
+      "value_distance": 192,
+      "thought_hops": 3,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "offset_horizon": 64,
+      "convex_alpha": null,
+      "seed": 2026,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "n_heads": 4,
+      "parameters": 197377,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 2.8125,
+          "loss": 3.711152,
+          "queries": 3200,
+          "gate_mean_all_positions_by_hop": [
+            0.701452,
+            0.751726,
+            0.743671
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.775844,
+            0.756833,
+            0.74641
+          ]
+        },
+        {
+          "step": 3000,
+          "accuracy": 2.75,
+          "loss": 3.699946,
+          "queries": 3200,
+          "gate_mean_all_positions_by_hop": [
+            0.738818,
+            0.75617,
+            0.747209
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.796289,
+            0.754632,
+            0.74934
+          ]
+        },
+        {
+          "step": 6000,
+          "accuracy": 2.0938,
+          "loss": 3.692841,
+          "queries": 3200,
+          "gate_mean_all_positions_by_hop": [
+            0.776368,
+            0.834258,
+            0.844313
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.840644,
+            0.846814,
+            0.846584
+          ]
+        }
+      ],
+      "elapsed_s": 118.426,
+      "tokens_per_s_train": 830084.91,
+      "peak_memory_mb": 492.1,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-012",
+      "model": "convex_075_forced_64_d256_t4_s2026",
+      "update_mode": "convex_075",
+      "route_mode": "forced_64",
+      "value_distance": 256,
+      "thought_hops": 4,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "offset_horizon": 64,
+      "convex_alpha": 0.75,
+      "seed": 2026,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "n_heads": 4,
+      "parameters": 197120,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 100.0,
+          "loss": 0.002346,
+          "queries": 3200
+        },
+        {
+          "step": 3000,
+          "accuracy": 100.0,
+          "loss": 0.000308,
+          "queries": 3200
+        },
+        {
+          "step": 6000,
+          "accuracy": 100.0,
+          "loss": 0.000113,
+          "queries": 3200
+        }
+      ],
+      "elapsed_s": 31.223,
+      "tokens_per_s_train": 3148469.44,
+      "peak_memory_mb": 151.36,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-012",
+      "model": "learned_gate_forced_64_d256_t4_s2026",
+      "update_mode": "learned_gate",
+      "route_mode": "forced_64",
+      "value_distance": 256,
+      "thought_hops": 4,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "offset_horizon": 64,
+      "convex_alpha": null,
+      "seed": 2026,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "n_heads": 4,
+      "parameters": 197377,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 100.0,
+          "loss": 0.001077,
+          "queries": 3200,
+          "gate_mean_all_positions_by_hop": [
+            0.953377,
+            0.990149,
+            0.991784,
+            0.963319
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.941156,
+            0.990049,
+            0.991741,
+            0.965392
+          ]
+        },
+        {
+          "step": 3000,
+          "accuracy": 100.0,
+          "loss": 0.000164,
+          "queries": 3200,
+          "gate_mean_all_positions_by_hop": [
+            0.962662,
+            0.984892,
+            0.983707,
+            0.97712
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.95417,
+            0.98547,
+            0.986165,
+            0.978395
+          ]
+        },
+        {
+          "step": 6000,
+          "accuracy": 100.0,
+          "loss": 5.6e-05,
+          "queries": 3200,
+          "gate_mean_all_positions_by_hop": [
+            0.966638,
+            0.987568,
+            0.985755,
+            0.974984
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.960046,
+            0.987013,
+            0.986912,
+            0.976881
+          ]
+        }
+      ],
+      "elapsed_s": 56.527,
+      "tokens_per_s_train": 1739063.38,
+      "peak_memory_mb": 244.61,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-012",
+      "model": "convex_075_learned_d256_t4_s2026",
+      "update_mode": "convex_075",
+      "route_mode": "learned",
+      "value_distance": 256,
+      "thought_hops": 4,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "offset_horizon": 64,
+      "convex_alpha": 0.75,
+      "seed": 2026,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "n_heads": 4,
+      "parameters": 197120,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 3.0312,
+          "loss": 3.729791,
+          "queries": 3200
+        },
+        {
+          "step": 3000,
+          "accuracy": 2.3125,
+          "loss": 3.693975,
+          "queries": 3200
+        },
+        {
+          "step": 6000,
+          "accuracy": 2.6875,
+          "loss": 3.68908,
+          "queries": 3200
+        }
+      ],
+      "elapsed_s": 120.429,
+      "tokens_per_s_train": 816280.29,
+      "peak_memory_mb": 545.6,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-012",
+      "model": "learned_gate_learned_d256_t4_s2026",
+      "update_mode": "learned_gate",
+      "route_mode": "learned",
+      "value_distance": 256,
+      "thought_hops": 4,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "offset_horizon": 64,
+      "convex_alpha": null,
+      "seed": 2026,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "n_heads": 4,
+      "parameters": 197377,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 3.0312,
+          "loss": 3.73241,
+          "queries": 3200,
+          "gate_mean_all_positions_by_hop": [
+            0.631989,
+            0.671452,
+            0.636091,
+            0.632197
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.690679,
+            0.67311,
+            0.636119,
+            0.633802
+          ]
+        },
+        {
+          "step": 3000,
+          "accuracy": 2.3125,
+          "loss": 3.694879,
+          "queries": 3200,
+          "gate_mean_all_positions_by_hop": [
+            0.663781,
+            0.695943,
+            0.667583,
+            0.666998
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.726471,
+            0.694422,
+            0.668962,
+            0.668914
+          ]
+        },
+        {
+          "step": 6000,
+          "accuracy": 2.6562,
+          "loss": 3.688992,
+          "queries": 3200,
+          "gate_mean_all_positions_by_hop": [
+            0.655007,
+            0.787557,
+            0.807434,
+            0.808658
+          ],
+          "gate_mean_query_positions_by_hop": [
+            0.772371,
+            0.813374,
+            0.811255,
+            0.811649
+          ]
+        }
+      ],
+      "elapsed_s": 153.874,
+      "tokens_per_s_train": 638862.14,
+      "peak_memory_mb": 606.54,
+      "device": "NVIDIA A10"
+    }
+  ],
+  "completed_at": "2026-09-05T13:26:54Z"
+}

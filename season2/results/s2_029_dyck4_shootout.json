@@ -1,0 +1,196 @@
+{
+  "experiment": "S2-029",
+  "description": "Dyck-4 Deep Bracket Shootout: Dense 4-layer vs SubQ 2-macro recurrent vs SubQ 1-layer final MLP",
+  "task": "Dyck-4 bracket completion across nesting depths 1 to 30+",
+  "seeds": [
+    42,
+    1337,
+    2026
+  ],
+  "training_steps": 2000,
+  "conditions": [
+    [
+      "dense_4layer_s42",
+      "dense_4layer",
+      42
+    ],
+    [
+      "dense_4layer_s1337",
+      "dense_4layer",
+      1337
+    ],
+    [
+      "dense_4layer_s2026",
+      "dense_4layer",
+      2026
+    ],
+    [
+      "subq_2macro_recurrent_s42",
+      "subq_2macro_recurrent",
+      42
+    ],
+    [
+      "subq_2macro_recurrent_s1337",
+      "subq_2macro_recurrent",
+      1337
+    ],
+    [
+      "subq_2macro_recurrent_s2026",
+      "subq_2macro_recurrent",
+      2026
+    ],
+    [
+      "subq_1layer_final_mlp_s42",
+      "subq_1layer_final_mlp",
+      42
+    ],
+    [
+      "subq_1layer_final_mlp_s1337",
+      "subq_1layer_final_mlp",
+      1337
+    ],
+    [
+      "subq_1layer_final_mlp_s2026",
+      "subq_1layer_final_mlp",
+      2026
+    ]
+  ],
+  "completed_at": "2026-09-08T07:03:41Z",
+  "results": [
+    {
+      "model": "dense_4layer_s42",
+      "architecture": "dense_4layer",
+      "seed": 42,
+      "parameters": 828160,
+      "steps": 2000,
+      "overall_accuracy": 96.1313,
+      "tier_accuracy": {
+        "tier1_shallow_1_5": 96.8768,
+        "tier2_medium_6_15": 95.8402,
+        "tier3_deep_16_30": 96.0657
+      },
+      "total_evaluated_tokens": 204800,
+      "elapsed_s": 135.713
+    },
+    {
+      "model": "dense_4layer_s1337",
+      "architecture": "dense_4layer",
+      "seed": 1337,
+      "parameters": 828160,
+      "steps": 2000,
+      "overall_accuracy": 94.5532,
+      "tier_accuracy": {
+        "tier1_shallow_1_5": 95.8221,
+        "tier2_medium_6_15": 93.7388,
+        "tier3_deep_16_30": 94.7104
+      },
+      "total_evaluated_tokens": 204800,
+      "elapsed_s": 144.588
+    },
+    {
+      "model": "dense_4layer_s2026",
+      "architecture": "dense_4layer",
+      "seed": 2026,
+      "parameters": 828160,
+      "steps": 2000,
+      "overall_accuracy": 93.4678,
+      "tier_accuracy": {
+        "tier1_shallow_1_5": 94.9096,
+        "tier2_medium_6_15": 92.4811,
+        "tier3_deep_16_30": 93.7065
+      },
+      "total_evaluated_tokens": 204800,
+      "elapsed_s": 145.359
+    },
+    {
+      "model": "subq_2macro_recurrent_s42",
+      "architecture": "subq_2macro_recurrent",
+      "seed": 42,
+      "parameters": 218496,
+      "steps": 2000,
+      "overall_accuracy": 72.2065,
+      "tier_accuracy": {
+        "tier1_shallow_1_5": 75.2625,
+        "tier2_medium_6_15": 70.393,
+        "tier3_deep_16_30": 72.4459
+      },
+      "total_evaluated_tokens": 204800,
+      "elapsed_s": 157.748
+    },
+    {
+      "model": "subq_2macro_recurrent_s1337",
+      "architecture": "subq_2macro_recurrent",
+      "seed": 1337,
+      "parameters": 218496,
+      "steps": 2000,
+      "overall_accuracy": 76.6719,
+      "tier_accuracy": {
+        "tier1_shallow_1_5": 77.7331,
+        "tier2_medium_6_15": 74.5457,
+        "tier3_deep_16_30": 77.9661
+      },
+      "total_evaluated_tokens": 204800,
+      "elapsed_s": 162.74
+    },
+    {
+      "model": "subq_2macro_recurrent_s2026",
+      "architecture": "subq_2macro_recurrent",
+      "seed": 2026,
+      "parameters": 218496,
+      "steps": 2000,
+      "overall_accuracy": 72.7866,
+      "tier_accuracy": {
+        "tier1_shallow_1_5": 75.0172,
+        "tier2_medium_6_15": 70.6451,
+        "tier3_deep_16_30": 73.655
+      },
+      "total_evaluated_tokens": 204800,
+      "elapsed_s": 164.874
+    },
+    {
+      "model": "subq_1layer_final_mlp_s42",
+      "architecture": "subq_1layer_final_mlp",
+      "seed": 42,
+      "parameters": 218496,
+      "steps": 2000,
+      "overall_accuracy": 74.6104,
+      "tier_accuracy": {
+        "tier1_shallow_1_5": 75.982,
+        "tier2_medium_6_15": 72.3303,
+        "tier3_deep_16_30": 75.9199
+      },
+      "total_evaluated_tokens": 204800,
+      "elapsed_s": 161.31
+    },
+    {
+      "model": "subq_1layer_final_mlp_s1337",
+      "architecture": "subq_1layer_final_mlp",
+      "seed": 1337,
+      "parameters": 218496,
+      "steps": 2000,
+      "overall_accuracy": 77.8433,
+      "tier_accuracy": {
+        "tier1_shallow_1_5": 78.378,
+        "tier2_medium_6_15": 75.503,
+        "tier3_deep_16_30": 79.5165
+      },
+      "total_evaluated_tokens": 204800,
+      "elapsed_s": 160.824
+    },
+    {
+      "model": "subq_1layer_final_mlp_s2026",
+      "architecture": "subq_1layer_final_mlp",
+      "seed": 2026,
+      "parameters": 218496,
+      "steps": 2000,
+      "overall_accuracy": 77.772,
+      "tier_accuracy": {
+        "tier1_shallow_1_5": 78.2618,
+        "tier2_medium_6_15": 75.1702,
+        "tier3_deep_16_30": 79.6916
+      },
+      "total_evaluated_tokens": 204800,
+      "elapsed_s": 150.339
+    }
+  ]
+}

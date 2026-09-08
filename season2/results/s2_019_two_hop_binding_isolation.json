@@ -1,0 +1,691 @@
+{
+  "experiment": "S2-019",
+  "description": "Two-hop binding versus retrieval isolation",
+  "source_commit": "working-tree",
+  "offsets": [
+    1,
+    2,
+    4,
+    8,
+    16,
+    32,
+    64,
+    96,
+    128,
+    160
+  ],
+  "value_offsets": [
+    4,
+    8,
+    16,
+    32,
+    64,
+    96,
+    128,
+    160
+  ],
+  "modes": [
+    "learned",
+    "force_hop1",
+    "force_hop2",
+    "force_both"
+  ],
+  "random_exact_baseline_percent": 2.5,
+  "seeds": [
+    42,
+    1337,
+    2026
+  ],
+  "training_steps": 6000,
+  "results": [
+    {
+      "experiment": "S2-019",
+      "model": "learned_s42",
+      "mode": "learned",
+      "offsets": [
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64,
+        96,
+        128,
+        160
+      ],
+      "value_offsets": [
+        4,
+        8,
+        16,
+        32,
+        64,
+        96,
+        128,
+        160
+      ],
+      "seed": 42,
+      "parameters": 296577,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 12.0938,
+          "hop1_binding_top1": 14.8281,
+          "hop2_query_top1": 13.25,
+          "queries": 3200
+        },
+        {
+          "step": 3000,
+          "accuracy": 12.3438,
+          "hop1_binding_top1": 24.9023,
+          "hop2_query_top1": 13.0312,
+          "queries": 3200
+        },
+        {
+          "step": 6000,
+          "accuracy": 100.0,
+          "hop1_binding_top1": 100.0,
+          "hop2_query_top1": 100.0,
+          "queries": 3200
+        }
+      ],
+      "elapsed_s": 389.347
+    },
+    {
+      "experiment": "S2-019",
+      "model": "learned_s1337",
+      "mode": "learned",
+      "offsets": [
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64,
+        96,
+        128,
+        160
+      ],
+      "value_offsets": [
+        4,
+        8,
+        16,
+        32,
+        64,
+        96,
+        128,
+        160
+      ],
+      "seed": 1337,
+      "parameters": 296577,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 12.3125,
+          "hop1_binding_top1": 24.4492,
+          "hop2_query_top1": 12.1562,
+          "queries": 3200
+        },
+        {
+          "step": 3000,
+          "accuracy": 12.2812,
+          "hop1_binding_top1": 33.7422,
+          "hop2_query_top1": 12.2812,
+          "queries": 3200
+        },
+        {
+          "step": 6000,
+          "accuracy": 13.3438,
+          "hop1_binding_top1": 56.0156,
+          "hop2_query_top1": 12.5625,
+          "queries": 3200
+        }
+      ],
+      "elapsed_s": 386.491
+    },
+    {
+      "experiment": "S2-019",
+      "model": "learned_s2026",
+      "mode": "learned",
+      "offsets": [
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64,
+        96,
+        128,
+        160
+      ],
+      "value_offsets": [
+        4,
+        8,
+        16,
+        32,
+        64,
+        96,
+        128,
+        160
+      ],
+      "seed": 2026,
+      "parameters": 296577,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 12.0312,
+          "hop1_binding_top1": 8.6094,
+          "hop2_query_top1": 12.2812,
+          "queries": 3200
+        },
+        {
+          "step": 3000,
+          "accuracy": 12.1562,
+          "hop1_binding_top1": 9.9531,
+          "hop2_query_top1": 11.5625,
+          "queries": 3200
+        },
+        {
+          "step": 6000,
+          "accuracy": 12.4375,
+          "hop1_binding_top1": 15.8906,
+          "hop2_query_top1": 12.3438,
+          "queries": 3200
+        }
+      ],
+      "elapsed_s": 384.261
+    },
+    {
+      "experiment": "S2-019",
+      "model": "force_hop1_s42",
+      "mode": "force_hop1",
+      "offsets": [
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64,
+        96,
+        128,
+        160
+      ],
+      "value_offsets": [
+        4,
+        8,
+        16,
+        32,
+        64,
+        96,
+        128,
+        160
+      ],
+      "seed": 42,
+      "parameters": 296577,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 100.0,
+          "hop1_binding_top1": 100.0,
+          "hop2_query_top1": 100.0,
+          "queries": 3200
+        },
+        {
+          "step": 3000,
+          "accuracy": 100.0,
+          "hop1_binding_top1": 100.0,
+          "hop2_query_top1": 100.0,
+          "queries": 3200
+        },
+        {
+          "step": 6000,
+          "accuracy": 100.0,
+          "hop1_binding_top1": 100.0,
+          "hop2_query_top1": 100.0,
+          "queries": 3200
+        }
+      ],
+      "elapsed_s": 387.049
+    },
+    {
+      "experiment": "S2-019",
+      "model": "force_hop1_s1337",
+      "mode": "force_hop1",
+      "offsets": [
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64,
+        96,
+        128,
+        160
+      ],
+      "value_offsets": [
+        4,
+        8,
+        16,
+        32,
+        64,
+        96,
+        128,
+        160
+      ],
+      "seed": 1337,
+      "parameters": 296577,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 100.0,
+          "hop1_binding_top1": 100.0,
+          "hop2_query_top1": 100.0,
+          "queries": 3200
+        },
+        {
+          "step": 3000,
+          "accuracy": 100.0,
+          "hop1_binding_top1": 100.0,
+          "hop2_query_top1": 100.0,
+          "queries": 3200
+        },
+        {
+          "step": 6000,
+          "accuracy": 100.0,
+          "hop1_binding_top1": 100.0,
+          "hop2_query_top1": 100.0,
+          "queries": 3200
+        }
+      ],
+      "elapsed_s": 408.891
+    },
+    {
+      "experiment": "S2-019",
+      "model": "force_hop1_s2026",
+      "mode": "force_hop1",
+      "offsets": [
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64,
+        96,
+        128,
+        160
+      ],
+      "value_offsets": [
+        4,
+        8,
+        16,
+        32,
+        64,
+        96,
+        128,
+        160
+      ],
+      "seed": 2026,
+      "parameters": 296577,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 100.0,
+          "hop1_binding_top1": 100.0,
+          "hop2_query_top1": 100.0,
+          "queries": 3200
+        },
+        {
+          "step": 3000,
+          "accuracy": 100.0,
+          "hop1_binding_top1": 100.0,
+          "hop2_query_top1": 100.0,
+          "queries": 3200
+        },
+        {
+          "step": 6000,
+          "accuracy": 100.0,
+          "hop1_binding_top1": 100.0,
+          "hop2_query_top1": 100.0,
+          "queries": 3200
+        }
+      ],
+      "elapsed_s": 385.423
+    },
+    {
+      "experiment": "S2-019",
+      "model": "force_hop2_s42",
+      "mode": "force_hop2",
+      "offsets": [
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64,
+        96,
+        128,
+        160
+      ],
+      "value_offsets": [
+        4,
+        8,
+        16,
+        32,
+        64,
+        96,
+        128,
+        160
+      ],
+      "seed": 42,
+      "parameters": 296577,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 100.0,
+          "hop1_binding_top1": 7.957,
+          "hop2_query_top1": 100.0,
+          "queries": 3200
+        },
+        {
+          "step": 3000,
+          "accuracy": 100.0,
+          "hop1_binding_top1": 7.2266,
+          "hop2_query_top1": 100.0,
+          "queries": 3200
+        },
+        {
+          "step": 6000,
+          "accuracy": 100.0,
+          "hop1_binding_top1": 6.9219,
+          "hop2_query_top1": 100.0,
+          "queries": 3200
+        }
+      ],
+      "elapsed_s": 393.902
+    },
+    {
+      "experiment": "S2-019",
+      "model": "force_hop2_s1337",
+      "mode": "force_hop2",
+      "offsets": [
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64,
+        96,
+        128,
+        160
+      ],
+      "value_offsets": [
+        4,
+        8,
+        16,
+        32,
+        64,
+        96,
+        128,
+        160
+      ],
+      "seed": 1337,
+      "parameters": 296577,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 100.0,
+          "hop1_binding_top1": 7.5,
+          "hop2_query_top1": 100.0,
+          "queries": 3200
+        },
+        {
+          "step": 3000,
+          "accuracy": 100.0,
+          "hop1_binding_top1": 6.0,
+          "hop2_query_top1": 100.0,
+          "queries": 3200
+        },
+        {
+          "step": 6000,
+          "accuracy": 100.0,
+          "hop1_binding_top1": 5.2383,
+          "hop2_query_top1": 100.0,
+          "queries": 3200
+        }
+      ],
+      "elapsed_s": 388.077
+    },
+    {
+      "experiment": "S2-019",
+      "model": "force_hop2_s2026",
+      "mode": "force_hop2",
+      "offsets": [
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64,
+        96,
+        128,
+        160
+      ],
+      "value_offsets": [
+        4,
+        8,
+        16,
+        32,
+        64,
+        96,
+        128,
+        160
+      ],
+      "seed": 2026,
+      "parameters": 296577,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 100.0,
+          "hop1_binding_top1": 7.8945,
+          "hop2_query_top1": 100.0,
+          "queries": 3200
+        },
+        {
+          "step": 3000,
+          "accuracy": 100.0,
+          "hop1_binding_top1": 6.1562,
+          "hop2_query_top1": 100.0,
+          "queries": 3200
+        },
+        {
+          "step": 6000,
+          "accuracy": 100.0,
+          "hop1_binding_top1": 5.7031,
+          "hop2_query_top1": 100.0,
+          "queries": 3200
+        }
+      ],
+      "elapsed_s": 389.752
+    },
+    {
+      "experiment": "S2-019",
+      "model": "force_both_s42",
+      "mode": "force_both",
+      "offsets": [
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64,
+        96,
+        128,
+        160
+      ],
+      "value_offsets": [
+        4,
+        8,
+        16,
+        32,
+        64,
+        96,
+        128,
+        160
+      ],
+      "seed": 42,
+      "parameters": 296577,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 100.0,
+          "hop1_binding_top1": 100.0,
+          "hop2_query_top1": 100.0,
+          "queries": 3200
+        },
+        {
+          "step": 3000,
+          "accuracy": 100.0,
+          "hop1_binding_top1": 100.0,
+          "hop2_query_top1": 100.0,
+          "queries": 3200
+        },
+        {
+          "step": 6000,
+          "accuracy": 100.0,
+          "hop1_binding_top1": 100.0,
+          "hop2_query_top1": 100.0,
+          "queries": 3200
+        }
+      ],
+      "elapsed_s": 403.633
+    },
+    {
+      "experiment": "S2-019",
+      "model": "force_both_s1337",
+      "mode": "force_both",
+      "offsets": [
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64,
+        96,
+        128,
+        160
+      ],
+      "value_offsets": [
+        4,
+        8,
+        16,
+        32,
+        64,
+        96,
+        128,
+        160
+      ],
+      "seed": 1337,
+      "parameters": 296577,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 100.0,
+          "hop1_binding_top1": 100.0,
+          "hop2_query_top1": 100.0,
+          "queries": 3200
+        },
+        {
+          "step": 3000,
+          "accuracy": 100.0,
+          "hop1_binding_top1": 100.0,
+          "hop2_query_top1": 100.0,
+          "queries": 3200
+        },
+        {
+          "step": 6000,
+          "accuracy": 100.0,
+          "hop1_binding_top1": 100.0,
+          "hop2_query_top1": 100.0,
+          "queries": 3200
+        }
+      ],
+      "elapsed_s": 387.625
+    },
+    {
+      "experiment": "S2-019",
+      "model": "force_both_s2026",
+      "mode": "force_both",
+      "offsets": [
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64,
+        96,
+        128,
+        160
+      ],
+      "value_offsets": [
+        4,
+        8,
+        16,
+        32,
+        64,
+        96,
+        128,
+        160
+      ],
+      "seed": 2026,
+      "parameters": 296577,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 100.0,
+          "hop1_binding_top1": 100.0,
+          "hop2_query_top1": 100.0,
+          "queries": 3200
+        },
+        {
+          "step": 3000,
+          "accuracy": 100.0,
+          "hop1_binding_top1": 100.0,
+          "hop2_query_top1": 100.0,
+          "queries": 3200
+        },
+        {
+          "step": 6000,
+          "accuracy": 100.0,
+          "hop1_binding_top1": 100.0,
+          "hop2_query_top1": 100.0,
+          "queries": 3200
+        }
+      ],
+      "elapsed_s": 384.673
+    }
+  ],
+  "completed_at": "2026-09-05T17:41:11Z"
+}

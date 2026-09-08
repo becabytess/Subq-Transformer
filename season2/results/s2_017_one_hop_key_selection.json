@@ -1,0 +1,164 @@
+{
+  "experiment": "S2-017",
+  "description": "One-hop SubQ key-selection diagnostic",
+  "source_commit": "working-tree",
+  "task": "The query key is guaranteed to be one of the visible candidate keys; output is the query key.",
+  "offsets": [
+    1,
+    2,
+    4,
+    8,
+    16,
+    32,
+    64,
+    96
+  ],
+  "random_exact_baseline_percent": 2.5,
+  "seeds": [
+    42,
+    1337,
+    2026
+  ],
+  "training_steps": 6000,
+  "results": [
+    {
+      "experiment": "S2-017",
+      "model": "one_hop_s42",
+      "offsets": [
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64,
+        96
+      ],
+      "candidate_count": 8,
+      "seed": 42,
+      "seq_len": 256,
+      "target_position": 200,
+      "d_model": 128,
+      "n_heads": 4,
+      "parameters": 164352,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 100.0,
+          "attention_top1_accuracy": 26.8438,
+          "mean_correct_candidate_weight": 0.168517,
+          "queries": 3200
+        },
+        {
+          "step": 3000,
+          "accuracy": 100.0,
+          "attention_top1_accuracy": 21.375,
+          "mean_correct_candidate_weight": 0.152465,
+          "queries": 3200
+        },
+        {
+          "step": 6000,
+          "accuracy": 100.0,
+          "attention_top1_accuracy": 20.4062,
+          "mean_correct_candidate_weight": 0.15042,
+          "queries": 3200
+        }
+      ],
+      "elapsed_s": 76.358
+    },
+    {
+      "experiment": "S2-017",
+      "model": "one_hop_s1337",
+      "offsets": [
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64,
+        96
+      ],
+      "candidate_count": 8,
+      "seed": 1337,
+      "seq_len": 256,
+      "target_position": 200,
+      "d_model": 128,
+      "n_heads": 4,
+      "parameters": 164352,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 100.0,
+          "attention_top1_accuracy": 31.3438,
+          "mean_correct_candidate_weight": 0.168953,
+          "queries": 3200
+        },
+        {
+          "step": 3000,
+          "accuracy": 100.0,
+          "attention_top1_accuracy": 25.75,
+          "mean_correct_candidate_weight": 0.153772,
+          "queries": 3200
+        },
+        {
+          "step": 6000,
+          "accuracy": 100.0,
+          "attention_top1_accuracy": 22.4688,
+          "mean_correct_candidate_weight": 0.147323,
+          "queries": 3200
+        }
+      ],
+      "elapsed_s": 80.957
+    },
+    {
+      "experiment": "S2-017",
+      "model": "one_hop_s2026",
+      "offsets": [
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64,
+        96
+      ],
+      "candidate_count": 8,
+      "seed": 2026,
+      "seq_len": 256,
+      "target_position": 200,
+      "d_model": 128,
+      "n_heads": 4,
+      "parameters": 164352,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 100.0,
+          "attention_top1_accuracy": 70.125,
+          "mean_correct_candidate_weight": 0.271254,
+          "queries": 3200
+        },
+        {
+          "step": 3000,
+          "accuracy": 100.0,
+          "attention_top1_accuracy": 76.5625,
+          "mean_correct_candidate_weight": 0.288833,
+          "queries": 3200
+        },
+        {
+          "step": 6000,
+          "accuracy": 100.0,
+          "attention_top1_accuracy": 79.6875,
+          "mean_correct_candidate_weight": 0.304954,
+          "queries": 3200
+        }
+      ],
+      "elapsed_s": 74.626
+    }
+  ],
+  "completed_at": "2026-09-05T16:48:36Z"
+}

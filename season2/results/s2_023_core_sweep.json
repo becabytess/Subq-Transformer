@@ -1,0 +1,412 @@
+{
+  "experiment": "S2-023",
+  "description": "Core SubQ sweep: T=8, attention-only, and width scaling",
+  "source_commit": "working-tree",
+  "task": "16 independently randomized key/value pairs, 8 late queries",
+  "offsets": [
+    0,
+    1,
+    2,
+    4,
+    8,
+    16,
+    32,
+    64
+  ],
+  "conditions": [
+    [
+      "residual_t8_d128",
+      "residual",
+      128,
+      512,
+      8
+    ],
+    [
+      "gru_t8_d128",
+      "gru",
+      128,
+      126,
+      8
+    ],
+    [
+      "replacement_t8_d128",
+      "replacement",
+      128,
+      512,
+      8
+    ],
+    [
+      "attention_only_t8_d128",
+      "attention_only",
+      128,
+      0,
+      8
+    ],
+    [
+      "residual_t4_d256",
+      "residual",
+      256,
+      1024,
+      4
+    ],
+    [
+      "gru_t4_d256",
+      "gru",
+      256,
+      1024,
+      4
+    ]
+  ],
+  "seeds": [
+    42,
+    1337,
+    2026
+  ],
+  "training_steps": 6000,
+  "random_exact_baseline_percent": 2.5,
+  "results": [
+    {
+      "experiment": "S2-023",
+      "model": "residual_t8_d128_s42",
+      "mode": "residual",
+      "seed": 42,
+      "d_model": 128,
+      "d_mlp": 512,
+      "thought_hops": 8,
+      "parameters": 329088,
+      "steps": 6000,
+      "accuracy": 2.4922,
+      "distance_accuracy": {
+        "128-255": 2.7966,
+        "256-383": 2.3369,
+        "384-511": 2.416
+      },
+      "queries": 12800,
+      "elapsed_s": 545.143
+    },
+    {
+      "experiment": "S2-023",
+      "model": "residual_t8_d128_s1337",
+      "mode": "residual",
+      "seed": 1337,
+      "d_model": 128,
+      "d_mlp": 512,
+      "thought_hops": 8,
+      "parameters": 329088,
+      "steps": 6000,
+      "accuracy": 2.4297,
+      "distance_accuracy": {
+        "128-255": 2.5341,
+        "256-383": 2.8098,
+        "384-511": 1.9706
+      },
+      "queries": 12800,
+      "elapsed_s": 546.904
+    },
+    {
+      "experiment": "S2-023",
+      "model": "residual_t8_d128_s2026",
+      "mode": "residual",
+      "seed": 2026,
+      "d_model": 128,
+      "d_mlp": 512,
+      "thought_hops": 8,
+      "parameters": 329088,
+      "steps": 6000,
+      "accuracy": 2.4922,
+      "distance_accuracy": {
+        "128-255": 2.76,
+        "256-383": 2.2117,
+        "384-511": 2.568
+      },
+      "queries": 12800,
+      "elapsed_s": 555.595
+    },
+    {
+      "experiment": "S2-023",
+      "model": "gru_t8_d128_s42",
+      "mode": "gru",
+      "seed": 42,
+      "d_model": 128,
+      "d_mlp": 126,
+      "thought_hops": 8,
+      "parameters": 328958,
+      "steps": 6000,
+      "accuracy": 2.5234,
+      "distance_accuracy": {
+        "128-255": 2.5141,
+        "256-383": 2.1882,
+        "384-511": 2.8772
+      },
+      "queries": 12800,
+      "elapsed_s": 584.654
+    },
+    {
+      "experiment": "S2-023",
+      "model": "gru_t8_d128_s1337",
+      "mode": "gru",
+      "seed": 1337,
+      "d_model": 128,
+      "d_mlp": 126,
+      "thought_hops": 8,
+      "parameters": 328958,
+      "steps": 6000,
+      "accuracy": 2.6953,
+      "distance_accuracy": {
+        "128-255": 2.729,
+        "256-383": 2.5485,
+        "384-511": 2.8151
+      },
+      "queries": 12800,
+      "elapsed_s": 586.311
+    },
+    {
+      "experiment": "S2-023",
+      "model": "gru_t8_d128_s2026",
+      "mode": "gru",
+      "seed": 2026,
+      "d_model": 128,
+      "d_mlp": 126,
+      "thought_hops": 8,
+      "parameters": 328958,
+      "steps": 6000,
+      "accuracy": 2.4844,
+      "distance_accuracy": {
+        "128-255": 2.3975,
+        "256-383": 2.3835,
+        "384-511": 2.6558
+      },
+      "queries": 12800,
+      "elapsed_s": 582.97
+    },
+    {
+      "experiment": "S2-023",
+      "model": "replacement_t8_d128_s42",
+      "mode": "replacement",
+      "seed": 42,
+      "d_model": 128,
+      "d_mlp": 512,
+      "thought_hops": 8,
+      "parameters": 329088,
+      "steps": 6000,
+      "accuracy": 2.3516,
+      "distance_accuracy": {
+        "128-255": 2.7684,
+        "256-383": 2.2095,
+        "384-511": 2.1744
+      },
+      "queries": 12800,
+      "elapsed_s": 558.867
+    },
+    {
+      "experiment": "S2-023",
+      "model": "replacement_t8_d128_s1337",
+      "mode": "replacement",
+      "seed": 1337,
+      "d_model": 128,
+      "d_mlp": 512,
+      "thought_hops": 8,
+      "parameters": 329088,
+      "steps": 6000,
+      "accuracy": 2.5078,
+      "distance_accuracy": {
+        "128-255": 2.562,
+        "256-383": 2.2,
+        "384-511": 2.7718
+      },
+      "queries": 12800,
+      "elapsed_s": 543.43
+    },
+    {
+      "experiment": "S2-023",
+      "model": "replacement_t8_d128_s2026",
+      "mode": "replacement",
+      "seed": 2026,
+      "d_model": 128,
+      "d_mlp": 512,
+      "thought_hops": 8,
+      "parameters": 329088,
+      "steps": 6000,
+      "accuracy": 2.5,
+      "distance_accuracy": {
+        "128-255": 2.7878,
+        "256-383": 2.2117,
+        "384-511": 2.568
+      },
+      "queries": 12800,
+      "elapsed_s": 653.866
+    },
+    {
+      "experiment": "S2-023",
+      "model": "attention_only_t8_d128_s42",
+      "mode": "attention_only",
+      "seed": 42,
+      "d_model": 128,
+      "d_mlp": 0,
+      "thought_hops": 8,
+      "parameters": 180736,
+      "steps": 6000,
+      "accuracy": 4.8047,
+      "distance_accuracy": {
+        "128-255": 7.3446,
+        "256-383": 5.7149,
+        "384-511": 1.8889
+      },
+      "queries": 12800,
+      "elapsed_s": 571.69
+    },
+    {
+      "experiment": "S2-023",
+      "model": "attention_only_t8_d128_s1337",
+      "mode": "attention_only",
+      "seed": 1337,
+      "d_model": 128,
+      "d_mlp": 0,
+      "thought_hops": 8,
+      "parameters": 180736,
+      "steps": 6000,
+      "accuracy": 6.3359,
+      "distance_accuracy": {
+        "128-255": 10.1643,
+        "256-383": 8.2553,
+        "384-511": 1.4508
+      },
+      "queries": 12800,
+      "elapsed_s": 481.462
+    },
+    {
+      "experiment": "S2-023",
+      "model": "attention_only_t8_d128_s2026",
+      "mode": "attention_only",
+      "seed": 2026,
+      "d_model": 128,
+      "d_mlp": 0,
+      "thought_hops": 8,
+      "parameters": 180736,
+      "steps": 6000,
+      "accuracy": 6.0156,
+      "distance_accuracy": {
+        "128-255": 9.7296,
+        "256-383": 7.3653,
+        "384-511": 1.712
+      },
+      "queries": 12800,
+      "elapsed_s": 483.685
+    },
+    {
+      "experiment": "S2-023",
+      "model": "residual_t4_d256_s42",
+      "mode": "residual",
+      "seed": 42,
+      "d_model": 256,
+      "d_mlp": 1024,
+      "thought_hops": 4,
+      "parameters": 1051392,
+      "steps": 6000,
+      "accuracy": 2.4531,
+      "distance_accuracy": {
+        "128-255": 2.6201,
+        "256-383": 2.5398,
+        "384-511": 2.2272
+      },
+      "queries": 6400,
+      "elapsed_s": 276.996
+    },
+    {
+      "experiment": "S2-023",
+      "model": "residual_t4_d256_s1337",
+      "mode": "residual",
+      "seed": 1337,
+      "d_model": 256,
+      "d_mlp": 1024,
+      "thought_hops": 4,
+      "parameters": 1051392,
+      "steps": 6000,
+      "accuracy": 2.2031,
+      "distance_accuracy": {
+        "128-255": 2.6842,
+        "256-383": 1.7559,
+        "384-511": 2.3039
+      },
+      "queries": 6400,
+      "elapsed_s": 280.001
+    },
+    {
+      "experiment": "S2-023",
+      "model": "residual_t4_d256_s2026",
+      "mode": "residual",
+      "seed": 2026,
+      "d_model": 256,
+      "d_mlp": 1024,
+      "thought_hops": 4,
+      "parameters": 1051392,
+      "steps": 6000,
+      "accuracy": 2.5,
+      "distance_accuracy": {
+        "128-255": 2.0419,
+        "256-383": 2.4968,
+        "384-511": 2.8764
+      },
+      "queries": 6400,
+      "elapsed_s": 268.136
+    },
+    {
+      "experiment": "S2-023",
+      "model": "gru_t4_d256_s42",
+      "mode": "gru",
+      "seed": 42,
+      "d_model": 256,
+      "d_mlp": 1024,
+      "thought_hops": 4,
+      "parameters": 1446144,
+      "steps": 6000,
+      "accuracy": 2.7031,
+      "distance_accuracy": {
+        "128-255": 2.7293,
+        "256-383": 2.5398,
+        "384-511": 2.8508
+      },
+      "queries": 6400,
+      "elapsed_s": 301.751
+    },
+    {
+      "experiment": "S2-023",
+      "model": "gru_t4_d256_s1337",
+      "mode": "gru",
+      "seed": 1337,
+      "d_model": 256,
+      "d_mlp": 1024,
+      "thought_hops": 4,
+      "parameters": 1446144,
+      "steps": 6000,
+      "accuracy": 2.4062,
+      "distance_accuracy": {
+        "128-255": 2.3986,
+        "256-383": 2.6338,
+        "384-511": 2.171
+      },
+      "queries": 6400,
+      "elapsed_s": 301.476
+    },
+    {
+      "experiment": "S2-023",
+      "model": "gru_t4_d256_s2026",
+      "mode": "gru",
+      "seed": 2026,
+      "d_model": 256,
+      "d_mlp": 1024,
+      "thought_hops": 4,
+      "parameters": 1446144,
+      "steps": 6000,
+      "accuracy": 2.6875,
+      "distance_accuracy": {
+        "128-255": 2.9249,
+        "256-383": 2.5391,
+        "384-511": 2.6517
+      },
+      "queries": 6400,
+      "elapsed_s": 295.213
+    }
+  ],
+  "completed_at": "2026-09-06T13:30:37Z"
+}

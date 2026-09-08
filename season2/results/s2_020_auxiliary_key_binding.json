@@ -1,0 +1,383 @@
+{
+  "experiment": "S2-020",
+  "description": "Auxiliary key-binding supervision for two-hop SubQ",
+  "source_commit": "working-tree",
+  "offsets": [
+    1,
+    2,
+    4,
+    8,
+    16,
+    32,
+    64,
+    96,
+    128,
+    160
+  ],
+  "value_offsets": [
+    4,
+    8,
+    16,
+    32,
+    64,
+    96,
+    128,
+    160
+  ],
+  "modes": [
+    "baseline",
+    "aux_key"
+  ],
+  "random_exact_baseline_percent": 2.5,
+  "seeds": [
+    42,
+    1337,
+    2026
+  ],
+  "training_steps": 6000,
+  "results": [
+    {
+      "experiment": "S2-020",
+      "model": "baseline_s42",
+      "mode": "baseline",
+      "offsets": [
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64,
+        96,
+        128,
+        160
+      ],
+      "value_offsets": [
+        4,
+        8,
+        16,
+        32,
+        64,
+        96,
+        128,
+        160
+      ],
+      "seed": 42,
+      "parameters": 301737,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 12.7188,
+          "hop1_key_probe_accuracy": 2.6289,
+          "hop1_binding_top1": 17.7148,
+          "hop2_query_top1": 12.8438,
+          "queries": 3200
+        },
+        {
+          "step": 3000,
+          "accuracy": 11.5938,
+          "hop1_key_probe_accuracy": 2.5,
+          "hop1_binding_top1": 23.3633,
+          "hop2_query_top1": 13.0312,
+          "queries": 3200
+        },
+        {
+          "step": 6000,
+          "accuracy": 12.125,
+          "hop1_key_probe_accuracy": 2.3555,
+          "hop1_binding_top1": 61.3477,
+          "hop2_query_top1": 14.2812,
+          "queries": 3200
+        }
+      ],
+      "elapsed_s": 467.017
+    },
+    {
+      "experiment": "S2-020",
+      "model": "baseline_s1337",
+      "mode": "baseline",
+      "offsets": [
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64,
+        96,
+        128,
+        160
+      ],
+      "value_offsets": [
+        4,
+        8,
+        16,
+        32,
+        64,
+        96,
+        128,
+        160
+      ],
+      "seed": 1337,
+      "parameters": 301737,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 12.5,
+          "hop1_key_probe_accuracy": 2.4844,
+          "hop1_binding_top1": 15.332,
+          "hop2_query_top1": 11.9375,
+          "queries": 3200
+        },
+        {
+          "step": 3000,
+          "accuracy": 12.0312,
+          "hop1_key_probe_accuracy": 2.6133,
+          "hop1_binding_top1": 11.9258,
+          "hop2_query_top1": 13.1875,
+          "queries": 3200
+        },
+        {
+          "step": 6000,
+          "accuracy": 12.4375,
+          "hop1_key_probe_accuracy": 2.4844,
+          "hop1_binding_top1": 11.9883,
+          "hop2_query_top1": 11.0938,
+          "queries": 3200
+        }
+      ],
+      "elapsed_s": 472.101
+    },
+    {
+      "experiment": "S2-020",
+      "model": "baseline_s2026",
+      "mode": "baseline",
+      "offsets": [
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64,
+        96,
+        128,
+        160
+      ],
+      "value_offsets": [
+        4,
+        8,
+        16,
+        32,
+        64,
+        96,
+        128,
+        160
+      ],
+      "seed": 2026,
+      "parameters": 301737,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 13.0,
+          "hop1_key_probe_accuracy": 2.4492,
+          "hop1_binding_top1": 6.2812,
+          "hop2_query_top1": 12.4062,
+          "queries": 3200
+        },
+        {
+          "step": 3000,
+          "accuracy": 12.9062,
+          "hop1_key_probe_accuracy": 2.5312,
+          "hop1_binding_top1": 7.3789,
+          "hop2_query_top1": 12.875,
+          "queries": 3200
+        },
+        {
+          "step": 6000,
+          "accuracy": 12.0625,
+          "hop1_key_probe_accuracy": 2.4062,
+          "hop1_binding_top1": 10.6016,
+          "hop2_query_top1": 11.75,
+          "queries": 3200
+        }
+      ],
+      "elapsed_s": 475.994
+    },
+    {
+      "experiment": "S2-020",
+      "model": "aux_key_s42",
+      "mode": "aux_key",
+      "offsets": [
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64,
+        96,
+        128,
+        160
+      ],
+      "value_offsets": [
+        4,
+        8,
+        16,
+        32,
+        64,
+        96,
+        128,
+        160
+      ],
+      "seed": 42,
+      "parameters": 301737,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 11.4375,
+          "hop1_key_probe_accuracy": 100.0,
+          "hop1_binding_top1": 100.0,
+          "hop2_query_top1": 12.125,
+          "queries": 3200
+        },
+        {
+          "step": 3000,
+          "accuracy": 12.2188,
+          "hop1_key_probe_accuracy": 100.0,
+          "hop1_binding_top1": 100.0,
+          "hop2_query_top1": 12.9688,
+          "queries": 3200
+        },
+        {
+          "step": 6000,
+          "accuracy": 12.2812,
+          "hop1_key_probe_accuracy": 100.0,
+          "hop1_binding_top1": 100.0,
+          "hop2_query_top1": 12.75,
+          "queries": 3200
+        }
+      ],
+      "elapsed_s": 474.033
+    },
+    {
+      "experiment": "S2-020",
+      "model": "aux_key_s1337",
+      "mode": "aux_key",
+      "offsets": [
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64,
+        96,
+        128,
+        160
+      ],
+      "value_offsets": [
+        4,
+        8,
+        16,
+        32,
+        64,
+        96,
+        128,
+        160
+      ],
+      "seed": 1337,
+      "parameters": 301737,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 12.1875,
+          "hop1_key_probe_accuracy": 100.0,
+          "hop1_binding_top1": 100.0,
+          "hop2_query_top1": 12.1875,
+          "queries": 3200
+        },
+        {
+          "step": 3000,
+          "accuracy": 11.6875,
+          "hop1_key_probe_accuracy": 100.0,
+          "hop1_binding_top1": 100.0,
+          "hop2_query_top1": 12.75,
+          "queries": 3200
+        },
+        {
+          "step": 6000,
+          "accuracy": 12.2812,
+          "hop1_key_probe_accuracy": 100.0,
+          "hop1_binding_top1": 100.0,
+          "hop2_query_top1": 12.5938,
+          "queries": 3200
+        }
+      ],
+      "elapsed_s": 467.4
+    },
+    {
+      "experiment": "S2-020",
+      "model": "aux_key_s2026",
+      "mode": "aux_key",
+      "offsets": [
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64,
+        96,
+        128,
+        160
+      ],
+      "value_offsets": [
+        4,
+        8,
+        16,
+        32,
+        64,
+        96,
+        128,
+        160
+      ],
+      "seed": 2026,
+      "parameters": 301737,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 13.125,
+          "hop1_key_probe_accuracy": 100.0,
+          "hop1_binding_top1": 100.0,
+          "hop2_query_top1": 12.25,
+          "queries": 3200
+        },
+        {
+          "step": 3000,
+          "accuracy": 13.4688,
+          "hop1_key_probe_accuracy": 100.0,
+          "hop1_binding_top1": 100.0,
+          "hop2_query_top1": 12.5312,
+          "queries": 3200
+        },
+        {
+          "step": 6000,
+          "accuracy": 12.2812,
+          "hop1_key_probe_accuracy": 100.0,
+          "hop1_binding_top1": 100.0,
+          "hop2_query_top1": 12.7812,
+          "queries": 3200
+        }
+      ],
+      "elapsed_s": 487.256
+    }
+  ],
+  "completed_at": "2026-09-05T17:56:26Z"
+}

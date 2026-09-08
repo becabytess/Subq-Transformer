@@ -1,0 +1,198 @@
+{
+  "experiment": "S2-028",
+  "description": "Depth shootout on corrected MQAR: Dense 4-layer, SubQ 2-macro recurrent, and SubQ 4-layer physical",
+  "task": "16 independently randomized key/value pairs, 8 late queries",
+  "random_exact_baseline_percent": 2.5,
+  "total_attention_hops_subq": 8,
+  "seeds": [
+    42,
+    1337,
+    2026
+  ],
+  "training_steps": 6000,
+  "conditions": [
+    [
+      "dense_4layer_s42",
+      "dense_4layer",
+      42
+    ],
+    [
+      "dense_4layer_s1337",
+      "dense_4layer",
+      1337
+    ],
+    [
+      "dense_4layer_s2026",
+      "dense_4layer",
+      2026
+    ],
+    [
+      "subq_2macro_recurrent_s42",
+      "subq_2macro_recurrent",
+      42
+    ],
+    [
+      "subq_2macro_recurrent_s1337",
+      "subq_2macro_recurrent",
+      1337
+    ],
+    [
+      "subq_2macro_recurrent_s2026",
+      "subq_2macro_recurrent",
+      2026
+    ],
+    [
+      "subq_4layer_physical_s42",
+      "subq_4layer_physical",
+      42
+    ],
+    [
+      "subq_4layer_physical_s1337",
+      "subq_4layer_physical",
+      1337
+    ],
+    [
+      "subq_4layer_physical_s2026",
+      "subq_4layer_physical",
+      2026
+    ]
+  ],
+  "completed_at": "2026-09-08T05:01:58Z",
+  "results": [
+    {
+      "model": "dense_4layer_s42",
+      "architecture": "dense_4layer",
+      "seed": 42,
+      "parameters": 922368,
+      "steps": 6000,
+      "accuracy": 5.9766,
+      "distance_accuracy": {
+        "128-255": 5.4447,
+        "256-383": 6.286,
+        "384-511": 6.0665
+      },
+      "queries": 12800,
+      "elapsed_s": 472.493
+    },
+    {
+      "model": "dense_4layer_s1337",
+      "architecture": "dense_4layer",
+      "seed": 1337,
+      "parameters": 922368,
+      "steps": 6000,
+      "accuracy": 6.0,
+      "distance_accuracy": {
+        "128-255": 5.9425,
+        "256-383": 5.7287,
+        "384-511": 6.3374
+      },
+      "queries": 12800,
+      "elapsed_s": 473.324
+    },
+    {
+      "model": "dense_4layer_s2026",
+      "architecture": "dense_4layer",
+      "seed": 2026,
+      "parameters": 922368,
+      "steps": 6000,
+      "accuracy": 5.8125,
+      "distance_accuracy": {
+        "128-255": 6.2016,
+        "256-383": 5.4639,
+        "384-511": 5.8615
+      },
+      "queries": 12800,
+      "elapsed_s": 492.41
+    },
+    {
+      "model": "subq_2macro_recurrent_s42",
+      "architecture": "subq_2macro_recurrent",
+      "seed": 42,
+      "parameters": 312704,
+      "steps": 6000,
+      "accuracy": 4.8828,
+      "distance_accuracy": {
+        "128-255": 4.39,
+        "256-383": 4.9435,
+        "384-511": 5.1968
+      },
+      "queries": 12800,
+      "elapsed_s": 532.524
+    },
+    {
+      "model": "subq_2macro_recurrent_s1337",
+      "architecture": "subq_2macro_recurrent",
+      "seed": 1337,
+      "parameters": 312704,
+      "steps": 6000,
+      "accuracy": 5.6016,
+      "distance_accuracy": {
+        "128-255": 5.3344,
+        "256-383": 5.6234,
+        "384-511": 5.7961
+      },
+      "queries": 12800,
+      "elapsed_s": 606.773
+    },
+    {
+      "model": "subq_2macro_recurrent_s2026",
+      "architecture": "subq_2macro_recurrent",
+      "seed": 2026,
+      "parameters": 312704,
+      "steps": 6000,
+      "accuracy": 5.7656,
+      "distance_accuracy": {
+        "128-255": 5.897,
+        "256-383": 5.4853,
+        "384-511": 5.95
+      },
+      "queries": 12800,
+      "elapsed_s": 524.404
+    },
+    {
+      "model": "subq_4layer_physical_s42",
+      "architecture": "subq_4layer_physical",
+      "seed": 42,
+      "parameters": 856832,
+      "steps": 6000,
+      "accuracy": 2.6641,
+      "distance_accuracy": {
+        "128-255": 2.9076,
+        "256-383": 2.4505,
+        "384-511": 2.6962
+      },
+      "queries": 12800,
+      "elapsed_s": 550.844
+    },
+    {
+      "model": "subq_4layer_physical_s1337",
+      "architecture": "subq_4layer_physical",
+      "seed": 1337,
+      "parameters": 856832,
+      "steps": 6000,
+      "accuracy": 2.5938,
+      "distance_accuracy": {
+        "128-255": 2.4323,
+        "256-383": 2.6748,
+        "384-511": 2.6387
+      },
+      "queries": 12800,
+      "elapsed_s": 547.536
+    },
+    {
+      "model": "subq_4layer_physical_s2026",
+      "architecture": "subq_4layer_physical",
+      "seed": 2026,
+      "parameters": 856832,
+      "steps": 6000,
+      "accuracy": 2.5547,
+      "distance_accuracy": {
+        "128-255": 2.4363,
+        "256-383": 2.4855,
+        "384-511": 2.7206
+      },
+      "queries": 12800,
+      "elapsed_s": 644.933
+    }
+  ]
+}

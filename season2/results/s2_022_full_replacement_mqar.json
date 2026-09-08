@@ -1,0 +1,75 @@
+{
+  "experiment": "S2-022",
+  "description": "Full transformed replacement on corrected full MQAR",
+  "source_commit": "working-tree",
+  "task": "16 independently randomized key/value pairs, 8 late queries",
+  "offsets": [
+    0,
+    1,
+    2,
+    4,
+    8,
+    16,
+    32,
+    64
+  ],
+  "thought_hops": 4,
+  "seeds": [
+    42,
+    1337,
+    2026
+  ],
+  "training_steps": 6000,
+  "random_exact_baseline_percent": 2.5,
+  "results": [
+    {
+      "experiment": "S2-022",
+      "model": "replacement_s42",
+      "mode": "subq_replacement_full",
+      "seed": 42,
+      "parameters": 329088,
+      "steps": 6000,
+      "accuracy": 2.4453,
+      "distance_accuracy": {
+        "128-255": 2.7247,
+        "256-383": 2.086,
+        "384-511": 2.5926
+      },
+      "queries": 12800,
+      "elapsed_s": 417.484
+    },
+    {
+      "experiment": "S2-022",
+      "model": "replacement_s1337",
+      "mode": "subq_replacement_full",
+      "seed": 1337,
+      "parameters": 329088,
+      "steps": 6000,
+      "accuracy": 2.6016,
+      "distance_accuracy": {
+        "128-255": 2.7801,
+        "256-383": 2.8387,
+        "384-511": 2.2227
+      },
+      "queries": 12800,
+      "elapsed_s": 418.653
+    },
+    {
+      "experiment": "S2-022",
+      "model": "replacement_s2026",
+      "mode": "subq_replacement_full",
+      "seed": 2026,
+      "parameters": 329088,
+      "steps": 6000,
+      "accuracy": 2.6719,
+      "distance_accuracy": {
+        "128-255": 2.7654,
+        "256-383": 2.7724,
+        "384-511": 2.4939
+      },
+      "queries": 12800,
+      "elapsed_s": 420.165
+    }
+  ],
+  "completed_at": "2026-09-06T12:57:48Z"
+}

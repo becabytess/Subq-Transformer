@@ -1,0 +1,196 @@
+{
+  "experiment": "S2-018",
+  "description": "Two-hop normal SubQ key-to-value retrieval",
+  "source_commit": "working-tree",
+  "offsets": [
+    1,
+    2,
+    4,
+    8,
+    16,
+    32,
+    64,
+    96,
+    128,
+    160
+  ],
+  "value_offsets": [
+    4,
+    8,
+    16,
+    32,
+    64,
+    96,
+    128,
+    160
+  ],
+  "random_exact_baseline_percent": 2.5,
+  "seeds": [
+    42,
+    1337,
+    2026
+  ],
+  "training_steps": 6000,
+  "results": [
+    {
+      "experiment": "S2-018",
+      "model": "two_hop_s42",
+      "offsets": [
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64,
+        96,
+        128,
+        160
+      ],
+      "value_offsets": [
+        4,
+        8,
+        16,
+        32,
+        64,
+        96,
+        128,
+        160
+      ],
+      "seed": 42,
+      "parameters": 296577,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 13.0312,
+          "hop2_attention_top1": 12.9375,
+          "hop2_correct_weight": 0.117375,
+          "queries": 3200
+        },
+        {
+          "step": 3000,
+          "accuracy": 13.5312,
+          "hop2_attention_top1": 12.4062,
+          "hop2_correct_weight": 0.116172,
+          "queries": 3200
+        },
+        {
+          "step": 6000,
+          "accuracy": 18.2812,
+          "hop2_attention_top1": 20.1875,
+          "hop2_correct_weight": 0.118481,
+          "queries": 3200
+        }
+      ],
+      "elapsed_s": 398.676
+    },
+    {
+      "experiment": "S2-018",
+      "model": "two_hop_s1337",
+      "offsets": [
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64,
+        96,
+        128,
+        160
+      ],
+      "value_offsets": [
+        4,
+        8,
+        16,
+        32,
+        64,
+        96,
+        128,
+        160
+      ],
+      "seed": 1337,
+      "parameters": 296577,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 12.4688,
+          "hop2_attention_top1": 11.7812,
+          "hop2_correct_weight": 0.119058,
+          "queries": 3200
+        },
+        {
+          "step": 3000,
+          "accuracy": 11.7188,
+          "hop2_attention_top1": 13.1875,
+          "hop2_correct_weight": 0.117279,
+          "queries": 3200
+        },
+        {
+          "step": 6000,
+          "accuracy": 12.5625,
+          "hop2_attention_top1": 12.5,
+          "hop2_correct_weight": 0.117531,
+          "queries": 3200
+        }
+      ],
+      "elapsed_s": 382.258
+    },
+    {
+      "experiment": "S2-018",
+      "model": "two_hop_s2026",
+      "offsets": [
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64,
+        96,
+        128,
+        160
+      ],
+      "value_offsets": [
+        4,
+        8,
+        16,
+        32,
+        64,
+        96,
+        128,
+        160
+      ],
+      "seed": 2026,
+      "parameters": 296577,
+      "steps": 6000,
+      "checkpoints": [
+        {
+          "step": 1000,
+          "accuracy": 12.9375,
+          "hop2_attention_top1": 12.4688,
+          "hop2_correct_weight": 0.117674,
+          "queries": 3200
+        },
+        {
+          "step": 3000,
+          "accuracy": 12.5312,
+          "hop2_attention_top1": 12.7188,
+          "hop2_correct_weight": 0.1163,
+          "queries": 3200
+        },
+        {
+          "step": 6000,
+          "accuracy": 12.6562,
+          "hop2_attention_top1": 13.7188,
+          "hop2_correct_weight": 0.116921,
+          "queries": 3200
+        }
+      ],
+      "elapsed_s": 411.505
+    }
+  ],
+  "completed_at": "2026-09-05T17:01:21Z"
+}

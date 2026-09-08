@@ -1,0 +1,154 @@
+{
+  "experiment": "S2-034",
+  "description": "Dyck-4 Residual Shootout: Testing Block Residual vs Proj Residual vs Per-Hop Residual on 4-layer SubQ",
+  "task": "Dyck-4 bracket completion across nesting depths 1 to 30+",
+  "seeds": [
+    42,
+    1337,
+    2026
+  ],
+  "training_steps": 2000,
+  "completed_at": "2026-09-08T14:52:10Z",
+  "reference_baselines": {
+    "dense_4layer": 94.76,
+    "subq_1layer_final_mlp": 75.87,
+    "subq_4layer_physical_replacement": 24.94
+  },
+  "results": [
+    {
+      "model": "subq_4layer_block_residual_s42",
+      "architecture": "subq_4layer_block_residual",
+      "seed": 42,
+      "parameters": 762624,
+      "steps": 2000,
+      "overall_accuracy": 79.8604,
+      "tier_accuracy": {
+        "tier1_shallow_1_5": 80.2883,
+        "tier2_medium_6_15": 77.2398,
+        "tier3_deep_16_30": 81.8344
+      },
+      "total_evaluated_tokens": 204800,
+      "elapsed_s": 294.033
+    },
+    {
+      "model": "subq_4layer_block_residual_s1337",
+      "architecture": "subq_4layer_block_residual",
+      "seed": 1337,
+      "parameters": 762624,
+      "steps": 2000,
+      "overall_accuracy": 75.7505,
+      "tier_accuracy": {
+        "tier1_shallow_1_5": 76.9435,
+        "tier2_medium_6_15": 73.5137,
+        "tier3_deep_16_30": 77.082
+      },
+      "total_evaluated_tokens": 204800,
+      "elapsed_s": 290.644
+    },
+    {
+      "model": "subq_4layer_block_residual_s2026",
+      "architecture": "subq_4layer_block_residual",
+      "seed": 2026,
+      "parameters": 762624,
+      "steps": 2000,
+      "overall_accuracy": 72.0024,
+      "tier_accuracy": {
+        "tier1_shallow_1_5": 73.6653,
+        "tier2_medium_6_15": 69.9364,
+        "tier3_deep_16_30": 73.0307
+      },
+      "total_evaluated_tokens": 204800,
+      "elapsed_s": 289.262
+    },
+    {
+      "model": "subq_4layer_proj_residual_s42",
+      "architecture": "subq_4layer_proj_residual",
+      "seed": 42,
+      "parameters": 828160,
+      "steps": 2000,
+      "overall_accuracy": 72.8428,
+      "tier_accuracy": {
+        "tier1_shallow_1_5": 74.948,
+        "tier2_medium_6_15": 70.3691,
+        "tier3_deep_16_30": 74.0115
+      },
+      "total_evaluated_tokens": 204800,
+      "elapsed_s": 293.715
+    },
+    {
+      "model": "subq_4layer_proj_residual_s1337",
+      "architecture": "subq_4layer_proj_residual",
+      "seed": 1337,
+      "parameters": 828160,
+      "steps": 2000,
+      "overall_accuracy": 74.0859,
+      "tier_accuracy": {
+        "tier1_shallow_1_5": 74.875,
+        "tier2_medium_6_15": 71.9844,
+        "tier3_deep_16_30": 75.4673
+      },
+      "total_evaluated_tokens": 204800,
+      "elapsed_s": 293.139
+    },
+    {
+      "model": "subq_4layer_proj_residual_s2026",
+      "architecture": "subq_4layer_proj_residual",
+      "seed": 2026,
+      "parameters": 828160,
+      "steps": 2000,
+      "overall_accuracy": 81.0762,
+      "tier_accuracy": {
+        "tier1_shallow_1_5": 81.683,
+        "tier2_medium_6_15": 79.1549,
+        "tier3_deep_16_30": 82.3983
+      },
+      "total_evaluated_tokens": 204800,
+      "elapsed_s": 317.441
+    },
+    {
+      "model": "subq_4layer_per_hop_residual_s42",
+      "architecture": "subq_4layer_per_hop_residual",
+      "seed": 42,
+      "parameters": 828160,
+      "steps": 2000,
+      "overall_accuracy": 88.127,
+      "tier_accuracy": {
+        "tier1_shallow_1_5": 86.1669,
+        "tier2_medium_6_15": 85.2012,
+        "tier3_deep_16_30": 91.3263
+      },
+      "total_evaluated_tokens": 204800,
+      "elapsed_s": 296.535
+    },
+    {
+      "model": "subq_4layer_per_hop_residual_s1337",
+      "architecture": "subq_4layer_per_hop_residual",
+      "seed": 1337,
+      "parameters": 828160,
+      "steps": 2000,
+      "overall_accuracy": 88.1284,
+      "tier_accuracy": {
+        "tier1_shallow_1_5": 85.9114,
+        "tier2_medium_6_15": 85.2602,
+        "tier3_deep_16_30": 91.3071
+      },
+      "total_evaluated_tokens": 204800,
+      "elapsed_s": 299.1
+    },
+    {
+      "model": "subq_4layer_per_hop_residual_s2026",
+      "architecture": "subq_4layer_per_hop_residual",
+      "seed": 2026,
+      "parameters": 828160,
+      "steps": 2000,
+      "overall_accuracy": 88.3315,
+      "tier_accuracy": {
+        "tier1_shallow_1_5": 85.9015,
+        "tier2_medium_6_15": 85.4312,
+        "tier3_deep_16_30": 91.6306
+      },
+      "total_evaluated_tokens": 204800,
+      "elapsed_s": 317.266
+    }
+  ]
+}

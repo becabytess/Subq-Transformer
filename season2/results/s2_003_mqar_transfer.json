@@ -1,0 +1,1123 @@
+{
+  "experiment": "S2-003",
+  "description": "Three-seed MQAR transfer comparison of residual sparse refinement and inside-loop accumulator GRU",
+  "source_commit": "working-tree",
+  "dataset": "Synthetic MQAR: 16 random key-value pairs and 8 late queries",
+  "causal": true,
+  "seq_len": 512,
+  "vocab_size": 256,
+  "num_kv_pairs": 16,
+  "num_queries": 8,
+  "key_value_assignment": "independent random permutation per example",
+  "offsets": [
+    0,
+    1,
+    2,
+    4,
+    8,
+    16,
+    32,
+    64
+  ],
+  "parameter_matching": {
+    "target": 329088,
+    "residual_d_mlp": 512,
+    "gru_d_mlp": 126,
+    "note": "GRU variant is within 130 parameters of target because the integer MLP width cannot match exactly."
+  },
+  "seeds": [
+    42,
+    1337,
+    2026
+  ],
+  "validation_batches": 50,
+  "results": [
+    {
+      "experiment": "S2-003",
+      "model": "sparse_residual_t1_s42",
+      "update_mode": "sparse_residual",
+      "thought_hops": 1,
+      "d_mlp": 512,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "seed": 42,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "n_heads": 4,
+      "num_kv_pairs": 16,
+      "num_queries": 8,
+      "parameters": 329088,
+      "target_parameters": 329088,
+      "parameter_delta_vs_target": 0,
+      "steps": 1500,
+      "val_loss": 3.691187,
+      "val_exact_retrieval_accuracy": 2.4766,
+      "mean_query_distance": 332.136,
+      "distance_accuracy": {
+        "128-255": {
+          "correct": 93,
+          "total": 3562,
+          "accuracy": 2.6109
+        },
+        "256-383": {
+          "correct": 107,
+          "total": 4734,
+          "accuracy": 2.2602
+        },
+        "384-511": {
+          "correct": 117,
+          "total": 4504,
+          "accuracy": 2.5977
+        }
+      },
+      "elapsed_s": 80.563,
+      "train_elapsed_s": 78.057,
+      "tokens_per_s_train": 314848.54,
+      "peak_memory_mb": 265.22,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-003",
+      "model": "sparse_residual_t4_s42",
+      "update_mode": "sparse_residual",
+      "thought_hops": 4,
+      "d_mlp": 512,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "seed": 42,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "n_heads": 4,
+      "num_kv_pairs": 16,
+      "num_queries": 8,
+      "parameters": 329088,
+      "target_parameters": 329088,
+      "parameter_delta_vs_target": 0,
+      "steps": 1500,
+      "val_loss": 3.691261,
+      "val_exact_retrieval_accuracy": 2.4297,
+      "mean_query_distance": 332.136,
+      "distance_accuracy": {
+        "128-255": {
+          "correct": 88,
+          "total": 3562,
+          "accuracy": 2.4705
+        },
+        "256-383": {
+          "correct": 104,
+          "total": 4734,
+          "accuracy": 2.1969
+        },
+        "384-511": {
+          "correct": 119,
+          "total": 4504,
+          "accuracy": 2.6421
+        }
+      },
+      "elapsed_s": 109.091,
+      "train_elapsed_s": 106.25,
+      "tokens_per_s_train": 231303.33,
+      "peak_memory_mb": 679.98,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-003",
+      "model": "sparse_residual_t8_s42",
+      "update_mode": "sparse_residual",
+      "thought_hops": 8,
+      "d_mlp": 512,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "seed": 42,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "n_heads": 4,
+      "num_kv_pairs": 16,
+      "num_queries": 8,
+      "parameters": 329088,
+      "target_parameters": 329088,
+      "parameter_delta_vs_target": 0,
+      "steps": 1500,
+      "val_loss": 3.691263,
+      "val_exact_retrieval_accuracy": 2.2656,
+      "mean_query_distance": 332.136,
+      "distance_accuracy": {
+        "128-255": {
+          "correct": 82,
+          "total": 3562,
+          "accuracy": 2.3021
+        },
+        "256-383": {
+          "correct": 95,
+          "total": 4734,
+          "accuracy": 2.0068
+        },
+        "384-511": {
+          "correct": 113,
+          "total": 4504,
+          "accuracy": 2.5089
+        }
+      },
+      "elapsed_s": 140.177,
+      "train_elapsed_s": 137.057,
+      "tokens_per_s_train": 179312.08,
+      "peak_memory_mb": 1233.0,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-003",
+      "model": "sparse_gru_t1_s42",
+      "update_mode": "sparse_gru",
+      "thought_hops": 1,
+      "d_mlp": 126,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "seed": 42,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "n_heads": 4,
+      "num_kv_pairs": 16,
+      "num_queries": 8,
+      "parameters": 328958,
+      "target_parameters": 329088,
+      "parameter_delta_vs_target": -130,
+      "steps": 1500,
+      "val_loss": 3.691457,
+      "val_exact_retrieval_accuracy": 2.625,
+      "mean_query_distance": 332.136,
+      "distance_accuracy": {
+        "128-255": {
+          "correct": 91,
+          "total": 3562,
+          "accuracy": 2.5547
+        },
+        "256-383": {
+          "correct": 114,
+          "total": 4734,
+          "accuracy": 2.4081
+        },
+        "384-511": {
+          "correct": 131,
+          "total": 4504,
+          "accuracy": 2.9085
+        }
+      },
+      "elapsed_s": 84.379,
+      "train_elapsed_s": 81.857,
+      "tokens_per_s_train": 300231.04,
+      "peak_memory_mb": 265.35,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-003",
+      "model": "sparse_gru_t4_s42",
+      "update_mode": "sparse_gru",
+      "thought_hops": 4,
+      "d_mlp": 126,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "seed": 42,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "n_heads": 4,
+      "num_kv_pairs": 16,
+      "num_queries": 8,
+      "parameters": 328958,
+      "target_parameters": 329088,
+      "parameter_delta_vs_target": -130,
+      "steps": 1500,
+      "val_loss": 3.690972,
+      "val_exact_retrieval_accuracy": 2.6172,
+      "mean_query_distance": 332.136,
+      "distance_accuracy": {
+        "128-255": {
+          "correct": 99,
+          "total": 3562,
+          "accuracy": 2.7793
+        },
+        "256-383": {
+          "correct": 108,
+          "total": 4734,
+          "accuracy": 2.2814
+        },
+        "384-511": {
+          "correct": 128,
+          "total": 4504,
+          "accuracy": 2.8419
+        }
+      },
+      "elapsed_s": 107.321,
+      "train_elapsed_s": 104.652,
+      "tokens_per_s_train": 234835.52,
+      "peak_memory_mb": 763.92,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-003",
+      "model": "sparse_gru_t8_s42",
+      "update_mode": "sparse_gru",
+      "thought_hops": 8,
+      "d_mlp": 126,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "seed": 42,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "n_heads": 4,
+      "num_kv_pairs": 16,
+      "num_queries": 8,
+      "parameters": 328958,
+      "target_parameters": 329088,
+      "parameter_delta_vs_target": -130,
+      "steps": 1500,
+      "val_loss": 3.69095,
+      "val_exact_retrieval_accuracy": 2.5938,
+      "mean_query_distance": 332.136,
+      "distance_accuracy": {
+        "128-255": {
+          "correct": 98,
+          "total": 3562,
+          "accuracy": 2.7513
+        },
+        "256-383": {
+          "correct": 107,
+          "total": 4734,
+          "accuracy": 2.2602
+        },
+        "384-511": {
+          "correct": 127,
+          "total": 4504,
+          "accuracy": 2.8197
+        }
+      },
+      "elapsed_s": 145.188,
+      "train_elapsed_s": 142.049,
+      "tokens_per_s_train": 173010.2,
+      "peak_memory_mb": 1429.06,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-003",
+      "model": "dense_1l_s42",
+      "update_mode": "dense",
+      "thought_hops": 1,
+      "d_mlp": 512,
+      "offsets": null,
+      "seed": 42,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "n_heads": 4,
+      "num_kv_pairs": 16,
+      "num_queries": 8,
+      "parameters": 329088,
+      "target_parameters": 329088,
+      "parameter_delta_vs_target": 0,
+      "steps": 1500,
+      "val_loss": 3.671124,
+      "val_exact_retrieval_accuracy": 3.7422,
+      "mean_query_distance": 332.136,
+      "distance_accuracy": {
+        "128-255": {
+          "correct": 139,
+          "total": 3562,
+          "accuracy": 3.9023
+        },
+        "256-383": {
+          "correct": 157,
+          "total": 4734,
+          "accuracy": 3.3164
+        },
+        "384-511": {
+          "correct": 183,
+          "total": 4504,
+          "accuracy": 4.0631
+        }
+      },
+      "elapsed_s": 86.79,
+      "train_elapsed_s": 84.192,
+      "tokens_per_s_train": 291903.82,
+      "peak_memory_mb": 517.69,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-003",
+      "model": "sparse_residual_t1_s1337",
+      "update_mode": "sparse_residual",
+      "thought_hops": 1,
+      "d_mlp": 512,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "seed": 1337,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "n_heads": 4,
+      "num_kv_pairs": 16,
+      "num_queries": 8,
+      "parameters": 329088,
+      "target_parameters": 329088,
+      "parameter_delta_vs_target": 0,
+      "steps": 1500,
+      "val_loss": 3.690781,
+      "val_exact_retrieval_accuracy": 2.4297,
+      "mean_query_distance": 333.6,
+      "distance_accuracy": {
+        "128-255": {
+          "correct": 91,
+          "total": 3531,
+          "accuracy": 2.5772
+        },
+        "256-383": {
+          "correct": 107,
+          "total": 4717,
+          "accuracy": 2.2684
+        },
+        "384-511": {
+          "correct": 113,
+          "total": 4552,
+          "accuracy": 2.4824
+        }
+      },
+      "elapsed_s": 80.738,
+      "train_elapsed_s": 78.364,
+      "tokens_per_s_train": 313614.79,
+      "peak_memory_mb": 265.22,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-003",
+      "model": "sparse_residual_t4_s1337",
+      "update_mode": "sparse_residual",
+      "thought_hops": 4,
+      "d_mlp": 512,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "seed": 1337,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "n_heads": 4,
+      "num_kv_pairs": 16,
+      "num_queries": 8,
+      "parameters": 329088,
+      "target_parameters": 329088,
+      "parameter_delta_vs_target": 0,
+      "steps": 1500,
+      "val_loss": 3.690632,
+      "val_exact_retrieval_accuracy": 2.4375,
+      "mean_query_distance": 333.6,
+      "distance_accuracy": {
+        "128-255": {
+          "correct": 91,
+          "total": 3531,
+          "accuracy": 2.5772
+        },
+        "256-383": {
+          "correct": 102,
+          "total": 4717,
+          "accuracy": 2.1624
+        },
+        "384-511": {
+          "correct": 119,
+          "total": 4552,
+          "accuracy": 2.6142
+        }
+      },
+      "elapsed_s": 107.618,
+      "train_elapsed_s": 104.846,
+      "tokens_per_s_train": 234400.48,
+      "peak_memory_mb": 679.98,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-003",
+      "model": "sparse_residual_t8_s1337",
+      "update_mode": "sparse_residual",
+      "thought_hops": 8,
+      "d_mlp": 512,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "seed": 1337,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "n_heads": 4,
+      "num_kv_pairs": 16,
+      "num_queries": 8,
+      "parameters": 329088,
+      "target_parameters": 329088,
+      "parameter_delta_vs_target": 0,
+      "steps": 1500,
+      "val_loss": 3.690614,
+      "val_exact_retrieval_accuracy": 2.4844,
+      "mean_query_distance": 333.6,
+      "distance_accuracy": {
+        "128-255": {
+          "correct": 91,
+          "total": 3531,
+          "accuracy": 2.5772
+        },
+        "256-383": {
+          "correct": 105,
+          "total": 4717,
+          "accuracy": 2.226
+        },
+        "384-511": {
+          "correct": 122,
+          "total": 4552,
+          "accuracy": 2.6801
+        }
+      },
+      "elapsed_s": 138.669,
+      "train_elapsed_s": 135.45,
+      "tokens_per_s_train": 181439.5,
+      "peak_memory_mb": 1233.0,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-003",
+      "model": "sparse_gru_t1_s1337",
+      "update_mode": "sparse_gru",
+      "thought_hops": 1,
+      "d_mlp": 126,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "seed": 1337,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "n_heads": 4,
+      "num_kv_pairs": 16,
+      "num_queries": 8,
+      "parameters": 328958,
+      "target_parameters": 329088,
+      "parameter_delta_vs_target": -130,
+      "steps": 1500,
+      "val_loss": 3.690458,
+      "val_exact_retrieval_accuracy": 2.2734,
+      "mean_query_distance": 333.6,
+      "distance_accuracy": {
+        "128-255": {
+          "correct": 85,
+          "total": 3531,
+          "accuracy": 2.4073
+        },
+        "256-383": {
+          "correct": 113,
+          "total": 4717,
+          "accuracy": 2.3956
+        },
+        "384-511": {
+          "correct": 93,
+          "total": 4552,
+          "accuracy": 2.0431
+        }
+      },
+      "elapsed_s": 83.999,
+      "train_elapsed_s": 81.466,
+      "tokens_per_s_train": 301672.57,
+      "peak_memory_mb": 265.35,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-003",
+      "model": "sparse_gru_t4_s1337",
+      "update_mode": "sparse_gru",
+      "thought_hops": 4,
+      "d_mlp": 126,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "seed": 1337,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "n_heads": 4,
+      "num_kv_pairs": 16,
+      "num_queries": 8,
+      "parameters": 328958,
+      "target_parameters": 329088,
+      "parameter_delta_vs_target": -130,
+      "steps": 1500,
+      "val_loss": 3.690372,
+      "val_exact_retrieval_accuracy": 2.4609,
+      "mean_query_distance": 333.6,
+      "distance_accuracy": {
+        "128-255": {
+          "correct": 83,
+          "total": 3531,
+          "accuracy": 2.3506
+        },
+        "256-383": {
+          "correct": 128,
+          "total": 4717,
+          "accuracy": 2.7136
+        },
+        "384-511": {
+          "correct": 104,
+          "total": 4552,
+          "accuracy": 2.2847
+        }
+      },
+      "elapsed_s": 111.873,
+      "train_elapsed_s": 109.034,
+      "tokens_per_s_train": 225397.26,
+      "peak_memory_mb": 763.98,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-003",
+      "model": "sparse_gru_t8_s1337",
+      "update_mode": "sparse_gru",
+      "thought_hops": 8,
+      "d_mlp": 126,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "seed": 1337,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "n_heads": 4,
+      "num_kv_pairs": 16,
+      "num_queries": 8,
+      "parameters": 328958,
+      "target_parameters": 329088,
+      "parameter_delta_vs_target": -130,
+      "steps": 1500,
+      "val_loss": 3.69034,
+      "val_exact_retrieval_accuracy": 2.4453,
+      "mean_query_distance": 333.6,
+      "distance_accuracy": {
+        "128-255": {
+          "correct": 78,
+          "total": 3531,
+          "accuracy": 2.209
+        },
+        "256-383": {
+          "correct": 128,
+          "total": 4717,
+          "accuracy": 2.7136
+        },
+        "384-511": {
+          "correct": 107,
+          "total": 4552,
+          "accuracy": 2.3506
+        }
+      },
+      "elapsed_s": 146.597,
+      "train_elapsed_s": 143.421,
+      "tokens_per_s_train": 171355.3,
+      "peak_memory_mb": 1428.88,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-003",
+      "model": "dense_1l_s1337",
+      "update_mode": "dense",
+      "thought_hops": 1,
+      "d_mlp": 512,
+      "offsets": null,
+      "seed": 1337,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "n_heads": 4,
+      "num_kv_pairs": 16,
+      "num_queries": 8,
+      "parameters": 329088,
+      "target_parameters": 329088,
+      "parameter_delta_vs_target": 0,
+      "steps": 1500,
+      "val_loss": 3.647964,
+      "val_exact_retrieval_accuracy": 4.7969,
+      "mean_query_distance": 333.6,
+      "distance_accuracy": {
+        "128-255": {
+          "correct": 159,
+          "total": 3531,
+          "accuracy": 4.503
+        },
+        "256-383": {
+          "correct": 228,
+          "total": 4717,
+          "accuracy": 4.8336
+        },
+        "384-511": {
+          "correct": 227,
+          "total": 4552,
+          "accuracy": 4.9868
+        }
+      },
+      "elapsed_s": 86.572,
+      "train_elapsed_s": 84.045,
+      "tokens_per_s_train": 292414.58,
+      "peak_memory_mb": 517.69,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-003",
+      "model": "sparse_residual_t1_s2026",
+      "update_mode": "sparse_residual",
+      "thought_hops": 1,
+      "d_mlp": 512,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "seed": 2026,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "n_heads": 4,
+      "num_kv_pairs": 16,
+      "num_queries": 8,
+      "parameters": 329088,
+      "target_parameters": 329088,
+      "parameter_delta_vs_target": 0,
+      "steps": 1500,
+      "val_loss": 3.690244,
+      "val_exact_retrieval_accuracy": 2.5781,
+      "mean_query_distance": 332.333,
+      "distance_accuracy": {
+        "128-255": {
+          "correct": 80,
+          "total": 3606,
+          "accuracy": 2.2185
+        },
+        "256-383": {
+          "correct": 139,
+          "total": 4682,
+          "accuracy": 2.9688
+        },
+        "384-511": {
+          "correct": 111,
+          "total": 4512,
+          "accuracy": 2.4601
+        }
+      },
+      "elapsed_s": 78.042,
+      "train_elapsed_s": 75.748,
+      "tokens_per_s_train": 324446.29,
+      "peak_memory_mb": 265.22,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-003",
+      "model": "sparse_residual_t4_s2026",
+      "update_mode": "sparse_residual",
+      "thought_hops": 4,
+      "d_mlp": 512,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "seed": 2026,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "n_heads": 4,
+      "num_kv_pairs": 16,
+      "num_queries": 8,
+      "parameters": 329088,
+      "target_parameters": 329088,
+      "parameter_delta_vs_target": 0,
+      "steps": 1500,
+      "val_loss": 3.690232,
+      "val_exact_retrieval_accuracy": 2.4844,
+      "mean_query_distance": 332.333,
+      "distance_accuracy": {
+        "128-255": {
+          "correct": 83,
+          "total": 3606,
+          "accuracy": 2.3017
+        },
+        "256-383": {
+          "correct": 130,
+          "total": 4682,
+          "accuracy": 2.7766
+        },
+        "384-511": {
+          "correct": 105,
+          "total": 4512,
+          "accuracy": 2.3271
+        }
+      },
+      "elapsed_s": 107.034,
+      "train_elapsed_s": 104.291,
+      "tokens_per_s_train": 235649.32,
+      "peak_memory_mb": 679.98,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-003",
+      "model": "sparse_residual_t8_s2026",
+      "update_mode": "sparse_residual",
+      "thought_hops": 8,
+      "d_mlp": 512,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "seed": 2026,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "n_heads": 4,
+      "num_kv_pairs": 16,
+      "num_queries": 8,
+      "parameters": 329088,
+      "target_parameters": 329088,
+      "parameter_delta_vs_target": 0,
+      "steps": 1500,
+      "val_loss": 3.690185,
+      "val_exact_retrieval_accuracy": 2.6172,
+      "mean_query_distance": 332.333,
+      "distance_accuracy": {
+        "128-255": {
+          "correct": 91,
+          "total": 3606,
+          "accuracy": 2.5236
+        },
+        "256-383": {
+          "correct": 129,
+          "total": 4682,
+          "accuracy": 2.7552
+        },
+        "384-511": {
+          "correct": 115,
+          "total": 4512,
+          "accuracy": 2.5488
+        }
+      },
+      "elapsed_s": 143.905,
+      "train_elapsed_s": 140.757,
+      "tokens_per_s_train": 174598.56,
+      "peak_memory_mb": 1233.0,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-003",
+      "model": "sparse_gru_t1_s2026",
+      "update_mode": "sparse_gru",
+      "thought_hops": 1,
+      "d_mlp": 126,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "seed": 2026,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "n_heads": 4,
+      "num_kv_pairs": 16,
+      "num_queries": 8,
+      "parameters": 328958,
+      "target_parameters": 329088,
+      "parameter_delta_vs_target": -130,
+      "steps": 1500,
+      "val_loss": 3.69028,
+      "val_exact_retrieval_accuracy": 2.5312,
+      "mean_query_distance": 332.333,
+      "distance_accuracy": {
+        "128-255": {
+          "correct": 96,
+          "total": 3606,
+          "accuracy": 2.6622
+        },
+        "256-383": {
+          "correct": 130,
+          "total": 4682,
+          "accuracy": 2.7766
+        },
+        "384-511": {
+          "correct": 98,
+          "total": 4512,
+          "accuracy": 2.172
+        }
+      },
+      "elapsed_s": 80.731,
+      "train_elapsed_s": 78.4,
+      "tokens_per_s_train": 313467.48,
+      "peak_memory_mb": 265.35,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-003",
+      "model": "sparse_gru_t4_s2026",
+      "update_mode": "sparse_gru",
+      "thought_hops": 4,
+      "d_mlp": 126,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "seed": 2026,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "n_heads": 4,
+      "num_kv_pairs": 16,
+      "num_queries": 8,
+      "parameters": 328958,
+      "target_parameters": 329088,
+      "parameter_delta_vs_target": -130,
+      "steps": 1500,
+      "val_loss": 3.690235,
+      "val_exact_retrieval_accuracy": 2.5859,
+      "mean_query_distance": 332.333,
+      "distance_accuracy": {
+        "128-255": {
+          "correct": 98,
+          "total": 3606,
+          "accuracy": 2.7177
+        },
+        "256-383": {
+          "correct": 119,
+          "total": 4682,
+          "accuracy": 2.5416
+        },
+        "384-511": {
+          "correct": 114,
+          "total": 4512,
+          "accuracy": 2.5266
+        }
+      },
+      "elapsed_s": 107.714,
+      "train_elapsed_s": 105.083,
+      "tokens_per_s_train": 233871.71,
+      "peak_memory_mb": 763.86,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-003",
+      "model": "sparse_gru_t8_s2026",
+      "update_mode": "sparse_gru",
+      "thought_hops": 8,
+      "d_mlp": 126,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "seed": 2026,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "n_heads": 4,
+      "num_kv_pairs": 16,
+      "num_queries": 8,
+      "parameters": 328958,
+      "target_parameters": 329088,
+      "parameter_delta_vs_target": -130,
+      "steps": 1500,
+      "val_loss": 3.690211,
+      "val_exact_retrieval_accuracy": 2.6562,
+      "mean_query_distance": 332.333,
+      "distance_accuracy": {
+        "128-255": {
+          "correct": 97,
+          "total": 3606,
+          "accuracy": 2.69
+        },
+        "256-383": {
+          "correct": 120,
+          "total": 4682,
+          "accuracy": 2.563
+        },
+        "384-511": {
+          "correct": 123,
+          "total": 4512,
+          "accuracy": 2.7261
+        }
+      },
+      "elapsed_s": 147.583,
+      "train_elapsed_s": 144.318,
+      "tokens_per_s_train": 170290.81,
+      "peak_memory_mb": 1429.13,
+      "device": "NVIDIA A10"
+    },
+    {
+      "experiment": "S2-003",
+      "model": "dense_1l_s2026",
+      "update_mode": "dense",
+      "thought_hops": 1,
+      "d_mlp": 512,
+      "offsets": null,
+      "seed": 2026,
+      "seq_len": 512,
+      "batch_size": 32,
+      "d_model": 128,
+      "n_heads": 4,
+      "num_kv_pairs": 16,
+      "num_queries": 8,
+      "parameters": 329088,
+      "target_parameters": 329088,
+      "parameter_delta_vs_target": 0,
+      "steps": 1500,
+      "val_loss": 3.654436,
+      "val_exact_retrieval_accuracy": 5.2578,
+      "mean_query_distance": 332.333,
+      "distance_accuracy": {
+        "128-255": {
+          "correct": 186,
+          "total": 3606,
+          "accuracy": 5.1581
+        },
+        "256-383": {
+          "correct": 222,
+          "total": 4682,
+          "accuracy": 4.7416
+        },
+        "384-511": {
+          "correct": 265,
+          "total": 4512,
+          "accuracy": 5.8732
+        }
+      },
+      "elapsed_s": 86.844,
+      "train_elapsed_s": 84.417,
+      "tokens_per_s_train": 291126.23,
+      "peak_memory_mb": 517.69,
+      "device": "NVIDIA A10"
+    }
+  ],
+  "completed_at": "2026-09-05T07:46:42Z"
+}

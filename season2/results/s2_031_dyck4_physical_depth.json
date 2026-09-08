@@ -1,0 +1,149 @@
+{
+  "experiment": "S2-031",
+  "description": "Dyck-4 Shootout with 4 physical layers of SubQ (8 hops/layer) vs Dense 4-layer",
+  "task": "Dyck-4 bracket completion across nesting depths 1 to 30+",
+  "seeds": [
+    42,
+    1337,
+    2026
+  ],
+  "training_steps": 2000,
+  "completed_at": "2026-09-08T07:57:23Z",
+  "results": [
+    {
+      "model": "dense_4layer_s42",
+      "architecture": "dense_4layer",
+      "seed": 42,
+      "parameters": 828160,
+      "steps": 2000,
+      "overall_accuracy": 96.042,
+      "tier_accuracy": {
+        "tier1_shallow_1_5": 96.7543,
+        "tier2_medium_6_15": 96.022,
+        "tier3_deep_16_30": 95.7676
+      },
+      "total_evaluated_tokens": 204800,
+      "elapsed_s": 141.711
+    },
+    {
+      "model": "dense_4layer_s1337",
+      "architecture": "dense_4layer",
+      "seed": 1337,
+      "parameters": 828160,
+      "steps": 2000,
+      "overall_accuracy": 94.2139,
+      "tier_accuracy": {
+        "tier1_shallow_1_5": 95.4832,
+        "tier2_medium_6_15": 93.5081,
+        "tier3_deep_16_30": 94.2834
+      },
+      "total_evaluated_tokens": 204800,
+      "elapsed_s": 144.914
+    },
+    {
+      "model": "dense_4layer_s2026",
+      "architecture": "dense_4layer",
+      "seed": 2026,
+      "parameters": 828160,
+      "steps": 2000,
+      "overall_accuracy": 94.0386,
+      "tier_accuracy": {
+        "tier1_shallow_1_5": 94.9565,
+        "tier2_medium_6_15": 93.0362,
+        "tier3_deep_16_30": 94.4942
+      },
+      "total_evaluated_tokens": 204800,
+      "elapsed_s": 140.164
+    },
+    {
+      "model": "subq_1layer_final_mlp_s42",
+      "architecture": "subq_1layer_final_mlp",
+      "seed": 42,
+      "parameters": 218496,
+      "steps": 2000,
+      "overall_accuracy": 72.6108,
+      "tier_accuracy": {
+        "tier1_shallow_1_5": 74.1699,
+        "tier2_medium_6_15": 70.4275,
+        "tier3_deep_16_30": 73.7646
+      },
+      "total_evaluated_tokens": 204800,
+      "elapsed_s": 160.08
+    },
+    {
+      "model": "subq_1layer_final_mlp_s1337",
+      "architecture": "subq_1layer_final_mlp",
+      "seed": 1337,
+      "parameters": 218496,
+      "steps": 2000,
+      "overall_accuracy": 76.7329,
+      "tier_accuracy": {
+        "tier1_shallow_1_5": 77.5501,
+        "tier2_medium_6_15": 74.3937,
+        "tier3_deep_16_30": 78.2945
+      },
+      "total_evaluated_tokens": 204800,
+      "elapsed_s": 153.699
+    },
+    {
+      "model": "subq_1layer_final_mlp_s2026",
+      "architecture": "subq_1layer_final_mlp",
+      "seed": 2026,
+      "parameters": 218496,
+      "steps": 2000,
+      "overall_accuracy": 78.2646,
+      "tier_accuracy": {
+        "tier1_shallow_1_5": 78.5377,
+        "tier2_medium_6_15": 75.7822,
+        "tier3_deep_16_30": 80.1719
+      },
+      "total_evaluated_tokens": 204800,
+      "elapsed_s": 199.709
+    },
+    {
+      "model": "subq_4layer_physical_s42",
+      "architecture": "subq_4layer_physical",
+      "seed": 42,
+      "parameters": 762624,
+      "steps": 2000,
+      "overall_accuracy": 24.9497,
+      "tier_accuracy": {
+        "tier1_shallow_1_5": 24.996,
+        "tier2_medium_6_15": 24.8049,
+        "tier3_deep_16_30": 25.0495
+      },
+      "total_evaluated_tokens": 204800,
+      "elapsed_s": 313.589
+    },
+    {
+      "model": "subq_4layer_physical_s1337",
+      "architecture": "subq_4layer_physical",
+      "seed": 1337,
+      "parameters": 762624,
+      "steps": 2000,
+      "overall_accuracy": 25.0166,
+      "tier_accuracy": {
+        "tier1_shallow_1_5": 25.0376,
+        "tier2_medium_6_15": 25.0583,
+        "tier3_deep_16_30": 24.9748
+      },
+      "total_evaluated_tokens": 204800,
+      "elapsed_s": 292.729
+    },
+    {
+      "model": "subq_4layer_physical_s2026",
+      "architecture": "subq_4layer_physical",
+      "seed": 2026,
+      "parameters": 762624,
+      "steps": 2000,
+      "overall_accuracy": 24.8672,
+      "tier_accuracy": {
+        "tier1_shallow_1_5": 25.1097,
+        "tier2_medium_6_15": 24.7026,
+        "tier3_deep_16_30": 24.9062
+      },
+      "total_evaluated_tokens": 204800,
+      "elapsed_s": 309.362
+    }
+  ]
+}
