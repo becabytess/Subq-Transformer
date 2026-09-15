@@ -1,0 +1,107 @@
+{
+  "study": "S3-029",
+  "description": "State-Conditioned Per-Token Wave Router on Dyck-4 at T=4 Hops",
+  "seq_len": 256,
+  "n_hops": 4,
+  "k_peaks": 8,
+  "num_params": 340912,
+  "total_time_s": 280.2,
+  "final_overall_acc": 89.82,
+  "final_shallow_acc": 88.17,
+  "final_med_acc": 86.26,
+  "final_deep_acc": 93.36,
+  "records": [
+    {
+      "step": 250,
+      "loss": 0.3402,
+      "overall_acc": 83.38,
+      "shallow_acc": 83.36,
+      "med_acc": 80.22,
+      "deep_acc": 85.93,
+      "elapsed_s": 28.5
+    },
+    {
+      "step": 500,
+      "loss": 0.2967,
+      "overall_acc": 85.99,
+      "shallow_acc": 84.77,
+      "med_acc": 82.69,
+      "deep_acc": 89.18,
+      "elapsed_s": 63.7
+    },
+    {
+      "step": 750,
+      "loss": 0.2746,
+      "overall_acc": 87.06,
+      "shallow_acc": 85.39,
+      "med_acc": 83.66,
+      "deep_acc": 90.36,
+      "elapsed_s": 98.6
+    },
+    {
+      "step": 1000,
+      "loss": 0.2559,
+      "overall_acc": 88.13,
+      "shallow_acc": 86.73,
+      "med_acc": 84.97,
+      "deep_acc": 91.36,
+      "elapsed_s": 133.6
+    },
+    {
+      "step": 1250,
+      "loss": 0.2173,
+      "overall_acc": 88.56,
+      "shallow_acc": 87.47,
+      "med_acc": 84.97,
+      "deep_acc": 91.9,
+      "elapsed_s": 168.4
+    },
+    {
+      "step": 1500,
+      "loss": 0.2153,
+      "overall_acc": 88.7,
+      "shallow_acc": 87.14,
+      "med_acc": 85.29,
+      "deep_acc": 92.07,
+      "elapsed_s": 203.2
+    },
+    {
+      "step": 1750,
+      "loss": 0.2035,
+      "overall_acc": 89.5,
+      "shallow_acc": 87.35,
+      "med_acc": 85.82,
+      "deep_acc": 93.19,
+      "elapsed_s": 238.1
+    },
+    {
+      "step": 2000,
+      "loss": 0.2252,
+      "overall_acc": 89.82,
+      "shallow_acc": 88.17,
+      "med_acc": 86.26,
+      "deep_acc": 93.36,
+      "elapsed_s": 273.0
+    }
+  ],
+  "diagnostics": {
+    "offset_std_per_token": [
+      69.33407592773438,
+      98.70199584960938,
+      106.53359985351562,
+      98.98031616210938
+    ],
+    "mean_attended_distances": [
+      23.337142944335938,
+      18.565380096435547,
+      18.038793563842773,
+      18.92335319519043
+    ],
+    "hop_entropies": [
+      1.3777920007705688,
+      1.1871426105499268,
+      0.9060227870941162,
+      0.762639582157135
+    ]
+  }
+}

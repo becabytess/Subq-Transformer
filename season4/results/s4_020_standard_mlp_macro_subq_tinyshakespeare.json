@@ -1,0 +1,129 @@
+{
+  "experiment": "S4-020",
+  "name": "Standard Stacked SubQ with Feedforward MLPs (ZERO CONVOLUTIONS)",
+  "dataset": "TinyShakespeare",
+  "seq_len": 256,
+  "vocab_size": 65,
+  "d_model": 128,
+  "n_heads": 4,
+  "num_macro_layers": 2,
+  "T_hops_per_layer": 4,
+  "K_peaks_per_hop": 8,
+  "lookups_per_token": 64,
+  "dense_lookups": 256,
+  "sparsity_pct": 75.0,
+  "total_parameters": 687164,
+  "mlp_count": 2,
+  "mlp_hidden": 1022,
+  "conv_head": null,
+  "hardware": {
+    "device": "cuda",
+    "gpu": "Tesla T4",
+    "openai_triton": true
+  },
+  "triton_self_check": {
+    "fwd_out_diff": 2.86e-06,
+    "dq_diff": 2.95e-05,
+    "dk_diff": 3.47e-05,
+    "dv_diff": 1.81e-05,
+    "dbias_diff": 0.00162,
+    "status": "100% BIT-EXACT MATCH WITH PYTORCH"
+  },
+  "causal_firewall": {
+    "max_leakage_pos_gt_30": 0.0,
+    "status": "100% Zero Future Leakage"
+  },
+  "training_trajectory": [
+    {
+      "step": 0,
+      "val_loss": 4.3628,
+      "val_ppl": 78.47
+    },
+    {
+      "step": 200,
+      "train_loss": 2.316,
+      "val_loss": 2.321,
+      "val_ppl": 10.19,
+      "steps_per_sec": 12.8,
+      "elapsed_s": 15.6
+    },
+    {
+      "step": 400,
+      "train_loss": 2.0148,
+      "val_loss": 2.0899,
+      "val_ppl": 8.08,
+      "steps_per_sec": 14.6,
+      "elapsed_s": 27.4
+    },
+    {
+      "step": 600,
+      "train_loss": 1.8184,
+      "val_loss": 1.9478,
+      "val_ppl": 7.01,
+      "steps_per_sec": 15.3,
+      "elapsed_s": 39.2
+    },
+    {
+      "step": 800,
+      "train_loss": 1.6942,
+      "val_loss": 1.8583,
+      "val_ppl": 6.41,
+      "steps_per_sec": 15.6,
+      "elapsed_s": 51.2
+    },
+    {
+      "step": 1000,
+      "train_loss": 1.6123,
+      "val_loss": 1.7901,
+      "val_ppl": 5.99,
+      "steps_per_sec": 15.8,
+      "elapsed_s": 63.2
+    },
+    {
+      "step": 1200,
+      "train_loss": 1.5696,
+      "val_loss": 1.7585,
+      "val_ppl": 5.8,
+      "steps_per_sec": 15.9,
+      "elapsed_s": 75.3
+    },
+    {
+      "step": 1400,
+      "train_loss": 1.5354,
+      "val_loss": 1.738,
+      "val_ppl": 5.69,
+      "steps_per_sec": 16.0,
+      "elapsed_s": 87.4
+    },
+    {
+      "step": 1600,
+      "train_loss": 1.5076,
+      "val_loss": 1.7174,
+      "val_ppl": 5.57,
+      "steps_per_sec": 16.0,
+      "elapsed_s": 99.7
+    },
+    {
+      "step": 1800,
+      "train_loss": 1.501,
+      "val_loss": 1.7137,
+      "val_ppl": 5.55,
+      "steps_per_sec": 16.1,
+      "elapsed_s": 112.0
+    },
+    {
+      "step": 2000,
+      "train_loss": 1.4939,
+      "val_loss": 1.7028,
+      "val_ppl": 5.49,
+      "steps_per_sec": 16.1,
+      "elapsed_s": 124.5
+    }
+  ],
+  "final_metrics": {
+    "best_val_loss": 1.7028,
+    "best_val_ppl": 5.49,
+    "total_training_time_s": 127.0,
+    "avg_steps_per_sec": 15.7
+  }
+}

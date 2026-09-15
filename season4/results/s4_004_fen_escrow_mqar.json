@@ -1,0 +1,20 @@
+{
+  "experiment": "S4-004",
+  "title": "Per-Token Feature Escrow Network (FEN) SubQ on MQAR",
+  "task": "Corrected MQAR (L=512, 16 pairs, 8 queries)",
+  "results": {
+    "subq_4hops_fen_escrow_roll": {
+      "parameters": 411392,
+      "step_1000_acc": 2.52,
+      "step_2000_acc": 2.6,
+      "step_3000_acc": 2.79,
+      "notes": "Failed because intermediate relay tokens along multi-hop wire corrupted signal before reaching escrow."
+    },
+    "fen_post_mlp_roll_nodep": {
+      "parameters": 395137,
+      "step_1000_acc": 2.52,
+      "step_2000_acc": 2.6,
+      "notes": "Failed for identical relay token vulnerability reasons."
+    }
+  }
+}

@@ -1,0 +1,2968 @@
+{
+  "final_val_loss": 1.4184001723925272,
+  "final_val_ppl": 4.1305070523064975,
+  "n_hops": 4,
+  "hops": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "velocities": [
+    0.49466667175292967,
+    0.4122355530659358,
+    0.34023457467556,
+    0.2885636568069458
+  ],
+  "state_cosines": [
+    0.8870639383792878,
+    0.9140742341677348,
+    0.948775718609492,
+    0.9684017678101857
+  ],
+  "decays": [
+    0.07163671180605888,
+    0.07813139657179514,
+    0.07782229358951251,
+    0.07419438237945239
+  ],
+  "reaches": [
+    13.95957684481896,
+    12.799290798425462,
+    12.850120155044236,
+    13.478384218071652
+  ],
+  "mean_distances": [
+    2.4424540360768634,
+    2.4665393431981406,
+    2.1137048562367755,
+    2.2620402654012044
+  ],
+  "entropies": [
+    0.5084878474473953,
+    0.42058755656083424,
+    0.3769107083479563,
+    0.3555277248223623
+  ],
+  "offset_std_per_token": [
+    112.98307902018229,
+    108.26097615559895,
+    107.48911794026692,
+    104.90513788859049
+  ],
+  "training_time": 132.04539322853088,
+  "parameters": 293808,
+  "inspection": [
+    {
+      "name": "Probe 1: Pronoun / Entity Resolution",
+      "text": "Sherlock Holmes sat in his armchair, smoking his pipe. The visitor knocked on the door and asked for help.",
+      "tokens": [
+        {
+          "word": "his",
+          "start_pos": 23,
+          "target_pos": 25,
+          "hop_history": [
+            {
+              "hop": 1,
+              "reach": 15.35,
+              "antenna_shift": 0.0,
+              "mean_amplitude": 0.8151,
+              "targets": [
+                {
+                  "offset": 0,
+                  "weight": 1.0,
+                  "peak_val": 0.0,
+                  "target_char": "s",
+                  "snippet": " his ar"
+                },
+                {
+                  "offset": 255,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 254,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 253,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 252,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 251,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 250,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 249,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                }
+              ]
+            },
+            {
+              "hop": 2,
+              "reach": 16.01,
+              "antenna_shift": 0.0,
+              "mean_amplitude": 0.7085,
+              "targets": [
+                {
+                  "offset": 0,
+                  "weight": 1.0,
+                  "peak_val": 0.0,
+                  "target_char": "s",
+                  "snippet": " his ar"
+                },
+                {
+                  "offset": 255,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 254,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 253,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 252,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 251,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 250,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 249,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                }
+              ]
+            },
+            {
+              "hop": 3,
+              "reach": 18.46,
+              "antenna_shift": 0.0,
+              "mean_amplitude": 0.7551,
+              "targets": [
+                {
+                  "offset": 0,
+                  "weight": 1.0,
+                  "peak_val": 0.0,
+                  "target_char": "s",
+                  "snippet": " his ar"
+                },
+                {
+                  "offset": 255,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 254,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 253,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 252,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 251,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 250,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 249,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                }
+              ]
+            },
+            {
+              "hop": 4,
+              "reach": 21.98,
+              "antenna_shift": 0.0,
+              "mean_amplitude": 0.7649,
+              "targets": [
+                {
+                  "offset": 0,
+                  "weight": 1.0,
+                  "peak_val": 0.0,
+                  "target_char": "s",
+                  "snippet": " his ar"
+                },
+                {
+                  "offset": 255,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 254,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 253,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 252,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 251,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 250,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 249,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "word": "his",
+          "start_pos": 45,
+          "target_pos": 47,
+          "hop_history": [
+            {
+              "hop": 1,
+              "reach": 14.56,
+              "antenna_shift": 0.0,
+              "mean_amplitude": 0.7998,
+              "targets": [
+                {
+                  "offset": 0,
+                  "weight": 1.0,
+                  "peak_val": 0.0,
+                  "target_char": "s",
+                  "snippet": " his pi"
+                },
+                {
+                  "offset": 255,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 254,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 253,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 252,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 251,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 250,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 249,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                }
+              ]
+            },
+            {
+              "hop": 2,
+              "reach": 15.5,
+              "antenna_shift": 0.0,
+              "mean_amplitude": 0.6799,
+              "targets": [
+                {
+                  "offset": 0,
+                  "weight": 1.0,
+                  "peak_val": 0.0,
+                  "target_char": "s",
+                  "snippet": " his pi"
+                },
+                {
+                  "offset": 255,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 254,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 253,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 252,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 251,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 250,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 249,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                }
+              ]
+            },
+            {
+              "hop": 3,
+              "reach": 17.7,
+              "antenna_shift": 0.0,
+              "mean_amplitude": 0.7888,
+              "targets": [
+                {
+                  "offset": 0,
+                  "weight": 1.0,
+                  "peak_val": 0.0,
+                  "target_char": "s",
+                  "snippet": " his pi"
+                },
+                {
+                  "offset": 255,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 254,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 253,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 252,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 251,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 250,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 249,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                }
+              ]
+            },
+            {
+              "hop": 4,
+              "reach": 20.47,
+              "antenna_shift": 0.0,
+              "mean_amplitude": 0.7829,
+              "targets": [
+                {
+                  "offset": 0,
+                  "weight": 1.0,
+                  "peak_val": 0.0,
+                  "target_char": "s",
+                  "snippet": " his pi"
+                },
+                {
+                  "offset": 255,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 254,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 253,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 252,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 251,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 250,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 249,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "word": "visitor",
+          "start_pos": 59,
+          "target_pos": 65,
+          "hop_history": [
+            {
+              "hop": 1,
+              "reach": 17.43,
+              "antenna_shift": 0.0,
+              "mean_amplitude": 0.7903,
+              "targets": [
+                {
+                  "offset": 0,
+                  "weight": 1.0,
+                  "peak_val": 0.0,
+                  "target_char": "r",
+                  "snippet": "itor kn"
+                },
+                {
+                  "offset": 255,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 254,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 253,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 252,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 251,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 250,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 249,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                }
+              ]
+            },
+            {
+              "hop": 2,
+              "reach": 15.01,
+              "antenna_shift": 0.0,
+              "mean_amplitude": 0.7516,
+              "targets": [
+                {
+                  "offset": 0,
+                  "weight": 1.0,
+                  "peak_val": 0.0,
+                  "target_char": "r",
+                  "snippet": "itor kn"
+                },
+                {
+                  "offset": 255,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 254,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 253,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 252,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 251,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 250,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 249,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                }
+              ]
+            },
+            {
+              "hop": 3,
+              "reach": 14.78,
+              "antenna_shift": 0.0,
+              "mean_amplitude": 0.7071,
+              "targets": [
+                {
+                  "offset": 0,
+                  "weight": 1.0,
+                  "peak_val": 0.0,
+                  "target_char": "r",
+                  "snippet": "itor kn"
+                },
+                {
+                  "offset": 255,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 254,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 253,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 252,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 251,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 250,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 249,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                }
+              ]
+            },
+            {
+              "hop": 4,
+              "reach": 16.05,
+              "antenna_shift": 140.0,
+              "mean_amplitude": 0.612,
+              "targets": [
+                {
+                  "offset": 0,
+                  "weight": 1.0,
+                  "peak_val": 0.0,
+                  "target_char": "r",
+                  "snippet": "itor kn"
+                },
+                {
+                  "offset": 112,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 113,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 111,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 114,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 110,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 115,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 109,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "word": "asked",
+          "start_pos": 91,
+          "target_pos": 95,
+          "hop_history": [
+            {
+              "hop": 1,
+              "reach": 17.06,
+              "antenna_shift": 0.0,
+              "mean_amplitude": 0.7025,
+              "targets": [
+                {
+                  "offset": 0,
+                  "weight": 1.0,
+                  "peak_val": 0.0,
+                  "target_char": "d",
+                  "snippet": "sked fo"
+                },
+                {
+                  "offset": 255,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 254,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 253,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 252,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 251,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 250,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 249,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                }
+              ]
+            },
+            {
+              "hop": 2,
+              "reach": 15.32,
+              "antenna_shift": 0.0,
+              "mean_amplitude": 0.65,
+              "targets": [
+                {
+                  "offset": 0,
+                  "weight": 1.0,
+                  "peak_val": 0.0,
+                  "target_char": "d",
+                  "snippet": "sked fo"
+                },
+                {
+                  "offset": 255,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 254,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 253,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 252,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 251,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 250,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 249,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                }
+              ]
+            },
+            {
+              "hop": 3,
+              "reach": 17.51,
+              "antenna_shift": 0.0,
+              "mean_amplitude": 0.6591,
+              "targets": [
+                {
+                  "offset": 0,
+                  "weight": 1.0,
+                  "peak_val": 0.0,
+                  "target_char": "d",
+                  "snippet": "sked fo"
+                },
+                {
+                  "offset": 255,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 254,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 253,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 252,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 251,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 250,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 249,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                }
+              ]
+            },
+            {
+              "hop": 4,
+              "reach": 21.35,
+              "antenna_shift": 125.0,
+              "mean_amplitude": 0.6571,
+              "targets": [
+                {
+                  "offset": 0,
+                  "weight": 1.0,
+                  "peak_val": 0.0,
+                  "target_char": "d",
+                  "snippet": "sked fo"
+                },
+                {
+                  "offset": 126,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 127,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 125,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 128,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 124,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 129,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 130,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Probe 2: Quotation & Dialogue Discourse",
+      "text": "He said: \u201cIt is an extraordinary problem, my dear Watson, but we shall solve it.\u201d",
+      "tokens": [
+        {
+          "word": "\u201c",
+          "start_pos": 9,
+          "target_pos": 9,
+          "hop_history": [
+            {
+              "hop": 1,
+              "reach": 13.45,
+              "antenna_shift": 0.0,
+              "mean_amplitude": 0.762,
+              "targets": [
+                {
+                  "offset": 0,
+                  "weight": 0.225,
+                  "peak_val": 0.0,
+                  "target_char": "\u201c",
+                  "snippet": "d: \u201cIt "
+                },
+                {
+                  "offset": 4,
+                  "weight": 0.2156,
+                  "peak_val": 0.292,
+                  "target_char": "i",
+                  "snippet": " said: "
+                },
+                {
+                  "offset": 5,
+                  "weight": 0.2087,
+                  "peak_val": 0.488,
+                  "target_char": "a",
+                  "snippet": "e said:"
+                },
+                {
+                  "offset": 1,
+                  "weight": 0.1157,
+                  "peak_val": 0.688,
+                  "target_char": " ",
+                  "snippet": "id: \u201cIt"
+                },
+                {
+                  "offset": 6,
+                  "weight": 0.1101,
+                  "peak_val": -0.819,
+                  "target_char": "s",
+                  "snippet": "He said"
+                },
+                {
+                  "offset": 2,
+                  "weight": 0.0908,
+                  "peak_val": -0.666,
+                  "target_char": ":",
+                  "snippet": "aid: \u201cI"
+                },
+                {
+                  "offset": 3,
+                  "weight": 0.0239,
+                  "peak_val": -0.927,
+                  "target_char": "d",
+                  "snippet": "said: \u201c"
+                },
+                {
+                  "offset": 8,
+                  "weight": 0.0102,
+                  "peak_val": -1.031,
+                  "target_char": "e",
+                  "snippet": "He sa"
+                }
+              ]
+            },
+            {
+              "hop": 2,
+              "reach": 11.38,
+              "antenna_shift": 72.43,
+              "mean_amplitude": 0.7038,
+              "targets": [
+                {
+                  "offset": 1,
+                  "weight": 0.5523,
+                  "peak_val": 2.067,
+                  "target_char": " ",
+                  "snippet": "id: \u201cIt"
+                },
+                {
+                  "offset": 0,
+                  "weight": 0.1782,
+                  "peak_val": 0.0,
+                  "target_char": "\u201c",
+                  "snippet": "d: \u201cIt "
+                },
+                {
+                  "offset": 2,
+                  "weight": 0.1747,
+                  "peak_val": 0.067,
+                  "target_char": ":",
+                  "snippet": "aid: \u201cI"
+                },
+                {
+                  "offset": 5,
+                  "weight": 0.0424,
+                  "peak_val": -0.452,
+                  "target_char": "a",
+                  "snippet": "e said:"
+                },
+                {
+                  "offset": 4,
+                  "weight": 0.0369,
+                  "peak_val": -0.224,
+                  "target_char": "i",
+                  "snippet": " said: "
+                },
+                {
+                  "offset": 3,
+                  "weight": 0.0155,
+                  "peak_val": -0.784,
+                  "target_char": "d",
+                  "snippet": "said: \u201c"
+                },
+                {
+                  "offset": 255,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 254,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                }
+              ]
+            },
+            {
+              "hop": 3,
+              "reach": 11.15,
+              "antenna_shift": 108.0,
+              "mean_amplitude": 0.6424,
+              "targets": [
+                {
+                  "offset": 1,
+                  "weight": 0.7814,
+                  "peak_val": 1.883,
+                  "target_char": " ",
+                  "snippet": "id: \u201cIt"
+                },
+                {
+                  "offset": 0,
+                  "weight": 0.145,
+                  "peak_val": 0.0,
+                  "target_char": "\u201c",
+                  "snippet": "d: \u201cIt "
+                },
+                {
+                  "offset": 2,
+                  "weight": 0.0736,
+                  "peak_val": -0.115,
+                  "target_char": ":",
+                  "snippet": "aid: \u201cI"
+                },
+                {
+                  "offset": 255,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 254,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 253,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 252,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 251,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                }
+              ]
+            },
+            {
+              "hop": 4,
+              "reach": 11.51,
+              "antenna_shift": 0.0,
+              "mean_amplitude": 0.6303,
+              "targets": [
+                {
+                  "offset": 1,
+                  "weight": 0.8195,
+                  "peak_val": 1.392,
+                  "target_char": " ",
+                  "snippet": "id: \u201cIt"
+                },
+                {
+                  "offset": 0,
+                  "weight": 0.131,
+                  "peak_val": 0.0,
+                  "target_char": "\u201c",
+                  "snippet": "d: \u201cIt "
+                },
+                {
+                  "offset": 2,
+                  "weight": 0.0496,
+                  "peak_val": -0.144,
+                  "target_char": ":",
+                  "snippet": "aid: \u201cI"
+                },
+                {
+                  "offset": 255,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 254,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 253,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 252,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 251,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "word": "Watson",
+          "start_pos": 50,
+          "target_pos": 55,
+          "hop_history": [
+            {
+              "hop": 1,
+              "reach": 24.04,
+              "antenna_shift": 0.0,
+              "mean_amplitude": 0.7287,
+              "targets": [
+                {
+                  "offset": 0,
+                  "weight": 1.0,
+                  "peak_val": 0.0,
+                  "target_char": "n",
+                  "snippet": "tson, b"
+                },
+                {
+                  "offset": 255,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 254,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 253,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 252,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 251,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 250,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 249,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                }
+              ]
+            },
+            {
+              "hop": 2,
+              "reach": 26.3,
+              "antenna_shift": 0.0,
+              "mean_amplitude": 0.7078,
+              "targets": [
+                {
+                  "offset": 0,
+                  "weight": 1.0,
+                  "peak_val": 0.0,
+                  "target_char": "n",
+                  "snippet": "tson, b"
+                },
+                {
+                  "offset": 255,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 254,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 253,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 252,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 251,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 250,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 249,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                }
+              ]
+            },
+            {
+              "hop": 3,
+              "reach": 29.59,
+              "antenna_shift": 196.71,
+              "mean_amplitude": 0.5727,
+              "targets": [
+                {
+                  "offset": 0,
+                  "weight": 0.5964,
+                  "peak_val": 0.0,
+                  "target_char": "n",
+                  "snippet": "tson, b"
+                },
+                {
+                  "offset": 7,
+                  "weight": 0.2743,
+                  "peak_val": -2.557,
+                  "target_char": "r",
+                  "snippet": "dear Wa"
+                },
+                {
+                  "offset": 8,
+                  "weight": 0.1054,
+                  "peak_val": -2.643,
+                  "target_char": "a",
+                  "snippet": " dear W"
+                },
+                {
+                  "offset": 6,
+                  "weight": 0.0238,
+                  "peak_val": -2.626,
+                  "target_char": " ",
+                  "snippet": "ear Wat"
+                },
+                {
+                  "offset": 92,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 91,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 93,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 90,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                }
+              ]
+            },
+            {
+              "hop": 4,
+              "reach": 30.6,
+              "antenna_shift": 43.86,
+              "mean_amplitude": 0.6321,
+              "targets": [
+                {
+                  "offset": 0,
+                  "weight": 0.4445,
+                  "peak_val": 0.0,
+                  "target_char": "n",
+                  "snippet": "tson, b"
+                },
+                {
+                  "offset": 7,
+                  "weight": 0.2343,
+                  "peak_val": -2.779,
+                  "target_char": "r",
+                  "snippet": "dear Wa"
+                },
+                {
+                  "offset": 8,
+                  "weight": 0.1161,
+                  "peak_val": -2.875,
+                  "target_char": "a",
+                  "snippet": " dear W"
+                },
+                {
+                  "offset": 5,
+                  "weight": 0.0494,
+                  "peak_val": -2.957,
+                  "target_char": "W",
+                  "snippet": "ar Wats"
+                },
+                {
+                  "offset": 17,
+                  "weight": 0.0471,
+                  "peak_val": -2.951,
+                  "target_char": "e",
+                  "snippet": "oblem, "
+                },
+                {
+                  "offset": 18,
+                  "weight": 0.045,
+                  "peak_val": -2.938,
+                  "target_char": "l",
+                  "snippet": "roblem,"
+                },
+                {
+                  "offset": 19,
+                  "weight": 0.0384,
+                  "peak_val": -2.959,
+                  "target_char": "b",
+                  "snippet": "problem"
+                },
+                {
+                  "offset": 6,
+                  "weight": 0.0251,
+                  "peak_val": -2.798,
+                  "target_char": " ",
+                  "snippet": "ear Wat"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "word": "solve",
+          "start_pos": 71,
+          "target_pos": 75,
+          "hop_history": [
+            {
+              "hop": 1,
+              "reach": 15.62,
+              "antenna_shift": 0.0,
+              "mean_amplitude": 0.7935,
+              "targets": [
+                {
+                  "offset": 0,
+                  "weight": 1.0,
+                  "peak_val": 0.0,
+                  "target_char": "e",
+                  "snippet": "olve it"
+                },
+                {
+                  "offset": 255,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 254,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 253,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 252,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 251,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 250,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 249,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                }
+              ]
+            },
+            {
+              "hop": 2,
+              "reach": 14.38,
+              "antenna_shift": 0.0,
+              "mean_amplitude": 0.7784,
+              "targets": [
+                {
+                  "offset": 0,
+                  "weight": 1.0,
+                  "peak_val": 0.0,
+                  "target_char": "e",
+                  "snippet": "olve it"
+                },
+                {
+                  "offset": 255,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 254,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 253,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 252,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 251,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 250,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 249,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                }
+              ]
+            },
+            {
+              "hop": 3,
+              "reach": 14.59,
+              "antenna_shift": 0.0,
+              "mean_amplitude": 0.7948,
+              "targets": [
+                {
+                  "offset": 0,
+                  "weight": 1.0,
+                  "peak_val": 0.0,
+                  "target_char": "e",
+                  "snippet": "olve it"
+                },
+                {
+                  "offset": 255,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 254,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 253,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 252,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 251,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 250,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 249,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                }
+              ]
+            },
+            {
+              "hop": 4,
+              "reach": 14.63,
+              "antenna_shift": 0.0,
+              "mean_amplitude": 0.7737,
+              "targets": [
+                {
+                  "offset": 0,
+                  "weight": 1.0,
+                  "peak_val": 0.0,
+                  "target_char": "e",
+                  "snippet": "olve it"
+                },
+                {
+                  "offset": 255,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 254,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 253,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 252,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 251,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 250,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 249,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "word": "\u201d",
+          "start_pos": 80,
+          "target_pos": 80,
+          "hop_history": [
+            {
+              "hop": 1,
+              "reach": 27.47,
+              "antenna_shift": 0.0,
+              "mean_amplitude": 0.5802,
+              "targets": [
+                {
+                  "offset": 0,
+                  "weight": 0.6531,
+                  "peak_val": 0.0,
+                  "target_char": "\u201d",
+                  "snippet": "it.\u201d"
+                },
+                {
+                  "offset": 31,
+                  "weight": 0.1326,
+                  "peak_val": -0.199,
+                  "target_char": " ",
+                  "snippet": "ear Wat"
+                },
+                {
+                  "offset": 25,
+                  "weight": 0.1228,
+                  "peak_val": -0.184,
+                  "target_char": "n",
+                  "snippet": "tson, b"
+                },
+                {
+                  "offset": 26,
+                  "weight": 0.0916,
+                  "peak_val": -0.088,
+                  "target_char": "o",
+                  "snippet": "atson, "
+                },
+                {
+                  "offset": 255,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 254,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 253,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 252,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                }
+              ]
+            },
+            {
+              "hop": 2,
+              "reach": 33.3,
+              "antenna_shift": 110.14,
+              "mean_amplitude": 0.5628,
+              "targets": [
+                {
+                  "offset": 0,
+                  "weight": 1.0,
+                  "peak_val": 0.0,
+                  "target_char": "\u201d",
+                  "snippet": "it.\u201d"
+                },
+                {
+                  "offset": 162,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 163,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 161,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 164,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 160,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 165,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 158,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                }
+              ]
+            },
+            {
+              "hop": 3,
+              "reach": 44.5,
+              "antenna_shift": 44.57,
+              "mean_amplitude": 0.5844,
+              "targets": [
+                {
+                  "offset": 0,
+                  "weight": 1.0,
+                  "peak_val": 0.0,
+                  "target_char": "\u201d",
+                  "snippet": "it.\u201d"
+                },
+                {
+                  "offset": 112,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 113,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 111,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 114,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 115,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 116,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 140,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                }
+              ]
+            },
+            {
+              "hop": 4,
+              "reach": 48.19,
+              "antenna_shift": 35.29,
+              "mean_amplitude": 0.5737,
+              "targets": [
+                {
+                  "offset": 80,
+                  "weight": 0.6566,
+                  "peak_val": -0.268,
+                  "target_char": "H",
+                  "snippet": "He s"
+                },
+                {
+                  "offset": 79,
+                  "weight": 0.2197,
+                  "peak_val": -0.288,
+                  "target_char": "e",
+                  "snippet": "He sa"
+                },
+                {
+                  "offset": 0,
+                  "weight": 0.1237,
+                  "peak_val": 0.0,
+                  "target_char": "\u201d",
+                  "snippet": "it.\u201d"
+                },
+                {
+                  "offset": 81,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 82,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 83,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 84,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 85,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Probe 3: Subordinate Clause & Causality",
+      "text": "The doctor hurried away because the patient had suddenly collapsed in the garden.",
+      "tokens": [
+        {
+          "word": "because",
+          "start_pos": 24,
+          "target_pos": 30,
+          "hop_history": [
+            {
+              "hop": 1,
+              "reach": 16.13,
+              "antenna_shift": 0.0,
+              "mean_amplitude": 0.6751,
+              "targets": [
+                {
+                  "offset": 0,
+                  "weight": 1.0,
+                  "peak_val": 0.0,
+                  "target_char": "e",
+                  "snippet": "ause th"
+                },
+                {
+                  "offset": 255,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 254,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 253,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 252,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 251,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 250,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 249,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                }
+              ]
+            },
+            {
+              "hop": 2,
+              "reach": 18.07,
+              "antenna_shift": 0.0,
+              "mean_amplitude": 0.6118,
+              "targets": [
+                {
+                  "offset": 0,
+                  "weight": 1.0,
+                  "peak_val": 0.0,
+                  "target_char": "e",
+                  "snippet": "ause th"
+                },
+                {
+                  "offset": 255,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 254,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 253,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 252,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 251,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 250,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 249,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                }
+              ]
+            },
+            {
+              "hop": 3,
+              "reach": 19.46,
+              "antenna_shift": 0.0,
+              "mean_amplitude": 0.6979,
+              "targets": [
+                {
+                  "offset": 0,
+                  "weight": 1.0,
+                  "peak_val": 0.0,
+                  "target_char": "e",
+                  "snippet": "ause th"
+                },
+                {
+                  "offset": 255,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 254,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 253,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 252,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 251,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 250,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 249,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                }
+              ]
+            },
+            {
+              "hop": 4,
+              "reach": 18.1,
+              "antenna_shift": 0.0,
+              "mean_amplitude": 0.7173,
+              "targets": [
+                {
+                  "offset": 0,
+                  "weight": 1.0,
+                  "peak_val": 0.0,
+                  "target_char": "e",
+                  "snippet": "ause th"
+                },
+                {
+                  "offset": 255,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 254,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 253,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 252,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 251,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 250,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 249,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "word": "patient",
+          "start_pos": 36,
+          "target_pos": 42,
+          "hop_history": [
+            {
+              "hop": 1,
+              "reach": 19.91,
+              "antenna_shift": 0.0,
+              "mean_amplitude": 0.7075,
+              "targets": [
+                {
+                  "offset": 0,
+                  "weight": 1.0,
+                  "peak_val": 0.0,
+                  "target_char": "t",
+                  "snippet": "ient ha"
+                },
+                {
+                  "offset": 255,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 254,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 253,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 252,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 251,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 250,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 249,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                }
+              ]
+            },
+            {
+              "hop": 2,
+              "reach": 16.37,
+              "antenna_shift": 0.0,
+              "mean_amplitude": 0.6708,
+              "targets": [
+                {
+                  "offset": 0,
+                  "weight": 1.0,
+                  "peak_val": 0.0,
+                  "target_char": "t",
+                  "snippet": "ient ha"
+                },
+                {
+                  "offset": 255,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 254,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 253,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 252,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 251,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 250,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 249,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                }
+              ]
+            },
+            {
+              "hop": 3,
+              "reach": 16.43,
+              "antenna_shift": 0.0,
+              "mean_amplitude": 0.6405,
+              "targets": [
+                {
+                  "offset": 0,
+                  "weight": 1.0,
+                  "peak_val": 0.0,
+                  "target_char": "t",
+                  "snippet": "ient ha"
+                },
+                {
+                  "offset": 255,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 254,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 253,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 252,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 251,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 250,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 249,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                }
+              ]
+            },
+            {
+              "hop": 4,
+              "reach": 17.8,
+              "antenna_shift": 0.0,
+              "mean_amplitude": 0.6414,
+              "targets": [
+                {
+                  "offset": 0,
+                  "weight": 1.0,
+                  "peak_val": 0.0,
+                  "target_char": "t",
+                  "snippet": "ient ha"
+                },
+                {
+                  "offset": 255,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 254,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 253,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 252,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 251,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 250,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 249,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "word": "collapsed",
+          "start_pos": 57,
+          "target_pos": 65,
+          "hop_history": [
+            {
+              "hop": 1,
+              "reach": 20.83,
+              "antenna_shift": 0.0,
+              "mean_amplitude": 0.6668,
+              "targets": [
+                {
+                  "offset": 0,
+                  "weight": 1.0,
+                  "peak_val": 0.0,
+                  "target_char": "d",
+                  "snippet": "psed in"
+                },
+                {
+                  "offset": 255,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 254,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 253,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 252,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 251,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 250,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 249,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                }
+              ]
+            },
+            {
+              "hop": 2,
+              "reach": 18.76,
+              "antenna_shift": 0.0,
+              "mean_amplitude": 0.5991,
+              "targets": [
+                {
+                  "offset": 0,
+                  "weight": 1.0,
+                  "peak_val": 0.0,
+                  "target_char": "d",
+                  "snippet": "psed in"
+                },
+                {
+                  "offset": 255,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 254,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 253,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 252,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 251,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 250,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 249,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                }
+              ]
+            },
+            {
+              "hop": 3,
+              "reach": 20.23,
+              "antenna_shift": 0.0,
+              "mean_amplitude": 0.669,
+              "targets": [
+                {
+                  "offset": 0,
+                  "weight": 1.0,
+                  "peak_val": 0.0,
+                  "target_char": "d",
+                  "snippet": "psed in"
+                },
+                {
+                  "offset": 255,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 254,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 253,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 252,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 251,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 250,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 249,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                }
+              ]
+            },
+            {
+              "hop": 4,
+              "reach": 22.53,
+              "antenna_shift": 0.0,
+              "mean_amplitude": 0.6769,
+              "targets": [
+                {
+                  "offset": 0,
+                  "weight": 1.0,
+                  "peak_val": 0.0,
+                  "target_char": "d",
+                  "snippet": "psed in"
+                },
+                {
+                  "offset": 255,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 254,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 253,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 252,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 251,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 250,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                },
+                {
+                  "offset": 249,
+                  "weight": 0.0,
+                  "peak_val": 0.0,
+                  "target_char": "[MASKED]",
+                  "snippet": "[MASKED]"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

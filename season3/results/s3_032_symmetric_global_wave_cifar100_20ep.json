@@ -1,0 +1,436 @@
+{
+  "study": "S3-032",
+  "description": "True Symmetric Global Wave on High-Res CIFAR-100 (20 Epochs, Bilateral Radiation)",
+  "seq_len": 256,
+  "d_model": 128,
+  "n_hops": 4,
+  "p_peaks": 4,
+  "k_total": 9,
+  "num_params": 282240,
+  "epochs": 20,
+  "total_time_s": 541.2,
+  "final_test_acc": 51.94,
+  "best_test_acc": 51.94,
+  "epoch_records": [
+    {
+      "epoch": 1,
+      "train_loss": 4.1255,
+      "train_acc": 7.27,
+      "test_acc": 11.16,
+      "offsets_hop1": [
+        45,
+        46,
+        44,
+        47
+      ],
+      "offsets_hop4": [
+        45,
+        44,
+        46,
+        43
+      ],
+      "time_s": 27.6
+    },
+    {
+      "epoch": 2,
+      "train_loss": 3.4932,
+      "train_acc": 16.11,
+      "test_acc": 21.33,
+      "offsets_hop1": [
+        47,
+        48,
+        46,
+        49
+      ],
+      "offsets_hop4": [
+        43,
+        44,
+        42,
+        41
+      ],
+      "time_s": 26.3
+    },
+    {
+      "epoch": 3,
+      "train_loss": 3.0863,
+      "train_acc": 23.57,
+      "test_acc": 26.09,
+      "offsets_hop1": [
+        48,
+        47,
+        49,
+        46
+      ],
+      "offsets_hop4": [
+        41,
+        42,
+        40,
+        43
+      ],
+      "time_s": 26.4
+    },
+    {
+      "epoch": 4,
+      "train_loss": 2.8247,
+      "train_acc": 28.39,
+      "test_acc": 31.34,
+      "offsets_hop1": [
+        48,
+        47,
+        49,
+        46
+      ],
+      "offsets_hop4": [
+        43,
+        44,
+        42,
+        41
+      ],
+      "time_s": 27.0
+    },
+    {
+      "epoch": 5,
+      "train_loss": 2.6284,
+      "train_acc": 32.38,
+      "test_acc": 34.39,
+      "offsets_hop1": [
+        48,
+        49,
+        47,
+        50
+      ],
+      "offsets_hop4": [
+        48,
+        47,
+        49,
+        46
+      ],
+      "time_s": 27.0
+    },
+    {
+      "epoch": 6,
+      "train_loss": 2.4725,
+      "train_acc": 35.57,
+      "test_acc": 36.96,
+      "offsets_hop1": [
+        48,
+        49,
+        47,
+        50
+      ],
+      "offsets_hop4": [
+        90,
+        91,
+        89,
+        92
+      ],
+      "time_s": 27.1
+    },
+    {
+      "epoch": 7,
+      "train_loss": 2.3292,
+      "train_acc": 38.81,
+      "test_acc": 39.37,
+      "offsets_hop1": [
+        48,
+        49,
+        47,
+        50
+      ],
+      "offsets_hop4": [
+        92,
+        93,
+        91,
+        94
+      ],
+      "time_s": 27.1
+    },
+    {
+      "epoch": 8,
+      "train_loss": 2.2086,
+      "train_acc": 41.26,
+      "test_acc": 41.97,
+      "offsets_hop1": [
+        48,
+        49,
+        47,
+        50
+      ],
+      "offsets_hop4": [
+        92,
+        93,
+        91,
+        94
+      ],
+      "time_s": 27.1
+    },
+    {
+      "epoch": 9,
+      "train_loss": 2.1073,
+      "train_acc": 43.52,
+      "test_acc": 43.86,
+      "offsets_hop1": [
+        48,
+        49,
+        47,
+        50
+      ],
+      "offsets_hop4": [
+        108,
+        107,
+        109,
+        106
+      ],
+      "time_s": 27.1
+    },
+    {
+      "epoch": 10,
+      "train_loss": 2.0217,
+      "train_acc": 45.63,
+      "test_acc": 45.27,
+      "offsets_hop1": [
+        48,
+        49,
+        47,
+        50
+      ],
+      "offsets_hop4": [
+        101,
+        102,
+        100,
+        103
+      ],
+      "time_s": 27.2
+    },
+    {
+      "epoch": 11,
+      "train_loss": 1.9532,
+      "train_acc": 47.14,
+      "test_acc": 46.62,
+      "offsets_hop1": [
+        48,
+        49,
+        47,
+        50
+      ],
+      "offsets_hop4": [
+        100,
+        99,
+        101,
+        102
+      ],
+      "time_s": 27.1
+    },
+    {
+      "epoch": 12,
+      "train_loss": 1.8821,
+      "train_acc": 49.14,
+      "test_acc": 47.43,
+      "offsets_hop1": [
+        48,
+        49,
+        47,
+        50
+      ],
+      "offsets_hop4": [
+        101,
+        100,
+        102,
+        99
+      ],
+      "time_s": 27.1
+    },
+    {
+      "epoch": 13,
+      "train_loss": 1.817,
+      "train_acc": 50.12,
+      "test_acc": 48.52,
+      "offsets_hop1": [
+        48,
+        49,
+        47,
+        50
+      ],
+      "offsets_hop4": [
+        100,
+        101,
+        99,
+        102
+      ],
+      "time_s": 27.2
+    },
+    {
+      "epoch": 14,
+      "train_loss": 1.7547,
+      "train_acc": 52.1,
+      "test_acc": 49.77,
+      "offsets_hop1": [
+        48,
+        49,
+        47,
+        50
+      ],
+      "offsets_hop4": [
+        100,
+        101,
+        99,
+        102
+      ],
+      "time_s": 27.1
+    },
+    {
+      "epoch": 15,
+      "train_loss": 1.7054,
+      "train_acc": 52.98,
+      "test_acc": 49.55,
+      "offsets_hop1": [
+        48,
+        49,
+        47,
+        50
+      ],
+      "offsets_hop4": [
+        100,
+        101,
+        102,
+        99
+      ],
+      "time_s": 27.2
+    },
+    {
+      "epoch": 16,
+      "train_loss": 1.6645,
+      "train_acc": 54.17,
+      "test_acc": 50.81,
+      "offsets_hop1": [
+        48,
+        49,
+        47,
+        50
+      ],
+      "offsets_hop4": [
+        100,
+        99,
+        101,
+        102
+      ],
+      "time_s": 27.2
+    },
+    {
+      "epoch": 17,
+      "train_loss": 1.6306,
+      "train_acc": 54.98,
+      "test_acc": 50.71,
+      "offsets_hop1": [
+        48,
+        47,
+        49,
+        46
+      ],
+      "offsets_hop4": [
+        100,
+        99,
+        101,
+        102
+      ],
+      "time_s": 27.1
+    },
+    {
+      "epoch": 18,
+      "train_loss": 1.6037,
+      "train_acc": 55.69,
+      "test_acc": 51.68,
+      "offsets_hop1": [
+        48,
+        49,
+        47,
+        50
+      ],
+      "offsets_hop4": [
+        100,
+        101,
+        99,
+        102
+      ],
+      "time_s": 27.1
+    },
+    {
+      "epoch": 19,
+      "train_loss": 1.5743,
+      "train_acc": 56.48,
+      "test_acc": 51.34,
+      "offsets_hop1": [
+        48,
+        49,
+        47,
+        50
+      ],
+      "offsets_hop4": [
+        100,
+        101,
+        99,
+        102
+      ],
+      "time_s": 27.1
+    },
+    {
+      "epoch": 20,
+      "train_loss": 1.5662,
+      "train_acc": 56.67,
+      "test_acc": 51.94,
+      "offsets_hop1": [
+        48,
+        49,
+        47,
+        50
+      ],
+      "offsets_hop4": [
+        100,
+        101,
+        99,
+        102
+      ],
+      "time_s": 27.2
+    }
+  ],
+  "diagnostics": {
+    "offsets": [
+      [
+        48,
+        49,
+        47,
+        50
+      ],
+      [
+        48,
+        47,
+        49,
+        46
+      ],
+      [
+        44,
+        45,
+        43,
+        46
+      ],
+      [
+        100,
+        101,
+        99,
+        102
+      ]
+    ],
+    "wave_reaches": [
+      39.7,
+      43.1,
+      46.2,
+      48.2
+    ],
+    "attn_entropies": [
+      1.305,
+      1.219,
+      1.173,
+      1.139
+    ]
+  }
+}

@@ -152,11 +152,49 @@ class TestSubQTransformer(unittest.TestCase):
             routing_mode="harmonic",
             is_causal=False,
             num_waves=6,
-            K_peaks=4
+            K_peaks=8
         )
         block_harm = SubQBlock(cfg_harm)
         out_harm = block_harm(x)
         self.assertEqual(out_harm.shape, (2, 16, 32))
+
+    def test_mirrored_bilateral_wave_symmetry(self):
+        # Explicit test for the mirror on token i:
+        # P peaks on left, P peaks on right, identical biases, no wrap-around
+        cfg = SubQConfig(
+            vocab_size=64,
+            d_model=32,
+            n_heads=2,
+            n_layers=1,
+            default_T=2,
+            routing_mode="harmonic",
+            is_causal=False,
+            num_waves=6,
+            K_peaks=8
+        )
+        surfer = SubQSurfer(cfg)
+        p = surfer.p_peaks  # 4
+        self.assertEqual(surfer.K, 1 + 2 * p)  # 9 candidates
+
+        offsets, vals, _ = surfer.compute_wave_offsets(surfer.init_wave_latent, B=1, device=torch.device("cpu"))
+        # Shape: (1, n_heads, K)
+        center_offset = offsets[0, 0, 0].item()
+        left_offsets = offsets[0, 0, 1:p+1]
+        right_offsets = offsets[0, 0, p+1:]
+
+        self.assertEqual(center_offset, 0)
+        # Verify right offsets are exact negation of left offsets (-Δ)
+        self.assertTrue(torch.equal(right_offsets, -left_offsets))
+        # Verify biases are identical on left and right
+        left_vals = vals[0, 0, 1:p+1]
+        right_vals = vals[0, 0, p+1:]
+        self.assertTrue(torch.equal(left_vals, right_vals))
+
+        # Test single hop attention with edge tokens (L=10)
+        x = torch.randn(1, 10, 32)
+        out, _ = surfer.single_hop_attention(x)
+        self.assertEqual(out.shape, (1, 10, 32))
+        self.assertFalse(torch.isnan(out).any())
 
     def test_custom_routing_mode(self):
         custom_offsets = [0, 1, 3, 7, 15]

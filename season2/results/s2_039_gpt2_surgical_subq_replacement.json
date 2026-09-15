@@ -1,0 +1,21 @@
+{
+  "architecture": "12L Surgical SubQ-GPT2 (K=8, T=8)",
+  "k_peaks": 8,
+  "T_hops": 8,
+  "parameters": 124496640,
+  "zero_shot_loss": 11.18,
+  "zero_shot_ppl": 71681.73,
+  "zero_shot_top1": 0.42,
+  "zero_shot_top5": 3.61,
+  "val_loss": 5.6173,
+  "val_ppl": 275.15,
+  "top1_acc": 4.71,
+  "top5_acc": 19.01,
+  "ptb_loss": 6.9843,
+  "ptb_ppl": 1079.54,
+  "ptb_top1": 2.19,
+  "ptb_top5": 11.6,
+  "training_time_s": 429.1,
+  "throughput_tok_s": 4773.3,
+  "sample_generation": "The discovery of gravitational waves showed that the of @@ @@ @@ @@ @@ @@ @@ @@ @@ @@ @@ @"
+}

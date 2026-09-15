@@ -1,0 +1,20 @@
+{
+  "experiment": "S4-003",
+  "title": "Multi-Physical-Layer SubQ with Fixed Residuals on Corrected MQAR",
+  "task": "Corrected MQAR (L=512, 16 pairs, 8 queries)",
+  "results": {
+    "subq_2layer_4hops_fixed_residuals": {
+      "parameters": 494080,
+      "step_1000_acc": 2.52,
+      "step_2000_acc": 2.58,
+      "step_3000_acc": 2.87,
+      "notes": "Failed near random baseline due to additive residual s = s + o(c) trapping query key."
+    },
+    "subq_4layer_2hops_fixed_residuals": {
+      "parameters": 494080,
+      "step_1000_acc": 2.52,
+      "step_2000_acc": 2.6,
+      "notes": "Collapsed near random baseline."
+    }
+  }
+}

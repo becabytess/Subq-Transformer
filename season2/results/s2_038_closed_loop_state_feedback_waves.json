@@ -1,0 +1,108 @@
+{
+  "closed_loop_shared_wave_k8": {
+    "name": "closed_loop_shared_wave_k8",
+    "k_peaks": 8,
+    "final_val_loss": 1.6986,
+    "final_val_ppl": 5.47,
+    "eval_history": [
+      {
+        "step": 500,
+        "train_loss": 1.8469,
+        "val_loss": 1.9324,
+        "val_ppl": 6.91,
+        "elapsed_s": 15.8
+      },
+      {
+        "step": 1000,
+        "train_loss": 1.602,
+        "val_loss": 1.807,
+        "val_ppl": 6.09,
+        "elapsed_s": 30.9
+      },
+      {
+        "step": 1500,
+        "train_loss": 1.613,
+        "val_loss": 1.7538,
+        "val_ppl": 5.78,
+        "elapsed_s": 46.1
+      },
+      {
+        "step": 2000,
+        "train_loss": 1.5121,
+        "val_loss": 1.7243,
+        "val_ppl": 5.61,
+        "elapsed_s": 61.3
+      },
+      {
+        "step": 2500,
+        "train_loss": 1.4874,
+        "val_loss": 1.7063,
+        "val_ppl": 5.51,
+        "elapsed_s": 76.5
+      },
+      {
+        "step": 3000,
+        "train_loss": 1.5092,
+        "val_loss": 1.6986,
+        "val_ppl": 5.47,
+        "elapsed_s": 91.8
+      }
+    ],
+    "total_time_s": 91.8,
+    "throughput_tok_s": 267847.5,
+    "peak_vram_mb": 883.6
+  },
+  "closed_loop_shared_wave_k32": {
+    "name": "closed_loop_shared_wave_k32",
+    "k_peaks": 32,
+    "final_val_loss": 1.6848,
+    "final_val_ppl": 5.39,
+    "eval_history": [
+      {
+        "step": 500,
+        "train_loss": 1.8116,
+        "val_loss": 1.9122,
+        "val_ppl": 6.77,
+        "elapsed_s": 41.9
+      },
+      {
+        "step": 1000,
+        "train_loss": 1.602,
+        "val_loss": 1.7907,
+        "val_ppl": 5.99,
+        "elapsed_s": 83.4
+      },
+      {
+        "step": 1500,
+        "train_loss": 1.5944,
+        "val_loss": 1.7386,
+        "val_ppl": 5.69,
+        "elapsed_s": 125.2
+      },
+      {
+        "step": 2000,
+        "train_loss": 1.5093,
+        "val_loss": 1.7093,
+        "val_ppl": 5.52,
+        "elapsed_s": 167.1
+      },
+      {
+        "step": 2500,
+        "train_loss": 1.4709,
+        "val_loss": 1.6941,
+        "val_ppl": 5.44,
+        "elapsed_s": 209.2
+      },
+      {
+        "step": 3000,
+        "train_loss": 1.4978,
+        "val_loss": 1.6848,
+        "val_ppl": 5.39,
+        "elapsed_s": 251.3
+      }
+    ],
+    "total_time_s": 251.3,
+    "throughput_tok_s": 97802.5,
+    "peak_vram_mb": 2764.6
+  }
+}

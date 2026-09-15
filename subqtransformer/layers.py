@@ -59,7 +59,8 @@ class SubQSurfer(nn.Module):
             self.K_peaks = config.K_peaks
             self.max_d = min(config.max_seq_len, 256)
 
-            self.init_wave_latent = nn.Parameter(torch.randn(self.n_heads, self.num_waves * 4) * 0.1)
+            # 1 Shared wave generator for the layer: broadcast to all heads for standard subspace splitting
+            self.init_wave_latent = nn.Parameter(torch.randn(1, self.num_waves * 4) * 0.1)
             self.wave_transition = nn.Sequential(
                 nn.Linear(self.num_waves * 4, 64),
                 nn.GELU(),
@@ -69,7 +70,17 @@ class SubQSurfer(nn.Module):
             log_freqs = torch.linspace(0.0, -2.0, self.num_waves)
             self.register_buffer("base_freqs", (10.0 ** log_freqs).view(1, 1, 1, self.num_waves))
             self.register_buffer("d_grid", torch.arange(1, self.max_d).float().view(1, 1, self.max_d - 1, 1))
-            self.K = self.K_peaks
+
+            if not self.is_causal:
+                # Mirrored Bilateral Wave:
+                # Anchor token i is the center mirror (offset 0).
+                # P positive peaks radiate symmetrically to both Left (i - Δ) and Right (i + Δ).
+                # Total candidate slots = 1 (center) + 2 * P (bilateral wings).
+                self.p_peaks = max(1, self.K_peaks // 2)
+                self.K = 1 + 2 * self.p_peaks
+            else:
+                self.p_peaks = self.K_peaks - 1
+                self.K = self.K_peaks
         else:
             self.jump_offsets = config.jump_offsets or [0, 1, 2, 4, 8, 16, 32, 64]
             # If bidirectional, expand offsets to include negative offsets
@@ -99,22 +110,42 @@ class SubQSurfer(nn.Module):
         self.register_buffer("valid_mask", valid_mask, persistent=False)
 
     def compute_wave_offsets(self, wave_latent: torch.Tensor, B: int, device: torch.device):
-        curr_params = wave_latent.view(self.n_heads, self.num_waves, 4)
-        amp = torch.tanh(curr_params[..., 0]).view(1, self.n_heads, 1, self.num_waves)
-        omega = (F.softplus(curr_params[..., 1]).view(1, self.n_heads, 1, self.num_waves) * self.base_freqs)
-        phi = (curr_params[..., 2] * math.pi).view(1, self.n_heads, 1, self.num_waves)
-        decay = (F.softplus(curr_params[..., 3]) * 0.05).view(1, self.n_heads, 1, self.num_waves)
+        # Evaluate 1 single shared 1D carrier wave across sequence distance
+        curr_params = wave_latent.view(1, self.num_waves, 4)
+        amp = torch.tanh(curr_params[..., 0]).view(1, 1, 1, self.num_waves)
+        omega = (F.softplus(curr_params[..., 1]).view(1, 1, 1, self.num_waves) * self.base_freqs)
+        phi = (curr_params[..., 2] * math.pi).view(1, 1, 1, self.num_waves)
+        decay = (F.softplus(curr_params[..., 3]) * 0.05).view(1, 1, 1, self.num_waves)
 
         wave_comps = amp * torch.cos(omega * self.d_grid + phi) * torch.exp(-decay * self.d_grid)
-        wave_1d = wave_comps.sum(dim=-1).expand(B, -1, -1)
+        wave_1d = wave_comps.sum(dim=-1).expand(B, 1, -1)  # (B, 1, max_d - 1)
 
-        topk_vals, past_peak_offsets = torch.topk(wave_1d, k=self.K_peaks - 1, dim=-1)
-        past_peak_offsets = past_peak_offsets + 1
+        zero_offset = torch.zeros((B, 1, 1), dtype=torch.long, device=device)
+        zero_val = torch.zeros((B, 1, 1), dtype=torch.float, device=device)
 
-        zero_offset = torch.zeros((B, self.n_heads, 1), dtype=torch.long, device=device)
-        zero_val = torch.zeros((B, self.n_heads, 1), dtype=torch.float, device=device)
-        peak_offsets = torch.cat([zero_offset, past_peak_offsets], dim=-1)
-        peak_vals = torch.cat([zero_val, topk_vals], dim=-1)
+        if not self.is_causal:
+            # Mirrored Bilateral Wave Router:
+            # Token i acts as the mirror. Extract p_peaks positive crests:
+            topk_vals, past_peak_offsets = torch.topk(wave_1d, k=self.p_peaks, dim=-1)
+            past_peak_offsets = past_peak_offsets + 1  # distances in [1, max_d - 1]
+
+            # In single_hop_attention, target_pos = q_pos - offset.
+            # Center: offset 0 -> q_pos
+            # Left (backward wing): offset +Δ -> q_pos - Δ
+            # Right (forward wing): offset -Δ -> q_pos - (-Δ) = q_pos + Δ
+            # Both Left and Right wings share identical wave peak heights (topk_vals)
+            peak_offsets = torch.cat([zero_offset, past_peak_offsets, -past_peak_offsets], dim=-1)
+            peak_vals = torch.cat([zero_val, topk_vals, topk_vals], dim=-1)
+        else:
+            topk_vals, past_peak_offsets = torch.topk(wave_1d, k=self.p_peaks, dim=-1)
+            past_peak_offsets = past_peak_offsets + 1
+
+            peak_offsets = torch.cat([zero_offset, past_peak_offsets], dim=-1)
+            peak_vals = torch.cat([zero_val, topk_vals], dim=-1)
+
+        # Broadcast identical candidate offsets to all heads (Standard Transformer Heads)
+        peak_offsets = peak_offsets.expand(B, self.n_heads, self.K)
+        peak_vals = peak_vals.expand(B, self.n_heads, self.K)
 
         next_wave_latent = wave_latent + 0.1 * self.wave_transition(wave_latent)
         return peak_offsets, peak_vals, next_wave_latent
@@ -139,28 +170,20 @@ class SubQSurfer(nn.Module):
             peak_offsets, peak_vals, next_wave_latent = self.compute_wave_offsets(wave_latent, B, device)
 
             q_pos = torch.arange(L, device=device).view(1, 1, L, 1)
-            if not self.is_causal:
-                # In bidirectional mode, candidates extend both backward and forward
-                past_offsets = peak_offsets  # [0, d1, d2, ...]
-                future_offsets = -peak_offsets[..., 1:]  # [-d1, -d2, ...]
-                all_offsets = torch.cat([past_offsets, future_offsets], dim=-1)
-                all_vals = torch.cat([peak_vals, peak_vals[..., 1:]], dim=-1)
-                target_indices = q_pos - all_offsets.unsqueeze(2)
-                curr_K = all_offsets.size(-1)
-            else:
-                target_indices = q_pos - peak_offsets.unsqueeze(2)
-                all_vals = peak_vals
-                curr_K = self.K_peaks
+            # target_indices: target_pos = q_pos - offset
+            # (Center: q_pos; Left: q_pos - Δ; Right: q_pos + Δ)
+            target_indices = q_pos - peak_offsets.unsqueeze(2)  # (B, H, L, K)
 
+            # Strict boundary masking: out-of-bounds positions are masked cleanly without wrap-around
             valid_mask = (target_indices >= 0) & (target_indices < L)
             target_clamped = torch.clamp(target_indices, min=0, max=L - 1)
 
-            idx_exp = target_clamped.unsqueeze(-1).expand(B, self.n_heads, L, curr_K, self.head_dim)
-            K_gathered = torch.gather(K.unsqueeze(3).expand(B, self.n_heads, L, curr_K, self.head_dim), dim=2, index=idx_exp)
-            V_gathered = torch.gather(V.unsqueeze(3).expand(B, self.n_heads, L, curr_K, self.head_dim), dim=2, index=idx_exp)
+            idx_exp = target_clamped.unsqueeze(-1).expand(B, self.n_heads, L, self.K, self.head_dim)
+            K_gathered = torch.gather(K.unsqueeze(3).expand(B, self.n_heads, L, self.K, self.head_dim), dim=2, index=idx_exp)
+            V_gathered = torch.gather(V.unsqueeze(3).expand(B, self.n_heads, L, self.K, self.head_dim), dim=2, index=idx_exp)
 
             Q_exp = Q.unsqueeze(3)
-            scores = (Q_exp * K_gathered).sum(dim=-1) * self.scale + all_vals.unsqueeze(2)
+            scores = (Q_exp * K_gathered).sum(dim=-1) * self.scale + peak_vals.unsqueeze(2)
             scores = scores.masked_fill(~valid_mask, float("-inf"))
             weights = F.softmax(scores, dim=-1) * valid_mask.float()
             weights = weights / (weights.sum(dim=-1, keepdim=True) + 1e-8)

@@ -1,0 +1,21 @@
+{
+  "architecture": "1L Canonical Recurrent SubQ-GPT2 (K=8, T=8, End-MLP)",
+  "k_peaks": 8,
+  "T_hops": 8,
+  "parameters": 46476416,
+  "zero_shot_loss": 11.3667,
+  "zero_shot_ppl": 86394.0,
+  "zero_shot_top1": 0.2,
+  "zero_shot_top5": 2.77,
+  "val_loss": 4.5578,
+  "val_ppl": 95.37,
+  "top1_acc": 30.13,
+  "top5_acc": 47.0,
+  "ptb_loss": 6.0557,
+  "ptb_ppl": 426.54,
+  "ptb_top1": 21.16,
+  "ptb_top5": 31.1,
+  "training_time_s": 60.9,
+  "throughput_tok_s": 33629.4,
+  "sample_generation": "The discovery of gravitational waves showed that the <unk> of the <unk> , the <unk> , <unk> , <unk> , <unk"
+}

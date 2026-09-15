@@ -1,0 +1,673 @@
+{
+  "study": "S2-041",
+  "description": "Qwen2.5-0.5B Foundation LLM with Layer-Specific Continuous Harmonic Waves (T=1) on GSM8K",
+  "base_model": "Qwen/Qwen2.5-0.5B",
+  "config": {
+    "num_layers": 24,
+    "T_hops_per_layer": 1,
+    "total_hops": 24,
+    "k_peaks": 8,
+    "d_max": 256,
+    "training_steps": 600,
+    "eval_samples": 150
+  },
+  "metrics": {
+    "exact_accuracy_pct": 1.3333333333333335,
+    "correct_count": 2,
+    "total_count": 150,
+    "delimiter_adherence_pct": 96.66666666666667,
+    "training_time_sec": 98.4936695098877,
+    "eval_time_sec": 276.57963967323303,
+    "eval_tok_per_sec": 30.045595582588465
+  },
+  "train_history": [
+    {
+      "step": 50,
+      "loss": 3.8518078756332397,
+      "ppl": 47.07809768822737,
+      "elapsed_sec": 10.317333698272705
+    },
+    {
+      "step": 100,
+      "loss": 2.458090341091156,
+      "ppl": 11.682480671304692,
+      "elapsed_sec": 18.057660818099976
+    },
+    {
+      "step": 150,
+      "loss": 2.333658833503723,
+      "ppl": 10.315615689578083,
+      "elapsed_sec": 25.917803049087524
+    },
+    {
+      "step": 200,
+      "loss": 2.1894625854492187,
+      "ppl": 8.93041249123457,
+      "elapsed_sec": 34.09379243850708
+    },
+    {
+      "step": 250,
+      "loss": 2.1500825119018554,
+      "ppl": 8.585566779395984,
+      "elapsed_sec": 42.162949323654175
+    },
+    {
+      "step": 300,
+      "loss": 2.094793484210968,
+      "ppl": 8.123763111617539,
+      "elapsed_sec": 50.058791160583496
+    },
+    {
+      "step": 350,
+      "loss": 1.9819537544250487,
+      "ppl": 7.256907358665832,
+      "elapsed_sec": 58.04096865653992
+    },
+    {
+      "step": 400,
+      "loss": 1.970676336288452,
+      "ppl": 7.175527917482287,
+      "elapsed_sec": 65.79584312438965
+    },
+    {
+      "step": 450,
+      "loss": 1.9419482493400573,
+      "ppl": 6.972321567784443,
+      "elapsed_sec": 73.87246131896973
+    },
+    {
+      "step": 500,
+      "loss": 1.9077149796485902,
+      "ppl": 6.737675469783191,
+      "elapsed_sec": 82.15393137931824
+    },
+    {
+      "step": 550,
+      "loss": 1.9119603371620177,
+      "ppl": 6.766340113740632,
+      "elapsed_sec": 90.32464122772217
+    },
+    {
+      "step": 600,
+      "loss": 1.8488181734085083,
+      "ppl": 6.3523077584485605,
+      "elapsed_sec": 98.4929096698761
+    }
+  ],
+  "learned_offsets": {
+    "layer_0": {
+      "offsets": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "peak_biases": [
+        0.0,
+        5.04,
+        4.331,
+        3.592,
+        3.039,
+        2.753,
+        2.663,
+        2.614
+      ]
+    },
+    "layer_1": {
+      "offsets": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "peak_biases": [
+        0.0,
+        5.002,
+        4.334,
+        3.65,
+        3.143,
+        2.868,
+        2.735,
+        2.595
+      ]
+    },
+    "layer_2": {
+      "offsets": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "peak_biases": [
+        0.0,
+        5.042,
+        4.317,
+        3.574,
+        3.032,
+        2.765,
+        2.685,
+        2.628
+      ]
+    },
+    "layer_3": {
+      "offsets": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "peak_biases": [
+        0.0,
+        5.029,
+        4.317,
+        3.581,
+        3.046,
+        2.781,
+        2.696,
+        2.621
+      ]
+    },
+    "layer_4": {
+      "offsets": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "peak_biases": [
+        0.0,
+        4.982,
+        4.32,
+        3.595,
+        3.047,
+        2.769,
+        2.681,
+        2.615
+      ]
+    },
+    "layer_5": {
+      "offsets": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "peak_biases": [
+        0.0,
+        4.811,
+        4.063,
+        3.37,
+        2.931,
+        2.756,
+        2.705,
+        2.602
+      ]
+    },
+    "layer_6": {
+      "offsets": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "peak_biases": [
+        0.0,
+        4.972,
+        4.242,
+        3.503,
+        2.994,
+        2.782,
+        2.751,
+        2.709
+      ]
+    },
+    "layer_7": {
+      "offsets": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "peak_biases": [
+        0.0,
+        4.861,
+        4.131,
+        3.458,
+        3.021,
+        2.811,
+        2.68,
+        2.469
+      ]
+    },
+    "layer_8": {
+      "offsets": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "peak_biases": [
+        0.0,
+        4.991,
+        4.233,
+        3.416,
+        2.814,
+        2.533,
+        2.479,
+        2.458
+      ]
+    },
+    "layer_9": {
+      "offsets": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "peak_biases": [
+        0.0,
+        5.07,
+        4.347,
+        3.557,
+        2.978,
+        2.709,
+        2.646,
+        2.588
+      ]
+    },
+    "layer_10": {
+      "offsets": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "peak_biases": [
+        0.0,
+        4.944,
+        4.188,
+        3.418,
+        2.896,
+        2.683,
+        2.64,
+        2.561
+      ]
+    },
+    "layer_11": {
+      "offsets": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "peak_biases": [
+        0.0,
+        4.963,
+        4.168,
+        3.351,
+        2.795,
+        2.583,
+        2.578,
+        2.562
+      ]
+    },
+    "layer_12": {
+      "offsets": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        6,
+        5,
+        7
+      ],
+      "peak_biases": [
+        0.0,
+        4.924,
+        4.15,
+        3.377,
+        2.882,
+        2.729,
+        2.719,
+        2.682
+      ]
+    },
+    "layer_13": {
+      "offsets": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "peak_biases": [
+        0.0,
+        4.972,
+        4.231,
+        3.421,
+        2.849,
+        2.615,
+        2.587,
+        2.54
+      ]
+    },
+    "layer_14": {
+      "offsets": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "peak_biases": [
+        0.0,
+        4.999,
+        4.275,
+        3.538,
+        3.069,
+        2.919,
+        2.918,
+        2.842
+      ]
+    },
+    "layer_15": {
+      "offsets": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "peak_biases": [
+        0.0,
+        5.004,
+        4.231,
+        3.438,
+        2.92,
+        2.742,
+        2.734,
+        2.665
+      ]
+    },
+    "layer_16": {
+      "offsets": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "peak_biases": [
+        0.0,
+        4.87,
+        4.053,
+        3.335,
+        2.939,
+        2.825,
+        2.775,
+        2.592
+      ]
+    },
+    "layer_17": {
+      "offsets": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "peak_biases": [
+        0.0,
+        4.81,
+        4.023,
+        3.356,
+        3.007,
+        2.904,
+        2.823,
+        2.592
+      ]
+    },
+    "layer_18": {
+      "offsets": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        6,
+        5,
+        7
+      ],
+      "peak_biases": [
+        0.0,
+        4.934,
+        4.135,
+        3.321,
+        2.812,
+        2.699,
+        2.669,
+        2.644
+      ]
+    },
+    "layer_19": {
+      "offsets": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "peak_biases": [
+        0.0,
+        4.837,
+        4.041,
+        3.341,
+        2.966,
+        2.86,
+        2.79,
+        2.567
+      ]
+    },
+    "layer_20": {
+      "offsets": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "peak_biases": [
+        0.0,
+        4.786,
+        3.955,
+        3.259,
+        2.918,
+        2.851,
+        2.804,
+        2.584
+      ]
+    },
+    "layer_21": {
+      "offsets": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "peak_biases": [
+        0.0,
+        4.86,
+        3.981,
+        3.193,
+        2.766,
+        2.661,
+        2.628,
+        2.446
+      ]
+    },
+    "layer_22": {
+      "offsets": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "peak_biases": [
+        0.0,
+        4.953,
+        4.137,
+        3.395,
+        2.994,
+        2.886,
+        2.818,
+        2.581
+      ]
+    },
+    "layer_23": {
+      "offsets": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "peak_biases": [
+        0.0,
+        4.944,
+        4.13,
+        3.406,
+        3.033,
+        2.945,
+        2.877,
+        2.627
+      ]
+    }
+  },
+  "sample_solutions": [
+    {
+      "problem_idx": 1,
+      "question": "Janet\u2019s ducks lay 16 eggs per day. She eats three for breakfast every morning and bakes muffins for her friends every da...",
+      "gold_answer": "18",
+      "predicted_answer": "1000",
+      "is_correct": false,
+      "generated_text": "He makes 200*2=$<<200*2=400>>400\nSo he will have to pay 1000-1000=$<<1000-1000=1000>>1000\n#### 1000"
+    },
+    {
+      "problem_idx": 2,
+      "question": "A robe takes 2 bolts of blue fiber and half that much white fiber.  How many bolts in total does it take?...",
+      "gold_answer": "3",
+      "predicted_answer": "10",
+      "is_correct": false,
+      "generated_text": "He uses 2*10=<<2*10=20>>20 gallons of milk\nSo he has 20-10=<<20-10=10>>10 pounds of oranges left.\n#### 10"
+    },
+    {
+      "problem_idx": 3,
+      "question": "Josh decides to try flipping a house.  He buys a house for $80,000 and then puts in $50,000 in repairs.  This increased ...",
+      "gold_answer": "70000",
+      "predicted_answer": "1000",
+      "is_correct": false,
+      "generated_text": "He sold 1000*.50=$<<1000*.50=500>>500\nSo he will have to pay 1000-1000=$<<1000-1000=1000>>1000\n#### 1000"
+    }
+  ],
+  "historical_baselines": {
+    "dense_qwen2_5_05b_study44": {
+      "exact_accuracy_pct": 11.33,
+      "correct_count": 17,
+      "total_count": 150,
+      "delimiter_adherence_pct": 71.3
+    },
+    "hardcoded_subq_study44": {
+      "exact_accuracy_pct": 1.33,
+      "correct_count": 2,
+      "total_count": 150,
+      "delimiter_adherence_pct": 72.7
+    },
+    "recurrent_t6_subq_study45": {
+      "exact_accuracy_pct": 0.0,
+      "correct_count": 0,
+      "total_count": 150,
+      "delimiter_adherence_pct": 40.7
+    }
+  }
+}

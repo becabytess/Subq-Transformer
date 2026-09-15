@@ -1,0 +1,26 @@
+{
+  "experiment": "S4-002",
+  "title": "High-Resolution CIFAR-100 Benchmark & The Recurrent Equivalence Realization",
+  "dataset": "CIFAR-100 (2x2 patches, L=256, d=128, T=8)",
+  "results": {
+    "attention_driven_gru_vit": {
+      "parameters": 218656,
+      "epoch_10_acc": 35.35,
+      "epoch_20_test_acc": 44.27,
+      "epoch_20_train_acc": 44.91,
+      "notes": "Severe underfitting due to 128-D bottleneck and convex state decay."
+    },
+    "canonical_subq_final_mlp": {
+      "parameters": 251552,
+      "epoch_10_acc": 31.27,
+      "epoch_20_test_acc": 33.5,
+      "notes": "Season 2 baseline, 1 final MLP."
+    },
+    "study68_subq_per_hop_mlp": {
+      "parameters": 253984,
+      "epoch_10_acc": 38.0,
+      "epoch_20_test_acc": 48.36,
+      "notes": "Continuous-Time Residual Neural ODE, weight-tied 4x MLP at every hop."
+    }
+  }
+}

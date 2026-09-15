@@ -1,0 +1,68 @@
+{
+  "model": "s3_034_no_escrow_gru_only",
+  "parameters": 267776,
+  "final_val_loss": 1.6284,
+  "final_val_ppl": 5.1,
+  "delta_loss_vs_s3_016": -0.0251,
+  "delta_ppl_vs_s3_016": -0.13,
+  "total_time_s": 46.5,
+  "verdict": "CONDITION B OUTPERFORMS BASELINE (-0.13 PPL). Removing escrow actually helped.",
+  "records": [
+    {
+      "step": 250,
+      "train_loss": 2.209,
+      "val_loss": 1.9403,
+      "val_ppl": 6.96,
+      "elapsed_s": 7.7
+    },
+    {
+      "step": 500,
+      "train_loss": 1.7313,
+      "val_loss": 1.7912,
+      "val_ppl": 6.0,
+      "elapsed_s": 13.1
+    },
+    {
+      "step": 750,
+      "train_loss": 1.574,
+      "val_loss": 1.7133,
+      "val_ppl": 5.55,
+      "elapsed_s": 18.2
+    },
+    {
+      "step": 1000,
+      "train_loss": 1.4945,
+      "val_loss": 1.6719,
+      "val_ppl": 5.32,
+      "elapsed_s": 23.9
+    },
+    {
+      "step": 1250,
+      "train_loss": 1.4467,
+      "val_loss": 1.6469,
+      "val_ppl": 5.19,
+      "elapsed_s": 29.7
+    },
+    {
+      "step": 1500,
+      "train_loss": 1.4164,
+      "val_loss": 1.6336,
+      "val_ppl": 5.12,
+      "elapsed_s": 34.9
+    },
+    {
+      "step": 1750,
+      "train_loss": 1.3986,
+      "val_loss": 1.6282,
+      "val_ppl": 5.09,
+      "elapsed_s": 41.0
+    },
+    {
+      "step": 2000,
+      "train_loss": 1.3904,
+      "val_loss": 1.6284,
+      "val_ppl": 5.1,
+      "elapsed_s": 46.5
+    }
+  ]
+}

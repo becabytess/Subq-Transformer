@@ -1,0 +1,142 @@
+{
+  "dataset": "TinyShakespeare",
+  "seq_len": 256,
+  "d_model": 128,
+  "total_steps": 2000,
+  "no_mlp": {
+    "name": "FEN-SubQ (No-MLP, Pure Linear State)",
+    "use_mlp": false,
+    "parameters": 185472,
+    "total_time_s": 36.62,
+    "final_val_loss": 1.988,
+    "final_val_ppl": 7.3,
+    "records": [
+      {
+        "step": 250,
+        "train_loss": 3.0271,
+        "val_loss": 2.6319,
+        "val_ppl": 13.9,
+        "elapsed_s": 6.3
+      },
+      {
+        "step": 500,
+        "train_loss": 2.4428,
+        "val_loss": 2.327,
+        "val_ppl": 10.25,
+        "elapsed_s": 10.5
+      },
+      {
+        "step": 750,
+        "train_loss": 2.2276,
+        "val_loss": 2.1771,
+        "val_ppl": 8.82,
+        "elapsed_s": 14.8
+      },
+      {
+        "step": 1000,
+        "train_loss": 2.0963,
+        "val_loss": 2.088,
+        "val_ppl": 8.07,
+        "elapsed_s": 19.1
+      },
+      {
+        "step": 1250,
+        "train_loss": 2.0092,
+        "val_loss": 2.0311,
+        "val_ppl": 7.62,
+        "elapsed_s": 23.5
+      },
+      {
+        "step": 1500,
+        "train_loss": 1.957,
+        "val_loss": 2.007,
+        "val_ppl": 7.44,
+        "elapsed_s": 27.9
+      },
+      {
+        "step": 1750,
+        "train_loss": 1.9266,
+        "val_loss": 1.9916,
+        "val_ppl": 7.33,
+        "elapsed_s": 32.3
+      },
+      {
+        "step": 2000,
+        "train_loss": 1.9146,
+        "val_loss": 1.988,
+        "val_ppl": 7.3,
+        "elapsed_s": 36.6
+      }
+    ],
+    "sample_text": "QUEEN:\nWhe hompuintess pall ay hom of your doth,\nClays, to thou sire this thee your supon, her?\nI son sill pare ay host whis yould of scansel's that wirst a fore she know ther year hathing love\nWell will pep"
+  },
+  "with_mlp": {
+    "name": "FEN-SubQ (With-MLP, Non-Linear State Cleaning)",
+    "use_mlp": true,
+    "parameters": 251648,
+    "total_time_s": 39.82,
+    "final_val_loss": 1.9021,
+    "final_val_ppl": 6.7,
+    "records": [
+      {
+        "step": 250,
+        "train_loss": 2.8724,
+        "val_loss": 2.4588,
+        "val_ppl": 11.69,
+        "elapsed_s": 4.8
+      },
+      {
+        "step": 500,
+        "train_loss": 2.3227,
+        "val_loss": 2.2366,
+        "val_ppl": 9.36,
+        "elapsed_s": 9.6
+      },
+      {
+        "step": 750,
+        "train_loss": 2.1264,
+        "val_loss": 2.0772,
+        "val_ppl": 7.98,
+        "elapsed_s": 14.6
+      },
+      {
+        "step": 1000,
+        "train_loss": 1.9832,
+        "val_loss": 1.9925,
+        "val_ppl": 7.33,
+        "elapsed_s": 19.6
+      },
+      {
+        "step": 1250,
+        "train_loss": 1.8784,
+        "val_loss": 1.9429,
+        "val_ppl": 6.98,
+        "elapsed_s": 24.6
+      },
+      {
+        "step": 1500,
+        "train_loss": 1.8167,
+        "val_loss": 1.9161,
+        "val_ppl": 6.79,
+        "elapsed_s": 29.6
+      },
+      {
+        "step": 1750,
+        "train_loss": 1.7829,
+        "val_loss": 1.9045,
+        "val_ppl": 6.72,
+        "elapsed_s": 34.7
+      },
+      {
+        "step": 2000,
+        "train_loss": 1.7687,
+        "val_loss": 1.9021,
+        "val_ppl": 6.7,
+        "elapsed_s": 39.8
+      }
+    ],
+    "sample_text": "QUEEN:\nWhere my a deaster word you of your doth,\nCome.\n\nPOMARE:\nThat here thee, deass paison,\nHe hear him, in that hose while swill it creather,\nBut wirst a for the is save dries of their liend\nWe congent hi"
+  },
+  "delta_val_loss": 0.0859,
+  "delta_val_ppl": 0.6
+}

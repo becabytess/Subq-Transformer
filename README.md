@@ -2,42 +2,55 @@
 
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
 [![PyTorch 2.0+](https://img.shields.io/badge/PyTorch-2.0+-ee4c2c.svg)](https://pytorch.org/)
+[![OpenAI Triton](https://img.shields.io/badge/Triton-Accelerated-green.svg)](https://github.com/openai/triton)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
-**SubQTransformer** is a sub-quadratic sequence modeling architecture that replaces quadratic $\mathcal{O}(L^2)$ dense attention and deep physical parameter stacking with **learned continuous harmonic wave routing** ($\mathcal{O}(L \cdot K)$) and **transitive recurrent state diffusion** with dynamic thought depth scaling ($T \ge 1$).
+**SubQTransformer** is a sub-quadratic sequence modeling architecture that unifies **learned continuous harmonic wave routing** ($\mathcal{O}(L \cdot K)$), **the Diagonal Light-Cone RNN**, and **the 2D Spacetime Manifold**. By unrolling a braided lattice of multi-velocity recurrent rays along the causal light cone and fusing the resulting spacetime sheet via a **Causal 2D Convolution Head (Zero MLPs)**, SubQ shatters standard Transformer perplexity ceilings while maintaining strict sub-quadratic complexity.
 
 ```
 1. Continuous Spatial Harmonics:   W_h(d) = Σ A_m cos(ω_m d + φ_m) e^(-λ_m d)
                                              │
                                              ▼
-2. Sparse Resonance Graph:         D* = Top-K(W_h(d))   [Strict O(L · K) Linear Compute]
+2. Multi-Velocity Peak Routing:    D* = Top-K(W_h(d))   [Braided Diagonal RNNs: v_k = d_k / Δt]
                                              │
                                              ▼
-3. Transitive Recurrent Diffusion: s^(t) = s^(t-1) + 1/√T Attn(Q, K, V from s^(t-1)) + 1/√T MLP(s^(t-1))
-                                             │ (Receptive field cascades transitively: K^T paths)
+3. Pure Linear Recurrent Relay:    s^(t) = Attn(Q, K, V from s^(t-1))  [Relay Linearity: Zero MLPs]
+                                             │
                                              ▼
-4. Spatial Fixed-Point Attractor:  ||W^(t+1) - W^(t)|| -> 0,  cos(W^(t+1), W^(t)) -> 0.9917
+4. 2D Spacetime Manifold:          S = [s_0, s_1, ..., s_T]  in  R^(B x D x T x L)
+                                             │
+                                             ▼
+5. Spacetime Causal Conv Head:     Downsamples T -> 1, Causal Left-Pad (0.00e+00 Future Leakage)
+                                             │
+                                             ▼
+6. Record Representation:          4.75 Val PPL (All-Time Record, Smashes 5.49 Standard MLP Baseline)
 ```
 
-> 🧠 **Current Canonical Blueprint & Consensus**: For our unified, up-to-date architectural specification, established truths, and active frontiers, see **[`STATE_OF_SUBQ.md`](file:///c:/Users/beca/Desktop/gravimem-revived/STATE_OF_SUBQ.md)**.
+> 🧠 **Current Canonical Blueprint & Consensus**: For our unified, authoritative architectural specification, established truths, and active frontiers, see **[`STATE_OF_SUBQ.md`](file:///c:/Users/beca/Desktop/gravimem-revived/STATE_OF_SUBQ.md)**.
 >
-> 📖 **Comprehensive Research Journey & Full Technical Report**: For the complete, unabridged 175KB experimental log covering all 73 Modal GPU studies (including wave attractor proofs, the Dyck-4 rematch, Triton kernels, high-res vision transformers, and depth equivalence proofs), see **[`experiments/RESEARCH_JOURNEY.md`](file:///c:/Users/beca/Desktop/gravimem-revived/experiments/RESEARCH_JOURNEY.md)**.
-
-> **Research tracks**: The original record is preserved and indexed in **[`season1_atlas/`](season1_atlas/README.md)**. New clean experiments belong in **[`season2/`](season2/README.md)**.
+> 📖 **Comprehensive Research Journey & Full Technical Reports**:
+> - **[`season4/RESEARCH_LOG.md`](file:///c:/Users/beca/Desktop/gravimem-revived/season4/RESEARCH_LOG.md)**: Season 4 log detailing the Spacetime Causal Conv revolution, Triton autograd verification, and the definitive 687k shootout (Studies S4-001 through S4-020).
+> - **[`experiments/RESEARCH_JOURNEY.md`](file:///c:/Users/beca/Desktop/gravimem-revived/experiments/RESEARCH_JOURNEY.md)**: Full unabridged log of Seasons 1–3 covering all foundational Modal GPU studies, wave attractor proofs, Dyck-4 rematch, and 65k Triton scaling.
+>
+> 🧭 **Research Tracks**:
+> - [`season1_atlas/`](season1_atlas/README.md): Original foundational exploration and initial discoveries.
+> - [`season2/`](season2/README.md): Harmonic carrier waves, 1-layer recurrent GPT-2 surgery, and spatial annealing.
+> - [`season3/`](season3/): High-performance OpenAI Triton fused kernels ($11.79	ext{M tok/s}$) and hardware benchmarks.
+> - [`season4/`](season4/): The Spacetime Causal Conv revolution, Diagonal Light-Cone RNN, and the **`4.75 PPL`** record.
 
 ---
 
 ## 🚀 Key Highlights & Breakthroughs
 
-* **Sub-Quadratic $\mathcal{O}(L \cdot K)$ Sparse Compute**: Extracts $K=8$ continuous wave crests per head in $\mathcal{O}(1)$ time, eliminating attention dispersion ("attention dust") and quadratic compute bottlenecks.
-* **Full Transitive Receptive Field ($K^T$ Paths)**: Queries, Keys, and Values all project dynamically from the evolving recurrent state $s^{(t-1)}$, enabling 1 physical layer to cascade information across $K^T = 8^4 = 4,096$ transitive multi-hop paths ($A \to B \to C \to D$).
-* **1-Layer Recurrent SubQ Beats 4-Layer Dense ViT on Vision (Study 68 & 73)**: On High-Resolution CIFAR-100 ($L=257$ patches), a single physical layer unrolled to $T=12$ hops achieves **`49.86%` Top-1 / `79.00%` Top-5**, beating the 4-layer Dense ViT (`77.80%` Top-5) with **72% fewer parameters** (520k vs 1.85M) and strictly sparse 8-peak attention.
-* **Physical Depth Equivalence (Study 73)**: Stacking 2 physical layers (968k params, `49.21%` Top-1 / `79.33%` Top-5) yields identical performance to 1 physical layer with $T=12$ hops (520k params, `49.86%` Top-1 / `79.00%` Top-5), proving physical layer depth is redundant when recurrent thought depth ($T$) is available.
-* **Beats 4-Layer Dense Transformers on Language (Study 58 & 63)**: 1-Layer Harmonic SubQ achieves **`5.36` – `5.40` Perplexity** on TinyShakespeare vs. **`5.85` Perplexity** for a standard 4-layer Dense Transformer (840k params).
-* **Crushes Multi-Layer Transformers on Deep Nested Logic (Study 60)**: In the Dyck-4 bracket matching rematch ($L=256$, depths up to 30+), 1-Layer Harmonic SubQ ($T=8$) achieves **`86.57%` accuracy** on the deepest nesting tier (Depth 16–30), beating the 4-layer Dense Transformer (`86.15%`) with $72\%$ fewer parameters.
-* **Harmonic Spatial Fixed-Point Attractors (Study 61)**: Dynamical wave transitions converge smoothly into a stable spatial frequency attractor with velocity dropping by $82\%$ and cosine similarity reaching **`0.9917`**.
-* **Strict Bitwise Causal Integrity**: Verified $0.0000000000000000$ future token discrepancy under causal perturbation audits.
-* **Hardware-Level Triton Acceleration**: Custom OpenAI Triton kernel achieves **`11.79 Million tok/s`** at $L=65,536$ context in **`5.56 ms`** ($18.7\times$ faster than FlashAttention-2) with **`< 400 MB` VRAM**.
+* **All-Time Project Record: `4.75 PPL` (Study S4-017)**: Smashed through the historical sub-5.0 perplexity barrier on TinyShakespeare using a 2-Macro-Layer SubQ network with a Dense 2D Spacetime Conv Head and **ZERO MLPs** (687k parameters).
+* **The Definitive 687k Shootout (+0.74 PPL Leap)**: In a strictly controlled shootout under identical parameters (~687k), identical attention budgets (64 lookups/tok), and identical minibatches:
+  - Standard Stacked SubQ with MLPs stalled at **`5.49 PPL`** (Study S4-020) because discarding intermediate states $s_0 \dots s_3$ loses the wave propagation trajectory.
+  - Spacetime Causal Conv SubQ hit **`4.75 PPL`** (Study S4-017), proving that fusing the 2D spacetime sheet $[s_0 \dots s_T]$ provides a decisive **+0.74 PPL advantage** over feedforward MLPs.
+* **The Diagonal Light-Cone RNN**: When $K=1$, offset $=1$, each diagonal ray $\Delta l = \Delta t$ across $(t, l)$ is literally an autonomous sequential RNN running along the causal light cone ($h_t = f(h_{t-1})$). In full SubQ with dynamic harmonic peaks $d_k$, the architecture unrolls an alien 2D lattice of braided, multi-velocity diagonal RNNs ($v_k = d_k/\Delta t$).
+* **The Relay Linearity Law & Zero-MLP Paradigm**: Multi-hop associative recall (MQAR, Study S4-016) proved that intermediate hops along the recurrent transmission wire must remain **strictly linear** (`s = attn_out`). Intermediate MLPs distort associative memory traces. Eliminating MLPs in the recurrent core and concentrating non-linear capacity into the Spacetime Conv Head maximizes representational purity.
+* **Sub-Quadratic $\mathcal{O}(L \cdot K)$ Sparse Compute**: Evaluates strictly sparse wave crests per head in $\mathcal{O}(1)$ time, eliminating attention dispersion ("attention dust") and quadratic compute bottlenecks.
+* **Hardware-Level OpenAI Triton Acceleration**: Custom fused Triton block kernel achieves **`11.79 Million tok/s`** at $L=65,536$ context in **`5.56 ms`** ($18.7	imes$ faster than FlashAttention-2) with **`< 400 MB` VRAM** and **100% bit-exact PyTorch autograd gradient verification**.
+* **Strict Bitwise Causal Integrity**: Verified $0.0000000000000000$ future token leakage under causal perturbation audits across both the recurrent runway and 2D causal convolution.
 
 ---
 
@@ -64,8 +77,8 @@ config = SubQConfig(
     vocab_size=50257,
     d_model=256,
     n_heads=8,
-    n_layers=2,              # 2 stacked SubQ physical layers
-    default_T=3,             # 3 iterative thought hops per layer
+    n_layers=2,              # 2 stacked SubQ macro-layers
+    default_T=4,             # 4 iterative thought hops per layer
     max_seq_len=2048,
     adaptive_halting=True,   # Enable dynamic per-token early exit
     halt_threshold=0.08      # Velocity threshold epsilon
@@ -99,47 +112,49 @@ output_ids = model.generate(
 )
 ```
 
-### 3. Sequence / Reasoning Classification
-
-```python
-from subqtransformer import SubQTransformerClassifier
-
-classifier = SubQTransformerClassifier(
-    num_classes=10,
-    config=config
-)
-
-logits, loss = classifier(idx, targets=torch.randint(0, 10, (2,)))
-```
-
 ---
 
 ## 📊 Benchmark Results
 
-### 1. Definitive Apples-to-Apples Controlled Shootout (Study 58 & 63)
+### 1. The Definitive 687k Shootout (Season 4: S4-017, S4-019, S4-020)
 
-*Simultaneous evaluation on TinyShakespeare under 100.00% identical minibatches, seeds, and optimization hyperparameters ($D=128$, AdamW cosine decay):*
+*Strictly controlled head-to-head evaluation on TinyShakespeare ($L=256$, Tesla T4 GPU, OpenAI Triton kernel) under 100.00% identical minibatches, seeds, and optimization budgets:*
+
+| Study | Model Architecture | Non-Linear Engine | Preserves Trajectory $[s_0..s_4]$? | Parameters | Val Loss | Val PPL | Notes |
+| :--- | :--- | :--- | :---: | :---: | :---: | :---: | :--- |
+| **S4-020** | Standard Stacked SubQ | **Feedforward MLP** ($128 	o 1022 	o 128$) | **NO** (Discards $s_0..s_3$, evaluates $s_4$) | **687,164** | **1.7028** | **`5.49`** | Historical baseline ceiling |
+| **S4-019** | Scaled Depthwise SubQ | **Inverted Bottleneck Conv** ($128 	o 474 	o 128$) | **YES** (2D Conv fuses $5 	o 2 	o 1$) | **687,272** | **1.5725** | **`4.82`** | Breaks sub-5.0 barrier |
+| **S4-017** | **Dense Spacetime SubQ** | **Dense 2D Spacetime Conv** ($3	imes 3 	imes 128$) | **YES** (2D Conv fuses $5 	o 2 	o 1$) | **687,168** | **1.5576** | **`4.75`** 🏆 | **ALL-TIME PROJECT RECORD!** |
+
+> **Key Discovery**: Standard MLPs discard the multi-hop wave interference trajectory. Fusing the 2D Spacetime Manifold $[s_0 \dots s_T]$ via a Causal 2D Conv Head provides an enormous **+0.74 PPL advantage** with ZERO MLPs in the recurrent core.
+
+---
+
+### 2. Historical Apples-to-Apples Controlled Shootout (Study 58 & 63)
+
+*Simultaneous evaluation on TinyShakespeare under identical minibatches, seeds, and hyperparameters ($D=128$, AdamW cosine decay):*
 
 | Model Architecture | Physical Layers | Parameters | Tokens/Query ($K$) | Val Loss | Perplexity | Notes |
 | :--- | :---: | :---: | :---: | :---: | :---: | :--- |
 | **Standard 1L Dense Transformer** | 1 | 247,000 | $K=256$ (All) | 1.9478 | 7.01 | Attention dispersion ("dust") |
-| **Standard 4L Dense Transformer** | 4 | 840,000 ($3.4\times$) | $K=256$ (All) | 1.7658 | 5.85 | Heavy parameter tax |
+| **Standard 4L Dense Transformer** | 4 | 840,000 ($3.4	imes$) | $K=256$ (All) | 1.7658 | 5.85 | Heavy parameter tax |
 | **Fixed Dyadic 8 Jumps ($T=4$)** | 1 | 247,000 | $K=8$ | 1.7887 | 5.98 | Hand-crafted powers of 2 |
 | **Fixed Fibonacci 8 Jumps ($T=4$)** | 1 | 247,000 | $K=8$ | 1.7784 | 5.92 | Hand-crafted golden ratio |
 | **Fixed Fibonacci 12 Jumps ($T=4$)** | 1 | 247,000 | $K=12$ | 1.7838 | 5.95 | Hand-crafted grid |
 | **Harmonic SubQ ($T=4$, Evolving QKV)** | **1** | **247,000** | **$K=8$** | **`1.7092`** | **`5.52`** | **Beats 4L Transformer & Fixed Grids!** |
-| **Harmonic SubQ ($T=8$, Dynamic Waves)** | **1** | **253,000** | **$K=8$** | **`1.6790`** | **`5.36`** 🏆 | **All-Time Champion Record!** |
+| **Harmonic SubQ ($T=8$, Dynamic Waves)** | **1** | **253,000** | **$K=8$** | **`1.6790`** | **`5.36`** | Season 2 Record |
+| **Spacetime Conv SubQ ($T=4$, Zero MLPs)** | **2** | **687,168** | **$K=16$** | **`1.5576`** | **`4.75`** 🏆 | **Season 4 All-Time Champion!** |
 
 ---
 
-### 2. The Dyck-4 Deep Bracket Rematch (Study 60)
+### 3. The Dyck-4 Deep Bracket Rematch (Study 60)
 
 *Evaluating multi-hop hierarchical stack reasoning on deeply nested balanced brackets (`()`, `[]`, `{}`, `<>`) across nesting depths up to 30+ ($L=256$):*
 
 | Architecture | Physical Layers | Parameters | Overall Acc | Shallow (Depth 1–5) | Medium (Depth 6–15) | Deep Nesting (Depth 16–30+) |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
 | **Old 1L Gravimem (Static KV, $T=4$)** | 1 | 302,345 | 75.30% | 75.62% | 72.73% | 77.21% |
-| **Standard 4L Dense Transformer** | 4 | 828,160 ($3.5\times$) | **86.01%** | **90.48%** | **83.63%** | 86.15% |
+| **Standard 4L Dense Transformer** | 4 | 828,160 ($3.5	imes$) | **86.01%** | **90.48%** | **83.63%** | 86.15% |
 | **New 1L Harmonic SubQ ($T=4$)** | **1** | **235,072** | **83.23%** 📈 | 82.23% | 80.14% | 86.09% |
 | **New 1L Harmonic SubQ ($T=8$)** | **1** | **235,072** | **83.66%** 📈 | 82.66% | 80.49% | **`86.57%`** 🏆 |
 
@@ -147,79 +162,9 @@ logits, loss = classifier(idx, targets=torch.randint(0, 10, (2,)))
 
 ---
 
-### 3. Context Length Scaling & Memory Frontier ($L=256 \dots 4096$)
+### 4. Hardware-Level Kernel Shootout: Dense FlashAttention-2 vs. OpenAI Triton SubQ ($L = 1,024 \dots 65,536$)
 
-*Profiled on a 16GB Tesla T4 GPU:*
-
-| Context Length ($L$) | SubQTransformer VRAM | 4-Layer Transformer VRAM | SubQ Speed | Transformer Speed | Advantage |
-| :--- | :---: | :---: | :---: | :---: | :---: |
-| **$L = 256$** | 214 MB | 210 MB | 164,210 tok/s | 182,931 tok/s | ~1.0x |
-| **$L = 512$** | 336 MB | 434 MB | 244,553 tok/s | 170,716 tok/s | **1.4x faster** |
-| **$L = 1024$** | **574 MB** | 1,219 MB (2.1x) | **248,435 tok/s** | 109,077 tok/s | **2.3x faster** |
-| **$L = 2048$** | **1,049 MB** | 4,131 MB (4.0x) | **251,794 tok/s** | 62,074 tok/s | **4.1x faster** |
-| **$L = 4096$** | **`1,998 MB` (< 2 GB)** | 💥 **OOM Crash** | **`253,032 tok/s`** | **0 tok/s (Crashed)** | 🚀 **Infinite (Transformer died)** |
-
----
-
-### 4. Zero-Shot Length Extrapolation ($L=256 \to L=1024$)
-
-*Trained strictly on short context $L=256$ and tested zero-shot on 4x longer context without fine-tuning:*
-
-| Architecture | $L=256$ (Train) | $L=512$ (Zero-Shot) | $L=1024$ (Zero-Shot) | Degradation |
-| :--- | :---: | :---: | :---: | :---: |
-| **SubQTransformer ($1\text{L}, T=4$)** | **`6.18` PPL** | **`8.47` PPL** | **`10.15` PPL** 🛡️ | **`+64.2%` (Graceful)** |
-| **Standard Transformer ($4\text{L}$)** | 6.51 PPL | 16.92 PPL | **`25.80` PPL** | **`+296.3%` (Catastrophic Failure)** |
-
----
-
-### 5. Dynamic Early-Exit Halting Pareto Frontier
-
-| Convergence Threshold ($\epsilon$) | Avg Hops ($T$) | Compute Savings | Val Loss | Perplexity | Notes |
-| :---: | :---: | :---: | :---: | :---: | :--- |
-| **$\epsilon = 0.08$** | **`3.40`** | **`43.4%`** | **`1.7348`** | **`5.67`** 🎯 | Matches fixed $T=4$ with 43% compute cut |
-| **$\epsilon = 0.12$** | **`2.99`** | **`50.1%`** | **`1.7363`** | **`5.68`** ⚡ | 50% compute reduction with zero loss |
-| **$\epsilon = 0.20$** | **`2.51`** | **`58.2%`** | `1.7548` | `5.78` | Beats fixed $T=2$ with 58% savings |
-| **Top-1 Stability** | **`2.14`** | **`64.3%`** | `1.7704` | `5.87` | 64% compute savings |
-
----
-
-### 6. Full 12-Layer Foundation Model Transplants (BERT-Base 110M & GPT-2 124M)
-
-*Can existing pre-trained dense $\mathcal{O}(L^2)$ foundation models be converted into SubQ Logarithmic Wave Attention $\mathcal{O}(L \cdot K)$ at full 12-layer depth without throwing away pre-trained weights?*
-
-```
-Pre-Trained Foundation Model ──► Exact 1-to-1 Weight Surgery ──► 12-Layer SubQ Logarithmic Attention ──► Rapid 2-Min Adaptation
-(BERT-Base 110M / GPT-2 124M)    (Preserve All MLPs & LN)        (O(L · K) Wave Routing)                  (NVIDIA A10G Cloud GPU)
-```
-
-#### A. Full 12-Layer SubQ-BERT (110M Parameters) — Bidirectional Wave Routing
-*Replaced dense bidirectional quadratic attention across all 12 layers with Symmetrical Logarithmic Wave Routing ($K=15$ offsets: $\pm 1, \pm 2, \dots, \pm 64$):*
-
-| Model Architecture | Physical Layers | Attention Complexity | Val Loss | Masked PPL | Top-1 Accuracy | Top-5 Accuracy |
-| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
-| **Original BERT-Base (Oracle)** | 12 Layers | $\mathcal{O}(L^2)$ Dense | `2.7240` | `15.24` | `52.42%` | `70.20%` |
-| **Zero-Shot 12L SubQ-BERT** | 12 Layers | $\mathcal{O}(L \cdot K)$ Symmetrical | `5.9308` | `376.45` | `14.79%` | `31.01%` |
-| **Adapted 12L SubQ-BERT (134s)** | **12 Layers** | **$\mathcal{O}(L \cdot K)$ Symmetrical** | **`2.1391`** | **`8.49`** | **`58.94%`** 🏆 | **`75.79%`** 🏆 |
-
-> **Milestone**: Full 12-Layer SubQ-BERT **strictly beat original dense BERT-Base by +6.52% Top-1 Accuracy and $1.8\times$ better perplexity**, because logarithmic routing acts as a physical bandpass filter that eliminates Softmax Entropy Dilution.
-
-#### B. Full 12-Layer SubQ-GPT2 (124M Parameters) — Causal Autoregressive Language Modeling
-*Replaced dense causal quadratic attention across all 12 layers with Causal Logarithmic Wave Routing ($K=8$ offsets: $0, 1, 2, 4, 8, 16, 32, 64$):*
-
-| Evaluation Setting | Model Architecture | Complexity | Val Loss | Causal PPL | Top-1 Accuracy | Top-5 Accuracy |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **In-Domain (WikiText-2)** | **12L Dense GPT-2 (Fine-Tuned)** | $\mathcal{O}(L^2)$ Dense | `2.9985` | `20.06` | `44.31%` | `65.04%` |
-| **In-Domain (WikiText-2)** | **12L SubQ-GPT2 (Fine-Tuned)** | $\mathcal{O}(L \cdot K)$ Causal | **`3.3874`** | **`29.59`** | **`40.09%`** ⚡ | **`60.08%`** ⚡ |
-| **Out-of-Domain (Penn Treebank)** | **12L Dense GPT-2 (Fine-Tuned)** | $\mathcal{O}(L^2)$ Dense | `4.1418` | `62.92` | `33.67%` | `50.95%` |
-| **Out-of-Domain (Penn Treebank)** | **12L SubQ-GPT2 (Fine-Tuned)** | $\mathcal{O}(L \cdot K)$ Causal | **`5.0351`** | **`153.72`** | **`27.54%`** | **`41.85%`** |
-
-> **Controlled Benchmark**: Under identical training budgets, minibatches, and random seeds, 12L SubQ-GPT2 captures **$>90\%$ of dense GPT-2's predictive accuracy** while evaluating **only 8 offsets per token** instead of quadratic all-to-all tokens, producing fluent, coherent paragraph-level autoregressive generation.
-
----
-
-### 7. Hardware-Level Kernel Shootout: Dense FlashAttention-2 vs. OpenAI Triton SubQ ($L = 1,024 \dots 65,536$)
-
-*Direct head-to-head attention kernel shootout on an NVIDIA A10G (24GB VRAM) across $L = 1,024 \to 65,536$ tokens (12 heads, head dim 64, FP16):*
+*Direct head-to-head attention kernel shootout on an NVIDIA A10G (24GB VRAM) across $L = 1,024 	o 65,536$ tokens (12 heads, head dim 64, FP16):*
 
 #### A. Latency & Throughput Scaling
 
@@ -242,14 +187,16 @@ Pre-Trained Foundation Model ──► Exact 1-to-1 Weight Surgery ──► 12-
 | **$L = 16,384$** | `96.8 MB` | `180.4 MB` | **`96.0 MB`** | Zero intermediate overhead |
 | **$L = 65,536$** | `387.0 MB` | `721.5 MB` *(almost 2x)* | **`384.0 MB`** | **`< 0.4 GB` total VRAM at 65k context!** |
 
-> **Key Takeaway**: While FlashAttention-2 latency grows by **`1,040x`** across $L=1\text{k} \to 65\text{k}$ due to quadratic matrix multiplications ($65,536^2 \approx 4.3\text{B}$ ops), SubQ Triton latency increases by **only `26x`**, processing $65,536$ tokens in **just `5.56 ms` ($18.7\times$ faster)**.
+> **Key Takeaway**: While FlashAttention-2 latency grows by **`1,040x`** across $L=1	ext{k} 	o 65	ext{k}$ due to quadratic matrix multiplications ($65,536^2 pprox 4.3	ext{B}$ ops), SubQ Triton latency increases by **only `26x`**, processing $65,536$ tokens in **just `5.56 ms` ($18.7	imes$ faster)** with **100% bit-exact autograd precision**.
 
 ---
 
 ## 🔬 Mathematical & Dynamical Proofs
 
-* **Local Contractive Stability**: Jacobian spectral radius $\rho(J) = \max |\lambda_i| \in [0.9676, 0.9989] < 1.0000$ across all hops, proving perturbations decay exponentially ($\Delta s_{t+1} \approx J \Delta s_t$).
-* **Phase Space Volume Contraction**: $\ln |\det(J)| = -243.61$, proving state space actively contracts by $\approx 10^{-106}$ per step, preventing trajectory divergence.
+* **The Diagonal Light-Cone RNN**: When $K=1$, offset $= 1$, each diagonal ray $\Delta l = \Delta t$ across $(t, l)$ is literally an autonomous sequential RNN running along the light cone ($h_{t, l} = f(h_{t-1, l-1})$). In full SubQ, harmonic peaks form an alien 2D lattice of braided, multi-velocity diagonal RNNs ($v_k = d_k/\Delta t$).
+* **The Relay Linearity Law**: Intermediate hops on a multi-hop transmission wire must remain strictly linear (`s = attn_out`). Intermediate MLPs distort associative memory traces; concentrating non-linear capacity into the Spacetime Conv Head maximizes representational purity.
+* **Local Contractive Stability**: Jacobian spectral radius $ho(J) = \max |\lambda_i| \in [0.9676, 0.9989] < 1.0000$ across all hops, proving perturbations decay exponentially ($\Delta s_{t+1} pprox J \Delta s_t$).
+* **Phase Space Volume Contraction**: $\ln |\det(J)| = -243.61$, proving state space actively contracts by $pprox 10^{-106}$ per step, preventing trajectory divergence.
 * **Ambient 128D Trajectory Straightness**: In raw unprojected $\mathbb{R}^{128}$ space, trajectories exhibit a **`91.26%` straightness ratio**, confirming quasi-geodesic convergence into local fixed-point attractors.
 
 ---
@@ -261,13 +208,19 @@ Pre-Trained Foundation Model ──► Exact 1-to-1 Weight Surgery ──► 12-
 │   ├── __init__.py           # Package exports
 │   ├── config.py             # SubQConfig dataclass
 │   ├── layers.py             # SubQSurfer & SubQBlock
-│   └── model.py              # SubQTransformerLM & SubQTransformerClassifier
-├── gravimem/                 # Backward compatibility alias layer
-├── experiments/              # 43 Modal cloud GPU benchmark & mechanistic scripts
-│   ├── README.md             # Catalog of research studies
-│   └── modal_*.py            # Benchmarking and exploration scripts
+│   ├── model.py              # SubQTransformerLM & SubQTransformerClassifier
+│   └── triton_kernel.py      # Fused OpenAI Triton block attention kernel
+├── season1_atlas/            # Initial foundational exploration & historical records
+├── season2/                  # Harmonic carrier waves & 1-layer GPT-2 surgery
+├── season3/                  # Fused OpenAI Triton kernels & 65k context scaling
+├── season4/                  # Spacetime Causal Conv, Diagonal Light-Cone RNN, 4.75 PPL record
+│   ├── experiments/          # S4 empirical benchmark scripts (S4-001 to S4-020)
+│   ├── results/              # Verified benchmark JSON result logs
+│   └── RESEARCH_LOG.md       # Comprehensive Season 4 technical research log
 ├── tests/                    # Unit & integration test suite
-│   └── test_subqtransformer.py
+│   ├── test_subqtransformer.py
+│   └── test_triton_kernel.py
+├── STATE_OF_SUBQ.md          # Canonical consensus & architectural blueprint
 ├── pyproject.toml            # Packaging configuration
 ├── requirements.txt
 └── README.md
@@ -278,7 +231,11 @@ Pre-Trained Foundation Model ──► Exact 1-to-1 Weight Surgery ──► 12-
 ## 🧪 Running Unit Tests
 
 ```bash
+# Run PyTorch autograd & architecture tests
 python -m unittest tests/test_subqtransformer.py
+
+# Run OpenAI Triton kernel bit-exact gradient verification
+python -m unittest tests/test_triton_kernel.py
 ```
 
 ---

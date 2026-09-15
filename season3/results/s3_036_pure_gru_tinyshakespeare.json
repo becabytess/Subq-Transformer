@@ -1,0 +1,20 @@
+{
+  "gru_d128": {
+    "name": "Pure_GRU_d128",
+    "d_model": 128,
+    "params": 115777,
+    "best_val_loss": 1.7062738458315532,
+    "best_val_ppl": 5.5083980498103715,
+    "best_step": 2000,
+    "runtime": 5.761224746704102
+  },
+  "gru_d152": {
+    "name": "Pure_GRU_d152_ParamMatched",
+    "d_model": 152,
+    "params": 159361,
+    "best_val_loss": 1.667697501182556,
+    "best_val_ppl": 5.299950607539897,
+    "best_step": 2000,
+    "runtime": 12.10932731628418
+  }
+}

@@ -1,0 +1,105 @@
+{
+  "study": "S3-028",
+  "description": "State-Conditioned Per-Token Wave Router on High-Res CIFAR-100 with GAP (10 Epochs, T=4)",
+  "seq_len": 256,
+  "d_model": 128,
+  "n_hops": 4,
+  "k_peaks": 8,
+  "num_params": 285488,
+  "epochs": 10,
+  "total_time_s": 878.3,
+  "final_test_acc": 36.48,
+  "best_test_acc": 36.48,
+  "epoch_records": [
+    {
+      "epoch": 1,
+      "train_loss": 3.9125,
+      "train_acc": 9.77,
+      "test_acc": 14.26,
+      "time_s": 89.0
+    },
+    {
+      "epoch": 2,
+      "train_loss": 3.4087,
+      "train_acc": 17.7,
+      "test_acc": 19.31,
+      "time_s": 87.4
+    },
+    {
+      "epoch": 3,
+      "train_loss": 3.0784,
+      "train_acc": 23.43,
+      "test_acc": 24.86,
+      "time_s": 87.7
+    },
+    {
+      "epoch": 4,
+      "train_loss": 2.8577,
+      "train_acc": 27.84,
+      "test_acc": 29.46,
+      "time_s": 87.7
+    },
+    {
+      "epoch": 5,
+      "train_loss": 2.7439,
+      "train_acc": 30.06,
+      "test_acc": 30.98,
+      "time_s": 87.7
+    },
+    {
+      "epoch": 6,
+      "train_loss": 2.6203,
+      "train_acc": 32.48,
+      "test_acc": 31.34,
+      "time_s": 87.6
+    },
+    {
+      "epoch": 7,
+      "train_loss": 2.5603,
+      "train_acc": 33.86,
+      "test_acc": 34.33,
+      "time_s": 87.6
+    },
+    {
+      "epoch": 8,
+      "train_loss": 2.4965,
+      "train_acc": 35.01,
+      "test_acc": 35.26,
+      "time_s": 87.7
+    },
+    {
+      "epoch": 9,
+      "train_loss": 2.4672,
+      "train_acc": 35.76,
+      "test_acc": 36.22,
+      "time_s": 87.6
+    },
+    {
+      "epoch": 10,
+      "train_loss": 2.4376,
+      "train_acc": 36.37,
+      "test_acc": 36.48,
+      "time_s": 87.7
+    }
+  ],
+  "diagnostics": {
+    "offset_std_per_token": [
+      54.934425354003906,
+      54.029685974121094,
+      51.13716506958008,
+      46.64002990722656
+    ],
+    "mean_attended_distances": [
+      43.305110931396484,
+      40.832393646240234,
+      37.765953063964844,
+      34.84271240234375
+    ],
+    "attn_entropies": [
+      0.955,
+      0.953,
+      0.971,
+      0.975
+    ]
+  }
+}

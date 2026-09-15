@@ -1,0 +1,16 @@
+{
+  "experiment": "S4-014",
+  "title": "Spacetime Causal Convoluted SubQ Language Model",
+  "dataset": "TinyShakespeare (L=256, D=128, T=8, K=3 peaks, 2,000 steps)",
+  "parameters": 582432,
+  "hardware": "Tesla T4 (Google Colab)",
+  "triton_active": true,
+  "lookups_per_token": 24,
+  "final_metrics": {
+    "final_train_loss": 1.3089,
+    "best_val_loss": 1.629,
+    "best_val_ppl": 5.1,
+    "training_time_s": 104.7,
+    "steps_per_sec": 19.1
+  }
+}
