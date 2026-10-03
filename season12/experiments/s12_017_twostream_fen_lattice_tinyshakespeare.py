@@ -6,27 +6,21 @@ Baseline Reference: S12-002 (190,208 params, PPL 5.53)
 Incumbent Champion: S12-013 Flat Sum (190,080 params, PPL 5.26, Val Loss 1.6605)
 FEN Reference: S12-011 Canonical FEN (189,909 params, PPL 5.41, Grad d=60: 1.42e-3)
 
-TOURNAMENT CANDIDATES (All strictly <= 190,208 parameters):
-1. Cand 0: Flat Sum Baseline (S12-013 Champion)
-   h = tanh( W_hl * h_{i-1} + W_hr * h_i + (W_xl * x_{i-1} + W_xr * x_i) )
-   [190,080 params | delta: -128 | d_mlp: 384]
+THE ARCHITECTURAL BLUEPRINT:
+1. Phase 1: 2D Parallel Lattice (Across T=64 hops, zero spatial loops)
+   - Track 1 (Forward Wave h_fwd): h_fwd(i) = tanh( W_hf * h_fwd(i-1) + W_xf * x_i )
+     Ditches own state, keeping the clean diagonal causal RNN hand-off.
+   - Track 2 (Backward Counter-Wave h_bwd): h_bwd(i) = tanh( W_v * h_fwd(i) + W_xl * x_{i-1} )
+     Stores the local backward verification check in parallel across all tokens.
 
-2. Cand 1: Post-Lattice Two-Stream FEN (Single Escrow Sweep)
-   - Forward RNN relaxes for T=64 hops: h = tanh( W_hf * h_{i-1} + x_fwd_bias )
-   - Backward verification check computed: v_loc = tanh( W_hl * h + x_loc_bias )
-   - Horizontal FEN Escrow accumulates v_loc across space (i = 0..L-1):
-     E_i = (1 - gamma_i) * E_{i-1} + gamma_i * Roll(E_{i-1}) + v_loc,i
-   - Final Head receives [h ; E] (Way B: Pure unattenuated FEN gradient highway!)
-   [190,080 params | delta: -128 | d_mlp: 255]
+2. Phase 2: Post-Lattice Escrow Accumulation (Runs ONCE after all hops finish)
+   - Sweeps horizontally from token 0 to 63 (strictly left-to-right for airtight causality).
+   - Candidate 1 (Backward Escrow): h_fwd is kept local; h_bwd is accumulated into Escrow E_bwd.
+   - Candidate 2 (Dual Escrow): Both h_fwd and h_bwd are accumulated into E_fwd and E_bwd.
+   - Candidate 3 (Forward Escrow): h_bwd is kept local; h_fwd is accumulated into Escrow E_fwd.
+   - Candidate 0 (Flat Sum Baseline): S12-013 4-way sum benchmark (1.6605).
 
-3. Cand 2: Per-Hop Two-Stream FEN (Multi-Hop Escrow Sweep)
-   - At every hop t in 1..T:
-     Forward RNN updates h^(t)
-     Backward verification v_loc^(t) computed
-     Horizontal FEN Escrow accumulates v_loc^(t) across space (i = 0..L-1):
-     E_i^(t) = (1 - gamma_i) * E_{i-1}^(t) + gamma_i * Roll(E_{i-1}^(t)) + v_loc,i^(t)
-   - Final Head receives [h^(T) ; E^(T)]
-   [190,080 params | delta: -128 | d_mlp: 255]
+All models strictly <= 190,208 parameters.
 ===================================================================================================
 """
 
@@ -112,6 +106,7 @@ class Cand0_FlatSum(nn.Module):
         x_own = self.ln_in(self.tok(idx) + self.pos(pos))
         x_left = F.pad(x_own[:, :-1, :], (0, 0, 1, 0))
 
+        # Static terms precomputed once outside loop
         x_proj = self.W_xl(x_left) + self.W_xr(x_own)
         h = x_own.clone()
         trajectory = [] if return_diagnostics else None
@@ -131,15 +126,108 @@ class Cand0_FlatSum(nn.Module):
         return logits
 
 
-# --- Candidate 1: Post-Lattice Two-Stream FEN (Single Escrow Sweep) ---
-class Cand1_PostLatticeTwoStreamFEN(nn.Module):
+# --- Candidate 1: Backward Escrow (Core Idea: h_fwd + E_bwd) ---
+class Cand1_BackwardEscrow(nn.Module):
     def __init__(self, vocab_size=65, seq_len=64, d_model=128, T=64, d_mlp=255):
         super().__init__()
         self.vocab_size = vocab_size
         self.seq_len = seq_len
         self.d_model = d_model
         self.T = T
-        self.name = "Cand 1: Post-Lattice Two-Stream FEN"
+        self.name = "Cand 1: Backward Escrow (h_fwd + E_bwd)"
+
+        self.tok = nn.Embedding(vocab_size, d_model)
+        self.pos = nn.Embedding(seq_len, d_model)
+        self.ln_in = nn.LayerNorm(d_model)
+
+        # Track 1: Forward Wave (steps i-1 -> i, ditches own state)
+        self.W_hf = nn.Linear(d_model, d_model, bias=False)
+        self.W_xf = nn.Linear(d_model, d_model, bias=True)
+
+        # Track 2: Backward Verification (takes state at i and char from i-1)
+        self.W_v = nn.Linear(d_model, d_model, bias=False)
+        self.W_xl = nn.Linear(d_model, d_model, bias=True)
+
+        # FEN Roll Gate for Escrow
+        self.roll_gate = nn.Linear(d_model, 1, bias=True)
+
+        d_fused = d_model * 2  # 256
+        self.ln_mlp = nn.LayerNorm(d_fused)
+        self.final_mlp = nn.Sequential(
+            nn.Linear(d_fused, d_mlp),
+            nn.GELU(),
+            nn.Linear(d_mlp, d_model),
+        )
+        self.ln_f = nn.LayerNorm(d_model)
+        self.head = nn.Linear(d_model, vocab_size, bias=False)
+
+        nn.init.normal_(self.tok.weight, 0.0, 0.02)
+        nn.init.normal_(self.pos.weight, 0.0, 0.02)
+        nn.init.normal_(self.head.weight, 0.0, 0.02)
+        nn.init.normal_(self.W_hf.weight, 0.0, 0.02)
+        nn.init.normal_(self.W_xf.weight, 0.0, 0.02)
+        nn.init.normal_(self.W_v.weight, 0.0, 0.02)
+        nn.init.normal_(self.W_xl.weight, 0.0, 0.02)
+        nn.init.normal_(self.roll_gate.weight, 0.0, 0.02)
+        nn.init.constant_(self.roll_gate.bias, 0.0)
+
+    def forward(self, idx, return_diagnostics=False):
+        B, L = idx.shape
+        pos = torch.arange(0, L, device=idx.device).unsqueeze(0)
+        x_own = self.ln_in(self.tok(idx) + self.pos(pos))
+        x_left = F.pad(x_own[:, :-1, :], (0, 0, 1, 0))
+
+        # Static character projections precomputed once
+        x_fwd_bias = self.W_xf(x_own)
+        x_loc_bias = self.W_xl(x_left)
+
+        # Phase 1: 2D Recurrent Lattice across T=64 hops (Zero spatial loops!)
+        h = x_own.clone()
+        trajectory = [] if return_diagnostics else None
+
+        for hop in range(self.T):
+            if return_diagnostics:
+                trajectory.append(h.detach())
+            h_left = F.pad(h[:, :-1, :], (0, 0, 1, 0))
+            # Clean diagonal forward wave: steps i-1 -> i, ditches own state
+            h = torch.tanh(self.W_hf(h_left) + x_fwd_bias)
+
+        if return_diagnostics:
+            trajectory.append(h.detach())
+
+        # Track 2: Backward Verification Check across all tokens in parallel
+        v_loc = torch.tanh(self.W_v(h) + x_loc_bias)
+
+        # Phase 2: Post-Lattice FEN Escrow Accumulation (Runs ONCE from token 0 to 63)
+        escrow = torch.zeros(B, self.d_model, device=idx.device)
+        escrow_list = []
+        for i in range(L):
+            v_i = v_loc[:, i, :]
+            gamma_i = torch.sigmoid(self.roll_gate(v_i))
+            rolled = torch.roll(escrow, shifts=1, dims=-1)
+            escrow = (1.0 - gamma_i) * escrow + gamma_i * rolled + v_i
+            escrow_list.append(escrow)
+
+        escrow_seq = torch.stack(escrow_list, dim=1)  # (B, L, d_model)
+
+        # Phase 3: Head receives [h_fwd ; E_bwd]
+        fused = torch.cat([h, escrow_seq], dim=-1)
+        out = h + self.final_mlp(self.ln_mlp(fused))
+        logits = self.head(self.ln_f(out))
+        if return_diagnostics:
+            return logits, trajectory
+        return logits
+
+
+# --- Candidate 2: Dual Escrow (Both Accumulate: E_fwd + E_bwd) ---
+class Cand2_DualEscrow(nn.Module):
+    def __init__(self, vocab_size=65, seq_len=64, d_model=128, T=64, d_mlp=254):
+        super().__init__()
+        self.vocab_size = vocab_size
+        self.seq_len = seq_len
+        self.d_model = d_model
+        self.T = T
+        self.name = "Cand 2: Dual Escrow (E_fwd + E_bwd)"
 
         self.tok = nn.Embedding(vocab_size, d_model)
         self.pos = nn.Embedding(seq_len, d_model)
@@ -148,7 +236,111 @@ class Cand1_PostLatticeTwoStreamFEN(nn.Module):
         self.W_hf = nn.Linear(d_model, d_model, bias=False)
         self.W_xf = nn.Linear(d_model, d_model, bias=True)
 
-        self.W_hl = nn.Linear(d_model, d_model, bias=False)
+        self.W_v = nn.Linear(d_model, d_model, bias=False)
+        self.W_xl = nn.Linear(d_model, d_model, bias=True)
+
+        # Two roll gates for the two independent escrows
+        self.roll_gate_fwd = nn.Linear(d_model, 1, bias=True)
+        self.roll_gate_bwd = nn.Linear(d_model, 1, bias=True)
+
+        d_fused = d_model * 2  # 256
+        self.ln_mlp = nn.LayerNorm(d_fused)
+        self.final_mlp = nn.Sequential(
+            nn.Linear(d_fused, d_mlp),
+            nn.GELU(),
+            nn.Linear(d_mlp, d_model),
+        )
+        self.ln_f = nn.LayerNorm(d_model)
+        self.head = nn.Linear(d_model, vocab_size, bias=False)
+
+        nn.init.normal_(self.tok.weight, 0.0, 0.02)
+        nn.init.normal_(self.pos.weight, 0.0, 0.02)
+        nn.init.normal_(self.head.weight, 0.0, 0.02)
+        nn.init.normal_(self.W_hf.weight, 0.0, 0.02)
+        nn.init.normal_(self.W_xf.weight, 0.0, 0.02)
+        nn.init.normal_(self.W_v.weight, 0.0, 0.02)
+        nn.init.normal_(self.W_xl.weight, 0.0, 0.02)
+        nn.init.normal_(self.roll_gate_fwd.weight, 0.0, 0.02)
+        nn.init.constant_(self.roll_gate_fwd.bias, 0.0)
+        nn.init.normal_(self.roll_gate_bwd.weight, 0.0, 0.02)
+        nn.init.constant_(self.roll_gate_bwd.bias, 0.0)
+
+    def forward(self, idx, return_diagnostics=False):
+        B, L = idx.shape
+        pos = torch.arange(0, L, device=idx.device).unsqueeze(0)
+        x_own = self.ln_in(self.tok(idx) + self.pos(pos))
+        x_left = F.pad(x_own[:, :-1, :], (0, 0, 1, 0))
+
+        x_fwd_bias = self.W_xf(x_own)
+        x_loc_bias = self.W_xl(x_left)
+
+        # Phase 1: 2D Lattice across T=64 hops
+        h = x_own.clone()
+        trajectory = [] if return_diagnostics else None
+
+        for hop in range(self.T):
+            if return_diagnostics:
+                trajectory.append(h.detach())
+            h_left = F.pad(h[:, :-1, :], (0, 0, 1, 0))
+            h = torch.tanh(self.W_hf(h_left) + x_fwd_bias)
+
+        if return_diagnostics:
+            trajectory.append(h.detach())
+
+        v_loc = torch.tanh(self.W_v(h) + x_loc_bias)
+
+        # Phase 2: Dual FEN Escrow Accumulation
+        e_fwd = torch.zeros(B, self.d_model, device=idx.device)
+        e_bwd = torch.zeros(B, self.d_model, device=idx.device)
+        e_fwd_list = []
+        e_bwd_list = []
+
+        for i in range(L):
+            h_i = h[:, i, :]
+            v_i = v_loc[:, i, :]
+
+            # Forward Escrow
+            gf_i = torch.sigmoid(self.roll_gate_fwd(h_i))
+            rolled_f = torch.roll(e_fwd, shifts=1, dims=-1)
+            e_fwd = (1.0 - gf_i) * e_fwd + gf_i * rolled_f + h_i
+            e_fwd_list.append(e_fwd)
+
+            # Backward Escrow
+            gb_i = torch.sigmoid(self.roll_gate_bwd(v_i))
+            rolled_b = torch.roll(e_bwd, shifts=1, dims=-1)
+            e_bwd = (1.0 - gb_i) * e_bwd + gb_i * rolled_b + v_i
+            e_bwd_list.append(e_bwd)
+
+        e_fwd_seq = torch.stack(e_fwd_list, dim=1)
+        e_bwd_seq = torch.stack(e_bwd_list, dim=1)
+
+        # Phase 3: Head receives [E_fwd ; E_bwd]
+        fused = torch.cat([e_fwd_seq, e_bwd_seq], dim=-1)
+        out = h + self.final_mlp(self.ln_mlp(fused))
+        logits = self.head(self.ln_f(out))
+        if return_diagnostics:
+            return logits, trajectory
+        return logits
+
+
+# --- Candidate 3: Forward Escrow (Forward Accumulates: E_fwd + h_bwd) ---
+class Cand3_ForwardEscrow(nn.Module):
+    def __init__(self, vocab_size=65, seq_len=64, d_model=128, T=64, d_mlp=255):
+        super().__init__()
+        self.vocab_size = vocab_size
+        self.seq_len = seq_len
+        self.d_model = d_model
+        self.T = T
+        self.name = "Cand 3: Forward Escrow (E_fwd + h_bwd)"
+
+        self.tok = nn.Embedding(vocab_size, d_model)
+        self.pos = nn.Embedding(seq_len, d_model)
+        self.ln_in = nn.LayerNorm(d_model)
+
+        self.W_hf = nn.Linear(d_model, d_model, bias=False)
+        self.W_xf = nn.Linear(d_model, d_model, bias=True)
+
+        self.W_v = nn.Linear(d_model, d_model, bias=False)
         self.W_xl = nn.Linear(d_model, d_model, bias=True)
 
         self.roll_gate = nn.Linear(d_model, 1, bias=True)
@@ -168,7 +360,7 @@ class Cand1_PostLatticeTwoStreamFEN(nn.Module):
         nn.init.normal_(self.head.weight, 0.0, 0.02)
         nn.init.normal_(self.W_hf.weight, 0.0, 0.02)
         nn.init.normal_(self.W_xf.weight, 0.0, 0.02)
-        nn.init.normal_(self.W_hl.weight, 0.0, 0.02)
+        nn.init.normal_(self.W_v.weight, 0.0, 0.02)
         nn.init.normal_(self.W_xl.weight, 0.0, 0.02)
         nn.init.normal_(self.roll_gate.weight, 0.0, 0.02)
         nn.init.constant_(self.roll_gate.bias, 0.0)
@@ -182,7 +374,7 @@ class Cand1_PostLatticeTwoStreamFEN(nn.Module):
         x_fwd_bias = self.W_xf(x_own)
         x_loc_bias = self.W_xl(x_left)
 
-        # Track 1: Forward RNN across hops
+        # Phase 1: 2D Lattice across T=64 hops
         h = x_own.clone()
         trajectory = [] if return_diagnostics else None
 
@@ -195,108 +387,22 @@ class Cand1_PostLatticeTwoStreamFEN(nn.Module):
         if return_diagnostics:
             trajectory.append(h.detach())
 
-        # Track 2: Local Backward Check v_loc
-        v_loc = torch.tanh(self.W_hl(h) + x_loc_bias)
+        v_loc = torch.tanh(self.W_v(h) + x_loc_bias)
 
-        # Track 3: FEN Escrow Accumulation across space (tokens 0..L-1)
+        # Phase 2: Forward FEN Escrow Accumulation on h
         escrow = torch.zeros(B, self.d_model, device=idx.device)
         escrow_list = []
         for i in range(L):
-            v_i = v_loc[:, i, :]
-            gamma_i = torch.sigmoid(self.roll_gate(v_i))
+            h_i = h[:, i, :]
+            gamma_i = torch.sigmoid(self.roll_gate(h_i))
             rolled = torch.roll(escrow, shifts=1, dims=-1)
-            escrow = (1.0 - gamma_i) * escrow + gamma_i * rolled + v_i
+            escrow = (1.0 - gamma_i) * escrow + gamma_i * rolled + h_i
             escrow_list.append(escrow)
 
-        escrow_seq = torch.stack(escrow_list, dim=1)  # (B, L, d_model)
+        escrow_seq = torch.stack(escrow_list, dim=1)
 
-        # Track 4: The Decision Synthesis (Way B: Pure FEN Highway)
-        fused = torch.cat([h, escrow_seq], dim=-1)
-        out = h + self.final_mlp(self.ln_mlp(fused))
-        logits = self.head(self.ln_f(out))
-        if return_diagnostics:
-            return logits, trajectory
-        return logits
-
-
-# --- Candidate 2: Per-Hop Two-Stream FEN (Multi-Hop Escrow Sweep) ---
-class Cand2_PerHopTwoStreamFEN(nn.Module):
-    def __init__(self, vocab_size=65, seq_len=64, d_model=128, T=64, d_mlp=255):
-        super().__init__()
-        self.vocab_size = vocab_size
-        self.seq_len = seq_len
-        self.d_model = d_model
-        self.T = T
-        self.name = "Cand 2: Per-Hop Two-Stream FEN"
-
-        self.tok = nn.Embedding(vocab_size, d_model)
-        self.pos = nn.Embedding(seq_len, d_model)
-        self.ln_in = nn.LayerNorm(d_model)
-
-        self.W_hf = nn.Linear(d_model, d_model, bias=False)
-        self.W_xf = nn.Linear(d_model, d_model, bias=True)
-
-        self.W_hl = nn.Linear(d_model, d_model, bias=False)
-        self.W_xl = nn.Linear(d_model, d_model, bias=True)
-
-        self.roll_gate = nn.Linear(d_model, 1, bias=True)
-
-        d_fused = d_model * 2  # 256
-        self.ln_mlp = nn.LayerNorm(d_fused)
-        self.final_mlp = nn.Sequential(
-            nn.Linear(d_fused, d_mlp),
-            nn.GELU(),
-            nn.Linear(d_mlp, d_model),
-        )
-        self.ln_f = nn.LayerNorm(d_model)
-        self.head = nn.Linear(d_model, vocab_size, bias=False)
-
-        nn.init.normal_(self.tok.weight, 0.0, 0.02)
-        nn.init.normal_(self.pos.weight, 0.0, 0.02)
-        nn.init.normal_(self.head.weight, 0.0, 0.02)
-        nn.init.normal_(self.W_hf.weight, 0.0, 0.02)
-        nn.init.normal_(self.W_xf.weight, 0.0, 0.02)
-        nn.init.normal_(self.W_hl.weight, 0.0, 0.02)
-        nn.init.normal_(self.W_xl.weight, 0.0, 0.02)
-        nn.init.normal_(self.roll_gate.weight, 0.0, 0.02)
-        nn.init.constant_(self.roll_gate.bias, 0.0)
-
-    def forward(self, idx, return_diagnostics=False):
-        B, L = idx.shape
-        dev = idx.device
-        pos = torch.arange(0, L, device=dev).unsqueeze(0)
-        x_own = self.ln_in(self.tok(idx) + self.pos(pos))
-        x_left = F.pad(x_own[:, :-1, :], (0, 0, 1, 0))
-
-        x_fwd_bias = self.W_xf(x_own)
-        x_loc_bias = self.W_xl(x_left)
-
-        h = x_own.clone()
-        escrow = torch.zeros(B, L, self.d_model, device=dev)
-        trajectory = [] if return_diagnostics else None
-
-        for hop in range(self.T):
-            if return_diagnostics:
-                trajectory.append(h.detach())
-            h_left = F.pad(h[:, :-1, :], (0, 0, 1, 0))
-            h = torch.tanh(self.W_hf(h_left) + x_fwd_bias)
-            v_loc = torch.tanh(self.W_hl(h) + x_loc_bias)
-
-            # Horizontal escrow roll update for this hop:
-            curr_e = torch.zeros(B, self.d_model, device=dev)
-            hop_escrow_list = []
-            for i in range(L):
-                v_i = v_loc[:, i, :]
-                gamma_i = torch.sigmoid(self.roll_gate(v_i))
-                rolled = torch.roll(curr_e, shifts=1, dims=-1)
-                curr_e = (1.0 - gamma_i) * curr_e + gamma_i * rolled + v_i
-                hop_escrow_list.append(curr_e)
-            escrow = torch.stack(hop_escrow_list, dim=1)
-
-        if return_diagnostics:
-            trajectory.append(h.detach())
-
-        fused = torch.cat([h, escrow], dim=-1)
+        # Phase 3: Head receives [E_fwd ; h_bwd]
+        fused = torch.cat([escrow_seq, v_loc], dim=-1)
         out = h + self.final_mlp(self.ln_mlp(fused))
         logits = self.head(self.ln_f(out))
         if return_diagnostics:
@@ -326,7 +432,7 @@ def verify_model_causality(model, vocab_size=65, seq_len=64, device="cpu"):
 
             if diff_past > 0.0 or diff_future == 0.0:
                 all_passed = False
-                print(f"❌ CAUSALITY VIOLATION at k={k}! Past diff: {diff_past:.10e}")
+                print(f"CAUSALITY VIOLATION at k={k}! Past diff: {diff_past:.10e}")
 
     return all_passed
 
@@ -386,14 +492,14 @@ def analyze_gradient_reach(model, eval_x, target_pos=63):
             h = torch.tanh(model.W_hl(h_left) + model.W_hr(h) + x_proj)
         out = h + model.final_mlp(model.ln_mlp(h))
 
-    elif isinstance(model, Cand1_PostLatticeTwoStreamFEN):
+    elif isinstance(model, Cand1_BackwardEscrow):
         x_fwd_bias = model.W_xf(x_own)
         x_loc_bias = model.W_xl(x_left)
         h = x_own.clone()
         for hop in range(model.T):
             h_left = F.pad(h[:, :-1, :], (0, 0, 1, 0))
             h = torch.tanh(model.W_hf(h_left) + x_fwd_bias)
-        v_loc = torch.tanh(model.W_hl(h) + x_loc_bias)
+        v_loc = torch.tanh(model.W_v(h) + x_loc_bias)
 
         escrow = torch.zeros(B, model.d_model, device=dev)
         escrow_list = []
@@ -407,25 +513,53 @@ def analyze_gradient_reach(model, eval_x, target_pos=63):
         fused = torch.cat([h, escrow_seq], dim=-1)
         out = h + model.final_mlp(model.ln_mlp(fused))
 
-    elif isinstance(model, Cand2_PerHopTwoStreamFEN):
+    elif isinstance(model, Cand2_DualEscrow):
         x_fwd_bias = model.W_xf(x_own)
         x_loc_bias = model.W_xl(x_left)
         h = x_own.clone()
-        escrow = torch.zeros(B, L, model.d_model, device=dev)
         for hop in range(model.T):
             h_left = F.pad(h[:, :-1, :], (0, 0, 1, 0))
             h = torch.tanh(model.W_hf(h_left) + x_fwd_bias)
-            v_loc = torch.tanh(model.W_hl(h) + x_loc_bias)
-            curr_e = torch.zeros(B, model.d_model, device=dev)
-            hop_escrow_list = []
-            for i in range(L):
-                v_i = v_loc[:, i, :]
-                gamma_i = torch.sigmoid(model.roll_gate(v_i))
-                rolled = torch.roll(curr_e, shifts=1, dims=-1)
-                curr_e = (1.0 - gamma_i) * curr_e + gamma_i * rolled + v_i
-                hop_escrow_list.append(curr_e)
-            escrow = torch.stack(hop_escrow_list, dim=1)
-        fused = torch.cat([h, escrow], dim=-1)
+        v_loc = torch.tanh(model.W_v(h) + x_loc_bias)
+
+        e_fwd = torch.zeros(B, model.d_model, device=dev)
+        e_bwd = torch.zeros(B, model.d_model, device=dev)
+        e_fwd_list = []
+        e_bwd_list = []
+        for i in range(L):
+            h_i = h[:, i, :]
+            v_i = v_loc[:, i, :]
+            gf_i = torch.sigmoid(model.roll_gate_fwd(h_i))
+            rolled_f = torch.roll(e_fwd, shifts=1, dims=-1)
+            e_fwd = (1.0 - gf_i) * e_fwd + gf_i * rolled_f + h_i
+            e_fwd_list.append(e_fwd)
+
+            gb_i = torch.sigmoid(model.roll_gate_bwd(v_i))
+            rolled_b = torch.roll(e_bwd, shifts=1, dims=-1)
+            e_bwd = (1.0 - gb_i) * e_bwd + gb_i * rolled_b + v_i
+            e_bwd_list.append(e_bwd)
+        fused = torch.cat([torch.stack(e_fwd_list, dim=1), torch.stack(e_bwd_list, dim=1)], dim=-1)
+        out = h + model.final_mlp(model.ln_mlp(fused))
+
+    elif isinstance(model, Cand3_ForwardEscrow):
+        x_fwd_bias = model.W_xf(x_own)
+        x_loc_bias = model.W_xl(x_left)
+        h = x_own.clone()
+        for hop in range(model.T):
+            h_left = F.pad(h[:, :-1, :], (0, 0, 1, 0))
+            h = torch.tanh(model.W_hf(h_left) + x_fwd_bias)
+        v_loc = torch.tanh(model.W_v(h) + x_loc_bias)
+
+        escrow = torch.zeros(B, model.d_model, device=dev)
+        escrow_list = []
+        for i in range(L):
+            h_i = h[:, i, :]
+            gamma_i = torch.sigmoid(model.roll_gate(h_i))
+            rolled = torch.roll(escrow, shifts=1, dims=-1)
+            escrow = (1.0 - gamma_i) * escrow + gamma_i * rolled + h_i
+            escrow_list.append(escrow)
+        escrow_seq = torch.stack(escrow_list, dim=1)
+        fused = torch.cat([escrow_seq, v_loc], dim=-1)
         out = h + model.final_mlp(model.ln_mlp(fused))
 
     logits = model.head(model.ln_f(out))
@@ -439,7 +573,7 @@ def analyze_gradient_reach(model, eval_x, target_pos=63):
 
 def train_candidate(cand_cls, cand_name, train_data, val_data, vocab_size, seq_len, T, device, max_steps=1500):
     print("\n" + "=" * 95)
-    print(f"🚀 INITIALIZING & VERIFYING {cand_name.upper()}")
+    print(f"INITIALIZING & VERIFYING {cand_name.upper()}")
     print("=" * 95)
 
     torch.manual_seed(42)
@@ -449,10 +583,9 @@ def train_candidate(cand_cls, cand_name, train_data, val_data, vocab_size, seq_l
     delta = total_params - s12_002_params
     print(f"Parameters: {total_params:,} (vs S12-002: {s12_002_params:,} | Delta: {delta:+,} params)")
 
-    # Rigorous Causality Verification
     causal_ok = verify_model_causality(model, vocab_size=vocab_size, seq_len=seq_len, device=device)
     if causal_ok:
-        print("🔒 CAUSALITY VERIFICATION: PASSED (100% Strictly Causal. Max Past Perturbation = 0.00000000)")
+        print("CAUSALITY VERIFICATION: PASSED (100% Strictly Causal. Max Past Perturbation = 0.00000000)")
     else:
         raise RuntimeError("FATAL: Causality violation detected!")
 
@@ -527,8 +660,9 @@ def main():
 
     candidates = [
         (Cand0_FlatSum, "Cand 0: Flat Sum (S12-013 Champion)"),
-        (Cand1_PostLatticeTwoStreamFEN, "Cand 1: Post-Lattice Two-Stream FEN"),
-        (Cand2_PerHopTwoStreamFEN, "Cand 2: Per-Hop Two-Stream FEN"),
+        (Cand1_BackwardEscrow, "Cand 1: Backward Escrow (h_fwd + E_bwd)"),
+        (Cand2_DualEscrow, "Cand 2: Dual Escrow (E_fwd + E_bwd)"),
+        (Cand3_ForwardEscrow, "Cand 3: Forward Escrow (E_fwd + h_bwd)"),
     ]
 
     results = []
@@ -539,10 +673,10 @@ def main():
         results.append(res)
 
     print("\n" + "=" * 125)
-    print("🏆 FINAL TOURNAMENT LEADERBOARD: S12-017 TWO-STREAM FEN SHOOTOUT")
+    print("FINAL TOURNAMENT LEADERBOARD: S12-017 TWO-STREAM FEN SHOOTOUT")
     print("=" * 125)
     header = (
-        f"{'Candidate':<35} | {'Params':<10} | {'Val Loss':<9} | {'Val PPL':<8} | {'Time':<6} | "
+        f"{'Candidate':<40} | {'Params':<10} | {'Val Loss':<9} | {'Val PPL':<8} | {'Time':<6} | "
         f"{'Grad d=1':<10} | {'Grad d=20':<10} | {'Grad d=60':<10}"
     )
     print(header)
@@ -551,7 +685,7 @@ def main():
     sorted_res = sorted(results, key=lambda r: r["val_loss"])
     for r in sorted_res:
         line = (
-            f"{r['name']:<35} | {r['params']:<10,d} | {r['val_loss']:<9.4f} | {r['ppl']:<8.2f} | {r['time']:<5.1f}s | "
+            f"{r['name']:<40} | {r['params']:<10,d} | {r['val_loss']:<9.4f} | {r['ppl']:<8.2f} | {r['time']:<5.1f}s | "
             f"{r['g_d1']:<10.2e} | {r['g_d20']:<10.2e} | {r['g_d60']:<10.2e}"
         )
         print(line)
