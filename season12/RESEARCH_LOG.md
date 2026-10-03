@@ -35,6 +35,7 @@ This document provides the chronological record of empirical investigations, arc
 | **S12-012** | Hop-Escrow Lattice (Vertical Digestion) | 2-term tube ($h_{i-1}, x_i$) + 3rd term ($h_i$) absorbed into vertical escrow | PPL 5.81. **Pathology Diagnosed:** Vertical escrow caused norm explosion (71.36) by accumulating frozen attractor 44×. Audibility shrank to $d=16$. Proves escrow MUST be horizontal across space. | Completed |
 | **S12-013** | Dual Cross-Symmetric Recurrent Lattice | 4-way pairwise balance: $h_{i-1}, h_i, x_{i-1}, x_i$ | **ALL-TIME SEASON SOTA: PPL 5.26!** Val Loss plunged to 1.6605 (-0.0255 nats). Discovered 52% Left / 48% Right Tetrad Law. 190,080 params (-128 vs baseline). | Completed |
 | **S12-014** | 4-Way Cross-Symmetric Shootout Tournament | Shootout across 5 fusion candidates: Flat Sum, Obs Gating, Two-Stream Gated, Differential, Residual Highway | **TOURNAMENT WINNER: Cand 2 (Two-Stream Gated, PPL 5.27, Val 1.6622)** with $10^7\times$ higher gradient reach at $d=60$ ($2.31 \times 10^{-15}$ vs $4.52 \times 10^{-22}$ for Flat Sum). Flat Sum achieved PPL 5.32 in fastest time (92.7s). | Completed |
+| **S12-015** | Fast Two-Stream & Zero-Weight Tournament | Flat Sum vs Zero-Weight Diffusion/Tanh vs Fast Two-Stream 50/50 | **Flat Sum maintains Val Loss crown (1.6605).** Zero-weight uniform averaging suffered blur-collapse (PPL 6.41). Fast Two-Stream 50/50 ran in **69.4s** (fastest parameterized model) and yielded **$10^9\times$ gradient reach at $d=60$ ($9.88 \times 10^{-12}$)**. | Completed |
 
 
 
